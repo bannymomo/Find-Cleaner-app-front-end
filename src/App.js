@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import Navigation from './navigation/Navigation'
-import Client from './client/Client'
+import Navigation from "./navigation/Navigation";
+import Routes from "./routes/Routes";
 
 function App() {
   return (
-    <div className="App" style={{backgroundColor:"#f5f6fd"}}>
-        <Navigation />
-        <Client />
+    <div className="App" style={{ backgroundColor: "#f5f6fd" }}>
+      <Navigation />
+      <main className="App__container--whole-page">
+        <Routes />
+      </main>
     </div>
   );
 }

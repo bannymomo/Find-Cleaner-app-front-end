@@ -1,9 +1,23 @@
-.container {
-    margin-top: 100px;
-    width: 1024px;
-    height: 774px;
-    border: solid black;
-    margin: 0 auto;
-    background-color: #fdfefe;
-    display: flex;
+.client__container--whole-page {
+  margin-top: 100px;
+  width: 1024px;
+  height: 774px;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  background-color: #fdfefe;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
+}
+
+.client__avatar-container--left-top {
+  text-align: center;
+}
+.client__sidebar--page-left {
+  width: 230px;
+  box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
+}
+
+.client__content-container--page-right {
+  width: 794px;
 }

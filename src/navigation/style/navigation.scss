@@ -1,22 +1,21 @@
 .navigation {
   background: #fff;
-  border-bottom: 1px solid #ccc;
   height: 57px;
   left: 0;
   top: 0;
   white-space: nowrap;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
+
   display: flex;
-  
+
   img {
     width: 5%;
     height: 100%;
     margin-left: 20%;
-    padding-right: 2%;;
-    border-right: solid #ccc;
-  };
+    padding-right: 2%;
+  }
 
   .post {
     background: #e0446d;
@@ -31,10 +30,11 @@
     text-shadow: 0 1px 1px #9a0137;
     width: 90px;
     margin-right: 40%;
+    outline: none;
   }
 
   .avatar {
-    background: url('../../assets/images/George.JPG');
+    background: url("../../assets/images/George.JPG");
     background-size: 32px 32px;
     background-position: 50%;
     background-repeat: no-repeat;
