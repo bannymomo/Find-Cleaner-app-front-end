@@ -45,7 +45,9 @@ export default function Chart() {
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>23th,May,2020</p>
+              <p className={classes.cardCategory}>2023</p>
+              <br />
+              <br />
               <h3 className={classes.cardTitle}>Member Expires</h3>
             </CardHeader>
             <CardFooter stats>
