@@ -3,13 +3,12 @@ import {
   makeStyles,
   createMuiTheme,
   createStyles,
-  Theme,
   ThemeProvider
 } from "@material-ui/core/styles";
 
 import Fab from "@material-ui/core/Fab";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     margin: {
       margin: theme.spacing(1)
