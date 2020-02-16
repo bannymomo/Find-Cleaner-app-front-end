@@ -1,15 +1,32 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1)
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1)
-  }
-}));
+import {
+  makeStyles,
+  createMuiTheme,
+  createStyles,
+  Theme,
+  ThemeProvider
+} from "@material-ui/core/styles";
 
+import Fab from "@material-ui/core/Fab";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    margin: {
+      margin: theme.spacing(1)
+    }
+  })
+);
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#2196f3"
+    },
+    secondary: {
+      main: "#f50057"
+    }
+  }
+});
 export default function FloatingActionButtonSize() {
   const listArray = [
     { icon: "fas fa-broom", description: "Home Cleaning" },
@@ -29,18 +46,20 @@ export default function FloatingActionButtonSize() {
 
   return (
     <div className="list-array__container--whole">
-      {listArray.map(list => {
-        return (
-          <div className="list-array__container--single">
-            <div>
-              <Fab color="secondary" className={classes.margin}>
-                <i class={list.icon}></i>
-              </Fab>
+      <ThemeProvider theme={theme}>
+        {listArray.map(list => {
+          return (
+            <div className="list-array__container--single">
+              <div>
+                <Fab color="primary" className={classes.margin}>
+                  <i class={list.icon}></i>
+                </Fab>
+              </div>
+              <span>{list.description}</span>
             </div>
-            <span>{list.description}</span>
-          </div>
-        );
-      })}
+          );
+        })}
+      </ThemeProvider>
     </div>
   );
 }

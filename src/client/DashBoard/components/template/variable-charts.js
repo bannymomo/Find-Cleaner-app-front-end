@@ -1,8 +1,8 @@
 // ##############################
 // // // javascript library for creating charts
 // #############################
+var primaryBlue = "#2196f3";
 var Chartist = require("chartist");
-
 // ##############################
 // // // variables used to create animation on charts
 // #############################
@@ -37,6 +37,9 @@ const dailySalesChart = {
   animation: {
     draw: function(data) {
       if (data.type === "line" || data.type === "area") {
+        data.element.attr({
+          style: `stroke: ${primaryBlue}`
+        });
         data.element.animate({
           d: {
             begin: 600,
@@ -51,6 +54,9 @@ const dailySalesChart = {
           }
         });
       } else if (data.type === "point") {
+        data.element.attr({
+          style: `stroke: ${primaryBlue}`
+        });
         data.element.animate({
           opacity: {
             begin: (data.index + 1) * delays,
@@ -103,6 +109,9 @@ const emailsSubscriptionChart = {
   animation: {
     draw: function(data) {
       if (data.type === "bar") {
+        data.element.attr({
+          style: `stroke: ${primaryBlue}`
+        });
         data.element.animate({
           opacity: {
             begin: (data.index + 1) * delays2,
@@ -142,6 +151,9 @@ const completedTasksChart = {
   animation: {
     draw: function(data) {
       if (data.type === "line" || data.type === "area") {
+        data.element.attr({
+          style: `stroke: ${primaryBlue}`
+        });
         data.element.animate({
           d: {
             begin: 600,
@@ -156,6 +168,9 @@ const completedTasksChart = {
           }
         });
       } else if (data.type === "point") {
+        data.element.attr({
+          style: `stroke: ${primaryBlue}`
+        });
         data.element.animate({
           opacity: {
             begin: (data.index + 1) * delays,
