@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from "react";
 import ListArray from "./components/ListArray";
 import "./style/dashboard.scss";
-
+import Chart from "./components/Chart";
 class Dashboard extends Component {
   render() {
     return (
@@ -14,6 +14,8 @@ class Dashboard extends Component {
             help you need on Airtasker.
           </p>
         </div>
+        <Chart />
+
         <ListArray />
         <button className="dashboard__post-button--pink">Post a task</button>
       </Fragment>
