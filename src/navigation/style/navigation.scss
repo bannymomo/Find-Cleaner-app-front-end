@@ -1,3 +1,4 @@
+@import "../../theme/color.scss";
 .navigation {
   background: #fff;
   height: 57px;
@@ -18,7 +19,7 @@
   }
 
   .post {
-    background: #f50057;
+    background: $primary-color-rose;
     border-radius: 200px;
     color: #fff;
     cursor: pointer;
