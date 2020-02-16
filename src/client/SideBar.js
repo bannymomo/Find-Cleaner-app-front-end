@@ -8,6 +8,7 @@ import Avatar from "../UI/Avatar";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,11 +18,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function ListItemLink(props) {
+  return <ListItem button component={Link} {...props} />;
+}
+
 export default function SimpleList() {
   const classes = useStyles();
-  function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
 
   const [open, setOpen] = React.useState(true);
 
@@ -38,16 +40,16 @@ export default function SimpleList() {
       <div className={classes.root}>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItemLink href="dashboard">
+          <ListItemLink to="dashboard">
             <ListItemText primary="Dashboard" />
           </ListItemLink>
-          <ListItemLink href="profile">
+          <ListItemLink to="profile">
             <ListItemText primary="Profile" />
           </ListItemLink>
-          <ListItemLink href="take-order">
+          <ListItemLink to="take-order">
             <ListItemText primary="Take Orders" />
           </ListItemLink>
-          <ListItemLink href="order-history">
+          <ListItemLink to="order-history">
             <ListItemText primary="OrderHistory" />
           </ListItemLink>
           <ListItem button onClick={handleClick}>
@@ -57,10 +59,10 @@ export default function SimpleList() {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div">
               <ListItem className={classes.nested}>
-                <ListItemLink href="account">Account</ListItemLink>
+                <ListItemLink to="account">Account</ListItemLink>
               </ListItem>
               <ListItem className={classes.nested}>
-                <ListItemLink href="password">Password</ListItemLink>
+                <ListItemLink to="password">Password</ListItemLink>
               </ListItem>
             </List>
           </Collapse>
