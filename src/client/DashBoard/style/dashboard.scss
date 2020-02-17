@@ -1,3 +1,5 @@
+@import "../../../theme/color.scss";
+
 .dashboard__header--top {
   font-size: 20px;
   margin: 20px;
@@ -13,7 +15,7 @@
 }
 
 .dashboard__post-button--pink {
-  background: #e0446d;
+  background: $primary-color-rose;
   border-radius: 200px;
   color: #fff;
   cursor: pointer;

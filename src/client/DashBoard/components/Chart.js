@@ -136,7 +136,7 @@ export default function Chart() {
               <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
+                </span>
                 increase this week.
               </p>
             </CardBody>
