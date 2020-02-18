@@ -15,16 +15,18 @@ function BasicDateTimePicker() {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
-			<Fragment>
-				<DateTimePicker
-					label="DateTimePicker"
-					inputVariant="outlined"
-					value={selectedDate}
-					onChange={handleDateChange}
-					color="secondary"
-				/>
-			</Fragment>
+		<div className="take-order--date-time-picker">
+			<div className={classes.root}>
+				<Fragment>
+					<DateTimePicker
+						label="DateTimePicker"
+						inputVariant="outlined"
+						value={selectedDate}
+						onChange={handleDateChange}
+						color="secondary"
+					/>
+				</Fragment>
+			</div>
 		</div>
 	);
 }

@@ -27,7 +27,7 @@ export default function FormControlLabelPosition() {
 	const classes = useStyles();
 
 	return (
-		<div className="take-order--checkbox">
+		<div className="take-order--checkboxes">
 			<FormControl component="fieldset">
 				<Grid container>
 					<Grid>
