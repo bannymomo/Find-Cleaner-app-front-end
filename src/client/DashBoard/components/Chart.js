@@ -46,10 +46,10 @@ export default function Chart() {
                 <Icon>content_copy</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>2023</p>
-              <br />
-              <br />
-              <h3 className={classes.cardTitle}>Member Expires</h3>
             </CardHeader>
+            <h3 className={(classes.cardTitle, "card__title--black")}>
+              Member Expires
+            </h3>
             <CardFooter stats>
               <div className={classes.stats}>
                 <Warning />
@@ -68,10 +68,10 @@ export default function Chart() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>45</p>
-              <br />
-              <br />
-              <h3 className={classes.cardTitle}>Total Orders</h3>
             </CardHeader>
+            <h3 className={(classes.cardTitle, "card__title--black")}>
+              Total Orders
+            </h3>
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
@@ -87,10 +87,10 @@ export default function Chart() {
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>75</p>
-              <br />
-              <br />
-              <h3 className={classes.cardTitle}>Fixed Issues</h3>
             </CardHeader>
+            <h3 className={(classes.cardTitle, "card__title--black")}>
+              Fixed Issues
+            </h3>
             <CardFooter stats>
               <div className={classes.stats}>
                 <LocalOffer />
@@ -106,10 +106,10 @@ export default function Chart() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>355+</p>
-              <br />
-              <br />
-              <h3 className={classes.cardTitle}>Followers</h3>
             </CardHeader>
+            <h3 className={(classes.cardTitle, "card__title--black")}>
+              Followers
+            </h3>
             <CardFooter stats>
               <div className={classes.stats}>
                 <Update />
