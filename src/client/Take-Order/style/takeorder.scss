@@ -1,0 +1,24 @@
+p#take-order {
+	padding-left: 0.63rem;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+	font-weight: 500;
+}
+
+.MuiSvgIcon-root {
+	padding-right: 5px;
+	padding-left: 0.5rem;
+}
+
+div.MuiToggleButtonGroup-root {
+	margin-bottom: 1.2rem;
+
+	& button:hover {
+		background-color: #e0446d;
+	}
+	.Mui-selected {
+		background-color: #f50057;
+		&:hover {
+			background-color: #e0446d;
+		}
+	}
+}
