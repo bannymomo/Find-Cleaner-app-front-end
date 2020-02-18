@@ -1,0 +1,47 @@
+.profile >div{
+    margin:3% 3%;
+}
+
+.profile__information,.about,.skills{
+    font-family:Times New Roman, serif;
+    font-size: large;
+}
+
+.profile__toggle-icon{
+    float:right;
+}
+
+.profile__toggle-icon :hover{
+    color:#C0C0C0;
+}
+
+.profile__buttion-group{
+    text-align: center;
+}
+
+.profile__buttion-group >button{
+    margin:0 3%;
+}
+
+.about-form{
+    text-align: center;
+}
+
+.about__form-Tagline input, .skills__form-item input{
+    width:100%;
+    height:25px;
+}
+
+.about__form-description textarea{
+    width:100%;
+    height:100px;
+}
+
+.about__form-Tagline input, .about__form-Tagline div, .skills__form-item input,.skills__form-item div{
+    margin:3px 0;
+}
+
+.about__form-title > div,.skills__form-title > div{
+    display:inline-block;
+}
+
