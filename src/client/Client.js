@@ -50,7 +50,7 @@ class Client extends Component {
               component={Profile}
             />
             <Route
-              exact
+              // exact
               path={`${CLIENT_BASE_URL}/order-history`}
               component={OrderHistory}
             />
