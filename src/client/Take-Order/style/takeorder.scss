@@ -79,6 +79,12 @@ $order-color-rose: #f50057;
 			}
 		}
 	}
+
+	& .take-order--card {
+		& .MuiCardContent-root {
+			padding: 0.8rem;
+		}
+	}
 }
 
 .MuiPickersModal-dialog {

@@ -8,6 +8,7 @@ import OtherClean from "./components/OtherClean";
 import Location from "./components/Location";
 import Date from "./components/Date";
 import Time from "./components/Time";
+import Price from "./components/Price";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 	},
 
 	paper: {
+		position: "relative",
 		width: "80%",
 		height: "90%",
 		backgroundColor: theme.palette.background.paper,
@@ -66,6 +68,7 @@ const TakeOrder = () => {
 						<Location />
 						<Date />
 						<Time />
+						<Price />
 					</div>
 				</Modal>
 			</div>
