@@ -6,7 +6,7 @@ import { Container, Box, CssBaseline, Typography, withStyles }
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
-// import { CLIENT_BASE_URL } from '../routes/URLMap';
+import { CLIENT_BASE_URL } from '../routes/URLMap';
 // import { setToken } from '../utils/auth';
 // import { login as loginFn } from '../api/auth';
 // import Error from '../TestingPage/Error'
@@ -42,6 +42,7 @@ class Login extends React.Component {
     //     })
     //     .catch(error => this.setState({ error, isLoading: false }));
     // });
+    this.props.history.replace(`${CLIENT_BASE_URL}`);
   }
 
   render() {
