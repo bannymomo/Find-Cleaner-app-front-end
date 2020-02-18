@@ -1,24 +1,113 @@
-p#take-order {
-	padding-left: 0.63rem;
-	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-	font-weight: 500;
-}
+$order-color-rose: #f50057;
 
-.MuiSvgIcon-root {
-	padding-right: 5px;
-	padding-left: 0.5rem;
-}
-
-div.MuiToggleButtonGroup-root {
-	margin-bottom: 1.2rem;
-
-	& button:hover {
-		background-color: #e0446d;
+.client__take-order-page {
+	& p#take-order {
+		padding-left: 0.63rem;
+		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+		font-weight: 500;
 	}
-	.Mui-selected {
-		background-color: #f50057;
-		&:hover {
-			background-color: #e0446d;
+	& .MuiGrid-container {
+		& .MuiSvgIcon-root {
+			padding-right: 5px;
+			padding-left: 7px;
 		}
 	}
+	& .take-order--toggle-button-group {
+		& div.MuiToggleButtonGroup-root {
+			margin-bottom: 1rem;
+
+			& button:hover {
+				background-color: #e0446d;
+			}
+			.Mui-selected {
+				background-color: $order-color-rose;
+				&:hover {
+					background-color: #e0446d;
+				}
+			}
+		}
+	}
+
+	& .makeStyles-root-205 div.MuiPaper-root {
+		background-color: rgba(245, 0, 86, 0.068);
+		margin-bottom: 1.2rem;
+
+		& .MuiFormControlLabel-root {
+			margin-left: 0;
+			& .MuiTypography-body1 {
+				font-size: 0.8rem;
+				color: #0008;
+			}
+		}
+	}
+
+	& .makeStyles-root-259 div.MuiPaper-root {
+		background-color: #eeee;
+		margin-bottom: 1.5rem;
+		margin-top: 0.5rem;
+
+		& .MuiIconButton-root {
+			margin: -20px 0 0 3px;
+		}
+
+		& span.MuiTypography-body1 {
+			margin: 12px 0 0 19px;
+		}
+
+		& p.MuiTypography-body1 {
+			// margin: -6px 0;
+			line-height: 0.8rem;
+			text-align: center;
+			font-size: 0.8rem;
+		}
+	}
+
+	& .take-order--radio {
+		margin-bottom: 0.6rem;
+
+		& .MuiFormGroup-root .MuiTypography-body1 {
+			color: #0009;
+			font-size: 0.9rem;
+		}
+	}
+
+	& .makeStyles-root-334 {
+		& .MuiInputBase-root {
+			display: block;
+			& .MuiOutlinedInput-input {
+				padding: 1rem 1.5rem 1rem 1rem;
+			}
+		}
+	}
+}
+
+.MuiPickersModal-dialog {
+	& .MuiPickersToolbar-toolbar,
+	& .MuiTabs-root.MuiPickerDTTabs-tabs,
+	& .MuiPickersDay-daySelected,
+	& .MuiPickersClock-pin,
+	& .MuiPickersClockPointer-pointer {
+		background-color: $order-color-rose;
+	}
+	& .MuiPickersDay-daySelected:hover {
+		background-color: #e0446d;
+	}
+	& .MuiPickersDay-daySelected .MuiTypography-body2 {
+		color: #fff;
+	}
+	& .MuiPickersDay-current {
+		color: $order-color-rose;
+	}
+	& .MuiPickersClockPointer-noPoint,
+	& .MuiPickersClockPointer-thumb {
+		background-color: $order-color-rose;
+		border-color: $order-color-rose;
+	}
+	& .MuiTabs-indicator {
+		background-color: #fff;
+	}
+}
+
+.MuiDialogActions-root button.MuiButton-textPrimary span.MuiButton-label {
+	color: $order-color-rose;
 }

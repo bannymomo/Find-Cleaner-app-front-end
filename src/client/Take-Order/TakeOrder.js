@@ -3,10 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Bedrooms from "./components/Bedrooms";
 import Bathrooms from "./components/Bathrooms";
+import LeaseEnd from "./components/LeaseEnd";
+import OtherClean from "./components/OtherClean";
+import Location from "./components/Location";
+import Date from "./components/Date";
+import Time from "./components/Time";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		height: "100vh",
+		height: "48.4rem",
 		flexGrow: 1,
 		minWidth: 300,
 		backgroundColor: "#555",
@@ -26,8 +31,8 @@ const useStyles = makeStyles(theme => ({
 	},
 
 	paper: {
-		width: "85%",
-		height: "75%",
+		width: "80%",
+		height: "90%",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
@@ -56,6 +61,11 @@ const TakeOrder = () => {
 						<p id="take-order">See how little it will cost...</p>
 						<Bedrooms />
 						<Bathrooms />
+						<LeaseEnd />
+						<OtherClean />
+						<Location />
+						<Date />
+						<Time />
 					</div>
 				</Modal>
 			</div>

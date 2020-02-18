@@ -5,7 +5,6 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import "../style/takeorder.scss";
 
 const StyledToggleButtonGroup = withStyles(theme => ({
 	grouped: {
@@ -33,7 +32,7 @@ export default function CustomizedDividers() {
 	};
 
 	return (
-		<div>
+		<div className="take-order--toggle-button-group">
 			<Grid container>
 				<Grid>
 					<BathtubOutlinedIcon />

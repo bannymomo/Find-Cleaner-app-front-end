@@ -33,7 +33,7 @@ export default function CustomizedDividers() {
 	};
 
 	return (
-		<div>
+		<div className="take-order--toggle-button-group">
 			<Grid container>
 				<Grid>
 					<KingBedOutlinedIcon />
