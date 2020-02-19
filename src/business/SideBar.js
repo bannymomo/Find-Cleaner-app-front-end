@@ -35,14 +35,14 @@ export default function SimpleList() {
     <div>
       <div className="client__avatar-container--left-top">
         <Avatar />
-        <p>client name</p>
+        <p>business name</p>
       </div>
       <div className={classes.root}>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          {/* <ListItemLink to="dashboard">
+          <ListItemLink to="dashboard">
             <ListItemText primary="Dashboard" />
-          </ListItemLink> */}
+          </ListItemLink>
           <ListItemLink to="profile">
             <ListItemText primary="Profile" />
           </ListItemLink>
