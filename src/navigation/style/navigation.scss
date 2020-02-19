@@ -1,3 +1,4 @@
+@import "../../theme/color.scss";
 .navigation {
   background: #fff;
   height: 57px;
@@ -7,7 +8,7 @@
   width: 100%;
   z-index: 1000;
   box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
-
+  text-decoration: none;
   display: flex;
 
   img {
@@ -18,7 +19,7 @@
   }
 
   .post {
-    background: #e0446d;
+    background: $primary-color-rose;
     border-radius: 200px;
     color: #fff;
     cursor: pointer;
@@ -42,6 +43,7 @@
     height: 32px;
     width: 32px;
     margin-top: 14px;
+    margin-left: 20px;
     cursor: pointer;
   }
 }

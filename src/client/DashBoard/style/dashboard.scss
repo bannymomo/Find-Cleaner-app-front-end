@@ -1,3 +1,5 @@
+@import "../../../theme/color.scss";
+
 .dashboard__header--top {
   font-size: 20px;
   margin: 20px;
@@ -13,7 +15,7 @@
 }
 
 .dashboard__post-button--pink {
-  background: #e0446d;
+  background: $primary-color-rose;
   border-radius: 200px;
   color: #fff;
   cursor: pointer;
@@ -40,4 +42,10 @@
   display: inline-block;
   margin: 10px;
   width: 100px;
+}
+
+.card__title--black {
+  margin: 5px 15px 0;
+  font-weight: lighter;
+  color: #6e6d6d;
 }
