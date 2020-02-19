@@ -1,20 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import MuiAppBar from '@material-ui/core/AppBar';
+import React from "react";
+import PropTypes from "prop-types";
+import MuiAppBar from "@material-ui/core/AppBar";
+import "../../theme/color.scss";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-const styles = theme => ({
-  root: {
-    color: theme.palette.common.white,
-  },
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#2196f3"
+    },
+    secondary: {
+      main: "#f50057"
+    }
+  }
 });
 
 function AppBar(props) {
-  return <MuiAppBar elevation={0} position="static" {...props} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <MuiAppBar color="primary" elevation={0} position="static" {...props} />
+    </ThemeProvider>
+  );
 }
 
 AppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(AppBar);
+export default AppBar;

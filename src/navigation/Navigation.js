@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import AppBar from "../homepage/views/AppAppBar";
+import AppAppBar from "../homepage/views/AppAppBar";
 
 class Navigation extends Component {
   render() {
-    return <AppBar />;
+    return <AppAppBar />;
   }
 }
 

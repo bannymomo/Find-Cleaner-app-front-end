@@ -48,7 +48,8 @@ function AppAppBar(props) {
               textDecoration: "none",
               color: "white",
               fontSize: 30 + "px",
-              fontWeight: "bold"
+              fontWeight: "bold",
+              fontFamily: "Arial, Helvetica, sans-serif"
             }}
             to={HOMEPAGE_URL}
           >
@@ -61,7 +62,8 @@ function AppAppBar(props) {
                 color: "white",
                 fontSize: 20 + "px",
                 fontWeight: "bold",
-                margin: 10 + "px"
+                margin: 10 + "px",
+                fontFamily: "Arial, Helvetica, sans-serif"
               }}
               to={LOGIN_URL}
             >
@@ -73,7 +75,8 @@ function AppAppBar(props) {
                 color: "white",
                 fontSize: 20 + "px",
                 fontWeight: "bold",
-                margin: 10 + "px "
+                margin: 10 + "px ",
+                fontFamily: "Arial, Helvetica, sans-serif"
               }}
               to={SIGNUP_URL}
             >
