@@ -23,17 +23,20 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Box from '@material-ui/core/Box';
 
+import Backdrop from '@material-ui/core/Backdrop';
+import Button from '@material-ui/core/Button';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
+import Maps from './Maps';
+
 import "../style/orderHistory.scss";
 
 const useStyles = makeStyles({
-    // block: {
-    //     display: "block",
-    // }
     formControl: {
         marginTop: 20,
         marginBottom: 20,
         width: '100%',
-        // height: 40
     }
 });
 
@@ -45,6 +48,8 @@ export default function OrderInformaiton() {
         { icon: "fab fa-instagram", description: "instagram" },
         { icon: "fas fa-briefcase", description: "and so on" },
     ]
+
+    //more options dropdown
     const [state, setState] =React.useState({
         options:'',
         name:'hai',
@@ -62,17 +67,40 @@ export default function OrderInformaiton() {
       });
     };
 
+    // backdrop for google map
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+      setOpen(false);
+    };
+    const handleToggle = () => {
+      setOpen(!open);
+    };
+
+    //toggle button
+    const [selected, setSelected] = React.useState(false);
+
     return (
         <div className="order-information">
 			<Grid container className="order-information__top" spacing={2}>
 				<Grid item xs={8}>
-                    <div>
+                    <div className="order-information__head">
                         <ul className="order-information__status">
                             <li className="order-information__status-active">OPEN</li>
                             <li>CANCELLED</li>
                             <li>ASSIGNED</li>
                             <li>COMPLETED</li>
                         </ul>
+                        <ToggleButton
+                        size="small"
+                        // value="follow"
+                        selected={selected}
+                        onChange={() => {
+                            setSelected(!selected);
+                        }}
+                        >
+                            <FavoriteBorderIcon fontSize="small"/>
+                            <p>Follow</p>
+                        </ToggleButton>
                     </div>
                     <Typography variant="h4" component="h2">
                         House Cleaning
@@ -93,6 +121,7 @@ export default function OrderInformaiton() {
                                 </Typography>
                             }
                             />
+                            <p className="order-information__postTime">20 mins ago</p>
                         </ListItem>
                         <Divider variant="inset" component="li" />
                         <ListItem alignItems="flex-start">
@@ -110,6 +139,14 @@ export default function OrderInformaiton() {
                                 </Typography>
                             }
                             />
+                            <div className="order-information__map">
+                                <Button  color="lightgreen" onClick={handleToggle}>
+                                    View Map
+                                </Button>
+                                <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+                                    <Maps />
+                                </Backdrop>
+                            </div>
                         </ListItem>
                         <Divider variant="inset" component="li" />
                         <ListItem alignItems="flex-start">
@@ -182,7 +219,7 @@ export default function OrderInformaiton() {
 				</Grid>
 			</Grid>
             <div className="order-information__details">
-                <Typography variant="body1" component="p">
+                <Typography variant="h6" component="p">
                     DETAILS
                 </Typography>
                 <Typography variant="body2" component="p">

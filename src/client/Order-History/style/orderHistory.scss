@@ -38,6 +38,10 @@ $font-family-theme: "Roboto", "Helvetica", "Arial", sans-serif;
     padding: 20px;
     border-top: solid 3px #eee;
 }
+.order-information__head {
+    display: flex;
+    align-items: center;
+}
 .order-information__status {
     display: flex;
     list-style: none;
@@ -53,6 +57,22 @@ $font-family-theme: "Roboto", "Helvetica", "Arial", sans-serif;
 .order-information__status .order-information__status-active {
     color: $secondary-color;
     background-color: $secondary-color-light;
+}
+.MuiGrid-container .MuiToggleButton-root {
+    border: none;
+    line-height: 1;
+    border-radius: 20px;
+    background-color: #eee;
+}
+.order-information__head .MuiToggleButton-root.Mui-selected {
+    color: $secondary-color;
+}
+.order-information__postTime {
+    font-family: $font-family-theme;
+    color: $secondary-text-color;
+}
+.order-information__map {
+    z-index: 1000;
 }
 .order-information__budget {
     text-align: center;
