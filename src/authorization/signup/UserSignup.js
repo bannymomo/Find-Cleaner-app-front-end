@@ -1,22 +1,42 @@
 import React, { Component } from 'react';
-import { Button, Grid, TextField, Container, CssBaseline, Typography, withStyles }
+import { Button, Grid, TextField, Container, CssBaseline, Typography, 
+  withStyles, Box, createMuiTheme, ThemeProvider,Avatar  }
   from '@material-ui/core';
+  import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 // import { signup as signupFn } from '../api/auth';
 // import { setToken } from '../utils/auth';
 import ClientSignup from './clients/ClientSignup';
 import BusinessSignup from './business/BusinessSignup'
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#2196f3"
+		},
+		secondary: {
+			main: "#f50057"
+		}
+  }
+});
 
 const styles = theme => ({
+  container: {
+    height:'85vh',
+    marginTop:'15vh',
+  },
+  box:{
+    height:"55vh",
+    width:"50vh",
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
+    padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    '& TextField': {
-      backgroundColor: 'red',
-    }
+    height:'100%',
+    backgroundColor: '#FEFEFF'
   },
   form: {
     width: '100%',
@@ -25,6 +45,10 @@ const styles = theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: '#2196f3'
+  }
 });
 
 class User extends Component {
@@ -59,9 +83,14 @@ class User extends Component {
 
     return (
       !this.state.basicInfo ? (
-        <Container component="main" maxWidth="xs">
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs" className={classes.container}>
           <CssBaseline />
+          <Box className={classes.box}>
           <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+                <LockOpenIcon />
+              </Avatar>
             <Typography component="h1" variant="h3">
               Sign up
         </Typography>
@@ -95,7 +124,9 @@ class User extends Component {
             </Button>
             </form>
           </div>
-        </Container>) : 
+          </Box>
+        </Container>
+        </ThemeProvider>) :
         (this.state.role === 'client' ?
           <ClientSignup
             email={this.state.email}

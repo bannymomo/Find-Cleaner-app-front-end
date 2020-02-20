@@ -1,17 +1,24 @@
 import React from 'react';
-import { Container, Button ,CssBaseline} from '@material-ui/core';
+import { Container, Button ,CssBaseline, makeStyles} from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 
-import { SIGNUP_URL } from '../routes/URLMap';
+import { SIGNUP_URL } from '../../routes/URLMap';
 import './style/signup.scss'
 
-const Signup = () => {
+const useStyles = makeStyles(theme => ({
+  button: {
+    marginLeft: '40%'
+  }
+}));
 
+const Signup = () => {
+  const classes = useStyles();
   return (
     <div className="chooseRole">
       <CssBaseline />
       <Container className="chooseRole__client">
-        <Button variant="contained" size="large" color="primary">
+        <Button variant="contained" size="large" color="primary"
+        className={classes.button}>
           <NavLink to={{ pathname: `${SIGNUP_URL}/user`, role:'client'}}
             style={{ textDecoration: 'none', color: "#FFEEAB" }}>
             I'm a User
@@ -19,7 +26,8 @@ const Signup = () => {
         </Button>
       </Container>
       <Container className="chooseRole__business">
-        <Button variant="contained" size='large'  color="primary">
+        <Button variant="contained" size='large'  color="primary"
+        className={classes.button}>
           <NavLink to={{ pathname: `${SIGNUP_URL}/user`, role:'business' }}
           style={{ textDecoration: 'none', color: "#87B7CB" }}>
             I'm a Business
