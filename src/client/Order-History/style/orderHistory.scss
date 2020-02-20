@@ -1,0 +1,116 @@
+$secondary-text-color: rgb(194, 194, 194);
+$secondary-color: rgb(112, 168, 112); 
+$secondary-color-light: rgb(175, 219, 175); 
+$font-family-theme: "Roboto", "Helvetica", "Arial", sans-serif;
+
+.order-card__list {
+    font-family: $font-family-theme;
+    list-style: none;
+    padding: 0px;
+    li {
+        line-height: 24px;
+        display: flex;
+        vertical-align: middle;
+        margin-bottom: 10px;
+        span {
+            padding-left: 10px;
+        }
+    }
+
+}
+.order-card__right {
+    text-align: right;
+    .order-card__avatar {
+        margin: auto 0 auto auto;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.order-card__status {
+    font-family: $font-family-theme;
+    font-size: 20px;
+    font-weight: 500;
+    color: $secondary-color;
+}
+
+.order-information {
+    padding: 20px;
+    border-top: solid 3px #eee;
+}
+.order-information__head {
+    display: flex;
+    align-items: center;
+}
+.order-information__status {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    font-family: $font-family-theme;
+    font-size: 15px;
+    li {
+        padding: 5px 10px;
+        border-radius: 20px;
+        color: $secondary-text-color;
+    }
+}
+.order-information__status .order-information__status-active {
+    color: $secondary-color;
+    background-color: $secondary-color-light;
+}
+.MuiGrid-container .MuiToggleButton-root {
+    border: none;
+    line-height: 1;
+    border-radius: 20px;
+    background-color: #eee;
+}
+.order-information__head .MuiToggleButton-root.Mui-selected {
+    color: $secondary-color;
+}
+.order-information__postTime {
+    font-family: $font-family-theme;
+    color: $secondary-text-color;
+}
+.order-information__map {
+    z-index: 1000;
+}
+.order-information__budget {
+    text-align: center;
+    // padding: 10px 0 0;
+}
+.order-information__offer {
+    &--btn {
+        width: 100%;
+        font-size: 20px;
+        color: white;
+        background-color: $secondary-color;
+        padding: 15px;
+        border-radius: 30px;
+        border: none;
+    }
+
+}
+.order-information__share {
+    &--label {
+        background: white;
+        width: fit-content;
+        margin: auto;
+        margin-top: -10px;
+    }
+    .MuiFormLabel-root {
+        padding: 0 10px;
+    }
+    &--whole {
+        display: flex;
+        justify-content: center;
+    }
+    &--single {
+        margin: 10px;
+        color: $secondary-text-color;
+    }
+}
+
+.order-information__details {
+    margin-top: 40px;
+}
+
