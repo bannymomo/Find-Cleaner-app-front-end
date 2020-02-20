@@ -28,6 +28,7 @@ export default function BasicTextFields() {
 					<Typography>Where do you need the cleaning?</Typography>
 				</Grid>
 			</Grid>
+
 			<form className={classes.root} autoComplete="off">
 				<TextField
 					id="outlined-basic"
@@ -35,8 +36,8 @@ export default function BasicTextFields() {
 					placeholder="4000"
 					label="Enter a suburb"
 					variant="outlined"
-					color="secondary"
 					margin="dense"
+					color="secondary"
 				/>
 			</form>
 		</div>
