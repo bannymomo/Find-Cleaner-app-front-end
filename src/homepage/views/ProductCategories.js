@@ -90,8 +90,8 @@ function ProductCategories(props) {
 	const images = [
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2018/01/07/04/21/lavender-3066531_1280.jpg",
-			title: "Bathroom cleaning",
+				"https://cdn.pixabay.com/photo/2014/02/17/14/28/vacuum-cleaner-268179_1280.jpg",
+			title: "Dusting",
 			width: "40%"
 		},
 		{
@@ -108,8 +108,8 @@ function ProductCategories(props) {
 		},
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2014/02/17/14/28/vacuum-cleaner-268179_1280.jpg",
-			title: "Dusting",
+				"https://cdn.pixabay.com/photo/2018/01/07/04/21/lavender-3066531_1280.jpg",
+			title: "Bathroom cleaning",
 			width: "38%"
 		},
 		{
@@ -154,7 +154,7 @@ function ProductCategories(props) {
 						align="center"
 						component="h2"
 					>
-						For all tastes and all desires
+						For all services and all desires
 					</Typography>
 					<div className={classes.images}>
 						{images.map(image => (
