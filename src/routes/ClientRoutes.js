@@ -8,17 +8,44 @@ import Password from "../client/Password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
 import Profile from "../client/Profile/Profile";
 import OrderHistory from "../client/Order-History/OrderHistory";
+import OrderInformation from "../client/Order-History/component/OrderInformation";
 
 const ClientRoutes = () => (
-  <Switch>
-    <Redirect exact from="/clients" to={`${CLIENT_BASE_URL}/dashboard`} component={DashBoard} />
-    <Route exact path={`${CLIENT_BASE_URL}/dashboard`} component={DashBoard} />
-    <Route exact path={`${CLIENT_BASE_URL}/account`} component={Account} />
-    <Route exact path={`${CLIENT_BASE_URL}/password`} component={Password} />
-    <Route exact path={`${CLIENT_BASE_URL}/take-order`} component={TakeOrder} />
-    <Route exact path={`${CLIENT_BASE_URL}/profile`} component={Profile} />
-    <Route exact path={`${CLIENT_BASE_URL}/order-history`} component={OrderHistory} />
-  </Switch>
-)
+	<Switch>
+		<Redirect
+			exact
+			from="/clients"
+			to={`${CLIENT_BASE_URL}/dashboard`}
+			component={DashBoard}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/dashboard`}
+			component={DashBoard}
+		/>
+		<Route exact path={`${CLIENT_BASE_URL}/account`} component={Account} />
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/password`}
+			component={Password}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/take-order`}
+			component={TakeOrder}
+		/>
+		<Route exact path={`${CLIENT_BASE_URL}/profile`} component={Profile} />
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/order-history`}
+			component={OrderHistory}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/order-history/orderId`}
+			component={OrderInformation}
+		/>
+	</Switch>
+);
 
-export default ClientRoutes
+export default ClientRoutes;

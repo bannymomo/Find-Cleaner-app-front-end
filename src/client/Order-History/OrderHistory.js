@@ -1,15 +1,15 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { CLIENT_BASE_URL } from "../../routes/URLMap";
+// import { Route, Switch } from "react-router-dom";
+// import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import OrderCard from "./component/OrderCard";
-import OrderInformation from "./component/OrderInformation";
+// import OrderInformation from "./component/OrderInformation";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles({
 	container: {
 		marginTop: 20,
-    	marginBottom: 20,
+		marginBottom: 20
 	}
 });
 
@@ -20,19 +20,18 @@ const OrderHistory = () => {
 		<React.Fragment>
 			<Container className={classes.container} maxWidth="sm">
 				<OrderCard />
-        		<OrderCard />
+				<OrderCard />
 			</Container>
-			<Container className={classes.container}>
+			{/* <Container className={classes.container}>
 				<Switch>
-					
 					<Route
 						exact
 						path={`${CLIENT_BASE_URL}/order-history/orderId`}
 						component={OrderInformation}
 					/>
 				</Switch>
-				{/* <OrderInformation /> */}
-			</Container>
+				<OrderInformation />
+			</Container> */}
 		</React.Fragment>
 	);
 };
