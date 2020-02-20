@@ -1,19 +1,40 @@
-import React, { Component} from 'react';
-import { Button, Grid, TextField, Container, CssBaseline, Typography, withStyles }
+import React, { Component } from 'react';
+import { Button, Grid, TextField, Container, CssBaseline, Typography, withStyles
+,Box, createMuiTheme, ThemeProvider, Avatar}
   from '@material-ui/core';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
-// import { CLIENT_BASE_URL } from '../../routes/URLMap'
+import { CLIENT_BASE_URL } from '../../../routes/URLMap'
 // import {createClient} from '../../api/client'
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#2196f3"
+		},
+		secondary: {
+			main: "#f50057"
+		}
+  }
+});
+
 const styles = theme => ({
+  container: {
+    height:'85vh',
+    marginTop:'15vh',
+  },
+  box:{
+    height:"60vh",
+    width:"60vh",
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
+    padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    '& TextField': {
-      backgroundColor: 'red',
-    }
+    height:'100%',
+    backgroundColor: '#FEFEFF'
   },
   form: {
     width: '100%',
@@ -22,6 +43,10 @@ const styles = theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: '#2196f3'
+  }
 });
 
 class MoreInfo extends Component {
@@ -51,35 +76,41 @@ class MoreInfo extends Component {
     //   const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
     //   this.props.history.replace(redirectTo);
     // });
+    this.props.history.replace(`${CLIENT_BASE_URL}`);
   }
 
   render() {
     const { classes } = this.props;
 
     return (
-      <Container component="main" maxWidth="xs">
+      <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" className={classes.container}>
         <CssBaseline />
+        <Box className={classes.box}>
         <div className={classes.paper}>
           <Typography component="h1" variant="h3">
             More about you~
-        </Typography>
+          </Typography>
+          <Avatar className={classes.avatar}>
+                <AssignmentIndIcon />
+              </Avatar>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField variant="outlined" required fullWidth label="First Name"
-                value={this.state.firstName}
-                onChange={(event) => this.setState({ firstName: event.target.value })}
+              <Grid item xs={12} sm={6}>
+                <TextField variant="outlined" required fullWidth label="First Name"
+                  value={this.state.firstName}
+                  onChange={(event) => this.setState({ firstName: event.target.value })}
                 />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField variant="outlined" required fullWidth label="Last Name"
-                value={this.state.lastName}
-                onChange={(event) => this.setState({ lastName: event.target.value })}/>
-            </Grid>
-            {this.state.invalidName?  
-            <Typography  variant="h5" color='secondary'>
-                The length of name must be longer than 2
-            </Typography> : null} 
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField variant="outlined" required fullWidth label="Last Name"
+                  value={this.state.lastName}
+                  onChange={(event) => this.setState({ lastName: event.target.value })} />
+              </Grid>
+              {this.state.invalidName ?
+                <Typography variant="h5" color='secondary'>
+                  The length of name must be longer than 2
+            </Typography> : null}
               <Grid item xs={12}>
                 <TextField variant="filled" required fullWidth label="Gender"
                   value={this.state.gender}
@@ -95,15 +126,16 @@ class MoreInfo extends Component {
               </Grid>
             </Grid>
             <Button
-                variant="contained"
+              variant="contained"
               fullWidth color="primary" className={classes.submit}
               onClick={this.postClient}
-              > 
-            lalala
+            >Sign up
             </Button>
           </form>
         </div>
+        </Box>
       </Container>
+      </ThemeProvider>
     )
   }
 }
