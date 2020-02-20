@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -48,6 +47,18 @@ const styles = theme => ({
 function ProductHeroLayout(props) {
 	const { backgroundClassName, children, classes } = props;
 
+	const scrollToAnchor = anchorName => {
+		if (anchorName) {
+			let anchorElement = document.getElementById(anchorName);
+			if (anchorElement) {
+				anchorElement.scrollIntoView({
+					block: "start",
+					behavior: "smooth"
+				});
+			}
+		}
+	};
+
 	return (
 		<section className={classes.root}>
 			<Container className={classes.container}>
@@ -57,25 +68,19 @@ function ProductHeroLayout(props) {
 					className={clsx(classes.background, backgroundClassName)}
 				/>
 				<div
+					onClick={() => scrollToAnchor("next-screens")}
 					style={{
+						cursor: "pointer",
 						fontSize: 30 + "px",
 						position: "absolute",
 						bottom: 20 + "px"
 					}}
 				>
-					<a>
-						<i class="fas fa-arrow-circle-down"></i>
-					</a>
+					<i className="fas fa-chevron-down"></i>
 				</div>
 			</Container>
 		</section>
 	);
 }
-
-ProductHeroLayout.propTypes = {
-	backgroundClassName: PropTypes.string.isRequired,
-	children: PropTypes.node.isRequired,
-	classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(ProductHeroLayout);
