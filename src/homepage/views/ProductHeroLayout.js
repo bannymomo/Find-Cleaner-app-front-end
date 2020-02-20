@@ -68,7 +68,7 @@ function ProductHeroLayout(props) {
 					className={clsx(classes.background, backgroundClassName)}
 				/>
 				<div
-					onClick={() => scrollToAnchor("next-screens")}
+					onClick={() => scrollToAnchor("product-value")}
 					style={{
 						cursor: "pointer",
 						fontSize: 30 + "px",

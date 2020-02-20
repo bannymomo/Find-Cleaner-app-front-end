@@ -11,18 +11,18 @@ import ProductCTA from "./views/ProductCTA";
 import AppAppBar from "./views/AppAppBar";
 
 function HomePage() {
-  return (
-    <React.Fragment>
-      <AppAppBar />
-      <ProductHero />
-      <ProductValues />
-      <ProductCategories />
-      <ProductHowItWorks />
-      <ProductCTA />
-      <ProductSmokingHero />
-      <AppFooter />
-    </React.Fragment>
-  );
+	return (
+		<React.Fragment>
+			<AppAppBar />
+			<ProductHero />
+			<ProductValues />
+			<ProductCategories />
+			<ProductHowItWorks />
+			<ProductCTA />
+			<ProductSmokingHero />
+			<AppFooter />
+		</React.Fragment>
+	);
 }
 
 export default withRoot(HomePage);
