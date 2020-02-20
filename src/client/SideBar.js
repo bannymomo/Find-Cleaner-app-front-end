@@ -72,7 +72,7 @@ export default function SimpleList() {
 
 	//modal
 	const modalClasses = useStylesModal();
-	const [modalOpen, setModalOpen] = React.useState(true);
+	const [modalOpen, setModalOpen] = React.useState(false);
 
 	const handleOpen = () => {
 		setModalOpen(!modalOpen);
@@ -104,7 +104,6 @@ export default function SimpleList() {
 					<Modal
 						className={modalClasses.modal}
 						open={modalOpen}
-						onClose={handleClose}
 						closeAfterTransition
 						disableScrollLock
 						BackdropComponent={Backdrop}
