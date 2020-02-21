@@ -5,13 +5,6 @@ import Informatiaon from "./components/Information";
 import "./style/profile.scss";
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      aboutFormShowElem: false,
-      skillsFormShowElem: false
-    }
-  }
 
   render() {
     return (
