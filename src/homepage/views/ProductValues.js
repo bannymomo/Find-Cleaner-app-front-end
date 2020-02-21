@@ -6,6 +6,8 @@ import Container from "@material-ui/core/Container";
 import Typography from "../components/Typography";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
+import "../style/homepage.scss";
+import productCurvyLines from "../../assets/images/productCurvyLines.png";
 
 const styles = theme => ({
 	root: {
@@ -39,41 +41,23 @@ const styles = theme => ({
 
 function ProductValues(props) {
 	const { classes } = props;
-	const scrollToAnchor = anchorName => {
-		if (anchorName) {
-			let anchorElement = document.getElementById(anchorName);
-			if (anchorElement) {
-				anchorElement.scrollIntoView({
-					block: "start",
-					behavior: "smooth"
-				});
-			}
-		}
-	};
+
 	return (
-		<section className={classes.root} id="product-value">
+		<section className={classes.root}>
 			<Container className={classes.container}>
+				<img
+					src={productCurvyLines}
+					className={classes.curvyLines}
+					alt="curvy lines"
+				/>
 				<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
-					<Typography
-						style={{
-							textAlign: "center",
-							marginBottom: 100 + "px"
-						}}
-						variant="h4"
-						marked="center"
-						className={classes.title}
-						component="h2"
-					>
-						Why choose us
-					</Typography>
 					<Grid container spacing={5}>
 						<Grid item xs={12} md={4}>
 							<div className={classes.item}>
 								<img
-									className={classes.image}
-									src="https://image.flaticon.com/icons/svg/1161/1161490.svg"
+									className="product-values__img--black"
+									src="https://image.flaticon.com/icons/svg/2532/2532447.svg"
 									alt="Verified badges"
-									style={{ height: 120 + "px" }}
 								/>
 								<Typography
 									variant="h6"
@@ -93,7 +77,7 @@ function ProductValues(props) {
 								<img
 									src="https://image.flaticon.com/icons/svg/181/181092.svg"
 									alt="insurance"
-									style={{ height: 120 + "px" }}
+									className="product-values__img--black"
 								/>
 								<Typography
 									variant="h6"
@@ -112,10 +96,9 @@ function ProductValues(props) {
 						<Grid item xs={12} md={4}>
 							<div className={classes.item}>
 								<img
-									className={classes.image}
+									className="product-values__img--black"
 									src="https://image.flaticon.com/icons/svg/1067/1067566.svg"
 									alt="clock"
-									style={{ height: 120 + "px" }}
 								/>
 								<Typography
 									variant="h6"
@@ -131,19 +114,6 @@ function ProductValues(props) {
 							</div>
 						</Grid>
 					</Grid>
-					<div
-						onClick={() => scrollToAnchor("product-categories")}
-						style={{
-							cursor: "pointer",
-							fontSize: 30 + "px",
-							position: "absolute",
-							left: 50 + "%",
-							transform: "translateX(-" + 50 + "%)",
-							marginTop: 50 + "px"
-						}}
-					>
-						<i className="fas fa-chevron-down"></i>
-					</div>
 				</ScrollAnimation>
 			</Container>
 		</section>

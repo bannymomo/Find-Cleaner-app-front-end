@@ -5,9 +5,8 @@ import Button from "../components/Button";
 import Typography from "../components/Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
 import { SIGNUP_URL } from "../../routes/URLMap";
-
-const backgroundImage =
-	"http://www.hnccs.com.au/wp-content/uploads/2018/08/house-kepping.jpg";
+import "../style/homepage.scss";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
 	button: {
@@ -29,14 +28,7 @@ function ProductHero(props) {
 	const { classes } = props;
 
 	return (
-		<div
-			style={{
-				background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),url(${backgroundImage})`,
-				backgroundSize: "cover",
-				padding: 60 + "px",
-				marginTop: -60 + "px"
-			}}
-		>
+		<div className="product-hero__background--gradient">
 			<ProductHeroLayout>
 				<Typography
 					color="inherit"
@@ -59,8 +51,8 @@ function ProductHero(props) {
 					variant="contained"
 					size="large"
 					className={classes.button}
-					component="a"
-					href={SIGNUP_URL}
+					component={Link}
+					to={SIGNUP_URL}
 				>
 					Register
 				</Button>
@@ -71,6 +63,9 @@ function ProductHero(props) {
 				>
 					Discover the experience
 				</Typography>
+				<div className="homepage__arrow--down">
+					<i className="fas fa-long-arrow-alt-down"></i>
+				</div>
 			</ProductHeroLayout>
 		</div>
 	);

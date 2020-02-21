@@ -6,6 +6,8 @@ import Container from "@material-ui/core/Container";
 import Typography from "../components/Typography";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
+import "../style/homepage.scss";
+
 const styles = theme => ({
 	root: {
 		marginTop: theme.spacing(8),
@@ -90,25 +92,25 @@ function ProductCategories(props) {
 	const images = [
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2014/02/17/14/28/vacuum-cleaner-268179_1280.jpg",
-			title: "Dusting",
+				"https://cdn.pixabay.com/photo/2016/08/03/14/24/roses-1566792_1280.jpg",
+			title: "Home & Gardening",
 			width: "40%"
 		},
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2017/04/18/08/41/hands-2238235_1280.jpg",
+				"https://cdn.pixabay.com/photo/2017/05/23/16/23/soap-dispenser-2337697_1280.jpg",
 			title: "Washing",
-			width: "20%"
+			width: "25%"
 		},
 		{
 			url:
-				"https://hips.hearstapps.com/hbu.h-cdn.co/assets/16/20/2048x1363/gallery-1463688033-hotel-bed-karate-chop.jpg?resize=768:*",
+				"https://cdn.pixabay.com/photo/2017/08/24/12/23/coffee-2676642_1280.jpg",
 			title: "Bed making",
-			width: "40%"
+			width: "35%"
 		},
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2018/01/07/04/21/lavender-3066531_1280.jpg",
+				"https://cdn.pixabay.com/photo/2015/03/26/10/01/bathroom-690774_1280.jpg",
 			title: "Bathroom cleaning",
 			width: "38%"
 		},
@@ -126,14 +128,14 @@ function ProductCategories(props) {
 		},
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2015/04/20/13/30/kitchen-731351_1280.jpg",
+				"https://cdn.pixabay.com/photo/2014/11/24/14/39/potato-544073_1280.jpg",
 			title: "Kitchen cleaning",
 			width: "40%"
 		},
 		{
 			url:
-				"https://cdn.pixabay.com/photo/2015/05/09/17/09/towel-759980_1280.jpg",
-			title: "Home & Gardening",
+				"https://cdn.pixabay.com/photo/2014/02/17/14/28/vacuum-cleaner-268179_1280.jpg",
+			title: "Dusting",
 			width: "20%"
 		},
 		{
@@ -145,50 +147,48 @@ function ProductCategories(props) {
 	];
 
 	return (
-		<div style={{ padding: 70 + "px" }} id="product-categories">
+		<Container className={classes.root} component="section">
 			<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
-				<Container className={classes.root} component="section">
-					<Typography
-						variant="h4"
-						marked="center"
-						align="center"
-						component="h2"
-					>
-						For all services and all desires
-					</Typography>
-					<div className={classes.images}>
-						{images.map(image => (
-							<ButtonBase
-								key={image.title}
-								className={classes.imageWrapper}
+				<Typography
+					variant="h4"
+					marked="center"
+					align="center"
+					component="h2"
+				>
+					For all services and all desires
+				</Typography>
+				<div className={classes.images}>
+					{images.map(image => (
+						<ButtonBase
+							key={image.title}
+							className={classes.imageWrapper}
+							style={{
+								width: image.width
+							}}
+						>
+							<div
+								className={classes.imageSrc}
 								style={{
-									width: image.width
+									backgroundImage: `url(${image.url})`
 								}}
-							>
-								<div
-									className={classes.imageSrc}
-									style={{
-										backgroundImage: `url(${image.url})`
-									}}
-								/>
-								<div className={classes.imageBackdrop} />
-								<div className={classes.imageButton}>
-									<Typography
-										component="h3"
-										variant="h6"
-										color="inherit"
-										className={classes.imageTitle}
-									>
-										{image.title}
-										<div className={classes.imageMarked} />
-									</Typography>
-								</div>
-							</ButtonBase>
-						))}
-					</div>
-				</Container>
+							/>
+							<div className={classes.imageBackdrop} />
+							<div className={classes.imageButton}>
+								<Typography
+									component="h3"
+									variant="h6"
+									color="inherit"
+									className={classes.imageTitle}
+								>
+									{image.title}
+									<div className={classes.imageMarked} />
+								</Typography>
+							</div>
+						</ButtonBase>
+					))}
+				</div>
 			</ScrollAnimation>
-		</div>
+		</Container>
 	);
 }
 

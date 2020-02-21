@@ -72,10 +72,10 @@ export default function SimpleList() {
 
 	//modal
 	const modalClasses = useStylesModal();
-	const [modalOpen, setModalOpen] = React.useState(true);
+	const [modalOpen, setModalOpen] = React.useState(false);
 
 	const handleOpen = () => {
-		setModalOpen(!modalOpen);
+		setModalOpen(true);
 	};
 
 	const handleClose = () => {

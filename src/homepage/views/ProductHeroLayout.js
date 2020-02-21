@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import "../style/homepage.scss";
 
 const styles = theme => ({
 	root: {
@@ -47,18 +48,6 @@ const styles = theme => ({
 function ProductHeroLayout(props) {
 	const { backgroundClassName, children, classes } = props;
 
-	const scrollToAnchor = anchorName => {
-		if (anchorName) {
-			let anchorElement = document.getElementById(anchorName);
-			if (anchorElement) {
-				anchorElement.scrollIntoView({
-					block: "start",
-					behavior: "smooth"
-				});
-			}
-		}
-	};
-
 	return (
 		<section className={classes.root}>
 			<Container className={classes.container}>
@@ -67,17 +56,6 @@ function ProductHeroLayout(props) {
 				<div
 					className={clsx(classes.background, backgroundClassName)}
 				/>
-				<div
-					onClick={() => scrollToAnchor("product-value")}
-					style={{
-						cursor: "pointer",
-						fontSize: 30 + "px",
-						position: "absolute",
-						bottom: 20 + "px"
-					}}
-				>
-					<i className="fas fa-chevron-down"></i>
-				</div>
 			</Container>
 		</section>
 	);
