@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CLIENT_BASE_URL } from "../../../routes/URLMap";
+import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -12,14 +12,13 @@ import Typography from "@material-ui/core/Typography";
 import  AddLocationOutlinedIcon  from '@material-ui/icons/AddLocationOutlined';
 import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
 
-
-import "../style/orderHistory.scss";
+import "./style/orderHistory.scss";
 
 const useStyles = makeStyles({
 	root: {
         padding: "20px 20px 0",
         marginBottom: "20px",
-        borderLeft: "solid 5px rgb(112, 168, 112)"
+        borderLeft: "solid 5px #43a047"
 	},
 	card_container: {
 		borderBottom: "solid 2px lightgrey"
@@ -35,12 +34,11 @@ const useStyles = makeStyles({
 	}
 });
 
-export default function OrderCard() {
+export default function OrderCard(props) {
 	const classes = useStyles();
 
 	return (
-		<CardActionArea component={Link} to={`${CLIENT_BASE_URL}/order-history/orderId`}>
-		{/* <CardActionArea> */}
+		<CardActionArea component={Link} to={`${BUSINESS_BASE_URL}/order-history/${props.orderId}`}>
 			<Card className={classes.root}>
 				<Grid container className={classes.card_container} spacing={2}>
 					<Grid item xs={9}>
@@ -79,7 +77,6 @@ export default function OrderCard() {
 				</Grid>
 				<p className="order-card__status">OPEN</p>
 			</Card>
-		{/* </Link> */}
 		</CardActionArea>
 	);
 }
