@@ -1,6 +1,31 @@
-$order-color-rose: #f50057;
+@import "../../../theme/color.scss";
 
 .client__take-order-page {
+	& .MuiCheckbox-colorSecondary,
+	& .MuiIconButton-colorSecondary {
+		&:hover {
+			background-color: #2195f31a;
+		}
+	}
+
+	& .MuiCheckbox-colorSecondary.Mui-checked,
+	& .MuiIconButton-colorSecondary.Mui-checked {
+		color: $primary-color-blue;
+		&:hover {
+			background-color: #2195f31a;
+		}
+	}
+
+	& label.Mui-focused {
+		color: $primary-color-blue;
+	}
+
+	& .MuiOutlinedInput-root {
+		&.Mui-focused fieldset {
+			border-color: $primary-color-blue;
+		}
+	}
+
 	& p#take-order {
 		padding-left: 0.63rem;
 		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -17,19 +42,19 @@ $order-color-rose: #f50057;
 			margin-bottom: 1rem;
 
 			& button:hover {
-				background-color: #e0446d;
+				background-color: #3489cf;
 			}
 			.Mui-selected {
-				background-color: $order-color-rose;
+				background-color: $primary-color-blue;
 				&:hover {
-					background-color: #e0446d;
+					background-color: #3489cf;
 				}
 			}
 		}
 	}
 
 	& .take-order--checkbox div.MuiPaper-root {
-		background-color: rgba(245, 0, 86, 0.068);
+		background-color: #2195f31a;
 		margin-bottom: 1.2rem;
 
 		& .MuiFormControlLabel-root {
@@ -84,6 +109,9 @@ $order-color-rose: #f50057;
 		& .MuiCardContent-root {
 			padding: 0.8rem;
 		}
+		.MuiButton-containedSecondary {
+			background-color: $primary-color-blue;
+		}
 	}
 }
 
@@ -93,21 +121,21 @@ $order-color-rose: #f50057;
 	& .MuiPickersDay-daySelected,
 	& .MuiPickersClock-pin,
 	& .MuiPickersClockPointer-pointer {
-		background-color: $order-color-rose;
+		background-color: $primary-color-blue;
 	}
 	& .MuiPickersDay-daySelected:hover {
-		background-color: #e0446d;
+		background-color: #3489cf;
 	}
 	& .MuiPickersDay-daySelected .MuiTypography-body2 {
 		color: #fff;
 	}
 	& .MuiPickersDay-current {
-		color: $order-color-rose;
+		color: $primary-color-blue;
 	}
 	& .MuiPickersClockPointer-noPoint,
 	& .MuiPickersClockPointer-thumb {
-		background-color: $order-color-rose;
-		border-color: $order-color-rose;
+		background-color: $primary-color-blue;
+		border-color: $primary-color-blue;
 	}
 	& .MuiTabs-indicator {
 		background-color: #fff;
@@ -115,5 +143,5 @@ $order-color-rose: #f50057;
 }
 
 .MuiDialogActions-root button.MuiButton-textPrimary span.MuiButton-label {
-	color: $order-color-rose;
+	color: $primary-color-blue;
 }

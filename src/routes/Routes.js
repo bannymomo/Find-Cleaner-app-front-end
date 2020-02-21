@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Login from "../login/login";
-import ChooseRole from "../signup/ChooseRole";
-import UserSignup from "../signup/UserSignup";
+import Login from "../authorization/login/login";
+import ChooseRole from "../authorization/signup/ChooseRole";
+import UserSignup from "../authorization/signup/UserSignup";
 import HomePage from "../homepage/HomePage";
 import Business from "../business/Business";
 import Client from "../client/Client";

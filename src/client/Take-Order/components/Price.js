@@ -10,35 +10,39 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		position: "absolute",
 		top: "2rem",
-		right: "2rem",
-		width: "12rem",
+		right: "3rem",
+		width: "15rem",
 		textAlign: "center"
 	},
 	bullet: {
 		display: "inline-block",
 		margin: "0 2px",
 		transform: "scale(0.8)",
-		color: "#f50057"
+		color: "#2196f3"
 	},
 	title: {
-		fontSize: "0.5rem",
+		fontSize: "0.8rem",
 		textTransform: "uppercase"
 	},
 	price: {
-		marginBottom: "1rem"
+		marginBottom: "1rem",
+		fontSize: "2rem"
 	},
 	pos: {
-		fontSize: "0.6rem",
+		fontSize: "0.8rem",
 		textAlign: "left",
-		lineHeight: "1.5rem"
+		lineHeight: "1.5rem",
+		marginLeft: "5px"
 	},
 	button: {
 		margin: "0 auto",
+		fontSize: "1.1rem",
+		letterSpacing: "1px",
 		paddingLeft: theme.spacing(3),
 		paddingRight: theme.spacing(3)
 	},
 	note: {
-		fontSize: "0.4rem",
+		fontSize: "0.6rem",
 		fontWeight: 100
 	}
 }));
@@ -74,7 +78,7 @@ export default function SimpleCard() {
 				<CardActions>
 					<Button
 						className={classes.button}
-						size="small"
+						size="large"
 						variant="contained"
 						color="secondary"
 					>
@@ -87,7 +91,7 @@ export default function SimpleCard() {
 						<br />
 						marketplace prices may vary.
 						<br />
-						Term & condition apply.
+						Terms & conditions apply.
 					</Typography>
 				</CardContent>
 			</Card>

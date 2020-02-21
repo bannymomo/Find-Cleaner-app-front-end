@@ -1,16 +1,27 @@
 import React from 'react';
-import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Grid }
+import { Avatar, Button, TextField, FormControlLabel, Checkbox }
   from '@material-ui/core';
 import { Container, Box, CssBaseline, Typography, withStyles }
   from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-
-import { CLIENT_BASE_URL } from '../routes/URLMap';
+import { CLIENT_BASE_URL } from '../../routes/URLMap';
 // import { setToken } from '../utils/auth';
 // import { login as loginFn } from '../api/auth';
 // import Error from '../TestingPage/Error'
-import styles from './Style'
+import styles from './Style';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#2196f3"
+		},
+		secondary: {
+			main: "#f50057"
+		}
+  }
+});
 
 class Login extends React.Component {
 
@@ -52,7 +63,8 @@ class Login extends React.Component {
       !!this.state.error ? 
       // <Error />
       null : (
-
+        <ThemeProvider theme={theme}>
+        <div className={classes.backGround}>
         <Container component="main" maxWidth="xs" className={classes.container}>
           <CssBaseline />
           <Box className={classes.box}>
@@ -76,18 +88,20 @@ class Login extends React.Component {
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me" />
                 <Button onClick={this.login} variant="contained"
-                  fullWidth color="primary">
+                  fullWidth color={"primary"}>
                   Sign In
                 </Button>
-                <Grid item xs>
+                {/* <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                 </Link>
-                </Grid>
+                </Grid> */}
               </form>
             </div>
           </Box>
-        </Container>)
+        </Container>
+        </div>
+        </ThemeProvider>)
     );
   }
 }
