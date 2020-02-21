@@ -4,7 +4,7 @@ import { Button, Grid, TextField, Container, CssBaseline, Typography, withStyles
   from '@material-ui/core';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
-import { CLIENT_BASE_URL } from '../../../routes/URLMap'
+import { BUSINESS_BASE_URL } from '../../../routes/URLMap'
 // import {createClient} from '../../api/client'
 
 const theme = createMuiTheme({
@@ -76,7 +76,7 @@ class MoreInfo extends Component {
     //   const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
     //   this.props.history.replace(redirectTo);
     // });
-    this.props.history.replace(`${CLIENT_BASE_URL}`);
+    this.props.history.replace(`${BUSINESS_BASE_URL}`);
   }
 
   render() {

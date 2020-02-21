@@ -9,7 +9,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
-
+import { BUSINESS_BASE_URL } from '../routes/URLMap'
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -24,9 +24,7 @@ function ListItemLink(props) {
 
 export default function SimpleList() {
   const classes = useStyles();
-
   const [open, setOpen] = React.useState(true);
-
   const handleClick = () => {
     setOpen(!open);
   };
@@ -40,16 +38,16 @@ export default function SimpleList() {
       <div className={classes.root}>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItemLink to="dashboard">
+          <ListItemLink to={`${BUSINESS_BASE_URL}/dashboard`}>
             <ListItemText primary="Dashboard" />
           </ListItemLink>
-          <ListItemLink to="profile">
+          <ListItemLink to={`${BUSINESS_BASE_URL}/profile`}>
             <ListItemText primary="Profile" />
           </ListItemLink>
-          <ListItemLink to="browse-order">
+          <ListItemLink to={`${BUSINESS_BASE_URL}/browse-order`}>
             <ListItemText primary="Browse Orders" />
           </ListItemLink>
-          <ListItemLink to="order-history">
+          <ListItemLink to={`${BUSINESS_BASE_URL}/order-history`}>
             <ListItemText primary="OrderHistory" />
           </ListItemLink>
           <ListItem button onClick={handleClick}>
@@ -59,10 +57,10 @@ export default function SimpleList() {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div">
               <ListItem className={classes.nested}>
-                <ListItemLink to="account">Account</ListItemLink>
+                <ListItemLink to={`${BUSINESS_BASE_URL}/account`}>Account</ListItemLink>
               </ListItem>
               <ListItem className={classes.nested}>
-                <ListItemLink to="password">Password</ListItemLink>
+                <ListItemLink to={`${BUSINESS_BASE_URL}/password`}>Password</ListItemLink>
               </ListItem>
             </List>
           </Collapse>

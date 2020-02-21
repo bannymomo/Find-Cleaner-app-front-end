@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { BUSINESS_BASE_URL } from "./URLMap";
+import Dashboard from "../business/Dashboard/Dashboard";
 import Account from "../business/Account/Account";
 import Password from "../business/Password/Password";
 import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
@@ -9,7 +10,6 @@ import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
 import OrderInformation from "../components/order/OrderInformation";
 
-import Dashboard from "../business/Dashboard/Dashboard";
 
 const orderId = "orderId";
 
