@@ -15,7 +15,7 @@ const styles = theme => ({
     justifyContent: "space-between"
   },
   left: {
-    flex: 1
+    flex: 1,
   },
   leftLinkActive: {
     color: theme.palette.common.white
@@ -46,6 +46,7 @@ function AppAppBar(props) {
           <Link
             style={{
               textDecoration: "none",
+              textAlign:"center",
               color: "white",
               fontSize: 30 + "px",
               fontWeight: "bold",
