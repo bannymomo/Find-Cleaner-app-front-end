@@ -8,7 +8,9 @@ import Password from "../client/Password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
 import Profile from "../client/Profile/Profile";
 import OrderHistory from "../client/Order-History/OrderHistory";
-import OrderInformation from "../client/Order-History/component/OrderInformation";
+import OrderInformation from "../components/order/OrderInformation";
+
+const orderId = "orderId";
 
 const ClientRoutes = () => (
 	<Switch>
@@ -42,7 +44,7 @@ const ClientRoutes = () => (
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/order-history/orderId`}
+			path={`${CLIENT_BASE_URL}/order-history/${orderId}`}
 			component={OrderInformation}
 		/>
 	</Switch>
