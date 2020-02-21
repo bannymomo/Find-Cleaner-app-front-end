@@ -47,7 +47,7 @@ export default function SimpleList() {
             <ListItemText primary="Profile" />
           </ListItemLink>
           <ListItemLink to="browse-order">
-            <ListItemText primary="Take Orders" />
+            <ListItemText primary="Browse Orders" />
           </ListItemLink>
           <ListItemLink to="order-history">
             <ListItemText primary="OrderHistory" />
