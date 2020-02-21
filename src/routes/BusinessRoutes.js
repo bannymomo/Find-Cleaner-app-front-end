@@ -7,7 +7,11 @@ import Password from "../business/Password/Password";
 import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
 import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
+import OrderInformation from "../components/order/OrderInformation";
+
 import Dashboard from "../business/Dashboard/Dashboard";
+
+const orderId = "orderId";
 
 const BusinessRoutes = () => (
   <Switch>
@@ -35,6 +39,11 @@ const BusinessRoutes = () => (
       path={`${BUSINESS_BASE_URL}/order-history`}
       component={OrderHistory}
     />
+    <Route
+			exact
+			path={`${BUSINESS_BASE_URL}/order-history/${orderId}`}
+			component={OrderInformation}
+		/>
   </Switch>
 );
 

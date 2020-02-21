@@ -1,36 +1,24 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+
 
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
 import Typography from "@material-ui/core/Typography";
-import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
-
-import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Box from "@material-ui/core/Box";
 
-import Backdrop from "@material-ui/core/Backdrop";
-import Button from "@material-ui/core/Button";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-import Maps from "./Maps";
-
-import "../style/orderHistory.scss";
+import "./style/orderHistory.scss";
+import OrderInformationList from "./OrderInformationList";
 
 const useStyles = makeStyles({
 	formControl: {
@@ -39,6 +27,8 @@ const useStyles = makeStyles({
 		width: "100%"
 	}
 });
+
+const offerButtonText = "Take the offer";
 
 export default function OrderInformaiton() {
 	const classes = useStyles();
@@ -83,15 +73,6 @@ export default function OrderInformaiton() {
 		});
 	};
 
-	// backdrop for google map
-	const [open, setOpen] = React.useState(false);
-	const handleClose = () => {
-		setOpen(false);
-	};
-	const handleToggle = () => {
-		setOpen(!open);
-	};
-
 	//toggle button
 	const [selected, setSelected] = React.useState(false);
 
@@ -101,9 +82,7 @@ export default function OrderInformaiton() {
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
-							<li className="order-information__status-active">
-								OPEN
-							</li>
+							<li className="order-information__status-active">OPEN</li>
 							<li>CANCELLED</li>
 							<li>ASSIGNED</li>
 							<li>COMPLETED</li>
@@ -123,82 +102,14 @@ export default function OrderInformaiton() {
 					<Typography variant="h4" component="h2">
 						House Cleaning
 					</Typography>
-					<List>
-						<ListItem alignItems="flex-start">
-							<ListItemAvatar>
-								<Avatar alt="user1" src="/1.jpg" />
-							</ListItemAvatar>
-							<ListItemText
-								primary="POSTED BY"
-								secondary={
-									<Typography
-										variant="body2"
-										color="textPrimary"
-									>
-										Gaurav L.
-									</Typography>
-								}
-							/>
-							<p className="order-information__postTime">
-								20 mins ago
-							</p>
-						</ListItem>
-						<Divider variant="inset" component="li" />
-						<ListItem alignItems="flex-start">
-							<ListItemIcon>
-								<AddLocationOutlinedIcon fontSize="large" />
-							</ListItemIcon>
-							<ListItemText
-								primary="LOCATION"
-								secondary={
-									<Typography
-										variant="body2"
-										color="textPrimary"
-									>
-										116 Adelaide St, Brisbane City
-									</Typography>
-								}
-							/>
-							<div className="order-information__map">
-								<Button
-									color="lightgreen"
-									onClick={handleToggle}
-								>
-									View Map
-								</Button>
-								<Backdrop
-									className={classes.backdrop}
-									open={open}
-									onClick={handleClose}
-								>
-									<Maps />
-								</Backdrop>
-							</div>
-						</ListItem>
-						<Divider variant="inset" component="li" />
-						<ListItem alignItems="flex-start">
-							<ListItemIcon>
-								<DateRangeOutlinedIcon fontSize="large" />
-							</ListItemIcon>
-							<ListItemText
-								primary="DUE DATE"
-								secondary={
-									<Typography
-										variant="body2"
-										color="textPrimary"
-									>
-										Saturday, 15th Feb 2020
-									</Typography>
-								}
-							/>
-						</ListItem>
-					</List>
+					<OrderInformationList />
+					
 				</Grid>
 				<Grid item xs={4}>
 					<Card>
 						<CardContent className="order-information__budget">
 							<Typography className={classes.title} gutterBottom>
-								TASK BUDGET
+								Price
 							</Typography>
 							<Typography variant="h4" component="p">
 								$180
@@ -206,7 +117,7 @@ export default function OrderInformaiton() {
 						</CardContent>
 						<CardActions className="order-information__offer">
 							<button className="order-information__offer--btn">
-								Make an offer
+								{offerButtonText}
 							</button>
 						</CardActions>
 					</Card>
