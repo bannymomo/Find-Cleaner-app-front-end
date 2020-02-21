@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BUSINESS_BASE_URL } from "../../routes/URLMap";
+import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../routes/URLMap";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -36,9 +36,15 @@ const useStyles = makeStyles({
 
 export default function OrderCard(props) {
 	const classes = useStyles();
+	let BASE_URL;
+	if (props.role === 'client') {
+		BASE_URL = CLIENT_BASE_URL;
+	} else if (props.role === 'business') {
+		BASE_URL = BUSINESS_BASE_URL;
+	}
 
 	return (
-		<CardActionArea component={Link} to={`${BUSINESS_BASE_URL}/order-history/${props.orderId}`}>
+		<CardActionArea component={Link} to={`${BASE_URL}/order-history/${props.orderId}`}>
 			<Card className={classes.root}>
 				<Grid container className={classes.card_container} spacing={2}>
 					<Grid item xs={9}>

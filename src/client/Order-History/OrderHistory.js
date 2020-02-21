@@ -6,6 +6,7 @@ class OrderHistory extends React.Component {
 	
 	state = {
 		orderId: 'orderId',
+		role: 'client',
 		allOrders: [ 'orderId', 'orderId' ]
 	}
 
@@ -15,7 +16,10 @@ class OrderHistory extends React.Component {
 				<Container className="order-history__container" maxWidth="sm">
 					{
 						this.state.allOrders.map( () => (
-							<OrderCard orderId={this.state.orderId}/>
+							<OrderCard 
+								orderId={this.state.orderId}
+								role={this.state.role}
+							/>
 						))
 					}
 				</Container>
