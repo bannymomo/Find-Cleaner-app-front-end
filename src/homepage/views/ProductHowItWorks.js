@@ -88,8 +88,11 @@ function ProductHowItWorks(props) {
 										alt="booking"
 										className={classes.image}
 									/>
+
 									<Typography variant="h5" align="center">
-										<h4>What do you need done? </h4>
+										<div className="product-how-it-works__title--black">
+											What do you need done?
+										</div>
 										<p>
 											Start by telling us about your task.
 											Mention when and where you need it
@@ -107,8 +110,11 @@ function ProductHowItWorks(props) {
 										alt="find-people"
 										className={classes.image}
 									/>
+
 									<Typography variant="h5" align="center">
-										<h4>Choose the best person for you</h4>
+										<div className="product-how-it-works__title--black">
+											Choose the best person for you
+										</div>
 										<p>
 											Take a look at profiles and reviews
 											to pick the best Tasker for your
@@ -125,8 +131,11 @@ function ProductHowItWorks(props) {
 										alt="task-done"
 										className={classes.image}
 									/>
+
 									<Typography variant="h5" align="center">
-										<h4>Task completed</h4>
+										<div className="product-how-it-works__title--black">
+											Task completed
+										</div>
 										<p>
 											With your task complete, you’re free
 											to leave a review for the Tasker so
