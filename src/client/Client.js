@@ -43,10 +43,10 @@ class Client extends Component {
 
       <div className="client__container--whole-page" >
 
-        <div >
+        <div className="client__sidebar--page-left">
           {
             !isMobile||this.state.expanded ? (
-              <div className="client__sidebar--page-left">
+              <div >
                 <SideBar />
               </div>
             ) : <div>
@@ -63,4 +63,4 @@ class Client extends Component {
   }
 }
 
-export default (Client);
+export default Client;
