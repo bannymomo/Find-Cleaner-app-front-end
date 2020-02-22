@@ -9,20 +9,31 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import { BUSINESS_BASE_URL } from '../routes/URLMap'
+
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  }
+	root: {
+		width: "100%",
+		maxWidth: 360,
+		backgroundColor: theme.palette.background.paper
+	},
+	tasksButton: {
+		margin: "0.3rem 0.5rem",
+		borderRadius: "100px",
+		padding: "0.7rem 1.6rem",
+		fontSize: "0.9rem",
+		letterSpacing: "1px",
+		fontWeight: "700"
+	}
 }));
 
 function ListItemLink(props) {
-  return <ListItem button component={Link} {...props} />;
+	return <ListItem button component={Link} {...props} />;
 }
 
 export default function SimpleList() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleClick = () => {
@@ -38,6 +49,17 @@ export default function SimpleList() {
       <div className={classes.root}>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
+          <ListItemLink to={`${BUSINESS_BASE_URL}/browse-order`}>
+           	<Button
+							className={classes.tasksButton}
+							variant="contained"
+							type="button"
+							color="secondary"
+							to="browse-order"
+						>
+							Browser Tasks
+						</Button>
+          </ListItemLink>
           <ListItemLink to={`${BUSINESS_BASE_URL}/dashboard`}>
             <ListItemText primary="Dashboard" />
           </ListItemLink>

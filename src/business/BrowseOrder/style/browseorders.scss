@@ -1,0 +1,63 @@
+@import "../../../theme/color.scss";
+
+.business__container--whole-page {
+	& .browse-orders--top-bar {
+		background-color: #2195f31a;
+		display: flex;
+		flex-direction: row;
+		// align-items: flex-end;
+		justify-content: flex-end;
+		align-items: stretch;
+		padding-top: 0.5rem;
+
+		& .MuiInput-colorSecondary.MuiInput-underline:after {
+			border-bottom-color: $primary-color-blue;
+		}
+
+		& .MuiButton-textSecondary {
+			color: $primary-color-blue;
+			&:hover {
+				background-color: #2195f31a;
+			}
+		}
+
+		&--date-posted {
+			& .MuiFormControl-root {
+				// margin-bottom: 5px;
+				& .MuiInputBase-root {
+					font-size: 13px;
+					color: #0009;
+				}
+			}
+		}
+
+		&--search {
+			margin-left: 15rem;
+			& .MuiInputBase-root {
+				font-size: 13px;
+				color: #000;
+			}
+		}
+
+		&--new-tasks {
+			& .MuiFormControlLabel-labelPlacementStart {
+				margin-left: 3rem;
+				& .MuiTypography-body1 {
+					font-size: 13px;
+					color: #0009;
+				}
+
+				& .MuiSwitch-colorSecondary.Mui-checked {
+					color: $primary-color-blue;
+
+					&:hover {
+						background-color: #2195f31a;
+					}
+				}
+				& .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+					background-color: $primary-color-blue;
+				}
+			}
+		}
+	}
+}

@@ -105,7 +105,6 @@ export default function SimpleList() {
 					<Modal
 						className={modalClasses.modal}
 						open={modalOpen}
-						onClose={handleClose}
 						closeAfterTransition
 						disableScrollLock
 						BackdropComponent={Backdrop}
