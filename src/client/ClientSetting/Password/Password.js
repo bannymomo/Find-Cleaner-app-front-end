@@ -1,7 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { TextField, Button } from '@material-ui/core'
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import './style/password.scss'
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#2196f3"
+		},
+		secondary: {
+			main: "#f50057"
+		}
+  }
+});
 class Password extends Component {
 
   state = {
@@ -18,7 +30,7 @@ class Password extends Component {
   render() {
     return (
       <Fragment>
-        <h3>Password</h3>
+        <ThemeProvider theme={theme}>
         <div className="password__form">
           <ul>
             <li><TextField
@@ -40,6 +52,7 @@ class Password extends Component {
               onClick={this.changePassword}>DONE</Button></li>
           </ul>
         </div>
+        </ThemeProvider>
       </Fragment>
     )
   }
