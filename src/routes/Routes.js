@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import ProtectedRoute from './components/ProtectedRoute'
+// import ProtectedRoute from './components/ProtectedRoute'
 import Login from "../authorization/login/login";
 import ChooseRole from "../authorization/signup/ChooseRole";
 import UserSignup from "../authorization/signup/UserSignup";
@@ -25,8 +25,8 @@ const Routes = () => {
       <Route exact path={SIGNUP_URL} component={ChooseRole} />
       <Route exact path={`${SIGNUP_URL}/user`} component={UserSignup} />
       <Route exact path={HOMEPAGE_URL} component={HomePage} />
-      <ProtectedRoute path={BUSINESS_BASE_URL} component={Business} />
-      <ProtectedRoute path={CLIENT_BASE_URL} component={Client} />
+      <Route path={BUSINESS_BASE_URL} component={Business} />
+      <Route path={CLIENT_BASE_URL} component={Client} />
     </Switch>
   );
 };
