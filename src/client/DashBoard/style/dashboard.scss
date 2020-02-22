@@ -1,51 +1,51 @@
-@import "../../../theme/color.scss";
+@import "../../../theme/variables.scss";
 
 .dashboard__header--top {
-  font-size: 20px;
-  margin: 20px;
+	font-size: 20px;
+	margin: 20px;
 }
 
 .dashboard__paragraph--title {
-  font-size: 30px;
-  margin: 20px;
+	font-size: 30px;
+	margin: 20px;
 }
 
 .dashboard__paragraph--content {
-  margin-left: 20px;
+	margin-left: 20px;
 }
 
 .dashboard__post-button--pink {
-  background: $primary-color-rose;
-  border-radius: 200px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bolder;
-  height: 40px;
-  margin: auto;
-  text-align: center;
-  text-shadow: 0 1px 1px #9a0137;
-  width: 120px;
-  outline: none;
-  display: block;
+	background: $primary-color-rose;
+	border-radius: 200px;
+	color: #fff;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: bolder;
+	height: 40px;
+	margin: auto;
+	text-align: center;
+	text-shadow: 0 1px 1px #9a0137;
+	width: 120px;
+	outline: none;
+	display: block;
 }
 
 .list-array__container--whole {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  height: 300px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	height: 300px;
 }
 
 .list-array__container--single {
-  text-align: center;
-  display: inline-block;
-  margin: 10px;
-  width: 100px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px;
+	width: 100px;
 }
 
 .card__title--black {
-  margin: 5px 15px 0;
-  font-weight: lighter;
-  color: #6e6d6d;
+	margin: 5px 15px 0;
+	font-weight: lighter;
+	color: #6e6d6d;
 }

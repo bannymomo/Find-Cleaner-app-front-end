@@ -1,6 +1,6 @@
 import React from "react";
 import MuiAppBar from "@material-ui/core/AppBar";
-import "../../theme/color.scss";
+import "../../theme/variables.scss";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({

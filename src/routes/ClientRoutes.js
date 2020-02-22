@@ -3,12 +3,14 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 import { CLIENT_BASE_URL } from "./URLMap";
 import DashBoard from "../client/DashBoard/DashBoard";
-import Account from "../client/Account/Account";
-import Password from "../client/Password/Password";
+import Account from "../client/ClientSetting/Account/Account";
+import Password from "../client/ClientSetting/Password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
-import Profile from "../client/Profile/Profile";
+import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
-import OrderInformation from "../client/Order-History/component/OrderInformation";
+import OrderInformation from "../components/order/OrderInformation";
+
+const orderId = "orderId";
 
 const ClientRoutes = () => (
 	<Switch>
@@ -42,7 +44,7 @@ const ClientRoutes = () => (
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/order-history/orderId`}
+			path={`${CLIENT_BASE_URL}/order-history/${orderId}`}
 			component={OrderInformation}
 		/>
 	</Switch>

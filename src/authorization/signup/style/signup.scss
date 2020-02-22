@@ -1,0 +1,18 @@
+.chooseRole {
+    display: flex;
+    width: 100%;
+    // flex-direction: row;
+    align-items: stretch;
+}
+
+.chooseRole__client {
+    height: 95vh;
+    background-color: #FFEEAB;
+    padding:45vh ;
+}
+
+.chooseRole__business {
+    height: 95vh;
+    background-color: #87B7CB;
+    padding: 45vh;
+}

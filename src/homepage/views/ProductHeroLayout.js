@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import "../style/homepage.scss";
 
 const styles = theme => ({
 	root: {
@@ -56,26 +56,9 @@ function ProductHeroLayout(props) {
 				<div
 					className={clsx(classes.background, backgroundClassName)}
 				/>
-				<div
-					style={{
-						fontSize: 30 + "px",
-						position: "absolute",
-						bottom: 20 + "px"
-					}}
-				>
-					<a>
-						<i class="fas fa-arrow-circle-down"></i>
-					</a>
-				</div>
 			</Container>
 		</section>
 	);
 }
-
-ProductHeroLayout.propTypes = {
-	backgroundClassName: PropTypes.string.isRequired,
-	children: PropTypes.node.isRequired,
-	classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(ProductHeroLayout);

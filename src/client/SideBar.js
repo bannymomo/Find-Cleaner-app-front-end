@@ -63,6 +63,7 @@ function ListItemLink(props) {
 	return <ListItem button component={Link} {...props} />;
 }
 
+
 export default function SimpleList() {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(true);
@@ -75,7 +76,7 @@ export default function SimpleList() {
 	const [modalOpen, setModalOpen] = React.useState(false);
 
 	const handleOpen = () => {
-		setModalOpen(!modalOpen);
+		setModalOpen(true);
 	};
 
 	const handleClose = () => {

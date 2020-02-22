@@ -10,6 +10,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { BUSINESS_BASE_URL } from '../routes/URLMap'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -32,26 +33,24 @@ function ListItemLink(props) {
 }
 
 export default function SimpleList() {
-	const classes = useStyles();
 
-	const [open, setOpen] = React.useState(true);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
-	const handleClick = () => {
-		setOpen(!open);
-	};
-
-	return (
-		<div>
-			<div className="client__avatar-container--left-top">
-				<Avatar />
-				<p>business name</p>
-			</div>
-			<div className={classes.root}>
-				<Divider />
-
-				<List component="nav" aria-label="secondary mailbox folders">
-					<ListItemLink to="browse-order">
-						<Button
+  return (
+    <div>
+      <div className="client__avatar-container--left-top">
+        <Avatar />
+        <p>business name</p>
+      </div>
+      <div className={classes.root}>
+        <Divider />
+        <List component="nav" aria-label="secondary mailbox folders">
+          <ListItemLink to={`${BUSINESS_BASE_URL}/browse-order`}>
+           	<Button
 							className={classes.tasksButton}
 							variant="contained"
 							type="button"
@@ -60,37 +59,35 @@ export default function SimpleList() {
 						>
 							Browser Tasks
 						</Button>
-					</ListItemLink>
-					<ListItemLink to="dashboard">
-						<ListItemText primary="Dashboard" />
-					</ListItemLink>
-					<ListItemLink to="profile">
-						<ListItemText primary="Profile" />
-					</ListItemLink>
-
-					<ListItemLink to="order-history">
-						<ListItemText primary="OrderHistory" />
-					</ListItemLink>
-					<ListItem button onClick={handleClick}>
-						<ListItemText primary="Setting" />
-						{open ? <ExpandLess /> : <ExpandMore />}
-					</ListItem>
-					<Collapse in={open} timeout="auto" unmountOnExit>
-						<List component="div">
-							<ListItem className={classes.nested}>
-								<ListItemLink to="account">
-									Account
-								</ListItemLink>
-							</ListItem>
-							<ListItem className={classes.nested}>
-								<ListItemLink to="password">
-									Password
-								</ListItemLink>
-							</ListItem>
-						</List>
-					</Collapse>
-				</List>
-			</div>
-		</div>
-	);
+          </ListItemLink>
+          <ListItemLink to={`${BUSINESS_BASE_URL}/dashboard`}>
+            <ListItemText primary="Dashboard" />
+          </ListItemLink>
+          <ListItemLink to={`${BUSINESS_BASE_URL}/profile`}>
+            <ListItemText primary="Profile" />
+          </ListItemLink>
+          <ListItemLink to={`${BUSINESS_BASE_URL}/browse-order`}>
+            <ListItemText primary="Browse Orders" />
+          </ListItemLink>
+          <ListItemLink to={`${BUSINESS_BASE_URL}/order-history`}>
+            <ListItemText primary="OrderHistory" />
+          </ListItemLink>
+          <ListItem button onClick={handleClick}>
+            <ListItemText primary="Setting" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div">
+              <ListItem className={classes.nested}>
+                <ListItemLink to={`${BUSINESS_BASE_URL}/account`}>Account</ListItemLink>
+              </ListItem>
+              <ListItem className={classes.nested}>
+                <ListItemLink to={`${BUSINESS_BASE_URL}/password`}>Password</ListItemLink>
+              </ListItem>
+            </List>
+          </Collapse>
+        </List>
+      </div>
+    </div>
+  );
 }

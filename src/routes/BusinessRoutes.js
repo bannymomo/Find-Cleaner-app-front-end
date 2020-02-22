@@ -2,12 +2,16 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { BUSINESS_BASE_URL } from "./URLMap";
+import Dashboard from "../business/Dashboard/Dashboard";
 import Account from "../business/Account/Account";
 import Password from "../business/Password/Password";
 import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
 import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
-import Dashboard from "../business/Dashboard/Dashboard";
+import OrderInformation from "../components/order/OrderInformation";
+
+
+const orderId = "orderId";
 
 const BusinessRoutes = () => (
   <Switch>
@@ -35,6 +39,11 @@ const BusinessRoutes = () => (
       path={`${BUSINESS_BASE_URL}/order-history`}
       component={OrderHistory}
     />
+    <Route
+			exact
+			path={`${BUSINESS_BASE_URL}/order-history/${orderId}`}
+			component={OrderInformation}
+		/>
   </Switch>
 );
 
