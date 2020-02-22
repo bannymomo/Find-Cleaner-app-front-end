@@ -1,27 +1,27 @@
-import axios from 'axios';
-import { getToken } from '../utils/auth';
+import axios from "axios";
+import { getToken } from "../utils/auth";
 
 // need to change
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = "https://find-cleaner.herokuapp.com/api";
 
 const appendAuthToken = config => {
-    const jwtToken = getToken();
-    const Authorization = jwtToken && `Bearer ${jwtToken}`;
+	const jwtToken = getToken();
+	const Authorization = jwtToken && `Bearer ${jwtToken}`;
 
-    return { ...config, headers: { Authorization, ...config.header } };
+	return { ...config, headers: { Authorization, ...config.header } };
 };
 
 export const get = (url, config = {}) =>
-    axios.get(url, appendAuthToken(config));
+	axios.get(url, appendAuthToken(config));
 
 export const post = (url, data, config = {}) =>
-    axios.post(url, data, appendAuthToken(config));
+	axios.post(url, data, appendAuthToken(config));
 
 export const put = (url, data, config = {}) =>
-    axios.put(url, data, appendAuthToken(config));
+	axios.put(url, data, appendAuthToken(config));
 
 export const del = (url, config = {}) =>
-    axios.delete(url, appendAuthToken(config));
+	axios.delete(url, appendAuthToken(config));
 
 export const patch = (url, config = {}) =>
-    axios.patch(url, appendAuthToken(config));
+	axios.patch(url, appendAuthToken(config));
