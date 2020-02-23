@@ -1,5 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+
+// import ProtectedRoute from './components/ProtectedRoute'
 import Login from "../authorization/login/login";
 import ChooseRole from "../authorization/signup/ChooseRole";
 import UserSignup from "../authorization/signup/UserSignup";
