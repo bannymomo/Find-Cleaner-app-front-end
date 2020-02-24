@@ -6,13 +6,13 @@ import {
   Marker
 } from "react-google-maps";
 
-const GOOGLE_MAP_API_KEY = process.env.GOOGLE_MAP_API_KEY;
+const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 const CustomSkinMap = withScriptjs(
   withGoogleMap(() => (
     <GoogleMap
       defaultZoom={13}
-      defaultCenter={{ lat: 40.748817, lng: -73.985428 }}
+      defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
       defaultOptions={{
         scrollwheel: false,
         zoomControl: true,
