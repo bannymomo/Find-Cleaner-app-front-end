@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "../style/homepage.scss";
 import googleplay from "../../assets/images/google-play.png";
 import appstore from "../../assets/images/app-store.png";
