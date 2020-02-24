@@ -6,6 +6,8 @@ import {
   Marker
 } from "react-google-maps";
 
+const GOOGLE_MAP_API_KEY = process.env.GOOGLE_MAP_API_KEY;
+const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 const CustomSkinMap = withScriptjs(
   withGoogleMap(() => (
     <GoogleMap
@@ -84,7 +86,7 @@ const CustomSkinMap = withScriptjs(
 export default function Maps() {
   return (
     <CustomSkinMap
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"
+      googleMapURL= {googleMapURL}
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `100%`, width: `100%` }} />}
       mapElement={<div style={{ height: `100%` }} />}
