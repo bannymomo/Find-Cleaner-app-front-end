@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Button from "../components/Button";
-import Typography from "../components/Typography";
+import Button from "../../UI/Button";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "../style/homepage.scss";
 import { Link } from "react-router-dom";
 import { SIGNUP_URL } from "../../routes/URLMap";
-import productCurvyLines from "../../assets/images/productCurvyLines.png";
+import howitworks01 from "../../assets/images/how-it-works-pic-01.png";
+import howitworks02 from "../../assets/images/how-it-works-pic-02.png";
+import howitworks03 from "../../assets/images/how-it-works-pic-03.png";
 
 const styles = theme => ({
 	root: {
@@ -26,32 +27,7 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center"
 	},
-	item: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		padding: theme.spacing(0, 5)
-	},
-	title: {
-		marginBottom: theme.spacing(14)
-	},
-	number: {
-		fontSize: 24,
-		fontFamily: theme.typography.fontFamily,
-		color: theme.palette.primary.main,
-		fontWeight: theme.typography.fontWeightMedium
-	},
-	image: {
-		height: 55,
-		marginTop: theme.spacing(4),
-		marginBottom: theme.spacing(4)
-	},
-	curvyLines: {
-		pointerEvents: "none",
-		position: "absolute",
-		top: -180,
-		opacity: 0.7
-	},
+
 	button: {
 		marginTop: theme.spacing(8)
 	}
@@ -64,85 +40,50 @@ function ProductHowItWorks(props) {
 		<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
 			<section className={classes.root}>
 				<Container className={classes.container}>
-					<img
-						src={productCurvyLines}
-						className={classes.curvyLines}
-						alt="curvy lines"
-					/>
+					<div className="homepage-child-components__title--black">
+						How it works
+					</div>
 
-					<Typography
-						variant="h4"
-						marked="center"
-						className={classes.title}
-						component="h2"
-					>
-						<div>How it works</div>
-					</Typography>
 					<div>
-						<Grid container spacing={5}>
+						<Grid container spacing={10}>
 							<Grid item xs={12} md={4}>
-								<div className={classes.item}>
-									<div className={classes.number}>1.</div>
+								<div className="product-how-it-works__single-container--grey">
 									<img
-										src="https://image.flaticon.com/icons/svg/887/887343.svg"
-										alt="booking"
-										className={classes.image}
+										src={howitworks01}
+										alt="how-it-works-pic-01"
 									/>
-
-									<Typography variant="h5" align="center">
-										<div className="product-how-it-works__title--black">
-											What do you need done?
-										</div>
-										<p>
-											Start by telling us about your task.
-											Mention when and where you need it
-											done, then suggest a fair budget for
-											the task.
-										</p>
-									</Typography>
+									<div>Post your task</div>
+									<p>
+										Answer a few simple questions about your
+										job to receive competitive quotes.
+									</p>
 								</div>
 							</Grid>
 							<Grid item xs={12} md={4}>
-								<div className={classes.item}>
-									<div className={classes.number}>2.</div>
+								<div className="product-how-it-works__single-container--grey">
 									<img
-										src="https://image.flaticon.com/icons/svg/1189/1189160.svg"
-										alt="find-people"
-										className={classes.image}
+										src={howitworks02}
+										alt="how-it-works-pic-02"
 									/>
-
-									<Typography variant="h5" align="center">
-										<div className="product-how-it-works__title--black">
-											Choose the best person for you
-										</div>
-										<p>
-											Take a look at profiles and reviews
-											to pick the best Tasker for your
-											task.
-										</p>
-									</Typography>
+									<div>Compare quotes</div>
+									<p>
+										Chat with businesses who respond to your
+										job and discuss the finer details.
+									</p>
 								</div>
 							</Grid>
 							<Grid item xs={12} md={4}>
-								<div className={classes.item}>
-									<div className={classes.number}>3.</div>
+								<div className="product-how-it-works__single-container--grey">
 									<img
-										src="https://image.flaticon.com/icons/svg/2521/2521536.svg"
-										alt="task-done"
-										className={classes.image}
+										src={howitworks03}
+										alt="how-it-works-pic-03"
 									/>
-
-									<Typography variant="h5" align="center">
-										<div className="product-how-it-works__title--black">
-											Task completed
-										</div>
-										<p>
-											With your task complete, you’re free
-											to leave a review for the Tasker so
-											everyone can know what a great job
-											they’ve done!
-										</p>
-									</Typography>
+									<div>Get your job done</div>
+									<p>
+										Select the best business for the job and
+										leave a review once your job is
+										complete.
+									</p>
 								</div>
 							</Grid>
 						</Grid>
@@ -155,7 +96,7 @@ function ProductHowItWorks(props) {
 						component={Link}
 						to={SIGNUP_URL}
 					>
-						Get started
+						Post your task
 					</Button>
 				</Container>
 			</section>

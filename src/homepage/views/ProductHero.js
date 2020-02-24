@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "../components/Button";
-import Typography from "../components/Typography";
+import Button from "../../UI/Button";
 import ProductHeroLayout from "./ProductHeroLayout";
 import { SIGNUP_URL } from "../../routes/URLMap";
 import "../style/homepage.scss";
@@ -30,22 +29,15 @@ function ProductHero(props) {
 	return (
 		<div className="product-hero__background--gradient">
 			<ProductHeroLayout>
-				<Typography
-					color="inherit"
-					align="center"
-					variant="h2"
-					marked="center"
-				>
-					The best person for the job isn't always who you think
-				</Typography>
-				<Typography
-					color="inherit"
-					align="center"
-					variant="h5"
-					className={classes.h5}
-				>
-					Find the people with the skills you need on Find Cleaner
-				</Typography>
+				<div className="product-hero__title--black">
+					Just one touch then experience
+					<br />
+					the difference
+				</div>
+				<div className="product-hero__text--black">
+					Your one stop for home cleaning needs.
+				</div>
+
 				<Button
 					color="primary"
 					variant="contained"
@@ -54,18 +46,8 @@ function ProductHero(props) {
 					component={Link}
 					to={SIGNUP_URL}
 				>
-					Register
+					Get started now
 				</Button>
-				<Typography
-					variant="body2"
-					color="inherit"
-					className={classes.more}
-				>
-					Discover the experience
-				</Typography>
-				<div className="homepage__arrow--down">
-					<i className="fas fa-long-arrow-alt-down"></i>
-				</div>
 			</ProductHeroLayout>
 		</div>
 	);

@@ -147,16 +147,12 @@ function ProductCategories(props) {
 	];
 
 	return (
-		<Container className={classes.root} component="section">
+		<Container className={classes.root} component="section" id="service">
 			<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
-				<Typography
-					variant="h4"
-					marked="center"
-					align="center"
-					component="h2"
-				>
-					For all services and all desires
-				</Typography>
+				<div className="homepage-child-components__title--black">
+					For all the needs to make your <br />
+					home or office neat and tidy
+				</div>
 				<div className={classes.images}>
 					{images.map(image => (
 						<ButtonBase

@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Typography from "../components/Typography";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "../style/homepage.scss";
-import productCurvyLines from "../../assets/images/productCurvyLines.png";
+import whybroomerpic01 from "../../assets/images/why-broomer-01.png";
+import whybroomerpic02 from "../../assets/images/why-broomer-02.png";
+import whybroomerpic03 from "../../assets/images/why-broomer-03.png";
 
 const styles = theme => ({
 	root: {
@@ -31,11 +32,6 @@ const styles = theme => ({
 	title: {
 		marginTop: theme.spacing(5),
 		marginBottom: theme.spacing(5)
-	},
-	curvyLines: {
-		pointerEvents: "none",
-		position: "absolute",
-		top: -180
 	}
 });
 
@@ -44,73 +40,69 @@ function ProductValues(props) {
 
 	return (
 		<section className={classes.root}>
-			<Container className={classes.container}>
-				<img
-					src={productCurvyLines}
-					className={classes.curvyLines}
-					alt="curvy lines"
-				/>
+			<Container className="product-value__container--whole">
 				<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
+					<div className="homepage-child-components__title--black">
+						Why Broomer
+					</div>
 					<Grid container spacing={5}>
 						<Grid item xs={12} md={4}>
 							<div className={classes.item}>
 								<img
-									className="product-values__img--black"
-									src="https://image.flaticon.com/icons/svg/2532/2532447.svg"
-									alt="Verified badges"
+									className="product-values__img--blue"
+									src={whybroomerpic01}
+									alt="Professional and
+									trusted cleaners"
 								/>
-								<Typography
-									variant="h6"
-									className={classes.title}
-								>
-									Verified badges
-								</Typography>
-								<Typography variant="h5">
-									{
-										"Badges give members a bit more verified info when deciding who to work with on a task. Each badge has certain requirements that must be met and verified before they’re shown on the member's profile."
-									}
-								</Typography>
+								<div className="product-values__title--black">
+									Professional and
+									<br />
+									trusted cleaners
+								</div>
+
+								<p className="product-values__text--black">
+									Broomer has the largest amount and the most
+									professional cleaners in Australia. Best
+									service and experiences guaranteed.
+								</p>
 							</div>
 						</Grid>
 						<Grid item xs={12} md={4}>
 							<div className={classes.item}>
 								<img
-									src="https://image.flaticon.com/icons/svg/181/181092.svg"
+									src={whybroomerpic02}
 									alt="insurance"
-									className="product-values__img--black"
+									className="product-values__img--blue"
 								/>
-								<Typography
-									variant="h6"
-									className={classes.title}
-								>
-									Top rated insurance
-								</Typography>
-								<Typography variant="h5">
-									{
-										"Insurance is there to ease any worries - making sure the Tasker has liability insurance from CGU while performing most task activities."
-									}
-								</Typography>
+								<div className="product-values__title--black">
+									Best platform <br />
+									and fire price
+								</div>
+								<p className="product-values__text--black">
+									You can use our mobile app or website to
+									book cleaners and also track the process of
+									your orders. Best price guaranteed.
+								</p>
 							</div>
 						</Grid>
 
 						<Grid item xs={12} md={4}>
 							<div className={classes.item}>
 								<img
-									className="product-values__img--black"
-									src="https://image.flaticon.com/icons/svg/1067/1067566.svg"
+									className="product-values__img--blue"
+									src={whybroomerpic03}
 									alt="clock"
 								/>
-								<Typography
-									variant="h6"
-									className={classes.title}
-								>
-									Here if you need us
-								</Typography>
-								<Typography variant="h5">
-									{
-										"Our comprehensive Help Centre and dedicated Support are on hand 24/7 to help with any questions, queries or issues you might have."
-									}
-								</Typography>
+								<div className="product-values__title--black">
+									Reliable customer service
+									<br />
+									<br />
+								</div>
+								<p className="product-values__text--black">
+									Our customer service team is ready to help
+									you with any inquiries you have during
+									office hours, Monday-Friday.
+								</p>
 							</div>
 						</Grid>
 					</Grid>

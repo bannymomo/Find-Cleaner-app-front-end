@@ -1,22 +1,183 @@
 .product-hero__background--gradient {
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
-		url("http://www.hnccs.com.au/wp-content/uploads/2018/08/house-kepping.jpg");
+	background: linear-gradient(
+			rgba(245, 246, 253, 0.3),
+			rgba(245, 246, 253, 0.5)
+		),
+		url("../../assets/images/heropicture.png");
 	background-size: cover;
-	margin-top: -60px;
+	height: 100vh;
 }
 
-.product-values__img--black {
+.product-hero__title--black {
+	margin-top: 150px;
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: 1000;
+	font-size: 48px;
+	line-height: 65px;
+	text-transform: uppercase;
+	text-align: center;
+	color: #000000;
+}
+
+.product-hero__text--black {
+	margin: 15px auto 30px;
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 55px;
+	text-align: center;
+	color: #000000;
+}
+.product-values__img--blue {
 	height: 60px;
 	margin: 30px 0;
+	height: 120px;
+	width: 120px;
 }
 
-.homepage__arrow--down {
-	font-size: 20px;
-	position: absolute;
-	bottom: 30px;
+.product-values__title--black {
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
 }
 
+.product-values__text--black {
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 22px;
+	margin-top: 20px;
+}
+
+.homepage-child-components__title--black {
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 49px;
+	text-align: center;
+	color: #000000;
+	margin-bottom: 50px;
+}
+
+.product-value__container--whole {
+	margin: 200px auto 150px;
+}
 .product-how-it-works__title--black {
 	font-size: 25px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Nunito;
+}
+.product-how-it-works__single-container--grey {
+	height: 409px;
+	background: #e5e5e5;
+	border-radius: 20px;
+	padding: 40px;
+	min-width: 320px;
+	text-align: center;
+	div {
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 27px;
+		margin-top: 20px;
+	}
+	p {
+		font-size: 18px;
+		line-height: 27px;
+	}
+}
+
+.productcta__container--whole {
+	background: linear-gradient(
+			rgba(245, 246, 253, 0.3),
+			rgba(245, 246, 253, 0.5)
+		),
+		url("../../assets/images/foot-img.png");
+	background-size: cover;
+	height: 420px;
+
+	padding-left: 180px;
+
+	.productcta__title--black {
+		font-weight: bold;
+		font-size: 24px;
+		line-height: 33px;
+		padding-top: 50px;
+		margin-bottom: 30px;
+	}
+
+	.product-container__input-container--whole {
+		position: relative;
+		margin-top: 25px;
+		width: 700px;
+	}
+
+	.product-container__button--blue {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.product-container__button--blue-thin {
+		height: 52px;
+		width: 225px;
+	}
+}
+
+.footer__container--main {
+	background-color: #646464;
+	padding: 40px 100px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	h3 {
+		font-family: Nunito;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 22px;
+		color: #edf4ff;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	li {
+		margin: 10px 15px;
+		font-family: Nunito;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 16px;
+		color: #edf4ff;
+	}
+
+	.footer__button-img--single {
+		width: 165px;
+		margin: 0;
+		padding: 0;
+	}
+
+	button {
+		border-radius: 10px;
+		padding: 0;
+		margin: 10px;
+		height: 53px;
+		background-color: black;
+		outline: none;
+		display: block;
+	}
+}
+.footer__copywirte--black {
+	background: #2f3439;
+	color: #c4c4c4;
+	display: flex;
+	justify-content: space-around;
+	min-height: 54px;
+	align-items: center;
 }
