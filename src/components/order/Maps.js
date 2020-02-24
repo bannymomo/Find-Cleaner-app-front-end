@@ -7,7 +7,6 @@ import {
 } from "react-google-maps";
 
 const GOOGLE_MAP_API_KEY = process.env.GOOGLE_MAP_API_KEY;
-console.log(process.env)
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 const CustomSkinMap = withScriptjs(
   withGoogleMap(() => (
