@@ -44,7 +44,7 @@ const ClientRoutes = () => (
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/order-history/${orderId}`}
+			path={`${CLIENT_BASE_URL}/orders/${orderId}`}
 			component={OrderInformation}
 		/>
 	</Switch>
