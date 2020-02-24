@@ -41,7 +41,7 @@ const BusinessRoutes = () => (
     />
     <Route
 			exact
-			path={`${BUSINESS_BASE_URL}/order-history/${orderId}`}
+			path={`${BUSINESS_BASE_URL}/orders/${orderId}`}
 			component={OrderInformation}
 		/>
   </Switch>

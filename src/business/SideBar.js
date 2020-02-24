@@ -66,9 +66,6 @@ export default function SimpleList() {
           <ListItemLink to={`${BUSINESS_BASE_URL}/profile`}>
             <ListItemText primary="Profile" />
           </ListItemLink>
-          <ListItemLink to={`${BUSINESS_BASE_URL}/browse-order`}>
-            <ListItemText primary="Browse Orders" />
-          </ListItemLink>
           <ListItemLink to={`${BUSINESS_BASE_URL}/order-history`}>
             <ListItemText primary="OrderHistory" />
           </ListItemLink>

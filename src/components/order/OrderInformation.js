@@ -82,7 +82,7 @@ export default function OrderInformaiton() {
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
-							<li className="order-information__status-active">OPEN</li>
+							<li className="order-information__status-active">NEW</li>
 							<li>CANCELLED</li>
 							<li>ASSIGNED</li>
 							<li>COMPLETED</li>
@@ -177,7 +177,16 @@ export default function OrderInformaiton() {
 				<Typography variant="h6" component="p">
 					DETAILS
 				</Typography>
-				<Typography variant="body2" component="p">
+				<ul className="order-information__details--list">
+					<li>Number of bedrooms: 4</li>
+					<li>Number of bathrooms: 4</li>
+					<li>End-of-lease clean: Yes</li>
+					<li>Oven: Yes</li>
+					<li>Windows: Yes</li>
+					<li>Cabinets: Yes</li>
+					<li>Carpet: Yes</li>
+				</ul>
+				<Typography variant="body1" component="p">
 					I need dlkalgj aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh
 					ioweja owea a aeg aweoig. dlkalgj aepwgk'ape [apeg[ap
 					aEOihgao ]] jeofiahgiuh ioweja owea a aeg aweoig. dlkalgj
