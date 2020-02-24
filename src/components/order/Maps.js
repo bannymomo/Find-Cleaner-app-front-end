@@ -86,7 +86,7 @@ export default function Maps() {
     <CustomSkinMap
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"
       loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `400px`, width: `500px` }} />}
+      containerElement={<div style={{ height: `100%`, width: `100%` }} />}
       mapElement={<div style={{ height: `100%` }} />}
     />
   );

@@ -17,18 +17,24 @@ import Button from "@material-ui/core/Button";
 
 
 import Maps from "./Maps";
+import BusinessProfile from "./BusinessProfile";
 
 import "./style/orderHistory.scss";
 
 export default function OrderInformationList() {
 
     // backdrop for google map
-	const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
 	const handleClose = () => {
-		setOpen(false);
+        setOpen1(false);
+        setOpen2(false);
 	};
-	const handleToggle = () => {
-		setOpen(!open);
+	const handleToggle1 = () => {
+		setOpen1(!open1);
+    };
+    const handleToggle2 = () => {
+		setOpen2(!open2);
 	};
 
     return (
@@ -71,12 +77,12 @@ export default function OrderInformationList() {
                 <div className="order-information__map">
                     <Button
                         color="lightgreen"
-                        onClick={handleToggle}
+                        onClick={handleToggle1}
                     >
                         View Map
                     </Button>
-                    <Backdrop
-                        open={open}
+                    <Backdrop className="order-information__map--backdrop" 
+                        open={open1}
                         onClick={handleClose}
                     >
                         <Maps />
@@ -99,6 +105,37 @@ export default function OrderInformationList() {
                         </Typography>
                     }
                 />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar alt="business1" src="/1.jpg" />
+                </ListItemAvatar>
+                <ListItemText
+                    primary="TAKEN BY"
+                    secondary={
+                        <Typography
+                            variant="body2"
+                            color="textPrimary"
+                        >
+                            Top Clean
+                        </Typography>
+                    }
+                />
+                <div className="order-information__business">
+                    <Button
+                        color="lightgreen"
+                        onClick={handleToggle2}
+                    >
+                        View Business
+                    </Button>
+                    <Backdrop className="order-information__business--backdrop"
+                        open={open2}
+                        onClick={handleClose}
+                    >
+                        <BusinessProfile />
+                    </Backdrop>
+                </div>
             </ListItem>
         </List>
     )
