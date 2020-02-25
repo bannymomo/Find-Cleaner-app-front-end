@@ -5,8 +5,8 @@ import {
 }
   from '@material-ui/core';
 
-// import { signup as signupFn } from '../api/auth';
-// import { setToken } from '../utils/auth';
+import { signup as signupFn } from '../../api/auth';
+import { setToken } from '../../utils/auth';
 import ClientSignup from './clients/ClientSignup';
 import BusinessSignup from './business/BusinessSignup'
 import Background from '../../assets/images/auth-background.png'
@@ -67,19 +67,19 @@ class User extends Component {
   }
 
   postUserInfo = () => {
-    // const userInfo = {
-    //   username: this.state.username,
-    //   password: this.state.password,
-    //   role: this.state.role
-    // }
-    // console.log(userInfo)
-    // signupFn(userInfo)
-    //   .then(data => {
-    //     this.setState({ basicInfo: true }, () => {
-    //       setToken(data.token)
-    //       this.setState({ history: this.props.history })
-    //     });
-    //   })
+    const userInfo = {
+      username: this.state.username,
+      password: this.state.password,
+      role: this.state.role
+    }
+
+    signupFn(userInfo)
+      .then(data => {
+        this.setState({ basicInfo: true }, () => {
+          setToken(data.token)
+          this.setState({ history: this.props.history })
+        });
+      })
     this.setState({ basicInfo: true, history: this.props.history })
   }
 
