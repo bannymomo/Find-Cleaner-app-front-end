@@ -1,15 +1,16 @@
-import Background from '../../assets/images/auth-background.jpg'
+import Background from '../../assets/images/auth-background.png'
 
 const styles = theme => ({
   container: {
-    paddingTop: '10vh',
-    height: '85vh',
+    paddingTop: '15vh',
+    height: '100vh',
     // marginTop:'15vh',
+    
   },
   backGround: {
     backgroundImage: `url(${Background})`, backgroundPosition: 'center',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat', height: '95vh'
+    backgroundRepeat: 'no-repeat', height: '100vh'
   },
   paper: {
     // marginTop: theme.spacing(4),
@@ -18,7 +19,8 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     height: '100%',
-    backgroundColor: '#FEFEFF'
+    backgroundColor: '#FBFCFF',
+    borderRadius: '10px'
   },
   avatar: {
     margin: theme.spacing(1),

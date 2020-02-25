@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Button,
   TextField,
   FormControlLabel,
@@ -11,10 +10,8 @@ import {
   Container,
   Box,
   CssBaseline,
-  Typography,
   withStyles
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Alert from '@material-ui/lab/Alert';
 
@@ -22,8 +19,10 @@ import Alert from '@material-ui/lab/Alert';
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import { setToken } from "../../utils/auth";
 import { login as loginFn } from '../../api/auth';
-
-import styles from "./Style";
+import logo from '../../assets/images/logo.png';
+import brandName from '../../assets/images/brandname.png';
+import styles from "./style/Style";
+import './style/style.scss'
 
 const theme = createMuiTheme({
   palette: {
@@ -84,13 +83,12 @@ class Login extends React.Component {
             <CssBaseline />
             <Box className={classes.box}>
               <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h3">
-                  Log in
-								</Typography>
+                <div className="login__logo">
+                  <img className="login__logo--pic" src={logo} alt="logo" />
+                  <img className="login__logo--font" src={brandName} alt="brandname" />
+                </div>
                 <form className={classes.form} noValidate>
+                  <label>Log in</label>
                   <TextField
                     variant="outlined"
                     required
