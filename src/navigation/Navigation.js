@@ -6,7 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
-import { SIGNUP_URL, HOMEPAGE_URL } from "../routes/URLMap";
+import { LOGIN_URL, HOMEPAGE_URL } from "../routes/URLMap";
+import { removeToken } from "../utils/auth";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -17,6 +18,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class Navigation extends Component {
+	handleLogOut = () => {
+		removeToken();
+	};
 	scrollToAnchor = anchorName => {
 		if (anchorName) {
 			let anchorElement = document.getElementById(anchorName);
@@ -62,12 +66,20 @@ class Navigation extends Component {
 						<li>
 							<Link
 								className="nav-bar__link--black"
-								to={SIGNUP_URL}
+								to={LOGIN_URL}
 							>
 								Log in
 							</Link>
 						</li>
-						<li>Support</li>
+						<li>
+							<Link
+								className="nav-bar__link--black"
+								to={HOMEPAGE_URL}
+								onClick={this.handleLogOut}
+							>
+								Log Out
+							</Link>
+						</li>
 					</ul>
 					<div className="nav-bar__button--blue">
 						<div className={classes.root}>
