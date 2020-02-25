@@ -4,7 +4,7 @@ import {
   , Box, createMuiTheme, ThemeProvider
 }
   from '@material-ui/core';
-import Background from '../../../assets/images/auth-background.jpg'
+import Background from '../../../assets/images/auth-background.png'
 import { CLIENT_BASE_URL } from '../../../routes/URLMap'
 // import {createClient} from '../../api/client'
 import logo from '../../../assets/images/logo.png';

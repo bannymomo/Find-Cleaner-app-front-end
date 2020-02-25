@@ -9,7 +9,7 @@ import {
 // import { setToken } from '../utils/auth';
 import ClientSignup from './clients/ClientSignup';
 import BusinessSignup from './business/BusinessSignup'
-import Background from '../../assets/images/auth-background.jpg'
+import Background from '../../assets/images/auth-background.png'
 import logo from '../../assets/images/logo.png';
 import brandName from '../../assets/images/brandname.png';
 import './style/signup.scss';
