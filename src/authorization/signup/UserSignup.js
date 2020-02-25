@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Button, Grid, TextField, Container, CssBaseline, Typography, 
-  withStyles, Box, createMuiTheme, ThemeProvider,Avatar  }
+import { Button, Grid, TextField, Container, CssBaseline,
+  withStyles, Box, createMuiTheme, ThemeProvider }
   from '@material-ui/core';
-  import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 // import { signup as signupFn } from '../api/auth';
 // import { setToken } from '../utils/auth';
 import ClientSignup from './clients/ClientSignup';
 import BusinessSignup from './business/BusinessSignup'
+import Background from '../../assets/images/auth-background.png'
+import logo from '../../assets/images/logo.png';
+import brandName from '../../assets/images/brandname.png';
+import './style/signup.scss';
 
 const theme = createMuiTheme({
 	palette: {
@@ -22,34 +25,34 @@ const theme = createMuiTheme({
 
 const styles = theme => ({
   container: {
-    height:'85vh',
-    marginTop:'15vh',
+    paddingTop: '15vh',
+    height: '100vh',
   },
-  box:{
-    height:"55vh",
-    width:"50vh",
+  backGround: {
+    backgroundImage: `url(${Background})`, backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat', height: '100vh'
   },
   paper: {
-    marginTop: theme.spacing(4),
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height:'100%',
-    backgroundColor: '#FEFEFF'
+    backgroundColor: '#FBFCFF',
+    borderRadius: '10px',
+    height:'50vh'
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(2),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2,0),
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#2196f3'
+  grid:{
+    marginTop:theme.spacing(1)
   }
-});
+})
 
 class User extends Component {
 
@@ -82,29 +85,30 @@ class User extends Component {
     const { classes } = this.props;
 
     return (
+      
       !this.state.basicInfo ? (
+        <div className={classes.backGround}>
         <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs" className={classes.container}>
           <CssBaseline />
           <Box className={classes.box}>
           <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-                <LockOpenIcon />
-              </Avatar>
-            <Typography component="h1" variant="h3">
-              Sign up
-        </Typography>
+                <div className="signUp__logo">
+                  <img className="signUp__logo--pic" src={logo} alt="logo" />
+                  <img className="signUp__logo--font" src={brandName} alt="brandname" />
+                </div>
             <form className={classes.form} noValidate>
-              <Grid container spacing={2}>
+            <label>Log in</label>
+              <Grid container spacing={2} className={classes.grid}>
                 <Grid item xs={12}>
                   <TextField
-                    variant="filled" required fullWidth label="User Name"
+                    variant="outlined" required fullWidth label="User Name"
                     value={this.state.username}
                     onChange={(event) => this.setState({ username: event.target.value })}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField variant="filled" required fullWidth label="Email Address"
+                  <TextField variant="outlined" required fullWidth label="Email Address"
                     value={this.state.email}
                     onChange={(event) => this.setState({ email: event.target.value })}
                   />
@@ -126,7 +130,8 @@ class User extends Component {
           </div>
           </Box>
         </Container>
-        </ThemeProvider>) :
+        </ThemeProvider>
+        </div>) :
         (this.state.role === 'client' ?
           <ClientSignup
             email={this.state.email}
@@ -135,6 +140,7 @@ class User extends Component {
             email={this.state.email}
             history={this.state.history} />)
     )
+    
   }
 }
 

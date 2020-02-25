@@ -4,8 +4,7 @@ const styles = theme => ({
   container: {
     paddingTop: '15vh',
     height: '100vh',
-    // marginTop:'15vh',
-    
+
   },
   backGround: {
     backgroundImage: `url(${Background})`, backgroundPosition: 'center',
@@ -13,7 +12,6 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat', height: '100vh'
   },
   paper: {
-    // marginTop: theme.spacing(4),
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
@@ -21,10 +19,6 @@ const styles = theme => ({
     backgroundColor: '#FBFCFF',
     borderRadius: '10px',
     height:'50vh'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#2196f3'
   },
   form: {
     width: '100%',
