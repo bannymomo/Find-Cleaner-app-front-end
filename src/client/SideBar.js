@@ -44,9 +44,10 @@ const useStylesModal = makeStyles(theme => ({
 		justifyContent: "center"
 	},
 	paper: {
+		boxSizing: "border-box",
 		position: "relative",
-		width: "60%",
-		height: "92vh",
+		width: "66.67%",
+		height: "95%",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
@@ -55,8 +56,8 @@ const useStylesModal = makeStyles(theme => ({
 	},
 	button: {
 		position: "absolute",
-		right: "0.5rem",
-		bottom: "0.5rem",
+		left: "43px",
+		bottom: "85px",
 		color: "#2196f3",
 		borderColor: "#0005",
 		textTransform: "Capitalize",
@@ -67,7 +68,6 @@ const useStylesModal = makeStyles(theme => ({
 function ListItemLink(props) {
 	return <ListItem button component={Link} {...props} />;
 }
-
 
 export default function SimpleList() {
 	const classes = useStyles();
