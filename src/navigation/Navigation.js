@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class Navigation extends Component {
+	
 	scrollToAnchor = anchorName => {
 		if (anchorName) {
 			let anchorElement = document.getElementById(anchorName);
