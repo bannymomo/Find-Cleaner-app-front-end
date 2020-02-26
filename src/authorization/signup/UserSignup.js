@@ -1,55 +1,60 @@
 import React, { Component } from 'react';
-import { Button, Grid, TextField, Container, CssBaseline, Typography, 
-  withStyles, Box, createMuiTheme, ThemeProvider,Avatar  }
+import {
+  Button, Grid, TextField, Container, CssBaseline,
+  withStyles, Box, createMuiTheme, ThemeProvider
+}
   from '@material-ui/core';
-  import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-// import { signup as signupFn } from '../api/auth';
-// import { setToken } from '../utils/auth';
+import { signup as signupFn } from '../../api/auth';
+import { setToken } from '../../utils/auth';
 import ClientSignup from './clients/ClientSignup';
 import BusinessSignup from './business/BusinessSignup'
+import Background from '../../assets/images/auth-background.png'
+import logo from '../../assets/images/logo.png';
+import brandName from '../../assets/images/brandname.png';
+import './style/signup.scss';
 
 const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: "#2196f3"
-		},
-		secondary: {
-			main: "#f50057"
-		}
+  palette: {
+    primary: {
+      main: "#2196f3"
+    },
+    secondary: {
+      main: "#f50057"
+    }
   }
 });
 
 const styles = theme => ({
   container: {
-    height:'85vh',
-    marginTop:'15vh',
+    paddingTop: '15vh',
+    height: '100vh',
   },
-  box:{
-    height:"55vh",
-    width:"50vh",
+  backGround: {
+    backgroundImage: `url(${Background})`, backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat', height: '100vh'
   },
   paper: {
-    marginTop: theme.spacing(4),
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height:'100%',
-    backgroundColor: '#FEFEFF'
+    backgroundColor: '#FBFCFF',
+    borderRadius: '10px',
+    height: '50vh'
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(2),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0),
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#2196f3'
+  grid: {
+    marginTop: theme.spacing(1)
   }
-});
+})
 
 class User extends Component {
 
@@ -62,19 +67,19 @@ class User extends Component {
   }
 
   postUserInfo = () => {
-    // const userInfo = {
-    //   username: this.state.username,
-    //   password: this.state.password,
-    //   role: this.state.role
-    // }
-    // console.log(userInfo)
-    // signupFn(userInfo)
-    //   .then(data => {
-    //     this.setState({ basicInfo: true }, () => {
-    //       setToken(data.token)
-    //       this.setState({ history: this.props.history })
-    //     });
-    //   })
+    const userInfo = {
+      username: this.state.username,
+      password: this.state.password,
+      role: this.state.role
+    }
+
+    signupFn(userInfo)
+      .then(data => {
+        this.setState({ basicInfo: true }, () => {
+          setToken(data.token)
+          this.setState({ history: this.props.history })
+        });
+      })
     this.setState({ basicInfo: true, history: this.props.history })
   }
 
@@ -82,51 +87,53 @@ class User extends Component {
     const { classes } = this.props;
 
     return (
+
       !this.state.basicInfo ? (
-        <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" className={classes.container}>
-          <CssBaseline />
-          <Box className={classes.box}>
-          <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-                <LockOpenIcon />
-              </Avatar>
-            <Typography component="h1" variant="h3">
-              Sign up
-        </Typography>
-            <form className={classes.form} noValidate>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    variant="filled" required fullWidth label="User Name"
-                    value={this.state.username}
-                    onChange={(event) => this.setState({ username: event.target.value })}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField variant="filled" required fullWidth label="Email Address"
-                    value={this.state.email}
-                    onChange={(event) => this.setState({ email: event.target.value })}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField color='secondary'
-                    variant="outlined" required fullWidth label="Password" type="password"
-                    value={this.state.password}
-                    onChange={(event) => this.setState({ password: event.target.value })}
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                onClick={() => this.postUserInfo()} variant="contained"
-                fullWidth color="primary" className={classes.submit}>
-                Continue
+        <div className={classes.backGround}>
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs" className={classes.container}>
+              <CssBaseline />
+              <Box className={classes.box}>
+                <div className={classes.paper}>
+                  <div className="signUp__logo">
+                    <img className="signUp__logo--pic" src={logo} alt="logo" />
+                    <img className="signUp__logo--font" src={brandName} alt="brandname" />
+                  </div>
+                  <form className={classes.form} noValidate>
+                    <label>Sign up</label>
+                    <Grid container spacing={2} className={classes.grid}>
+                      <Grid item xs={12}>
+                        <TextField
+                          variant="outlined" required fullWidth label="User Name"
+                          value={this.state.username}
+                          onChange={(event) => this.setState({ username: event.target.value })}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField variant="outlined" required fullWidth label="Email Address"
+                          value={this.state.email}
+                          onChange={(event) => this.setState({ email: event.target.value })}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField color='secondary'
+                          variant="outlined" required fullWidth label="Password" type="password"
+                          value={this.state.password}
+                          onChange={(event) => this.setState({ password: event.target.value })}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Button
+                      onClick={() => this.postUserInfo()} variant="contained"
+                      fullWidth color="primary" className={classes.submit}>
+                      Continue
             </Button>
-            </form>
-          </div>
-          </Box>
-        </Container>
-        </ThemeProvider>) :
+                  </form>
+                </div>
+              </Box>
+            </Container>
+          </ThemeProvider>
+        </div>) :
         (this.state.role === 'client' ?
           <ClientSignup
             email={this.state.email}
@@ -135,6 +142,7 @@ class User extends Component {
             email={this.state.email}
             history={this.state.history} />)
     )
+
   }
 }
 

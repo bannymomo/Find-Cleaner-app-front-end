@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "../UI/Avatar";
 import Collapse from "@material-ui/core/Collapse";
@@ -15,6 +16,10 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
+import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
+import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
+import HistoryRoundedIcon from '@material-ui/icons/HistoryRounded';
+import SettingsApplicationsRoundedIcon from '@material-ui/icons/SettingsApplicationsRounded';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -91,7 +96,6 @@ export default function SimpleList() {
 			</div>
 			<div className={classes.root}>
 				<Divider />
-
 				<div className={modalClasses.root}>
 					<Button
 						className={modalClasses.openButton}
@@ -129,16 +133,21 @@ export default function SimpleList() {
 				</div>
 
 				<List component="nav" aria-label="secondary mailbox folders">
+					
 					<ListItemLink to={`${CLIENT_BASE_URL}/dashboard`}>
+						<ListItemIcon><DashboardRoundedIcon/></ListItemIcon>
 						<ListItemText primary="Dashboard" />
 					</ListItemLink>
 					<ListItemLink to={`${CLIENT_BASE_URL}/profile`}>
+						<ListItemIcon><AccountBoxRoundedIcon/></ListItemIcon>
 						<ListItemText primary="Profile" />
 					</ListItemLink>
 					<ListItemLink to={`${CLIENT_BASE_URL}/order-history`}>
+						<ListItemIcon><HistoryRoundedIcon/></ListItemIcon>
 						<ListItemText primary="OrderHistory" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
+						<ListItemIcon><SettingsApplicationsRoundedIcon/></ListItemIcon>
 						<ListItemText primary="Setting" />
 						{open ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>

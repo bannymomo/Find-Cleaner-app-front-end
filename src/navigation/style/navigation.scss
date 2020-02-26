@@ -1,49 +1,52 @@
-@import "../../theme/variables.scss";
-.navigation {
-  background: #fff;
-  height: 57px;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-  display: flex;
+.nav-bar__header--white {
+	background-color: rgba(245, 246, 253, 0.9);
+	height: 70px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+	z-index: 100;
+	position: fixed;
+	font-family: Nunito;
+	margin: 0;
+	div {
+		align-items: center;
+	}
+	.nav-bar__logo--pic {
+		width: 48px;
+		height: 48px;
+		margin: 10px 10px 5px;
+	}
+	.nav-bar__logo--font {
+		width: 177px;
+		height: 37px;
+		margin: 10px;
+	}
 
-  img {
-    width: 5%;
-    height: 100%;
-    margin-left: 20%;
-    padding-right: 2%;
-  }
+	.nav-bar__items--container {
+		display: flex;
+		.nav-bar__ul--black {
+			display: flex;
+			list-style: none;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 20px;
+			line-height: 27px;
 
-  .post {
-    background: $primary-color-rose;
-    border-radius: 200px;
-    color: #fff;
-    cursor: pointer;
-    float: left;
-    font-size: 11px;
-    height: 27px;
-    margin: 13px 10px 0 20px;
-    text-align: center;
-    text-shadow: 0 1px 1px #9a0137;
-    width: 90px;
-    margin-right: 40%;
-    outline: none;
-  }
-
-  .avatar {
-    background: url("../../assets/images/George.JPG");
-    background-size: 32px 32px;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-    margin-top: 14px;
-    margin-left: 20px;
-    cursor: pointer;
-  }
+			li {
+				margin: 0 20px;
+				.nav-bar__link--black {
+					text-decoration: none;
+					color: black;
+				}
+				.nav-bar__link--black:hover {
+					color: #3f88de;
+				}
+			}
+		}
+		.nav-bar__button--blue {
+			margin: 0 0 0 30px;
+		}
+	}
 }

@@ -1,137 +1,81 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
-import Container from "@material-ui/core/Container";
-import Typography from "../components/Typography";
-import TextField from "../components/TextField";
-import Snackbar from "../components/Snackbar";
-import Button from "../components/Button";
+import Button from "../../UI/Button";
 import ScrollAnimation from "react-animate-on-scroll";
+import TextField from "@material-ui/core/TextField";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import "../style/homepage.scss";
 
-const styles = theme => ({
-	root: {
-		marginTop: theme.spacing(10),
-		marginBottom: 0,
-		display: "flex"
-	},
-	cardWrapper: {
-		zIndex: 1
-	},
-	card: {
-		display: "flex",
-		justifyContent: "center",
-		backgroundColor: theme.palette.warning.main,
-		padding: theme.spacing(8, 3)
-	},
-	cardContent: {
-		maxWidth: 400
-	},
-	textField: {
-		width: "100%",
-		marginTop: theme.spacing(3),
-		marginBottom: theme.spacing(2)
-	},
-	button: {
-		width: "100%"
-	},
-	imagesWrapper: {
-		position: "relative"
-	},
-	imageDots: {
-		position: "absolute",
-		top: -67,
-		left: -67,
-		right: 0,
-		bottom: 0,
-		width: "100%"
-	},
-	image: {
-		position: "absolute",
-		top: -28,
-		left: -28,
-		right: 0,
-		bottom: 0,
-		width: "100%",
-		maxWidth: 600
-	}
-});
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
-function ProductCTA(props) {
-	const { classes } = props;
+function ProductCTA() {
 	const [open, setOpen] = React.useState(false);
 
-	const handleSubmit = event => {
-		event.preventDefault();
+	const handleClick = () => {
 		setOpen(true);
 	};
 
-	const handleClose = () => {
+	const handleClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
 		setOpen(false);
 	};
 
 	return (
 		<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
-			<Container className={classes.root} component="section">
-				<Grid container>
-					<Grid item xs={12} md={6} className={classes.cardWrapper}>
-						<div className={classes.card}>
-							<form
-								onSubmit={handleSubmit}
-								className={classes.cardContent}
+			<div className="productcta__container--whole">
+				<div className="productcta__title--black">
+					We are always here to help. Get in touch！
+				</div>
+
+				<Button
+					color="primary"
+					variant="contained"
+					className="product-container__button--blue-thin"
+				>
+					Ask me questions
+				</Button>
+
+				<div className="productcta__title--black">
+					Subscribe our newsletter
+				</div>
+				<form noValidate autoComplete="off">
+					<div className="product-container__input-container--whole">
+						<TextField
+							id="outlined-basic"
+							label="Email-address"
+							variant="outlined"
+							fullWidth={true}
+							style={{ backgroundColor: "#E5E5E5" }}
+						/>
+						<div className="product-container__button--blue">
+							<Button
+								onClick={handleClick}
+								color="primary"
+								variant="contained"
 							>
-								<Typography
-									variant="h2"
-									component="h2"
-									gutterBottom
-								>
-									Receive offers
-								</Typography>
-								<Typography variant="h5">
-									Give yourself a day off.
-									<br />
-									Let us take care of the housework
-								</Typography>
-								<TextField
-									noBorder
-									className={classes.textField}
-									placeholder="Your email"
-								/>
-								<Button
-									type="submit"
-									color="primary"
-									variant="contained"
-									className={classes.button}
-								>
-									Keep me updated
-								</Button>
-							</form>
+								Subscribe
+							</Button>
 						</div>
-					</Grid>
-					<Grid item xs={12} md={6} className={classes.imagesWrapper}>
-						<Hidden smDown>
-							<div className={classes.imageDots} />
-							<img
-								src="https://cdn.pixabay.com/photo/2016/08/25/18/07/badesalz-1620255_1280.jpg"
-								alt="call to action"
-								className={classes.image}
-							/>
-						</Hidden>
-					</Grid>
-				</Grid>
-				<Snackbar
-					open={open}
-					onClose={handleClose}
-					message="We will send you our best offers, once a week."
-				/>
-			</Container>
+
+						<Snackbar
+							open={open}
+							autoHideDuration={6000}
+							onClose={handleClose}
+						>
+							<Alert onClose={handleClose} severity="info">
+								Thanks for subscribing our website
+							</Alert>
+						</Snackbar>
+					</div>
+				</form>
+			</div>
 		</ScrollAnimation>
 	);
 }
 
-ProductCTA.propTypes = {
-	classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ProductCTA);
+export default ProductCTA;

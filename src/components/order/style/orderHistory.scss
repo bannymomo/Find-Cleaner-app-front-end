@@ -3,14 +3,23 @@
 $secondary-text-color: rgb(194, 194, 194);
 
 .order-history__container {
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 20px
+}
+
+.order-card__status {
+    font-family: $primary-font-family;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px 0;
+    color: $secondary-color-darkgreen;
 }
 
 .order-card__list {
     font-family: $primary-font-family;
     list-style: none;
     padding: 0px;
+    font-size: 15px;
     li {
         line-height: 24px;
         display: flex;
@@ -26,16 +35,9 @@ $secondary-text-color: rgb(194, 194, 194);
     text-align: right;
     .order-card__avatar {
         margin: auto 0 auto auto;
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
-}
-
-.order-card__status {
-    font-family: $primary-font-family;
-    font-size: 20px;
-    font-weight: 500;
-    color: $secondary-color-darkgreen;
 }
 
 .order-information {
@@ -76,8 +78,17 @@ $secondary-text-color: rgb(194, 194, 194);
     color: $secondary-text-color;
 }
 .order-information__map {
-    z-index: 1000;
+    .MuiBackdrop-root {
+        z-index: 10;
+    }
 }
+.order-information__business {
+    .MuiBackdrop-root {
+        z-index: 10;
+        background-color: white;
+    }
+}
+
 .order-information__budget {
     text-align: center;
     // padding: 10px 0 0;
@@ -116,5 +127,10 @@ $secondary-text-color: rgb(194, 194, 194);
 
 .order-information__details {
     margin-top: 40px;
+    &--list {
+        list-style: none;
+        line-height: 1.5;
+        padding-left: 10px;
+    }
 }
 

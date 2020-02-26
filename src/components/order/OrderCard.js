@@ -16,12 +16,13 @@ import "./style/orderHistory.scss";
 
 const useStyles = makeStyles({
 	root: {
-        padding: "20px 20px 0",
+        padding: "0 20px",
         marginBottom: "20px",
-        borderLeft: "solid 5px #43a047"
+		borderLeft: "solid 5px #43a047",
+		// width: "50%"
 	},
 	card_container: {
-		borderBottom: "solid 2px lightgrey"
+		borderTop: "solid 2px lightgrey"
 	},
 	media: {
 		height: 70
@@ -44,9 +45,10 @@ export default function OrderCard(props) {
 	}
 
 	return (
-		<CardActionArea component={Link} to={`${BASE_URL}/order-history/${props.orderId}`}>
+		<CardActionArea component={Link} to={`${BASE_URL}/orders/${props.orderId}`}>
 			<Card className={classes.root}>
-				<Grid container className={classes.card_container} spacing={2}>
+				<p className="order-card__status">NEW</p>
+				<Grid container className={classes.card_container} spacing={1}>
 					<Grid item xs={9}>
 						<Typography
 							className={classes.card_title}
@@ -59,11 +61,11 @@ export default function OrderCard(props) {
 						<div>
 							<ul className="order-card__list">
 								<li>
-									<AddLocationOutlinedIcon />
+									<AddLocationOutlinedIcon fontSize="small" />
 									<span>116 Adelaide St, Brisbane City</span>
 								</li>
 								<li>
-									<DateRangeOutlinedIcon />
+									<DateRangeOutlinedIcon fontSize="small" />
 									<span>Sat, 15 Feb</span>
 								</li>
 							</ul>
@@ -73,15 +75,14 @@ export default function OrderCard(props) {
 						<Typography
 							className={classes.price}
 							gutterBottom
-							variant="h4"
+							variant="h5"
 							component="h2"
 						>
 							$180
 						</Typography>
 						<Avatar className="order-card__avatar" alt="user1" src="/1.jpg" />
 					</Grid>
-				</Grid>
-				<p className="order-card__status">OPEN</p>
+				</Grid>				
 			</Card>
 		</CardActionArea>
 	);

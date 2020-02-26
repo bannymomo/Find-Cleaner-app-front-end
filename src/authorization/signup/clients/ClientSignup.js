@@ -1,51 +1,54 @@
 import React, { Component } from 'react';
-import { Button, Grid, TextField, Container, CssBaseline, Typography, withStyles
-,Box, createMuiTheme, ThemeProvider, Avatar}
+import {
+  Button, Grid, TextField, Container, CssBaseline, Typography, withStyles
+  , Box, createMuiTheme, ThemeProvider
+}
   from '@material-ui/core';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-
+import Background from '../../../assets/images/auth-background.png'
 import { CLIENT_BASE_URL } from '../../../routes/URLMap'
-// import {createClient} from '../../api/client'
+import logo from '../../../assets/images/logo.png';
+import brandName from '../../../assets/images/brandname.png';
+import '../style/signup.scss';
 
 const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: "#2196f3"
-		},
-		secondary: {
-			main: "#f50057"
-		}
+  palette: {
+    primary: {
+      main: "#2196f3"
+    },
+    secondary: {
+      main: "#f50057"
+    }
   }
 });
 
 const styles = theme => ({
   container: {
-    height:'85vh',
-    marginTop:'15vh',
+    paddingTop: '15vh',
+    height: '100vh',
   },
-  box:{
-    height:"60vh",
-    width:"60vh",
+  backGround: {
+    backgroundImage: `url(${Background})`, backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat', height: '100vh'
   },
   paper: {
-    marginTop: theme.spacing(4),
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height:'100%',
-    backgroundColor: '#FEFEFF'
+    backgroundColor: '#FBFCFF',
+    borderRadius: '10px',
+    height: '50vh'
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(2),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0),
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#2196f3'
+  grid: {
+    marginTop: theme.spacing(1)
   }
 });
 
@@ -83,59 +86,61 @@ class MoreInfo extends Component {
     const { classes } = this.props;
 
     return (
+      <div className={classes.backGround}>
       <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" className={classes.container}>
-        <CssBaseline />
-        <Box className={classes.box}>
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h3">
-            More about you~
-          </Typography>
-          <Avatar className={classes.avatar}>
-                <AssignmentIndIcon />
-              </Avatar>
-          <form className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField variant="outlined" required fullWidth label="First Name"
-                  value={this.state.firstName}
-                  onChange={(event) => this.setState({ firstName: event.target.value })}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField variant="outlined" required fullWidth label="Last Name"
-                  value={this.state.lastName}
-                  onChange={(event) => this.setState({ lastName: event.target.value })} />
-              </Grid>
-              {this.state.invalidName ?
-                <Typography variant="h5" color='secondary'>
-                  The length of name must be longer than 2
+        <Container component="main" maxWidth="xs" className={classes.container}>
+          <CssBaseline />
+
+          <Box className={classes.box}>
+            <div className={classes.paper}>
+              <div className="signUp__logo">
+                <img className="signUp__logo--pic" src={logo} alt="logo" />
+                <img className="signUp__logo--font" src={brandName} alt="brandname" />
+              </div>
+              <form className={classes.form} noValidate>
+              <label>More about you~</label>
+                <Grid container spacing={2} className={classes.grid}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField variant="outlined" required fullWidth label="First Name"
+                      value={this.state.firstName}
+                      onChange={(event) => this.setState({ firstName: event.target.value })}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField variant="outlined" required fullWidth label="Last Name"
+                      value={this.state.lastName}
+                      onChange={(event) => this.setState({ lastName: event.target.value })} />
+                  </Grid>
+                  {this.state.invalidName ?
+                    <Typography variant="h5" color='secondary'>
+                      The length of name must be longer than 2
             </Typography> : null}
-              <Grid item xs={12}>
-                <TextField variant="filled" required fullWidth label="Gender"
-                  value={this.state.gender}
-                  onChange={(event) => this.setState({ gender: event.target.value })}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField color='primary'
-                  variant="outlined" required fullWidth label="postcode"
-                  value={this.state.postcode}
-                  onChange={(event) => this.setState({ postcode: event.target.value })}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              variant="contained"
-              fullWidth color="primary" className={classes.submit}
-              onClick={this.postClient}
-            >Sign up
+                  <Grid item xs={12}>
+                    <TextField variant="outlined" required fullWidth label="Gender"
+                      value={this.state.gender}
+                      onChange={(event) => this.setState({ gender: event.target.value })}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField color='primary'
+                      variant="outlined" required fullWidth label="postcode"
+                      value={this.state.postcode}
+                      onChange={(event) => this.setState({ postcode: event.target.value })}
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  variant="contained"
+                  fullWidth color="primary" className={classes.submit}
+                  onClick={this.postClient}
+                >Sign up
             </Button>
-          </form>
-        </div>
-        </Box>
-      </Container>
+              </form>
+            </div>
+          </Box>
+        </Container>
       </ThemeProvider>
+      </div>
     )
   }
 }
