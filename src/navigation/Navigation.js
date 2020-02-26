@@ -18,9 +18,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class Navigation extends Component {
+
 	handleLogOut = () => {
 		removeToken();
 	};
+
 	scrollToAnchor = anchorName => {
 		if (anchorName) {
 			let anchorElement = document.getElementById(anchorName);
