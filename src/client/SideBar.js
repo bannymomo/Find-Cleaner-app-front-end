@@ -10,17 +10,17 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
-import { CLIENT_BASE_URL } from "../routes/URLMap";
+import { CLIENT_BASE_URL, HOMEPAGE_URL } from "../routes/URLMap";
 import TakeOrder from "../client/Take-Order/TakeOrder";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
-import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
-import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
-import HistoryRoundedIcon from '@material-ui/icons/HistoryRounded';
-import SettingsApplicationsRoundedIcon from '@material-ui/icons/SettingsApplicationsRounded';
-
+import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
+import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
+import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
+import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
+import { removeToken } from "../utils/auth";
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -133,21 +133,28 @@ export default function SimpleList() {
 				</div>
 
 				<List component="nav" aria-label="secondary mailbox folders">
-					
 					<ListItemLink to={`${CLIENT_BASE_URL}/dashboard`}>
-						<ListItemIcon><DashboardRoundedIcon/></ListItemIcon>
+						<ListItemIcon>
+							<DashboardRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Dashboard" />
 					</ListItemLink>
 					<ListItemLink to={`${CLIENT_BASE_URL}/profile`}>
-						<ListItemIcon><AccountBoxRoundedIcon/></ListItemIcon>
+						<ListItemIcon>
+							<AccountBoxRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Profile" />
 					</ListItemLink>
 					<ListItemLink to={`${CLIENT_BASE_URL}/order-history`}>
-						<ListItemIcon><HistoryRoundedIcon/></ListItemIcon>
+						<ListItemIcon>
+							<HistoryRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="OrderHistory" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
-						<ListItemIcon><SettingsApplicationsRoundedIcon/></ListItemIcon>
+						<ListItemIcon>
+							<SettingsApplicationsRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Setting" />
 						{open ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
@@ -163,6 +170,14 @@ export default function SimpleList() {
 									to={`${CLIENT_BASE_URL}/password`}
 								>
 									Password
+								</ListItemLink>
+							</ListItem>
+							<ListItem className={classes.nested}>
+								<ListItemLink
+									to={`${HOMEPAGE_URL}`}
+									onClick={removeToken}
+								>
+									LogOut
 								</ListItemLink>
 							</ListItem>
 						</List>

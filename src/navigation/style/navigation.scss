@@ -33,12 +33,13 @@
 			font-weight: 600;
 			font-size: 20px;
 			line-height: 27px;
-
+			justify-content: space-around;
+			padding: 0;
 			li {
-				margin: 0 20px;
 				.nav-bar__link--black {
 					text-decoration: none;
 					color: black;
+					margin: 0 20px;
 				}
 				.nav-bar__link--black:hover {
 					color: #3f88de;
