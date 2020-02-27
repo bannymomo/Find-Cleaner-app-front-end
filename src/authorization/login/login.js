@@ -65,14 +65,14 @@ class Login extends React.Component {
 							const locationState = this.props.location.state;
 							const redirectTo =
 								(locationState && locationState.from) ||
-								`${CLIENT_BASE_URL}/${data.clientId}`;
+								`${CLIENT_BASE_URL}/${data.clientId}/dashboard`;
 							this.props.history.replace(redirectTo);
 						} else if (getTokenRole() === "business") {
 							setBusinessId(data.businessId);
 							const locationState = this.props.location.state;
 							const redirectTo =
 								(locationState && locationState.from) ||
-								`${BUSINESS_BASE_URL}/${data.businessId}`;
+								`${BUSINESS_BASE_URL}/${data.businessId}/dashboard`;
 							this.props.history.replace(redirectTo);
 						} else {
 							this.props.history.replace(SIGNUP_URL);
