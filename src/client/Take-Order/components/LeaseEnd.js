@@ -14,15 +14,8 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function CheckboxLabels() {
+export default function CheckboxLabels(props) {
 	const classes = useStyles();
-	const [state, setState] = React.useState({
-		leaseEndClean: false
-	});
-
-	const handleChange = name => event => {
-		setState({ ...state, [name]: event.target.checked });
-	};
 
 	return (
 		<div className="take-order--checkbox">
@@ -31,9 +24,9 @@ export default function CheckboxLabels() {
 					<FormControlLabel
 						control={
 							<Checkbox
-								checked={state.leaseEndClean}
-								onChange={handleChange("leaseEndClean")}
-								value="lease-end-clean"
+								name="endOfLease"
+								value={props.endOfLease}
+								onChange={props.handleChange}
 							/>
 						}
 						label="This is an end-of-lease clean"

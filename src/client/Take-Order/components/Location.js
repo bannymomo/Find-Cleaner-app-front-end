@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function BasicTextFields() {
+export default function BasicTextFields(props) {
 	const classes = useStyles();
 
 	return (
@@ -31,6 +31,8 @@ export default function BasicTextFields() {
 
 			<form className={classes.root} autoComplete="off">
 				<TextField
+					name="location"
+					onChange={props.handleChange}
 					id="outlined-basic"
 					required
 					placeholder="4000"
