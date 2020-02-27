@@ -89,7 +89,7 @@ export default function OrderInformaiton() {
 						</ul>
 						<ToggleButton
 							size="small"
-							// value="follow"
+							value="follow"
 							selected={selected}
 							onChange={() => {
 								setSelected(!selected);
@@ -165,7 +165,7 @@ export default function OrderInformaiton() {
 										href={list.link}
 										className="order-information__share--single"
 									>
-										<i class={list.icon}></i>
+										<i className={list.icon}></i>
 									</a>
 								);
 							})}

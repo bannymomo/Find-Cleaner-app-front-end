@@ -11,7 +11,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { BUSINESS_BASE_URL, HOMEPAGE_URL } from "../routes/URLMap";
-import { removeToken } from "../utils/auth";
+import { removeToken, getBusinessId, removeBusinessId } from "../utils/auth";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -39,6 +39,11 @@ export default function SimpleList() {
 	const handleClick = () => {
 		setOpen(!open);
 	};
+	const businessId = getBusinessId();
+	const handleLogOut = () => {
+		removeToken();
+		removeBusinessId();
+	};
 
 	return (
 		<div>
@@ -49,7 +54,9 @@ export default function SimpleList() {
 			<div className={classes.root}>
 				<Divider />
 				<List component="nav" aria-label="secondary mailbox folders">
-					<ListItemLink to={`${BUSINESS_BASE_URL}/browse-order`}>
+					<ListItemLink
+						to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
+					>
 						<Button
 							className={classes.tasksButton}
 							variant="contained"
@@ -60,13 +67,19 @@ export default function SimpleList() {
 							Browser Tasks
 						</Button>
 					</ListItemLink>
-					<ListItemLink to={`${BUSINESS_BASE_URL}/dashboard`}>
+					<ListItemLink
+						to={`${BUSINESS_BASE_URL}/${businessId}/dashboard`}
+					>
 						<ListItemText primary="Dashboard" />
 					</ListItemLink>
-					<ListItemLink to={`${BUSINESS_BASE_URL}/profile`}>
+					<ListItemLink
+						to={`${BUSINESS_BASE_URL}/${businessId}/profile`}
+					>
 						<ListItemText primary="Profile" />
 					</ListItemLink>
-					<ListItemLink to={`${BUSINESS_BASE_URL}/order-history`}>
+					<ListItemLink
+						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
+					>
 						<ListItemText primary="OrderHistory" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
@@ -77,14 +90,14 @@ export default function SimpleList() {
 						<List component="div">
 							<ListItem className={classes.nested}>
 								<ListItemLink
-									to={`${BUSINESS_BASE_URL}/account`}
+									to={`${BUSINESS_BASE_URL}/${businessId}/account`}
 								>
 									Account
 								</ListItemLink>
 							</ListItem>
 							<ListItem className={classes.nested}>
 								<ListItemLink
-									to={`${BUSINESS_BASE_URL}/password`}
+									to={`${BUSINESS_BASE_URL}/${businessId}/password`}
 								>
 									Password
 								</ListItemLink>
@@ -92,7 +105,7 @@ export default function SimpleList() {
 							<ListItem className={classes.nested}>
 								<ListItemLink
 									to={`${HOMEPAGE_URL}`}
-									onClick={removeToken}
+									onClick={handleLogOut}
 								>
 									LogOut
 								</ListItemLink>

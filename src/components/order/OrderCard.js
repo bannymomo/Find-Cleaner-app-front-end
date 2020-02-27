@@ -5,20 +5,21 @@ import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../routes/URLMap";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Avatar from '@material-ui/core/Avatar';
+import CardActionArea from "@material-ui/core/CardActionArea";
+import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
-import  AddLocationOutlinedIcon  from '@material-ui/icons/AddLocationOutlined';
-import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
+import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
+import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 
 import "./style/orderHistory.scss";
+import { getClientId, getBusinessId } from "../../utils/auth";
 
 const useStyles = makeStyles({
 	root: {
-        padding: "0 20px",
-        marginBottom: "20px",
-		borderLeft: "solid 5px #43a047",
+		padding: "0 20px",
+		marginBottom: "20px",
+		borderLeft: "solid 5px #43a047"
 		// width: "50%"
 	},
 	card_container: {
@@ -37,15 +38,20 @@ const useStyles = makeStyles({
 
 export default function OrderCard(props) {
 	const classes = useStyles();
+	const clientId = getClientId();
+	const businessId = getBusinessId();
 	let BASE_URL;
-	if (props.role === 'client') {
-		BASE_URL = CLIENT_BASE_URL;
-	} else if (props.role === 'business') {
-		BASE_URL = BUSINESS_BASE_URL;
+	if (props.role === "client") {
+		BASE_URL = `${CLIENT_BASE_URL}/${clientId}`;
+	} else if (props.role === "business") {
+		BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;
 	}
 
 	return (
-		<CardActionArea component={Link} to={`${BASE_URL}/orders/${props.orderId}`}>
+		<CardActionArea
+			component={Link}
+			to={`${BASE_URL}/orders/${props.orderId}`}
+		>
 			<Card className={classes.root}>
 				<p className="order-card__status">NEW</p>
 				<Grid container className={classes.card_container} spacing={1}>
@@ -80,9 +86,13 @@ export default function OrderCard(props) {
 						>
 							$180
 						</Typography>
-						<Avatar className="order-card__avatar" alt="user1" src="/1.jpg" />
+						<Avatar
+							className="order-card__avatar"
+							alt="user1"
+							src="/1.jpg"
+						/>
 					</Grid>
-				</Grid>				
+				</Grid>
 			</Card>
 		</CardActionArea>
 	);

@@ -20,7 +20,8 @@ import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
 import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
-import { removeToken } from "../utils/auth";
+import { removeToken, removeClientId } from "../utils/auth";
+import { getClientId } from "../utils/auth";
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -88,6 +89,12 @@ export default function SimpleList() {
 		setModalOpen(false);
 	};
 
+	const clientId = getClientId();
+	const handleLogOut = () => {
+		removeToken();
+		removeClientId();
+	};
+
 	return (
 		<div>
 			<div className="client__avatar-container--left-top">
@@ -133,19 +140,23 @@ export default function SimpleList() {
 				</div>
 
 				<List component="nav" aria-label="secondary mailbox folders">
-					<ListItemLink to={`${CLIENT_BASE_URL}/dashboard`}>
+					<ListItemLink
+						to={`${CLIENT_BASE_URL}/${clientId}/dashboard`}
+					>
 						<ListItemIcon>
 							<DashboardRoundedIcon />
 						</ListItemIcon>
 						<ListItemText primary="Dashboard" />
 					</ListItemLink>
-					<ListItemLink to={`${CLIENT_BASE_URL}/profile`}>
+					<ListItemLink to={`${CLIENT_BASE_URL}/${clientId}/profile`}>
 						<ListItemIcon>
 							<AccountBoxRoundedIcon />
 						</ListItemIcon>
 						<ListItemText primary="Profile" />
 					</ListItemLink>
-					<ListItemLink to={`${CLIENT_BASE_URL}/order-history`}>
+					<ListItemLink
+						to={`${CLIENT_BASE_URL}/${clientId}/order-history`}
+					>
 						<ListItemIcon>
 							<HistoryRoundedIcon />
 						</ListItemIcon>
@@ -161,13 +172,15 @@ export default function SimpleList() {
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						<List component="div">
 							<ListItem className={classes.nested}>
-								<ListItemLink to={`${CLIENT_BASE_URL}/account`}>
+								<ListItemLink
+									to={`${CLIENT_BASE_URL}/${clientId}/account`}
+								>
 									Account
 								</ListItemLink>
 							</ListItem>
 							<ListItem className={classes.nested}>
 								<ListItemLink
-									to={`${CLIENT_BASE_URL}/password`}
+									to={`${CLIENT_BASE_URL}/${clientId}/password`}
 								>
 									Password
 								</ListItemLink>
@@ -175,7 +188,7 @@ export default function SimpleList() {
 							<ListItem className={classes.nested}>
 								<ListItemLink
 									to={`${HOMEPAGE_URL}`}
-									onClick={removeToken}
+									onClick={handleLogOut}
 								>
 									LogOut
 								</ListItemLink>

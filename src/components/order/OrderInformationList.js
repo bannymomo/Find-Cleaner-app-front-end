@@ -76,7 +76,6 @@ export default function OrderInformationList() {
                 />
                 <div className="order-information__map">
                     <Button
-                        color="lightgreen"
                         onClick={handleToggle1}
                     >
                         View Map
@@ -124,7 +123,6 @@ export default function OrderInformationList() {
                 />
                 <div className="order-information__business">
                     <Button
-                        color="lightgreen"
                         onClick={handleToggle2}
                     >
                         View Business

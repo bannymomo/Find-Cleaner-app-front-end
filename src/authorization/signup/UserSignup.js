@@ -8,8 +8,10 @@ import {
 	withStyles,
 	Box,
 	createMuiTheme,
-	ThemeProvider
+	ThemeProvider,
+	LinearProgress
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 import { signup as signupFn } from "../../api/auth";
 import { setToken } from "../../utils/auth";
@@ -51,7 +53,6 @@ const styles = theme => ({
 		alignItems: "center",
 		backgroundColor: "#FBFCFF",
 		borderRadius: "10px",
-		height: "50vh"
 	},
 	form: {
 		width: "100%",
@@ -62,6 +63,9 @@ const styles = theme => ({
 	},
 	grid: {
 		marginTop: theme.spacing(1)
+	},
+	loading: {
+		margin: theme.spacing(2, 0)
 	}
 });
 
@@ -71,7 +75,9 @@ class User extends Component {
 		username: "",
 		password: "",
 		history: "",
-		role: this.props.location.role
+		role: this.props.location.role,
+		error: null,
+		isLoading: false
 	};
 
 	postUserInfo = () => {
@@ -80,14 +86,17 @@ class User extends Component {
 			password: this.state.password,
 			role: this.state.role
 		};
-
-		signupFn(userInfo).then(data => {
-			this.setState({ basicInfo: true }, () => {
-				setToken(data.token);
-				this.setState({ history: this.props.history });
-			});
-		});
-		this.setState({ basicInfo: true, history: this.props.history });
+		
+		this.setState({ isLoading: true }, () => {
+			signupFn(userInfo)
+				.then(data => {
+					this.setState({ basicInfo: true, isLoading:false }, () => {
+						setToken(data.token);
+						this.setState({ history: this.props.history, basicInfo: true });
+					})
+				})
+				.catch(error => this.setState({ error, isLoading: false }))
+		})
 	};
 
 	render() {
@@ -176,15 +185,23 @@ class User extends Component {
 												/>
 											</Grid>
 										</Grid>
-										<Button
-											onClick={() => this.postUserInfo()}
-											variant="contained"
-											fullWidth
-											color="primary"
-											className={classes.submit}
-										>
-											Continue
-										</Button>
+										{this.state.isLoading ? (
+											<LinearProgress className={classes.loading} />
+										) : (
+												<Button
+													onClick={() => this.postUserInfo()}
+													variant="contained"
+													fullWidth
+													color="primary"
+													className={classes.submit}
+												>
+													Continue
+										</Button>)}
+										{!!this.state.error && (
+											<Alert severity="error">
+												User already exits~
+											</Alert>
+										)}
 									</form>
 								</div>
 							</Box>
@@ -198,11 +215,11 @@ class User extends Component {
 				history={this.state.history}
 			/>
 		) : (
-			<BusinessSignup
-				email={this.state.email}
-				history={this.state.history}
-			/>
-		);
+					<BusinessSignup
+						email={this.state.email}
+						history={this.state.history}
+					/>
+				);
 	}
 }
 

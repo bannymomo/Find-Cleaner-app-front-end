@@ -19,7 +19,12 @@ import {
 	BUSINESS_BASE_URL,
 	SIGNUP_URL
 } from "../../routes/URLMap";
-import { setToken, getTokenRole } from "../../utils/auth";
+import {
+	setToken,
+	setClientId,
+	setBusinessId,
+	getTokenRole
+} from "../../utils/auth";
 import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
 
@@ -55,16 +60,19 @@ class Login extends React.Component {
 				.then(data => {
 					this.setState({ isLoading: false }, () => {
 						setToken(data.token);
-						const locationState = this.props.location.state;
 						if (getTokenRole() === "client") {
+							setClientId(data.clientId);
+							const locationState = this.props.location.state;
 							const redirectTo =
 								(locationState && locationState.from) ||
-								CLIENT_BASE_URL;
+								`${CLIENT_BASE_URL}/${data.clientId}`;
 							this.props.history.replace(redirectTo);
 						} else if (getTokenRole() === "business") {
+							setBusinessId(data.businessId);
+							const locationState = this.props.location.state;
 							const redirectTo =
 								(locationState && locationState.from) ||
-								BUSINESS_BASE_URL;
+								`${BUSINESS_BASE_URL}/${data.businessId}`;
 							this.props.history.replace(redirectTo);
 						} else {
 							this.props.history.replace(SIGNUP_URL);
@@ -79,6 +87,20 @@ class Login extends React.Component {
 		const key = event.target.name;
 		const value = event.target.value;
 		this.setState({ [key]: value });
+	};
+
+	handleKeyPress = event => {
+		if (event.key === "Enter") {
+			if (!this.state.username) {
+				alert("Username is empty, please fill your name");
+				return;
+			}
+			if (!this.state.password) {
+				alert("Password is empty, please fill your password");
+				return;
+			}
+			this.login();
+		}
 	};
 
 	render() {
@@ -112,6 +134,7 @@ class Login extends React.Component {
 									<form className={classes.form} noValidate>
 										<label>Log in</label>
 										<TextField
+											onKeyDown={this.handleKeyPress}
 											variant="outlined"
 											required
 											margin="normal"
@@ -122,6 +145,7 @@ class Login extends React.Component {
 											onChange={this.handleChange}
 										/>
 										<TextField
+											onKeyDown={this.handleKeyPress}
 											variant="outlined"
 											required
 											margin="normal"
@@ -142,7 +166,7 @@ class Login extends React.Component {
 											label="Remember me"
 										/>
 										{this.state.isLoading ? (
-											<LinearProgress />
+											<LinearProgress className={classes.loading}/>
 										) : (
 											<Button
 												onClick={this.login}
