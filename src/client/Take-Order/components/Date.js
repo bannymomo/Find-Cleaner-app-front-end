@@ -16,12 +16,16 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function FormControlLabelPosition() {
+export default function FormControlLabelPosition(props) {
 	const [value, setValue] = React.useState("within-one-week");
 	const handleChange = event => {
 		setValue(event.target.value);
 	};
 	const classes = useStyles();
+
+	let today = new Date();
+	today.setHours(23,59,59,999);
+	const inAWeek = new Date(Date.now() + 604800000);
 
 	return (
 		<div className="take-order--radio">
@@ -43,20 +47,32 @@ export default function FormControlLabelPosition() {
 					size="small"
 				>
 					<FormControlLabel
-						value="today"
-						control={<Radio color="secondary" />}
+						value={today}
+						control={<Radio
+							name="dueDate" 
+							value={today}
+							onChange={props.handleChange} 
+							color="secondary" 
+						/>}
 						label="Today"
 						labelPlacement="end"
 					/>
 					<FormControlLabel
 						value="by-a-certain-day"
-						control={<Radio color="secondary" />}
+						control={<Radio
+							color="secondary" 
+						/>}
 						label="By a certain day"
 						labelPlacement="end"
 					/>
 					<FormControlLabel
 						value="within-one-week"
-						control={<Radio color="secondary" />}
+						control={<Radio 
+							name="dueDate" 
+							value={inAWeek}
+							onChange={props.handleChange} 
+							color="secondary" 
+						/>}
 						label="Within 1 week"
 						labelPlacement="end"
 					/>

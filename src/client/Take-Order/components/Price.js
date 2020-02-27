@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function SimpleCard() {
+export default function SimpleCard(props) {
 	const classes = useStyles();
 	const bull = <span className={classes.bullet}>✔</span>;
 
@@ -67,7 +67,7 @@ export default function SimpleCard() {
 						variant="h5"
 						component="h2"
 					>
-						$min - $max
+						{props.price}
 					</Typography>
 					<Typography className={classes.pos} color="textSecondary">
 						{bull} Get instant quotes in minutes <br />
@@ -81,6 +81,7 @@ export default function SimpleCard() {
 						size="large"
 						variant="contained"
 						color="secondary"
+						onClick={props.handleSubmit}
 					>
 						Post My Task
 					</Button>

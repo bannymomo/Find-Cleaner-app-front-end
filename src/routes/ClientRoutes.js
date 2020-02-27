@@ -10,7 +10,6 @@ import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../components/order/OrderInformation";
 
-const orderId = "orderId";
 const ClientRoutes = () => (
 	<Switch>
 		<Redirect

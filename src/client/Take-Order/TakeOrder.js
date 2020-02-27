@@ -7,21 +7,103 @@ import Location from "./components/Location";
 import Date from "./components/Date";
 import Time from "./components/Time";
 import Price from "./components/Price";
+import { createOrder } from "../../api/order";
+import { ORDER_BASE_URL } from "../../routes/URLMap";
+import { CLIENT_BASE_URL } from "../../routes/URLMap";
+class TakeOrder extends React.Component {
+	constructor(props) {
+		super(props);
 
-const TakeOrder = () => {
-	return (
-		<div className="client__take-order-page">
-			<p id="take-order">See how little it will cost...</p>
-			<Bedrooms />
-			<Bathrooms />
-			<LeaseEnd />
-			<OtherClean />
-			<Location />
-			<Date />
-			<Time />
-			<Price />
-		</div>
-	);
-};
+		this.state = {
+			bedrooms: 1,
+			bathrooms: 1,
+			endOfLease: false,
+			oven: false,
+			windows: false,
+			cabinets: false,
+			carpet: false,
+			location: '',
+			dueDate: '2021-01-01',
+			price: 0,
+			error: null
+		}
+	};
+
+	handleChange = event => {
+		const key = event.target.name;
+		let value = event.target.value;
+		if (key === "bedrooms" || key === "bathrooms") {
+			value = parseInt(value);
+		} else if (key === "location" || key === "dueDate") {
+			value = value;
+		} else {
+			value = (value === "false");
+		}     
+
+		// this.setState({ [key]: value });
+		this.setState({ [key]: value }, () => {
+			let totalPrice = this.state.bedrooms*22 + this.state.bathrooms*28 + this.state.endOfLease*135 + this.state.oven*5 + this.state.windows*68 + this.state.cabinets*36 + this.state.carpet*18;
+			this.setState({price:totalPrice});
+		});
+	}
+	handleChangeDate = value => {
+		value = value.toString();
+		this.setState({dueDate: value});
+	}
+	handleSubmit = () => {
+		const order = { ...this.state };
+		const clientId = this.props.match.params.id;
+		this.setState({}, () => {
+			createOrder(clientId, order)
+				.then(newOrder => {
+					this.props.history.push(`${CLIENT_BASE_URL}/order-history/${newOrder.id}`);
+				})
+				.catch(error => this.setState({error}));
+		});
+	}
+
+	render() {
+		return (
+			<div className="client__take-order-page">
+				<p id="take-order">See how little it will cost...</p>
+				<Bedrooms 					
+					bedrooms={this.state.bedrooms}
+					handleChange={this.handleChange}
+				/>
+				<Bathrooms 
+					bathrooms={this.state.bathrooms}
+					handleChange={this.handleChange}
+				/>
+				<LeaseEnd 
+					endOfLease={this.state.endOfLease}
+					handleChange={this.handleChange}
+				/>
+				<OtherClean 
+					oven={this.state.oven}
+					windows={this.state.windows}
+					cabinets={this.state.cabinets}
+					carpet={this.state.carpet}
+					handleChange={this.handleChange}
+				/>
+				<Location 
+					location={this.state.location}
+					handleChange={this.handleChange}
+				/>
+				<Date 
+					dueDate={this.state.dueDate}
+					handleChange={this.handleChange}
+				/>
+				<Time 
+					dueDate={this.state.dueDate}
+					handleChangeDate={this.handleChangeDate}
+				/>
+				<Price 
+					price={this.state.price}
+					handleSubmit={this.handleSubmit}
+				/>
+			</div>
+		)
+	}
+}
 
 export default TakeOrder;
