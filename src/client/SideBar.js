@@ -10,7 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
-import { CLIENT_BASE_URL } from "../routes/URLMap";
+import { CLIENT_BASE_URL, HOMEPAGE_URL } from "../routes/URLMap";
 import TakeOrder from "../client/Take-Order/TakeOrder";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -20,7 +20,7 @@ import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
 import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
-
+import { removeToken } from "../utils/auth";
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -170,6 +170,14 @@ export default function SimpleList() {
 									to={`${CLIENT_BASE_URL}/password`}
 								>
 									Password
+								</ListItemLink>
+							</ListItem>
+							<ListItem className={classes.nested}>
+								<ListItemLink
+									to={`${HOMEPAGE_URL}`}
+									onClick={removeToken}
+								>
+									LogOut
 								</ListItemLink>
 							</ListItem>
 						</List>

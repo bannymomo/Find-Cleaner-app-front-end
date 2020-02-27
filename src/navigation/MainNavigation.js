@@ -1,24 +1,14 @@
 import React, { Component } from "react";
 import "./style/navigation.scss";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
 import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { LOGIN_URL, HOMEPAGE_URL } from "../routes/URLMap";
 import { removeToken } from "../utils/auth";
+import { isLoggedIn } from "../utils/auth";
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		"& > *": {
-			margin: theme.spacing(1)
-		}
-	}
-}));
-
-class Navigation extends Component {
-
+class MainNavigation extends Component {
 	handleLogOut = () => {
 		removeToken();
 	};
@@ -35,7 +25,6 @@ class Navigation extends Component {
 		}
 	};
 	render() {
-		const { classes } = this.props;
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -67,6 +56,7 @@ class Navigation extends Component {
 						</li>
 						<li>
 							<Link
+								style={{ display: isLoggedIn() ? "none" : " " }}
 								className="nav-bar__link--black"
 								to={LOGIN_URL}
 							>
@@ -75,6 +65,7 @@ class Navigation extends Component {
 						</li>
 						<li>
 							<Link
+								style={{ display: isLoggedIn() ? " " : "none" }}
 								className="nav-bar__link--black"
 								to={HOMEPAGE_URL}
 								onClick={this.handleLogOut}
@@ -82,13 +73,19 @@ class Navigation extends Component {
 								Log Out
 							</Link>
 						</li>
+						<li>
+							<Link
+								className="nav-bar__link--black"
+								to={HOMEPAGE_URL}
+							>
+								Support
+							</Link>
+						</li>
 					</ul>
 					<div className="nav-bar__button--blue">
-						<div className={classes.root}>
-							<Button variant="contained" color="primary">
-								Post your task
-							</Button>
-						</div>
+						<Button variant="contained" color="primary">
+							Post your task
+						</Button>
 					</div>
 				</div>
 			</header>
@@ -96,4 +93,4 @@ class Navigation extends Component {
 	}
 }
 
-export default withStyles(useStyles)(Navigation);
+export default MainNavigation;

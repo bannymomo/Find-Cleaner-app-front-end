@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
 	Button,
 	TextField,
@@ -6,18 +6,13 @@ import {
 	Checkbox,
 	LinearProgress
 } from "@material-ui/core";
-import {
-	Container,
-	Box,
-	CssBaseline,
-	withStyles
-} from "@material-ui/core";
+import { Container, Box, CssBaseline, withStyles } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 
-import logo from '../../assets/images/logo.png';
-import brandName from '../../assets/images/brandname.png';
-import './style/style.scss'
+import logo from "../../assets/images/logo.png";
+import brandName from "../../assets/images/brandname.png";
+import "./style/style.scss";
 
 import {
 	CLIENT_BASE_URL,
@@ -26,6 +21,7 @@ import {
 } from "../../routes/URLMap";
 import { setToken, getTokenRole } from "../../utils/auth";
 import { login as loginFn } from "../../api/auth";
+import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
 
@@ -89,55 +85,65 @@ class Login extends React.Component {
 		const { classes } = this.props;
 
 		return (
-			<ThemeProvider theme={theme}>
-				<div className={classes.backGround}>
-					<Container
-						component="main"
-						maxWidth="xs"
-						className={classes.container}
-					>
-						<CssBaseline />
-						<Box className={classes.box}>
-							<div className={classes.paper}>
-								<div className="login__logo">
-									<img className="login__logo--pic" src={logo} alt="logo" />
-									<img className="login__logo--font" src={brandName} alt="brandname" />
-								</div>
-								<form className={classes.form} noValidate>
-								<label>Log in</label>
-									<TextField
-										variant="outlined"
-										required
-										margin="normal"
-										fullWidth
-										label="User Name"
-										value={this.state.username}
-										name="username"
-										onChange={this.handleChange}
-									/>
-									<TextField
-										variant="outlined"
-										required
-										margin="normal"
-										type="password"
-										fullWidth
-										label="Password"
-										name="password"
-										value={this.state.password}
-										onChange={this.handleChange}
-									/>
-									<FormControlLabel
-										control={
-											<Checkbox
-												value="remember"
-												color="primary"
-											/>
-										}
-										label="Remember me"
-									/>
-									{this.state.isLoading ? (
-										<LinearProgress />
-									) : (
+			<Fragment>
+				<MainNavigation />
+				<ThemeProvider theme={theme}>
+					<div className={classes.backGround}>
+						<Container
+							component="main"
+							maxWidth="xs"
+							className={classes.container}
+						>
+							<CssBaseline />
+							<Box className={classes.box}>
+								<div className={classes.paper}>
+									<div className="login__logo">
+										<img
+											className="login__logo--pic"
+											src={logo}
+											alt="logo"
+										/>
+										<img
+											className="login__logo--font"
+											src={brandName}
+											alt="brandname"
+										/>
+									</div>
+									<form className={classes.form} noValidate>
+										<label>Log in</label>
+										<TextField
+											variant="outlined"
+											required
+											margin="normal"
+											fullWidth
+											label="User Name"
+											value={this.state.username}
+											name="username"
+											onChange={this.handleChange}
+										/>
+										<TextField
+											variant="outlined"
+											required
+											margin="normal"
+											type="password"
+											fullWidth
+											label="Password"
+											name="password"
+											value={this.state.password}
+											onChange={this.handleChange}
+										/>
+										<FormControlLabel
+											control={
+												<Checkbox
+													value="remember"
+													color="primary"
+												/>
+											}
+											label="Remember me"
+										/>
+										{this.state.isLoading ? (
+											<LinearProgress />
+										) : (
 											<Button
 												onClick={this.login}
 												variant="contained"
@@ -145,19 +151,20 @@ class Login extends React.Component {
 												color={"primary"}
 											>
 												Sign In
-										</Button>
+											</Button>
 										)}
-									{!!this.state.error && (
-										<Alert severity="error">
-											Account not exits or{" "}
-										</Alert>
-									)}
-								</form>
-							</div>
-						</Box>
-					</Container>
-				</div>
-			</ThemeProvider>
+										{!!this.state.error && (
+											<Alert severity="error">
+												Account not exits or{" "}
+											</Alert>
+										)}
+									</form>
+								</div>
+							</Box>
+						</Container>
+					</div>
+				</ThemeProvider>
+			</Fragment>
 		);
 	}
 }
