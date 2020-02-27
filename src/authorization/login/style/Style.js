@@ -4,7 +4,6 @@ const styles = theme => ({
   container: {
     paddingTop: '15vh',
     height: '100vh',
-
   },
   backGround: {
     backgroundImage: `url(${Background})`, backgroundPosition: 'center',
@@ -18,7 +17,6 @@ const styles = theme => ({
     alignItems: 'center',
     backgroundColor: '#FBFCFF',
     borderRadius: '10px',
-    height:'400px'
   },
   form: {
     width: '100%',
@@ -27,6 +25,9 @@ const styles = theme => ({
   submit: {
     margin: theme.spacing(4),
   },
+  loading: {
+		margin: theme.spacing(2, 0)
+	}
 })
 
 export default styles;

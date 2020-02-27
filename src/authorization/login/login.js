@@ -166,7 +166,7 @@ class Login extends React.Component {
 											label="Remember me"
 										/>
 										{this.state.isLoading ? (
-											<LinearProgress />
+											<LinearProgress className={classes.loading}/>
 										) : (
 											<Button
 												onClick={this.login}
