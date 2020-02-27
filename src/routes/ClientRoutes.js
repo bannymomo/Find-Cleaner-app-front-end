@@ -9,42 +9,51 @@ import TakeOrder from "../client/Take-Order/TakeOrder";
 import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../components/order/OrderInformation";
+import { getClientId } from "../utils/auth";
 
 const orderId = "orderId";
-
+const clientId = getClientId();
 const ClientRoutes = () => (
 	<Switch>
 		<Redirect
 			exact
-			from="/clients"
-			to={`${CLIENT_BASE_URL}/dashboard`}
+			from={`${CLIENT_BASE_URL}/${clientId}`}
+			to={`${CLIENT_BASE_URL}/${clientId}/dashboard`}
 			component={DashBoard}
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/dashboard`}
+			path={`${CLIENT_BASE_URL}/${clientId}/dashboard`}
 			component={DashBoard}
 		/>
-		<Route exact path={`${CLIENT_BASE_URL}/account`} component={Account} />
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/password`}
+			path={`${CLIENT_BASE_URL}/${clientId}/account`}
+			component={Account}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/${clientId}/password`}
 			component={Password}
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/take-order`}
+			path={`${CLIENT_BASE_URL}/${clientId}/take-order`}
 			component={TakeOrder}
 		/>
-		<Route exact path={`${CLIENT_BASE_URL}/profile`} component={Profile} />
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/order-history`}
+			path={`${CLIENT_BASE_URL}/${clientId}/profile`}
+			component={Profile}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/${clientId}/order-history`}
 			component={OrderHistory}
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/orders/${orderId}`}
+			path={`${CLIENT_BASE_URL}/${clientId}/orders/${orderId}`}
 			component={OrderInformation}
 		/>
 	</Switch>

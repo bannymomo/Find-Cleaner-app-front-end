@@ -5,12 +5,14 @@ import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { LOGIN_URL, HOMEPAGE_URL } from "../routes/URLMap";
-import { removeToken } from "../utils/auth";
+import { removeToken, removeClientId, removeBusinessId } from "../utils/auth";
 import { isLoggedIn } from "../utils/auth";
 
 class MainNavigation extends Component {
 	handleLogOut = () => {
 		removeToken();
+		removeClientId();
+		removeBusinessId();
 	};
 
 	scrollToAnchor = anchorName => {
