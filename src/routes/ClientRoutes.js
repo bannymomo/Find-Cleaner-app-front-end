@@ -50,7 +50,7 @@ const ClientRoutes = () => (
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/:clientId/orders/:${orderId}`}
+			path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId`}
 			component={OrderInformation}
 		/>
 	</Switch>
