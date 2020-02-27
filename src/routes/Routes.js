@@ -10,7 +10,6 @@ import Business from "../business/Business";
 import Client from "../client/Client";
 import ProtectedClientRoute from "./components/ProtectedClientRoute";
 import ProtectedBusinessRoute from "./components/ProtectedBusinessRoute";
-
 import {
 	CLIENT_BASE_URL,
 	BUSINESS_BASE_URL,

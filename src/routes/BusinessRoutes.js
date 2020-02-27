@@ -10,41 +10,52 @@ import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
 import OrderInformation from "../components/order/OrderInformation";
 
-
 const orderId = "orderId";
 
 const BusinessRoutes = () => (
-  <Switch>
-    <Redirect
-      exact
-      from="/businesses"
-      to={`${BUSINESS_BASE_URL}/dashboard`}
-      component={Dashboard}
-    />
-    <Route
-      exact
-      path={`${BUSINESS_BASE_URL}/dashboard`}
-      component={Dashboard}
-    />
-    <Route exact path={`${BUSINESS_BASE_URL}/profile`} component={Profile} />
-    <Route exact path={`${BUSINESS_BASE_URL}/account`} component={Account} />
-    <Route exact path={`${BUSINESS_BASE_URL}/password`} component={Password} />
-    <Route
-      exact
-      path={`${BUSINESS_BASE_URL}/browse-order`}
-      component={BrowseOrder}
-    />
-    <Route
-      exact
-      path={`${BUSINESS_BASE_URL}/order-history`}
-      component={OrderHistory}
-    />
-    <Route
+	<Switch>
+		<Redirect
 			exact
-			path={`${BUSINESS_BASE_URL}/orders/${orderId}`}
+			from={`${BUSINESS_BASE_URL}/:businessId`}
+			to={`${BUSINESS_BASE_URL}/:businessId/dashboard`}
+			component={Dashboard}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/dashboard`}
+			component={Dashboard}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/profile`}
+			component={Profile}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/account`}
+			component={Account}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/password`}
+			component={Password}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/browse-order`}
+			component={BrowseOrder}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/order-history`}
+			component={OrderHistory}
+		/>
+		<Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/orders/:${orderId}`}
 			component={OrderInformation}
 		/>
-  </Switch>
+	</Switch>
 );
 
 export default BusinessRoutes;

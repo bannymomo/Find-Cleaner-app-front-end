@@ -28,6 +28,8 @@ jobs:
       uses: borales/actions-yarn@v2.0.0
       with:
         cmd: build
+      env:
+        REACT_APP_GOOGLE_MAP_API_KEY: ${{secrets.REACT_APP_GOOGLE_MAP_API_KEY}}
         
     - name: upload artifact
       uses: actions/upload-artifact@master

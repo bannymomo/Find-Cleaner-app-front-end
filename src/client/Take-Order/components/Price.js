@@ -83,7 +83,7 @@ export default function SimpleCard(props) {
 						color="secondary"
 						onClick={props.handleSubmit}
 					>
-						Find a cleaner
+						Post My Task
 					</Button>
 				</CardActions>
 				<CardContent>

@@ -1,5 +1,4 @@
 import React from "react";
-// import Sidebar from "../SideBar";
 import Bedrooms from "./components/Bedrooms";
 import Bathrooms from "./components/Bathrooms";
 import LeaseEnd from "./components/LeaseEnd";
