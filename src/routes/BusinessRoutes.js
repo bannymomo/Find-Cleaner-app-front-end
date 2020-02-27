@@ -9,52 +9,50 @@ import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
 import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
 import OrderInformation from "../components/order/OrderInformation";
-import { getBusinessId } from "../utils/auth";
 
 const orderId = "orderId";
-const businessId = getBusinessId();
 
 const BusinessRoutes = () => (
 	<Switch>
 		<Redirect
 			exact
-			from={`${BUSINESS_BASE_URL}/:${businessId}`}
-			to={`${BUSINESS_BASE_URL}/:${businessId}/dashboard`}
+			from={`${BUSINESS_BASE_URL}/:businessId`}
+			to={`${BUSINESS_BASE_URL}/:businessId/dashboard`}
 			component={Dashboard}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/dashboard`}
+			path={`${BUSINESS_BASE_URL}/:businessId/dashboard`}
 			component={Dashboard}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/profile`}
+			path={`${BUSINESS_BASE_URL}/:businessId/profile`}
 			component={Profile}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/account`}
+			path={`${BUSINESS_BASE_URL}/:businessId/account`}
 			component={Account}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/password`}
+			path={`${BUSINESS_BASE_URL}/:businessId/password`}
 			component={Password}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/browse-order`}
+			path={`${BUSINESS_BASE_URL}/:businessId/browse-order`}
 			component={BrowseOrder}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/order-history`}
+			path={`${BUSINESS_BASE_URL}/:businessId/order-history`}
 			component={OrderHistory}
 		/>
 		<Route
 			exact
-			path={`${BUSINESS_BASE_URL}/:${businessId}/orders/:${orderId}`}
+			path={`${BUSINESS_BASE_URL}/:businessId/orders/:${orderId}`}
 			component={OrderInformation}
 		/>
 	</Switch>
