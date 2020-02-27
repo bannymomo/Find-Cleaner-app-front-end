@@ -10,8 +10,6 @@ import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../components/order/OrderInformation";
 
-const orderId = "orderId";
-
 const ClientRoutes = () => (
 	<Switch>
 		<Redirect
@@ -44,7 +42,7 @@ const ClientRoutes = () => (
 		/>
 		<Route
 			exact
-			path={`${CLIENT_BASE_URL}/orders/${orderId}`}
+			path={`${CLIENT_BASE_URL}/orders/:id`}
 			component={OrderInformation}
 		/>
 	</Switch>
