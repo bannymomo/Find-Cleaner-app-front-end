@@ -49,7 +49,7 @@ const styles = theme => ({
 		alignItems: "center",
 		backgroundColor: "#FBFCFF",
 		borderRadius: "10px",
-		height: "50vh"
+		height: "400px"
 	},
 	form: {
 		width: "100%",
