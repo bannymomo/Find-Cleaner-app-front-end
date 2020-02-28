@@ -18,7 +18,9 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
-import { fetchOrderById } from "../../api/order";
+import { fetchOrderById, changeOrderStatusByBusiness } from "../../api/order";
+
+import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 
 const listArray = [
 	{
@@ -92,6 +94,21 @@ class OrderInformaiton extends React.Component {
 	isActive = value => {
 		return ((this.state.order.status === value)? "order-information__status-active":"")
 	}
+	handleChangeStatus = () => {
+		let status;
+		if (this.state.order.status === "new") {
+			status = "accepted"
+		} else if (this.state.order.status === "accepted") {
+			status = "cancelledByBusiness"
+		}
+		this.setState({}, () => {
+			const orderId = this.state.order._id;
+			const businessId = this.props.match.params.businessId;
+			changeOrderStatusByBusiness(orderId, businessId, status)
+				.then(() => this.props.history.push(`${BUSINESS_BASE_URL}/${businessId}/orders/${orderId}`))
+				.catch(error => this.setState({error}));
+		});
+	}
 
 	render() {
 		return (
@@ -101,7 +118,7 @@ class OrderInformaiton extends React.Component {
 					<div className="order-information__head">
 						<ul className="order-information__status">
 							<li className={this.isActive('new')}>NEW</li>
-							<li className={this.isActive('cancelledByClient')}>CANCELLED</li>
+							<li className={this.isActive('cancelledByBusiness')}>CANCELLED</li>
 							<li className={this.isActive('accepted')}>ASSIGNED</li>
 							<li className={this.isActive('done')}>COMPLETED</li>
 						</ul>
@@ -121,6 +138,7 @@ class OrderInformaiton extends React.Component {
 					<OrderInformationList 
 						location={this.state.order.location}
 						dueDate={this.state.order.dueDate}
+						role={this.state.role}
 					/>
 					
 				</Grid>
@@ -135,7 +153,7 @@ class OrderInformaiton extends React.Component {
 							</Typography>
 						</CardContent>
 						<CardActions className="order-information__offer">
-							<button className="order-information__offer--btn">
+							<button  className="order-information__offer--btn" onClick={this.handleChangeStatus}>
 								{this.getButtonText()}
 							</button>
 						</CardActions>
