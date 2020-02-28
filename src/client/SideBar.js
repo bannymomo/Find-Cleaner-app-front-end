@@ -47,8 +47,8 @@ const useStylesModal = makeStyles(theme => ({
 	paper: {
 		boxSizing: "border-box",
 		position: "relative",
-		width: "66.67%",
-		height: "95%",
+		width: "960px",
+		height: "98%",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
@@ -57,8 +57,8 @@ const useStylesModal = makeStyles(theme => ({
 	},
 	button: {
 		position: "absolute",
-		left: "43px",
-		bottom: "85px",
+		left: window.innerWidth >= "1440" ? "43px" : "860px",
+		bottom: window.innerWidth >= "1440" ? "85px" : "20px",
 		color: "#2196f3",
 		borderColor: "#0005",
 		textTransform: "Capitalize",
