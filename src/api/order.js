@@ -22,7 +22,7 @@ export const fetchAllNewOrders = (page=1, pageSize=5) => {
 
 // need to be double checked
 export const createOrder = (clientId, order) => {
-    const url=`${API_ORDERS_URL}?clientId=${clientId}`
+    const url=`${API_ORDERS_URL}?clientId=${clientId}`;
     return post(url, order).then(res => res.data.data)
 }
 
@@ -37,6 +37,7 @@ export const changeOrderStatusByClient = (orderId, clientId) => {
 }
 
 // to be continued
-export const changeOrderStatusByBusiness = (orderId, businessesId) => {
-    return null;
+export const changeOrderStatusByBusiness = (orderId, businessId, status) => {
+    const url = `${getApiOrderUrlWithId(orderId)}/businesses/${businessId}?status=${status}`;
+    return patch(url,status).then(res => res.data.data)
 }

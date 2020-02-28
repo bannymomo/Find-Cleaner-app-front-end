@@ -121,6 +121,7 @@ class OrderInformaiton extends React.Component {
 					<OrderInformationList 
 						location={this.state.order.location}
 						dueDate={this.state.order.dueDate}
+						role={this.state.role}
 					/>
 					
 				</Grid>

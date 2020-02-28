@@ -9,6 +9,7 @@ import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
 import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
 import OrderInformation from "../business/OrderHistory/OrderInformation";
+// import NewOrderInformation from "../business/BrowseOrder/NewOrderInformation";
 
 const orderId = "orderId";
 
@@ -55,6 +56,11 @@ const BusinessRoutes = () => (
 			path={`${BUSINESS_BASE_URL}/:businessId/orders/:${orderId}`}
 			component={OrderInformation}
 		/>
+		{/* <Route
+			exact
+			path={`${BUSINESS_BASE_URL}/:businessId/new-orders/:${orderId}`}
+			component={NewOrderInformation}
+		/> */}
 	</Switch>
 );
 
