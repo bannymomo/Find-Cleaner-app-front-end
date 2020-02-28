@@ -7,66 +7,64 @@ import Maps from "../../components/order/Maps";
 import { fetchHisOrders } from "../../api/client";
 
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
-
+import ErrorMessage from "../../UI/ErrorMessage";
 class OrderHistory extends React.Component {
-	
 	state = {
 		orders: [],
 		error: null,
 		isLoading: false,
 		pagination: {},
-		role: 'client',
-	}
+		role: "client"
+	};
 
 	componentDidMount() {
 		this.loadOrders();
 	}
 
 	loadOrders = (page, pageSize) => {
-		this.setState({isLoading: true, orders:[]}, () => {
+		this.setState({ isLoading: true, orders: [] }, () => {
 			const clientId = this.props.match.params.clientId;
 			fetchHisOrders(clientId, page, pageSize)
 				.then(this.updateOrderData)
-				.catch(error => this.setState({error}));
+				.catch(error => this.setState({ error }));
 		});
-	}
+	};
 
 	updateOrderData = orderData => {
 		this.setState({
 			orders: orderData.orders,
 			isLoading: false,
 			pagination: orderData.pagination
-		})
-	}
+		});
+	};
 
-	render () {
-
+	render() {
 		const clientId = this.props.match.params.clientId;
 		const BASE_URL = `${CLIENT_BASE_URL}/${clientId}`;
 
 		return (
 			<Container className="order-history__container">
 				<Grid container spacing={2}>
+					{!!this.state.error && (
+						<ErrorMessage error={this.state.error} />
+					)}
 					<Grid item xs={6}>
-						{
-							this.state.orders.map( order => (
-								<OrderCard 
-									key={order._id}
-									role={this.state.role}
-									location={order.location}
-									dueDate={order.dueDate}
-									price={order.price}
-									to={`${BASE_URL}/orders/${order._id}`}
-								/>
-							))
-						}
+						{this.state.orders.map(order => (
+							<OrderCard
+								key={order._id}
+								role={this.state.role}
+								location={order.location}
+								dueDate={order.dueDate}
+								price={order.price}
+								to={`${BASE_URL}/orders/${order._id}`}
+							/>
+						))}
 					</Grid>
 					<Grid item xs={6}>
 						<Maps />
 					</Grid>
 				</Grid>
 			</Container>
-
 		);
 	}
 }

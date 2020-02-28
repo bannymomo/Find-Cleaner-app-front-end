@@ -1,18 +1,20 @@
 import React from "react";
-import Bedrooms from "./components/Bedrooms";
-import Bathrooms from "./components/Bathrooms";
-import LeaseEnd from "./components/LeaseEnd";
-import OtherClean from "./components/OtherClean";
-import Location from "./components/Location";
-import Date from "./components/Date";
-import Time from "./components/Time";
-import Price from "./components/Price";
+import Bedrooms from "../Take-Order/components/Bedrooms";
+import Bathrooms from "../Take-Order/components/Bathrooms";
+import LeaseEnd from "../Take-Order/components/LeaseEnd";
+import OtherClean from "../Take-Order/components/OtherClean";
+import Location from "../Take-Order/components/Location";
+import Date from "../Take-Order/components/Date";
+import Time from "../Take-Order/components/Time";
+import Price from "../Take-Order/components/Price";
 import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
+import Button from "@material-ui/core/Button";
 
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
-class TakeOrder extends React.Component {
+
+class OrderEdit extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -82,46 +84,53 @@ class TakeOrder extends React.Component {
 
 	render() {
 		return (
-			<div className="client__take-order-page">
-				<p id="take-order">See how little it will cost...</p>
-				<Bedrooms
-					bedrooms={this.state.bedrooms}
-					handleChange={this.handleChange}
-				/>
-				<Bathrooms
-					bathrooms={this.state.bathrooms}
-					handleChange={this.handleChange}
-				/>
-				<LeaseEnd
-					endOfLease={this.state.endOfLease}
-					handleChange={this.handleChange}
-				/>
-				<OtherClean
-					oven={this.state.oven}
-					windows={this.state.windows}
-					cabinets={this.state.cabinets}
-					carpet={this.state.carpet}
-					handleChange={this.handleChange}
-				/>
-				<Location
-					location={this.state.location}
-					handleChange={this.handleChange}
-				/>
-				<Date
-					dueDate={this.state.dueDate}
-					handleChange={this.handleChange}
-				/>
-				<Time
-					dueDate={this.state.dueDate}
-					handleChangeDate={this.handleChangeDate}
-				/>
-				<Price
-					price={this.state.price}
-					handleSubmit={this.handleSubmit}
-				/>
+			<div className="client__order-edit-page">
+				<div className="client__take-order-page">
+					<p id="take-order">Update your order here...</p>
+					<Bedrooms
+						bedrooms={this.state.bedrooms}
+						handleChange={this.handleChange}
+					/>
+					<Bathrooms
+						bathrooms={this.state.bathrooms}
+						handleChange={this.handleChange}
+					/>
+					<LeaseEnd
+						endOfLease={this.state.endOfLease}
+						handleChange={this.handleChange}
+					/>
+					<OtherClean
+						oven={this.state.oven}
+						windows={this.state.windows}
+						cabinets={this.state.cabinets}
+						carpet={this.state.carpet}
+						handleChange={this.handleChange}
+					/>
+					<Location
+						location={this.state.location}
+						handleChange={this.handleChange}
+					/>
+					<Date
+						dueDate={this.state.dueDate}
+						handleChange={this.handleChange}
+					/>
+					<Time
+						dueDate={this.state.dueDate}
+						handleChangeDate={this.handleChangeDate}
+					/>
+					<Button
+						className="submitButton"
+						size="large"
+						variant="contained"
+						color="secondary"
+						onClick={this.props.handleSubmit}
+					>
+						Update my order
+					</Button>
+				</div>
 			</div>
 		);
 	}
 }
 
-export default withRouter(TakeOrder);
+export default withRouter(OrderEdit);
