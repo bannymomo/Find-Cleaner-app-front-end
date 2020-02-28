@@ -30,13 +30,12 @@ export default function ErrorMessage({ error }) {
 						<IconButton
 							className={classes.closeButton}
 							aria-label="close"
-							color="#0005"
 							size="small"
 							onClick={() => {
 								setOpen(false);
 							}}
 						>
-							<CloseIcon fontSize="1rem" />
+							<CloseIcon />
 						</IconButton>
 					}
 				>
