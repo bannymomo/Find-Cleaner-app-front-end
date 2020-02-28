@@ -9,7 +9,6 @@ import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
 import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
 import OrderInformation from "../business/OrderHistory/OrderInformation";
-// import NewOrderInformation from "../business/BrowseOrder/NewOrderInformation";
 
 const orderId = "orderId";
 
