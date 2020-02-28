@@ -21,7 +21,7 @@ import BusinessProfile from "./BusinessProfile";
 
 import "./style/orderHistory.scss";
 
-export default function OrderInformationList() {
+export default function OrderInformationList(props) {
 
     // backdrop for google map
     const [open1, setOpen1] = React.useState(false);
@@ -70,7 +70,7 @@ export default function OrderInformationList() {
                             variant="body2"
                             color="textPrimary"
                         >
-                            116 Adelaide St, Brisbane City
+                            {props.location}
                         </Typography>
                     }
                 />
@@ -100,7 +100,7 @@ export default function OrderInformationList() {
                             variant="body2"
                             color="textPrimary"
                         >
-                            Saturday, 15th Feb 2020
+                            {props.dueDate}
                         </Typography>
                     }
                 />

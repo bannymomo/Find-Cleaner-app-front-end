@@ -8,8 +8,9 @@ import Date from "./components/Date";
 import Time from "./components/Time";
 import Price from "./components/Price";
 import { createOrder } from "../../api/order";
-import { ORDER_BASE_URL } from "../../routes/URLMap";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
+
+import { withRouter } from "react-router";
 class TakeOrder extends React.Component {
 	constructor(props) {
 		super(props);
@@ -35,7 +36,7 @@ class TakeOrder extends React.Component {
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
 		} else if (key === "location" || key === "dueDate") {
-			value = value;
+			// value = value;
 		} else {
 			value = (value === "false");
 		}     
@@ -52,11 +53,12 @@ class TakeOrder extends React.Component {
 	}
 	handleSubmit = () => {
 		const order = { ...this.state };
-		const clientId = this.props.match.params.id;
+		const clientId = this.props.match.params.clientId;
 		this.setState({}, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {
-					this.props.history.push(`${CLIENT_BASE_URL}/order-history/${newOrder.id}`);
+					// this.props.history.push(`${CLIENT_BASE_URL}/order-history/${newOrder.id}`);
+					this.props.history.push(`${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`);
 				})
 				.catch(error => this.setState({error}));
 		});
@@ -106,4 +108,4 @@ class TakeOrder extends React.Component {
 	}
 }
 
-export default TakeOrder;
+export default withRouter(TakeOrder);
