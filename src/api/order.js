@@ -31,12 +31,11 @@ export const updateOrderById = (id, order) => {
     return put(url, order);
 }
 
-// to be continued
-export const changeOrderStatusByClient = (orderId, clientId) => {
-    return null;
+export const changeOrderStatusByClient = (orderId, clientId, status) => {
+    const url = `${getApiOrderUrlWithId(orderId)}/clients/${clientId}?status=${status}`;
+    return patch(url,status).then(res => res.data.data)
 }
 
-// to be continued
 export const changeOrderStatusByBusiness = (orderId, businessId, status) => {
     const url = `${getApiOrderUrlWithId(orderId)}/businesses/${businessId}?status=${status}`;
     return patch(url,status).then(res => res.data.data)
