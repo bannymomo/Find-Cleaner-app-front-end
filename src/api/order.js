@@ -1,4 +1,5 @@
 import { get, put, post, patch } from './axios';
+import queryString from 'query-string';
 
 const API_ORDERS_URL = '/orders';
 const getApiOrderUrlWithId = id => `${API_ORDERS_URL}/${id}`
@@ -8,8 +9,15 @@ export const fetchOrderById = id => {
     return get(url).then(res => res.data.data)
 }
 
-export const fetchAllNewOrders = () => {
-    return get(API_ORDERS_URL).then(res => res.data.data)
+export const fetchAllNewOrders = (page=1, pageSize=5) => {
+    const  stringified = queryString.stringify({
+        page,
+        pageSize
+    });
+    return get(`${API_ORDERS_URL}/?${stringified}`).then(res => ({
+        orders: res.data.data,
+        pagination: res.data.pagination
+    }));
 }
 
 // need to be double checked
