@@ -18,7 +18,7 @@ import logo from "../../../assets/images/logo.png";
 import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
 import MainNavigation from "../../../navigation/MainNavigation";
-import { createClient } from '../../../api/client'
+import { createClient } from "../../../api/client";
 
 const theme = createMuiTheme({
 	palette: {
@@ -37,7 +37,7 @@ const styles = theme => ({
 		height: "100vh"
 	},
 	backGround: {
-		backgroundImage: `url(${Background})`,
+		backgroundImage: `linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(${Background})`,
 		backgroundPosition: "center",
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
@@ -49,7 +49,7 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		backgroundColor: "#FBFCFF",
-		borderRadius: "10px",
+		borderRadius: "10px"
 	},
 	form: {
 		width: "100%",
@@ -79,7 +79,7 @@ class ClientSignup extends Component {
 
 	postClient = () => {
 		if (this.state.firstName.length < 2 && this.state.lastName.length < 2) {
-			this.setState({ invalidName: true })
+			this.setState({ invalidName: true });
 			return;
 		}
 		const clientInfo = {
@@ -88,16 +88,16 @@ class ClientSignup extends Component {
 			gender: this.state.gender,
 			email: this.props.email,
 			postcode: this.state.postcode
-		}
+		};
 		this.setState({ isLoading: true }, () => {
 			createClient(clientInfo).then(data => {
-				this.setState({isLoading:false}, () =>{
+				this.setState({ isLoading: false }, () => {
 					const clientId = data._id;
 					const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
 					this.props.history.replace(redirectTo);
-				})
+				});
 			});
-		})
+		});
 	};
 
 	render() {
@@ -170,8 +170,9 @@ class ClientSignup extends Component {
 											</Grid>
 											{this.state.invalidName ? (
 												<Alert severity="error">
-													The length must longer than 3
-											</Alert>
+													The length must longer than
+													3
+												</Alert>
 											) : null}
 											<Grid item xs={12}>
 												<TextField
@@ -208,17 +209,20 @@ class ClientSignup extends Component {
 											</Grid>
 										</Grid>
 										{this.state.isLoading ? (
-											<LinearProgress className={classes.loading} />
+											<LinearProgress
+												className={classes.loading}
+											/>
 										) : (
-												<Button
-													variant="contained"
-													fullWidth
-													color="primary"
-													className={classes.submit}
-													onClick={this.postClient}
-												>
-													Sign up
-										</Button>)}
+											<Button
+												variant="contained"
+												fullWidth
+												color="primary"
+												className={classes.submit}
+												onClick={this.postClient}
+											>
+												Sign up
+											</Button>
+										)}
 										{!!this.state.error && (
 											<Alert severity="error">
 												Account not exits or{" "}

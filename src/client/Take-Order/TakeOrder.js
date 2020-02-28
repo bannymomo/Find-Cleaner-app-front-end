@@ -11,6 +11,7 @@ import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
 import { withRouter } from "react-router";
+import { matchPath } from "react-router-dom";
 class TakeOrder extends React.Component {
 	constructor(props) {
 		super(props);
@@ -60,11 +61,17 @@ class TakeOrder extends React.Component {
 	};
 	handleSubmit = () => {
 		const order = { ...this.state };
-		const clientId = this.props.match.params.clientId;
+		const match = matchPath(this.props.history.location.pathname, {
+			path: "/clients/:clientId"
+		});
+
+		let clientId;
+		if (match && match.params.clientId) {
+			clientId = match.params.clientId;
+		}
 		this.setState({}, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {
-					// this.props.history.push(`${CLIENT_BASE_URL}/order-history/${newOrder.id}`);
 					this.props.history.push(
 						`${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`
 					);

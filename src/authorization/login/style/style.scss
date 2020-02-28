@@ -1,21 +1,37 @@
 .login__logo {
-    margin-top: 20px;
-    margin-bottom: 0px;
+	margin-top: 20px;
+	margin-bottom: 0px;
 }
 
 .login__logo--pic {
-    height: 34px;
-    width: 34px;
-    margin-right: 12px;
+	height: 34px;
+	width: 34px;
+	margin-right: 12px;
 }
 
 .login__logo--font {
-    height: 31px;
-    width: 110px;
+	height: 31px;
+	width: 110px;
+}
+
+.login__text--bottom {
+	margin: 10px;
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 19px;
+	color: #646464;
+}
+
+.login__link--bottom {
+	text-decoration: none;
+	color: #2196f3;
+	margin: 0 5px;
 }
 
 label {
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 24px;
 }
