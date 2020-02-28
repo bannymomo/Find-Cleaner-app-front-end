@@ -25,7 +25,6 @@ const StyledToggleButtonGroup = withStyles(theme => ({
 }))(ToggleButtonGroup);
 
 export default function CustomizedDividers(props) {
-
 	const number = props.bathrooms.toString();
 
 	return (
@@ -39,20 +38,39 @@ export default function CustomizedDividers(props) {
 				</Grid>
 			</Grid>
 
-			<StyledToggleButtonGroup				
+			<StyledToggleButtonGroup
 				size="small"
 				value={number}
 				exclusive
 				onChange={props.handleChange}
 				aria-label="bathrooms"
 			>
-				<ToggleButton name="bathrooms" value="1" aria-label="one bathroom">
+				<ToggleButton
+					name="bathrooms"
+					value="0"
+					aria-label="no bathroom"
+				>
+					0
+				</ToggleButton>
+				<ToggleButton
+					name="bathrooms"
+					value="1"
+					aria-label="one bathroom"
+				>
 					1
 				</ToggleButton>
-				<ToggleButton name="bathrooms" value="2" aria-label="two bathrooms">
+				<ToggleButton
+					name="bathrooms"
+					value="2"
+					aria-label="two bathrooms"
+				>
 					2
 				</ToggleButton>
-				<ToggleButton name="bathrooms" value="3" aria-label="three bathrooms">
+				<ToggleButton
+					name="bathrooms"
+					value="3"
+					aria-label="three bathrooms"
+				>
 					3+
 				</ToggleButton>
 			</StyledToggleButtonGroup>
