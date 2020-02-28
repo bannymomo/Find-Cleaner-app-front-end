@@ -4,24 +4,59 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Maps from "../../components/order/Maps";
 
+import { fetchHisOrders } from "../../api/business";
+
+import { BUSINESS_BASE_URL } from "../../routes/URLMap";
+
 class OrderHistory extends React.Component {
 	
 	state = {
-		orderId: 'orderId',
+		orders: [],
+		error: null,
+		isLoading: false,
+		pagination: {},
 		role: 'business',
-		allOrders: [ 'orderId', 'orderId', 'orderId' ]
+	}
+
+	componentDidMount() {
+		this.loadOrders();
+	}
+
+	loadOrders = (page, pageSize) => {
+		this.setState({isLoading: true, orders:[]}, () => {
+			const businessId = this.props.match.params.businessId;
+			fetchHisOrders(businessId, page, pageSize)
+				.then(this.updateOrderData)
+				.catch(error => this.setState({error}));
+		});
+	}
+
+	updateOrderData = orderData => {
+		this.setState({
+			orders: orderData.orders,
+			isLoading: false,
+			pagination: orderData.pagination
+		})
 	}
 
 	render () {
+
+		const businessId = this.props.match.params.businessId;
+		const BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;
+	
 		return (
 			<Container className="order-history__container">
 				<Grid container spacing={2}>
 					<Grid item xs={6}>
 						{
-							this.state.allOrders.map( () => (
+							this.state.orders.map( order => (
 								<OrderCard 
-									orderId={this.state.orderId}
+									key={order._id}
 									role={this.state.role}
+									location={order.location}
+									dueDate={order.dueDate}
+									price={order.price}
+									to={`${BASE_URL}/orders/${order._id}`}
 								/>
 							))
 						}
@@ -31,8 +66,10 @@ class OrderHistory extends React.Component {
 					</Grid>
 				</Grid>
 			</Container>
+
 		);
 	}
 }
 
 export default OrderHistory;
+

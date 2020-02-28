@@ -80,7 +80,7 @@ export default function SimpleList() {
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
 					>
-						<ListItemText primary="OrderHistory" />
+						<ListItemText primary="Order Management" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
 						<ListItemText primary="Setting" />
