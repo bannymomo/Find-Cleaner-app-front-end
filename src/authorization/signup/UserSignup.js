@@ -21,7 +21,7 @@ import Background from "../../assets/images/auth-background.png";
 import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
-import { SIGNUP_URL } from "../../routes/URLMap";
+import { SIGNUP_URL, LOGIN_URL } from "../../routes/URLMap";
 import "./style/signup.scss";
 import { Link } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const styles = theme => ({
 		height: "100vh"
 	},
 	backGround: {
-		backgroundImage: `url(${Background})`,
+		backgroundImage: `linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(${Background})`,
 		backgroundPosition: "center",
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
@@ -224,6 +224,15 @@ class User extends Component {
 										>
 											I'm a business owner
 										</Button>
+										<div className="signin__text--bottom">
+											Already have an account?{" "}
+											<Link
+												className="signin__link--bottom"
+												to={LOGIN_URL}
+											>
+												Log in.
+											</Link>
+										</div>
 										{!!this.state.error && (
 											<Alert severity="error">
 												User already exits~

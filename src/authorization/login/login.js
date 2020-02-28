@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
 	TextField,
@@ -166,7 +167,9 @@ class Login extends React.Component {
 											label="Remember me"
 										/>
 										{this.state.isLoading ? (
-											<LinearProgress className={classes.loading}/>
+											<LinearProgress
+												className={classes.loading}
+											/>
 										) : (
 											<Button
 												onClick={this.login}
@@ -177,6 +180,15 @@ class Login extends React.Component {
 												Sign In
 											</Button>
 										)}
+										<div className="login__text--bottom">
+											Not sign up?{" "}
+											<Link
+												className="login__link--bottom"
+												to={`${SIGNUP_URL}/user/client`}
+											>
+												Create an account.
+											</Link>{" "}
+										</div>
 										{!!this.state.error && (
 											<Alert severity="error">
 												Account not exits or{" "}

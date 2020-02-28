@@ -1,41 +1,39 @@
-.chooseRole {
-    display: flex;
-    width: 100%;
-    // flex-direction: row;
-    align-items: stretch;
-}
-
-.chooseRole__client {
-    height: 100vh;
-    background-color: #FFEEAB;
-    padding:45vh ;
-}
-
-.chooseRole__business {
-    height: 100vh;
-    background-color: #87B7CB;
-    padding: 45vh;
-}
-
 .signUp__logo {
-    margin-top: 20px;
-    margin-bottom: 0px;
+	margin-top: 20px;
+	margin-bottom: 0px;
 }
 
 .signUp__logo--pic {
-    height: 34px;
-    width: 34px;
-    margin-right: 12px;
+	height: 34px;
+	width: 34px;
+	margin-right: 12px;
 }
 
 .signUp__logo--font {
-    height: 31px;
-    width: 110px;
+	height: 31px;
+	width: 110px;
+}
+
+.signin__text--bottom {
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: right;
+	color: #646464;
+	margin: 10px;
+}
+
+.signin__link--bottom {
+	text-decoration: none;
+	margin: 0 5px;
+	color: #2196f3;
 }
 
 label {
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
-    margin-left: 2px;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 24px;
+	margin-left: 2px;
 }

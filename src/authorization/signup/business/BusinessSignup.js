@@ -14,7 +14,7 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import Background from "../../../assets/images/auth-background.png";
 import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
-import {createBusiness} from '../../../api/business'
+import { createBusiness } from "../../../api/business";
 import logo from "../../../assets/images/logo.png";
 import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
@@ -37,7 +37,7 @@ const styles = theme => ({
 		height: "100vh"
 	},
 	backGround: {
-		backgroundImage: `url(${Background})`,
+		backgroundImage: `linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(${Background})`,
 		backgroundPosition: "center",
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
@@ -49,7 +49,7 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		backgroundColor: "#FBFCFF",
-		borderRadius: "10px",
+		borderRadius: "10px"
 	},
 	form: {
 		width: "100%",
@@ -85,16 +85,16 @@ class BusinessSignup extends Component {
 			email: this.props.email,
 			postcode: this.state.postcode,
 			ABNNumber: this.state.ABNNumber
-		}
+		};
 		this.setState({ isLoading: true }, () => {
 			createBusiness(businessInfo).then(data => {
-				this.setState({isLoading:false}, () =>{
+				this.setState({ isLoading: false }, () => {
 					const businessId = data._id;
 					const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
 					this.props.history.replace(redirectTo);
-				})
+				});
 			});
-		})
+		});
 	};
 
 	render() {
@@ -139,7 +139,9 @@ class BusinessSignup extends Component {
 													required
 													fullWidth
 													label="Business Name"
-													value={this.state.businessName}
+													value={
+														this.state.businessName
+													}
 													onChange={event =>
 														this.setState({
 															businessName:
@@ -188,7 +190,10 @@ class BusinessSignup extends Component {
 													required
 													fullWidth
 													label="Telephone Number"
-													value={this.state.telephoneNumber}
+													value={
+														this.state
+															.telephoneNumber
+													}
 													onChange={event =>
 														this.setState({
 															telephoneNumber:
@@ -216,17 +221,19 @@ class BusinessSignup extends Component {
 											</Grid>
 										</Grid>
 										{this.state.isLoading ? (
-											<LinearProgress className={classes.loading} />
+											<LinearProgress
+												className={classes.loading}
+											/>
 										) : (
-										<Button
-											variant="contained"
-											fullWidth
-											color="primary"
-											className={classes.submit}
-											onClick={this.postBusiness}
-										>
-											Sign up
-										</Button>
+											<Button
+												variant="contained"
+												fullWidth
+												color="primary"
+												className={classes.submit}
+												onClick={this.postBusiness}
+											>
+												Sign up
+											</Button>
 										)}
 										{!!this.state.error && (
 											<Alert severity="error">
