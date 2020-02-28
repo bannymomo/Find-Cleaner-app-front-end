@@ -30,6 +30,14 @@ class DashboardNavigation extends Component {
 								className="nav-bar__link--black"
 								to={HOMEPAGE_URL}
 							>
+								Home
+							</Link>
+						</li>
+						<li>
+							<Link
+								className="nav-bar__link--black"
+								to={HOMEPAGE_URL}
+							>
 								Notifications
 							</Link>
 						</li>

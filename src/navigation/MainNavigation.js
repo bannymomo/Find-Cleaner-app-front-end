@@ -4,8 +4,19 @@ import Button from "@material-ui/core/Button";
 import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
-import { LOGIN_URL, HOMEPAGE_URL } from "../routes/URLMap";
-import { removeToken, removeClientId, removeBusinessId } from "../utils/auth";
+import {
+	LOGIN_URL,
+	HOMEPAGE_URL,
+	BUSINESS_BASE_URL,
+	CLIENT_BASE_URL
+} from "../routes/URLMap";
+import {
+	removeToken,
+	removeClientId,
+	removeBusinessId,
+	getClientId,
+	getBusinessId
+} from "../utils/auth";
 import { isLoggedIn } from "../utils/auth";
 
 class MainNavigation extends Component {
@@ -26,6 +37,7 @@ class MainNavigation extends Component {
 			}
 		}
 	};
+
 	render() {
 		return (
 			<header className="nav-bar__header--white">
@@ -47,6 +59,26 @@ class MainNavigation extends Component {
 								Home
 							</Link>
 						</li>
+						<li>
+							<Link
+								className="nav-bar__link--black"
+								to={
+									getClientId()
+										? `${CLIENT_BASE_URL}/${getClientId()}`
+										: `${BUSINESS_BASE_URL}/${getBusinessId()}`
+								}
+								style={{
+									display:
+										isLoggedIn() &&
+										(getClientId() || getBusinessId())
+											? ""
+											: "none"
+								}}
+							>
+								Dashboard
+							</Link>
+						</li>
+
 						<li>
 							<Link
 								to={{ HOMEPAGE_URL }}
