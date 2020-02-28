@@ -94,7 +94,7 @@ function ProductHowItWorks(props) {
 						variant="contained"
 						className={classes.button}
 						component={Link}
-						to={SIGNUP_URL}
+						to={`${SIGNUP_URL}/user/client`}
 					>
 						Post your task
 					</Button>

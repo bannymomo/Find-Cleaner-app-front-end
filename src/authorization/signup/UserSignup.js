@@ -21,7 +21,9 @@ import Background from "../../assets/images/auth-background.png";
 import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
+import { SIGNUP_URL } from "../../routes/URLMap";
 import "./style/signup.scss";
+import { Link } from "react-router-dom";
 
 const theme = createMuiTheme({
 	palette: {
@@ -52,7 +54,7 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		backgroundColor: "#FBFCFF",
-		borderRadius: "10px",
+		borderRadius: "10px"
 	},
 	form: {
 		width: "100%",
@@ -75,9 +77,13 @@ class User extends Component {
 		username: "",
 		password: "",
 		history: "",
-		role: this.props.location.role,
+		role: "client",
 		error: null,
 		isLoading: false
+	};
+	handleBusinessClick = () => {
+		const role = "business";
+		this.setState({ role });
 	};
 
 	postUserInfo = () => {
@@ -86,17 +92,20 @@ class User extends Component {
 			password: this.state.password,
 			role: this.state.role
 		};
-		
+
 		this.setState({ isLoading: true }, () => {
 			signupFn(userInfo)
 				.then(data => {
-					this.setState({ basicInfo: true, isLoading:false }, () => {
+					this.setState({ basicInfo: true, isLoading: false }, () => {
 						setToken(data.token);
-						this.setState({ history: this.props.history, basicInfo: true });
-					})
+						this.setState({
+							history: this.props.history,
+							basicInfo: true
+						});
+					});
 				})
-				.catch(error => this.setState({ error, isLoading: false }))
-		})
+				.catch(error => this.setState({ error, isLoading: false }));
+		});
 	};
 
 	render() {
@@ -186,17 +195,35 @@ class User extends Component {
 											</Grid>
 										</Grid>
 										{this.state.isLoading ? (
-											<LinearProgress className={classes.loading} />
+											<LinearProgress
+												className={classes.loading}
+											/>
 										) : (
-												<Button
-													onClick={() => this.postUserInfo()}
-													variant="contained"
-													fullWidth
-													color="primary"
-													className={classes.submit}
-												>
-													Continue
-										</Button>)}
+											<Button
+												onClick={() =>
+													this.postUserInfo()
+												}
+												variant="contained"
+												fullWidth
+												color="primary"
+												className={classes.submit}
+											>
+												Continue
+											</Button>
+										)}
+										<Button
+											style={{ marginBottom: 10 + "px" }}
+											variant="contained"
+											fullWidth
+											className={classes.button}
+											component={Link}
+											to={{
+												pathname: `${SIGNUP_URL}/user/business`
+											}}
+											onClick={this.handleBusinessClick}
+										>
+											I'm a business owner
+										</Button>
 										{!!this.state.error && (
 											<Alert severity="error">
 												User already exits~
@@ -215,11 +242,11 @@ class User extends Component {
 				history={this.state.history}
 			/>
 		) : (
-					<BusinessSignup
-						email={this.state.email}
-						history={this.state.history}
-					/>
-				);
+			<BusinessSignup
+				email={this.state.email}
+				history={this.state.history}
+			/>
+		);
 	}
 }
 
