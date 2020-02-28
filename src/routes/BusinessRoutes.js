@@ -8,7 +8,7 @@ import Password from "../business/Password/Password";
 import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
 import Profile from "../business/Profile/Profile";
 import OrderHistory from "../business/OrderHistory/OrderHistory";
-import OrderInformation from "../components/order/OrderInformation";
+import OrderInformation from "../business/OrderHistory/OrderInformation";
 
 const orderId = "orderId";
 

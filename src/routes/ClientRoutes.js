@@ -8,7 +8,7 @@ import Password from "../client/ClientSetting/Password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
 import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
-import OrderInformation from "../components/order/OrderInformation";
+import OrderInformation from "../client/Order-History/OrderInformation";
 
 const ClientRoutes = () => (
 	<Switch>

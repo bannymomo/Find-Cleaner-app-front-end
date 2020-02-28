@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 
@@ -17,83 +16,100 @@ import Box from "@material-ui/core/Box";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-import "./style/orderHistory.scss";
-import OrderInformationList from "./OrderInformationList";
+import "../../components/order/style/orderHistory.scss";
+import OrderInformationList from "../../components/order/OrderInformationList";
+import { fetchOrderById } from "../../api/order";
 
-const useStyles = makeStyles({
-	formControl: {
-		marginTop: 20,
-		marginBottom: 20,
-		width: "100%"
+const listArray = [
+	{
+		link: "https://www.facebook.com/",
+		icon: "fab fa-facebook",
+		description: "facebook"
+	},
+	{
+		link: "https://twitter.com/",
+		icon: "fab fa-twitter",
+		description: "twitter"
+	},
+	{
+		link: "https://www.instagram.com/",
+		icon: "fab fa-instagram",
+		description: "instagram"
+	},
+	{
+		link: "localhost:3000",
+		icon: "fas fa-briefcase",
+		description: "and so on"
 	}
-});
+];
 
-const offerButtonText = "Take the offer";
 
-export default function OrderInformaiton() {
-	const classes = useStyles();
-	const listArray = [
-		{
-			link: "https://www.facebook.com/",
-			icon: "fab fa-facebook",
-			description: "facebook"
-		},
-		{
-			link: "https://twitter.com/",
-			icon: "fab fa-twitter",
-			description: "twitter"
-		},
-		{
-			link: "https://www.instagram.com/",
-			icon: "fab fa-instagram",
-			description: "instagram"
-		},
-		{
-			link: "localhost:3000",
-			icon: "fas fa-briefcase",
-			description: "and so on"
+class OrderInformaiton extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			role: 'business',
+			order: {},
+			error: null,
+			isLoading: false,
+
+			selected: false,
+			options: '',
+			labelWidth: 0
+		};
+
+		this.inputLabelRef = React.createRef();
+	}
+
+	componentDidMount() {
+		const orderId = this.props.match.params.orderId;
+		this.loadOrder(orderId);
+	}
+
+	loadOrder = orderId => this.setState({isLoading:true}, () => {
+		fetchOrderById(orderId)
+			.then(order => this.setState({ order, isLoading: false }))
+			.catch(error => this.setState({error}));
+	})
+	getButtonText = () => {
+		let buttonText;
+		if (this.state.order.status === "new") {
+			buttonText = "Accept Order"
+		} else if (this.state.order.status === "accepted") {
+			buttonText = "Cancel Order"
 		}
-	];
+		return buttonText;
+	}
 
-	//more options dropdown
-	const [state, setState] = React.useState({
-		options: "",
-		name: "hai"
-	});
-	const inputLabel = React.useRef(null);
-	const [labelWidth, setLabelWidth] = React.useState(0);
-	React.useEffect(() => {
-		setLabelWidth(inputLabel.current.offsetWidth);
-	}, []);
+	handleChangeSelected = () => {
+		this.setState({selected: !this.state.selected})
+	}
 
-	const handleChange = name => event => {
-		setState({
-			...state,
-			[name]: event.target.value
-		});
-	};
+	handleChangeOptions = event => {
+		this.setState({options: event.target.value, labelWidth: this.inputLabelRef.current.offsetWidth});
+	}
+	isActive = value => {
+		return ((this.state.order.status === value)? "order-information__status-active":"")
+	}
 
-	//toggle button
-	const [selected, setSelected] = React.useState(false);
-
-	return (
+	render() {
+		return (
 		<div className="order-information">
 			<Grid container className="order-information__top" spacing={2}>
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
-							<li className="order-information__status-active">NEW</li>
-							<li>CANCELLED</li>
-							<li>ASSIGNED</li>
-							<li>COMPLETED</li>
+							<li className={this.isActive('new')}>NEW</li>
+							<li className={this.isActive('cancelledByClient')}>CANCELLED</li>
+							<li className={this.isActive('accepted')}>ASSIGNED</li>
+							<li className={this.isActive('done')}>COMPLETED</li>
 						</ul>
 						<ToggleButton
 							size="small"
 							value="follow"
-							selected={selected}
-							onChange={() => {
-								setSelected(!selected);
-							}}
+							selected={this.state.selected}
+							onChange={this.handleChangeSelected}
 						>
 							<FavoriteBorderIcon fontSize="small" />
 							<p>Follow</p>
@@ -102,32 +118,35 @@ export default function OrderInformaiton() {
 					<Typography variant="h4" component="h2">
 						House Cleaning
 					</Typography>
-					<OrderInformationList />
+					<OrderInformationList 
+						location={this.state.order.location}
+						dueDate={this.state.order.dueDate}
+					/>
 					
 				</Grid>
 				<Grid item xs={4}>
 					<Card>
 						<CardContent className="order-information__budget">
-							<Typography className={classes.title} gutterBottom>
+							<Typography gutterBottom>
 								Price
 							</Typography>
 							<Typography variant="h4" component="p">
-								$180
+								${this.state.order.price}
 							</Typography>
 						</CardContent>
 						<CardActions className="order-information__offer">
 							<button className="order-information__offer--btn">
-								{offerButtonText}
+								{this.getButtonText()}
 							</button>
 						</CardActions>
 					</Card>
 					<FormControl
 						variant="outlined"
-						className={classes.formControl}
+						className="order-information__options"
 					>
 						<InputLabel
 							margin="dense"
-							ref={inputLabel}
+							ref={this.inputLabelRef}
 							htmlFor="more-options"
 						>
 							More Options
@@ -135,9 +154,9 @@ export default function OrderInformaiton() {
 						<Select
 							native
 							margin="dense"
-							value={state.options}
-							onChange={handleChange("options")}
-							labelWidth={labelWidth}
+							value={this.state.options}
+							onChange={this.handleChangeOptions}
+							labelWidth={this.state.labelWidth}
 							inputProps={{
 								name: "options",
 								id: "more-options"
@@ -178,13 +197,13 @@ export default function OrderInformaiton() {
 					DETAILS
 				</Typography>
 				<ul className="order-information__details--list">
-					<li>Number of bedrooms: 4</li>
-					<li>Number of bathrooms: 4</li>
-					<li>End-of-lease clean: Yes</li>
-					<li>Oven: Yes</li>
-					<li>Windows: Yes</li>
-					<li>Cabinets: Yes</li>
-					<li>Carpet: Yes</li>
+					<li>Number of bedrooms: {this.state.order.bedrooms}</li>
+					<li>Number of bathrooms: {this.state.order.bathrooms}</li>
+					<li>End-of-lease clean: {this.state.order.endOfLease? "Yes": "No"}</li>
+					<li>Oven: {this.state.order.oven? "Yes": "No"}</li>
+					<li>Windows: {this.state.order.windows? "Yes": "No"}</li>
+					<li>Cabinets: {this.state.order.cabinets? "Yes": "No"}</li>
+					<li>Carpet: {this.state.order.carpet? "Yes": "No"}</li>
 				</ul>
 				<Typography variant="body1" component="p">
 					I need dlkalgj aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh
@@ -195,5 +214,8 @@ export default function OrderInformaiton() {
 				</Typography>
 			</div>
 		</div>
-	);
+		)
+	}
 }
+
+export default OrderInformaiton;
