@@ -160,7 +160,7 @@ export default function SimpleList() {
 						<ListItemIcon>
 							<HistoryRoundedIcon />
 						</ListItemIcon>
-						<ListItemText primary="OrderHistory" />
+						<ListItemText primary="Order Management" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
 						<ListItemIcon>
