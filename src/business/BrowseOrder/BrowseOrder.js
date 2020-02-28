@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import OrderCard from "./OrderCard";
+import OrderCard from "../../components/order/OrderCard";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
@@ -12,8 +12,6 @@ import "./style/browseorders.scss";
 import { Divider } from "@material-ui/core";
 
 import { fetchAllNewOrders } from "../../api/order";
-
-import { changeOrderStatusByBusiness } from "../../api/order";
 
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 
@@ -32,7 +30,6 @@ class BrowseOrder extends Component {
 
 	loadOrders = (page, pageSize) => {
 		this.setState({isLoading: true, orders:[]}, () => {
-			// const businessId = this.props.match.params.businessId;
 			fetchAllNewOrders(page, pageSize)
 				.then(this.updateOrderData)
 				.catch(error => this.setState({error}));
@@ -46,23 +43,10 @@ class BrowseOrder extends Component {
 			pagination: orderData.pagination
 		})
 	}
-	
-	handleClick = (orderId, status) => {
-		const businessId = this.props.match.params.businessId;
-		this.setState({}, () => {
-			changeOrderStatusByBusiness(orderId, businessId, status)
-				.then(newOrder => {
-					this.props.history.push(`${BUSINESS_BASE_URL}/${businessId}/orders/${newOrder._id}`);
-				})
-				.catch(error => this.setState({error}));
-		});
-        
-
-    }
 
 	render () {
-
-		// const BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;	
+		const businessId = this.props.match.params.businessId;
+		const BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;	
 		return (
 			<React.Fragment>
 				<div className="browse-orders--top-bar">
@@ -79,13 +63,11 @@ class BrowseOrder extends Component {
 							this.state.orders.map( order => (
 								<OrderCard									 
 									key={order._id}
-									// order={this.state.orders}
 									role={this.state.role}
 									location={order.location}
 									dueDate={order.dueDate}
 									price={order.price}
-									handleClick={this.handleClick(order._id,order.status)}
-									// to={`${BASE_URL}/new-orders/${order._id}`}
+									to={`${BASE_URL}/orders/${order._id}`}
 								/>
 							))
 						}
