@@ -18,7 +18,9 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
-import { fetchOrderById } from "../../api/order";
+import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
+
+import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
 const listArray = [
 	{
@@ -93,6 +95,21 @@ class OrderInformaiton extends React.Component {
 	isActive = value => {
 		return ((this.state.order.status === value)? "order-information__status-active":"")
 	}
+	handleChangeStatus = () => {
+		let status;
+		if (this.state.order.status === "new") {
+			status = "cancelledByClient"
+		} else if (this.state.order.status === "accepted") {
+			status = "done"
+		}
+		this.setState({}, () => {
+			const orderId = this.state.order._id;
+			const clientId = this.props.match.params.clientId;
+			changeOrderStatusByClient(orderId, clientId, status)
+				.then(() => this.props.history.push(`${CLIENT_BASE_URL}/${clientId}/orders/${orderId}`))
+				.catch(error => this.setState({error}));
+		});
+	}
 
 	render() {
 		return (
@@ -135,8 +152,9 @@ class OrderInformaiton extends React.Component {
 								${this.state.order.price}
 							</Typography>
 						</CardContent>
-						<CardActions className="order-information__offer">
-							<button className="order-information__offer--btn">
+						<CardActions className="order-information__offer"
+						>
+							<button className="order-information__offer--btn" onClick={this.handleChangeStatus}>
 								{this.getButtonText()}
 							</button>
                             <button className="order-information__offer--btn">
