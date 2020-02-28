@@ -9,7 +9,7 @@ import TakeOrder from "../client/Take-Order/TakeOrder";
 import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../client/Order-History/OrderInformation";
-
+import OrderEdit from "../client/Order-History/OrderEdit";
 const ClientRoutes = () => (
 	<Switch>
 		<Redirect
@@ -52,6 +52,11 @@ const ClientRoutes = () => (
 			exact
 			path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId`}
 			component={OrderInformation}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId/edit`}
+			component={OrderEdit}
 		/>
 	</Switch>
 );
