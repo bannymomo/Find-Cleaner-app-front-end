@@ -17,8 +17,8 @@ class TakeOrder extends React.Component {
 		super(props);
 
 		this.state = {
-			bedrooms: 1,
-			bathrooms: 1,
+			bedrooms: 0,
+			bathrooms: 0,
 			endOfLease: false,
 			oven: false,
 			windows: false,
@@ -28,8 +28,8 @@ class TakeOrder extends React.Component {
 			dueDate: '',
 			price: 0,
 			error: null
-		}
-	};
+		};
+	}
 
 	handleChange = event => {
 		const key = event.target.name;
@@ -39,24 +39,31 @@ class TakeOrder extends React.Component {
 		} else if (key === "location" || key === "dueDate") {
 			// value = value;
 		} else {
-			value = (value === "false");
-		}     
+			value = value === "false";
+		}
 
 		// this.setState({ [key]: value });
 		this.setState({ [key]: value }, () => {
-			let totalPrice = this.state.bedrooms*22 + this.state.bathrooms*28 + this.state.endOfLease*135 + this.state.oven*5 + this.state.windows*68 + this.state.cabinets*36 + this.state.carpet*18;
-			this.setState({price:totalPrice});
+			let totalPrice =
+				this.state.bedrooms * 22 +
+				this.state.bathrooms * 28 +
+				this.state.endOfLease * 135 +
+				this.state.oven * 5 +
+				this.state.windows * 68 +
+				this.state.cabinets * 36 +
+				this.state.carpet * 18;
+			this.setState({ price: totalPrice });
 		});
-	}
+	};
 	handleChangeDate = value => {
 		value = value.toString();
-		this.setState({dueDate: value});
-	}
+		this.setState({ dueDate: value });
+	};
 	handleSubmit = () => {
 		const order = { ...this.state };
 		const match = matchPath(this.props.history.location.pathname, {
 			path: "/clients/:clientId"
-		})
+		});
 
 		let clientId;
 		if (match && match.params.clientId) {
@@ -65,53 +72,55 @@ class TakeOrder extends React.Component {
 		this.setState({}, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {
-					this.props.history.push(`${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`);
+					this.props.history.push(
+						`${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`
+					);
 				})
-				.catch(error => this.setState({error}));
+				.catch(error => this.setState({ error }));
 		});
-	}
+	};
 
 	render() {
 		return (
 			<div className="client__take-order-page">
 				<p id="take-order">See how little it will cost...</p>
-				<Bedrooms 					
+				<Bedrooms
 					bedrooms={this.state.bedrooms}
 					handleChange={this.handleChange}
 				/>
-				<Bathrooms 
+				<Bathrooms
 					bathrooms={this.state.bathrooms}
 					handleChange={this.handleChange}
 				/>
-				<LeaseEnd 
+				<LeaseEnd
 					endOfLease={this.state.endOfLease}
 					handleChange={this.handleChange}
 				/>
-				<OtherClean 
+				<OtherClean
 					oven={this.state.oven}
 					windows={this.state.windows}
 					cabinets={this.state.cabinets}
 					carpet={this.state.carpet}
 					handleChange={this.handleChange}
 				/>
-				<Location 
+				<Location
 					location={this.state.location}
 					handleChange={this.handleChange}
 				/>
-				<Date 
+				<Date
 					dueDate={this.state.dueDate}
 					handleChange={this.handleChange}
 				/>
-				<Time 
+				<Time
 					dueDate={this.state.dueDate}
 					handleChangeDate={this.handleChangeDate}
 				/>
-				<Price 
+				<Price
 					price={this.state.price}
 					handleSubmit={this.handleSubmit}
 				/>
 			</div>
-		)
+		);
 	}
 }
 

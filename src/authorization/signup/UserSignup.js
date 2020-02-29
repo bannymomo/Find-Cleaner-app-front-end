@@ -83,7 +83,15 @@ class User extends Component {
 	};
 	handleBusinessClick = () => {
 		const role = "business";
-		this.setState({ role });
+		this.setState({
+			role,
+			email: "",
+			username: "",
+			password: "",
+			history: "",
+			error: null,
+			isLoading: false
+		});
 	};
 
 	postUserInfo = () => {

@@ -8,7 +8,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import { fetchHisOrders } from "../../api/client";
 
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
-
+import ErrorMessage from "../../UI/ErrorMessage";
 class OrderHistory extends React.Component {
 
 	state = {
@@ -27,13 +27,13 @@ class OrderHistory extends React.Component {
 	}
 
 	loadOrders = (page, pageSize) => {
-		this.setState({isLoading: true, orders:[]}, () => {
+		this.setState({ isLoading: true, orders: [] }, () => {
 			const clientId = this.props.match.params.clientId;
 			fetchHisOrders(clientId, page, pageSize)
 				.then(this.updateOrderData)
-				.catch(error => this.setState({error}));
+				.catch(error => this.setState({ error }));
 		});
-	}
+	};
 
 	updateOrderData = orderData => {
 		this.setState({
@@ -47,8 +47,9 @@ class OrderHistory extends React.Component {
 		this.loadOrders(data)
 	}
 
-	render () {
 
+
+	render() {
 		const clientId = this.props.match.params.clientId;
 		const BASE_URL = `${CLIENT_BASE_URL}/${clientId}`;
 
@@ -60,6 +61,9 @@ class OrderHistory extends React.Component {
 				onChange={this.handlePageChange} 
 				shape="rounded" />
 				<Grid container spacing={2}>
+					{!!this.state.error && (
+						<ErrorMessage error={this.state.error} />
+					)}
 					<Grid item xs={6}>
 						{
 							this.state.orders.map( order => (
@@ -74,13 +78,13 @@ class OrderHistory extends React.Component {
 								/>
 							))
 						}
+
 					</Grid>
 					<Grid item xs={6}>
 						<Maps />
 					</Grid>
 				</Grid>
 			</Container>
-
 		);
 	}
 }
