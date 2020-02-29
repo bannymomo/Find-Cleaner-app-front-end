@@ -80,6 +80,7 @@ class BrowseOrder extends Component {
 									location={order.location}
 									dueDate={order.dueDate}
 									price={order.price}
+									status={order.status}
 									to={`${BASE_URL}/orders/${order._id}`}
 								/>
 							))

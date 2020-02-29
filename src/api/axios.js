@@ -23,5 +23,5 @@ export const put = (url, data, config = {}) =>
 export const del = (url, config = {}) =>
 	axios.delete(url, appendAuthToken(config));
 
-export const patch = (url, config = {}) =>
-	axios.patch(url, appendAuthToken(config));
+export const patch = (url, data, config = {}) =>
+	axios.patch(url, data, appendAuthToken(config));

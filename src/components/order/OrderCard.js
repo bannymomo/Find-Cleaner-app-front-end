@@ -42,7 +42,7 @@ export default function OrderCard(props) {
 			to={props.to}
 		>
 			<Card className={classes.root}>
-				<p className="order-card__status">NEW</p>
+				<p className="order-card__status">{props.status}</p>
 				<Grid container className={classes.card_container} spacing={1}>
 					<Grid item xs={9}>
 						<Typography
