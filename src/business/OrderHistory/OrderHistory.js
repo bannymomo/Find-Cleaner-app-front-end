@@ -3,6 +3,7 @@ import OrderCard from "../../components/order/OrderCard";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Maps from "../../components/order/Maps";
+import Pagination from '@material-ui/lab/Pagination';
 
 import { fetchHisOrders } from "../../api/business";
 
@@ -14,7 +15,10 @@ class OrderHistory extends React.Component {
 		orders: [],
 		error: null,
 		isLoading: false,
-		pagination: {},
+		pagination: {
+			page:1,
+			pageSize:5
+		},
 		role: 'business',
 	}
 
@@ -39,6 +43,10 @@ class OrderHistory extends React.Component {
 		})
 	}
 
+	handlePageChange = (event, data) => {
+		this.loadOrders(data)
+	}
+
 	render () {
 
 		const businessId = this.props.match.params.businessId;
@@ -46,6 +54,11 @@ class OrderHistory extends React.Component {
 	
 		return (
 			<Container className="order-history__container">
+				<Pagination 
+				page={this.state.pagination.page}
+				count={this.state.pagination.pages}
+				onChange={this.handlePageChange} 
+				shape="rounded" />
 				<Grid container spacing={2}>
 					<Grid item xs={6}>
 						{
@@ -56,6 +69,7 @@ class OrderHistory extends React.Component {
 									location={order.location}
 									dueDate={order.dueDate}
 									price={order.price}
+									status={order.status}
 									to={`${BASE_URL}/orders/${order._id}`}
 								/>
 							))

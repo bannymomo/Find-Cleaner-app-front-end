@@ -15,8 +15,8 @@ export const fetchAllNewOrders = (page=1, pageSize=5) => {
         pageSize
     });
     return get(`${API_ORDERS_URL}/?${stringified}`).then(res => ({
-        orders: res.data.data,
-        pagination: res.data.pagination
+        orders: res.data.data.data,
+        pagination: res.data.data.pagination
     }));
 }
 

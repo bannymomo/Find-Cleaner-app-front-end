@@ -36,7 +36,7 @@ export const fetchHisOrders = (id, page=1, pageSize=5) => {
     const url = `${getApiBusinessUrlWithId(id)}/orders/?${stringified}`;
 
     return get(url).then(res => ({
-        orders: res.data.data,
-        pagination: res.data.pagination
+        orders: res.data.data.data,
+        pagination: res.data.data.pagination
     }));
 }

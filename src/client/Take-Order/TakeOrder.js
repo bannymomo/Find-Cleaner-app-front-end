@@ -24,8 +24,8 @@ class TakeOrder extends React.Component {
 			windows: false,
 			cabinets: false,
 			carpet: false,
-			location: "",
-			dueDate: "2021-01-01",
+			location: '',
+			dueDate: '',
 			price: 0,
 			error: null
 		};

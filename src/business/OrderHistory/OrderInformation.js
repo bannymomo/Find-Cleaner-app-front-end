@@ -105,7 +105,7 @@ class OrderInformaiton extends React.Component {
 			const orderId = this.state.order._id;
 			const businessId = this.props.match.params.businessId;
 			changeOrderStatusByBusiness(orderId, businessId, status)
-				.then(() => this.props.history.push(`${BUSINESS_BASE_URL}/${businessId}/orders/${orderId}`))
+				.then(() => this.loadOrder(orderId))
 				.catch(error => this.setState({error}));
 		});
 	}

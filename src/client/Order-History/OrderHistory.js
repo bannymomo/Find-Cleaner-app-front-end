@@ -3,19 +3,24 @@ import OrderCard from "../../components/order/OrderCard";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Maps from "../../components/order/Maps";
+import Pagination from '@material-ui/lab/Pagination';
 
 import { fetchHisOrders } from "../../api/client";
 
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 class OrderHistory extends React.Component {
+
 	state = {
 		orders: [],
 		error: null,
 		isLoading: false,
-		pagination: {},
-		role: "client"
-	};
+		pagination: {
+			page:1,
+			pageSize:5
+		},
+		role: 'client',
+	}
 
 	componentDidMount() {
 		this.loadOrders();
@@ -35,8 +40,14 @@ class OrderHistory extends React.Component {
 			orders: orderData.orders,
 			isLoading: false,
 			pagination: orderData.pagination
-		});
-	};
+		})
+	}
+	
+	handlePageChange = (event, data) => {
+		this.loadOrders(data)
+	}
+
+
 
 	render() {
 		const clientId = this.props.match.params.clientId;
@@ -44,21 +55,30 @@ class OrderHistory extends React.Component {
 
 		return (
 			<Container className="order-history__container">
+				<Pagination 
+				page={this.state.pagination.page}
+				count={this.state.pagination.pages}
+				onChange={this.handlePageChange} 
+				shape="rounded" />
 				<Grid container spacing={2}>
 					{!!this.state.error && (
 						<ErrorMessage error={this.state.error} />
 					)}
 					<Grid item xs={6}>
-						{this.state.orders.map(order => (
-							<OrderCard
-								key={order._id}
-								role={this.state.role}
-								location={order.location}
-								dueDate={order.dueDate}
-								price={order.price}
-								to={`${BASE_URL}/orders/${order._id}`}
-							/>
-						))}
+						{
+							this.state.orders.map( order => (
+								<OrderCard 
+									key={order._id}
+									role={this.state.role}
+									location={order.location}
+									dueDate={order.dueDate}
+									price={order.price}
+									status={order.status}
+									to={`${BASE_URL}/orders/${order._id}`}
+								/>
+							))
+						}
+
 					</Grid>
 					<Grid item xs={6}>
 						<Maps />
