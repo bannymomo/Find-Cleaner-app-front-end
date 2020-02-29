@@ -10,6 +10,7 @@ import DatePosted from "./components/DatePosted";
 import NewTasks from "./components/NewTasks";
 import "./style/browseorders.scss";
 import { Divider } from "@material-ui/core";
+import Pagination from '@material-ui/lab/Pagination';
 
 import { fetchAllNewOrders } from "../../api/order";
 
@@ -20,7 +21,10 @@ class BrowseOrder extends Component {
 		orders: [],
 		error: null,
 		isLoading: false,
-		pagination: {},
+		pagination: {
+			page:1,
+			pageSize:5
+		},
 		role: 'business',
 	}
 
@@ -44,6 +48,10 @@ class BrowseOrder extends Component {
 		})
 	}
 
+	handlePageChange = (event, data) => {
+		this.loadOrders(data)
+	}
+
 	render () {
 		const businessId = this.props.match.params.businessId;
 		const BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;	
@@ -57,6 +65,11 @@ class BrowseOrder extends Component {
 				<Divider />
         
 			<Container className="order-history__container">
+				<Pagination 
+				page={this.state.pagination.page}
+				count={this.state.pagination.pages}
+				onChange={this.handlePageChange} 
+				shape="rounded" />
 				<Grid container spacing={2}>
 					<Grid item xs={6}>
 						{

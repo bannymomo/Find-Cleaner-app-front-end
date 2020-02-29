@@ -27,12 +27,13 @@ export const updateClientById = (id, client) => {
 export const fetchHisOrders = (id, page=1, pageSize=5) => {
     const  stringified = queryString.stringify({
         page,
-        pageSize
+        pageSize,
     });
-    const url = `${getApiClientUrlWithId(id)}/orders/?${stringified}`;
+    const url = `${getApiClientUrlWithId(id)}/orders?${stringified}`;
 
-    return get(url).then(res => ({
-        orders: res.data.data,
-        pagination: res.data.pagination
+    return get(url).then(res => (
+        {
+        orders: res.data.data.data,
+        pagination: res.data.data.pagination
     }));
 }
