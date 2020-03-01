@@ -94,9 +94,12 @@ function ProductHowItWorks(props) {
 						variant="contained"
 						className={classes.button}
 						component={Link}
-						to={`${SIGNUP_URL}/user/client`}
+						to={{
+							pathname: `${SIGNUP_URL}/user/business`,
+							role: "business"
+						}}
 					>
-						Post your task
+						Register your business
 					</Button>
 				</Container>
 			</section>

@@ -10,6 +10,8 @@ import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../client/Order-History/OrderInformation";
 import OrderEdit from "../client/Order-History/OrderEdit";
+import Notification from "../client/Notification/Notification";
+import Message from "../client/Message/Message";
 const ClientRoutes = () => (
 	<Switch>
 		<Redirect
@@ -57,6 +59,17 @@ const ClientRoutes = () => (
 			exact
 			path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId/edit`}
 			component={OrderEdit}
+		/>
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/:clientId/notification`}
+			component={Notification}
+		/>
+
+		<Route
+			exact
+			path={`${CLIENT_BASE_URL}/:clientId/message`}
+			component={Message}
 		/>
 	</Switch>
 );

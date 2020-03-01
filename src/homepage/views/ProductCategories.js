@@ -147,7 +147,7 @@ function ProductCategories(props) {
 	];
 
 	return (
-		<Container className={classes.root} component="section" id="service">
+		<Container className={classes.root} component="section">
 			<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
 				<div className="homepage-child-components__title--black">
 					For all the needs to make your <br />

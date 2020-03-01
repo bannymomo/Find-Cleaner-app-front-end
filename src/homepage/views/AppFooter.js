@@ -2,6 +2,8 @@ import React from "react";
 import "../style/homepage.scss";
 import googleplay from "../../assets/images/google-play.png";
 import appstore from "../../assets/images/app-store.png";
+import { Link } from "react-router-dom";
+import { SIGNUP_URL } from "../../routes/URLMap";
 export default function AppFooter() {
 	return (
 		<footer>
@@ -17,7 +19,20 @@ export default function AppFooter() {
 				<div className="footer__column-container--single">
 					<h3>Business</h3>
 					<ul>
-						<li>Register your business</li>
+						<li>
+							<Link
+								style={{
+									textDecoration: "none",
+									color: "white"
+								}}
+								to={{
+									pathname: `${SIGNUP_URL}/user/business`,
+									role: "business"
+								}}
+							>
+								Register your business
+							</Link>
+						</li>
 						<li>Look for a job</li>
 						<li>My business</li>
 						<li>Business owner experience</li>

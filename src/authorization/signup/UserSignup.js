@@ -77,21 +77,9 @@ class User extends Component {
 		username: "",
 		password: "",
 		history: "",
-		role: "client",
+		role: this.props.location.role,
 		error: null,
 		isLoading: false
-	};
-	handleBusinessClick = () => {
-		const role = "business";
-		this.setState({
-			role,
-			email: "",
-			username: "",
-			password: "",
-			history: "",
-			error: null,
-			isLoading: false
-		});
 	};
 
 	postUserInfo = () => {
@@ -219,19 +207,6 @@ class User extends Component {
 												Continue
 											</Button>
 										)}
-										<Button
-											style={{ marginBottom: 10 + "px" }}
-											variant="contained"
-											fullWidth
-											className={classes.button}
-											component={Link}
-											to={{
-												pathname: `${SIGNUP_URL}/user/business`
-											}}
-											onClick={this.handleBusinessClick}
-										>
-											I'm a business owner
-										</Button>
 										<div className="signin__text--bottom">
 											Already have an account?{" "}
 											<Link

@@ -4,6 +4,8 @@ import Button from "@material-ui/core/Button";
 import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import pic from "../assets/images/pic.png";
 import {
 	LOGIN_URL,
 	HOMEPAGE_URL,
@@ -20,104 +22,95 @@ import {
 import { isLoggedIn } from "../utils/auth";
 
 class MainNavigation extends Component {
+	state = {
+		linksActive: [true, false, false, false]
+	};
+
+	renderLink = index => {
+		const links = [
+			{ name: "Home", to: HOMEPAGE_URL },
+			{ name: "Serivce", to: HOMEPAGE_URL },
+			{ name: "Support", to: HOMEPAGE_URL },
+			{ name: "Login", to: LOGIN_URL }
+		];
+		return (
+			<Link
+				to={links[index].to}
+				style={{
+					color: this.state.linksActive[index] ? "#3f88de" : ""
+				}}
+				onClick={() => this.handleClick(index)}
+				className="nav-bar__link--black"
+			>
+				{links[index].name}
+			</Link>
+		);
+	};
+
+	handleClick = index => {
+		const linksActive = Array(4).fill(false);
+		linksActive[index] = true;
+		this.setState({ linksActive });
+	};
+
 	handleLogOut = () => {
 		removeToken();
 		removeClientId();
 		removeBusinessId();
 	};
 
-	scrollToAnchor = anchorName => {
-		if (anchorName) {
-			let anchorElement = document.getElementById(anchorName);
-			if (anchorElement) {
-				anchorElement.scrollIntoView({
-					block: "start",
-					behavior: "smooth"
-				});
-			}
-		}
-	};
-
 	render() {
 		return (
 			<header className="nav-bar__header--white">
 				<div>
-					<img className="nav-bar__logo--pic" src={logo} alt="logo" />
-					<img
-						className="nav-bar__logo--font"
-						src={brandname}
-						alt="brandname"
-					/>
+					<Link to={HOMEPAGE_URL}>
+						<img
+							className="nav-bar__logo--pic"
+							src={logo}
+							alt="logo"
+						/>
+						<img
+							className="nav-bar__logo--font"
+							src={brandname}
+							alt="brandname"
+						/>
+					</Link>
 				</div>
 				<div className="nav-bar__items--container">
 					<ul className="nav-bar__ul--black">
-						<li>
-							<Link
-								className="nav-bar__link--black"
-								to={HOMEPAGE_URL}
-							>
-								Home
-							</Link>
-						</li>
-						<li>
-							<Link
-								className="nav-bar__link--black"
-								to={
-									getClientId()
-										? `${CLIENT_BASE_URL}/${getClientId()}`
-										: `${BUSINESS_BASE_URL}/${getBusinessId()}`
-								}
-								style={{
-									display:
-										isLoggedIn() &&
-										(getClientId() || getBusinessId())
-											? ""
-											: "none"
-								}}
-							>
-								Dashboard
-							</Link>
-						</li>
-
-						<li>
-							<Link
-								to={{ HOMEPAGE_URL }}
-								className="nav-bar__link--black"
-								onClick={() => this.scrollToAnchor("service")}
-							>
-								Service
-							</Link>
-						</li>
-						<li>
-							<Link
-								style={{ display: isLoggedIn() ? "none" : " " }}
-								className="nav-bar__link--black"
-								to={LOGIN_URL}
-							>
-								Log in
-							</Link>
-						</li>
-						<li>
-							<Link
-								style={{ display: isLoggedIn() ? " " : "none" }}
-								className="nav-bar__link--black"
-								to={HOMEPAGE_URL}
-								onClick={this.handleLogOut}
-							>
-								Log Out
-							</Link>
-						</li>
-						<li>
-							<Link
-								className="nav-bar__link--black"
-								to={HOMEPAGE_URL}
-							>
-								Support
-							</Link>
+						<li>{this.renderLink(0)}</li>
+						<li>{this.renderLink(1)}</li>
+						<li>{this.renderLink(2)}</li>
+						<li style={{ display: isLoggedIn() ? "none" : " " }}>
+							{this.renderLink(3)}
 						</li>
 					</ul>
+					<div className="nav-bar__avatar--container">
+						<Link
+							to={
+								getClientId()
+									? `${CLIENT_BASE_URL}/${getClientId()}`
+									: `${BUSINESS_BASE_URL}/${getBusinessId()}`
+							}
+							style={{
+								display:
+									isLoggedIn() &&
+									(getClientId() || getBusinessId())
+										? ""
+										: "none"
+							}}
+						>
+							<Avatar alt="users" src={pic} />
+						</Link>
+					</div>
 					<div className="nav-bar__button--blue">
-						<Button variant="contained" color="primary">
+						<Button
+							variant="contained"
+							style={{
+								backgroundColor: "#3f88de",
+								color: "white"
+							}}
+						>
 							Post your task
 						</Button>
 					</div>

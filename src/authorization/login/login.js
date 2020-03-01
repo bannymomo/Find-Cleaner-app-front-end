@@ -184,7 +184,10 @@ class Login extends React.Component {
 											Not sign up?{" "}
 											<Link
 												className="login__link--bottom"
-												to={`${SIGNUP_URL}/user/client`}
+												to={{
+													pathname: `${SIGNUP_URL}/user/client`,
+													role: "client"
+												}}
 											>
 												Create an account.
 											</Link>{" "}
