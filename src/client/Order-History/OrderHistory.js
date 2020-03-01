@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Maps from "../../components/order/Maps";
 import Pagination from '@material-ui/lab/Pagination';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { fetchHisOrders } from "../../api/client";
 
@@ -60,11 +61,19 @@ class OrderHistory extends React.Component {
 				count={this.state.pagination.pages}
 				onChange={this.handlePageChange} 
 				shape="rounded" />
+				{
+					this.state.isLoading && (
+						<LinearProgress />
+					)
+				}
 				<Grid container spacing={2}>
 					{!!this.state.error && (
 						<ErrorMessage error={this.state.error} />
 					)}
 					<Grid item xs={6}>
+						{ !this.state.isLoading && !this.state.orders.length && (
+							<p> You don't have any order yet. </p>
+						)}
 						{
 							this.state.orders.map( order => (
 								<OrderCard 

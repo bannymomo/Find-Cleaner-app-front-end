@@ -11,10 +11,12 @@ import NewTasks from "./components/NewTasks";
 import "./style/browseorders.scss";
 import { Divider } from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { fetchAllNewOrders } from "../../api/order";
 
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
+import ErrorMessage from "../../UI/ErrorMessage";
 
 class BrowseOrder extends Component {
 	state = {
@@ -70,8 +72,19 @@ class BrowseOrder extends Component {
 				count={this.state.pagination.pages}
 				onChange={this.handlePageChange} 
 				shape="rounded" />
+				{
+					this.state.isLoading && (
+						<LinearProgress />
+					)
+				}
 				<Grid container spacing={2}>
+					{!!this.state.error && (
+						<ErrorMessage error={this.state.error} />
+					)}
 					<Grid item xs={6}>
+						{ !this.state.isLoading && !this.state.orders.length && (
+							<p> There is no orders at the moment. </p>
+						)}
 						{
 							this.state.orders.map( order => (
 								<OrderCard									 
