@@ -22,6 +22,15 @@ import { fetchOrderById, changeOrderStatusByBusiness } from "../../api/order";
 
 import ErrorMessage from "../../UI/ErrorMessage";
 
+import { 
+	businessRole,
+    newOrder, 
+    cancelledByClient, 
+    accepted, 
+    cancelledByBusiness, 
+    done 
+} from "../../utils/variables";
+
 const listArray = [
 	{
 		link: "https://www.facebook.com/",
@@ -51,7 +60,7 @@ class OrderInformaiton extends React.Component {
 		super(props);
 
 		this.state = {
-			role: 'business',
+			role: businessRole,
 			order: {},
 			error: null,
 			isLoading: false,
@@ -78,9 +87,9 @@ class OrderInformaiton extends React.Component {
 	} 
 	getButtonText = () => {
 		let buttonText;
-		if (this.state.order.status === "new") {
+		if (this.state.order.status === newOrder) {
 			buttonText = "Accept Order"
-		} else if (this.state.order.status === "accepted") {
+		} else if (this.state.order.status === accepted) {
 			buttonText = "Cancel Order"
 		}
 		return buttonText;
@@ -102,10 +111,10 @@ class OrderInformaiton extends React.Component {
 
 	handleChangeStatus = () => {
 		let status;
-		if (this.state.order.status === "new") {
-			status = "accepted";
-		} else if (this.state.order.status === "accepted") {
-			status = "cancelledByBusiness";
+		if (this.state.order.status === newOrder) {
+			status = accepted;
+		} else if (this.state.order.status === accepted) {
+			status = cancelledByBusiness;
 		}
 		this.setState({}, () => {
 			const orderId = this.state.order._id;
@@ -126,10 +135,11 @@ class OrderInformaiton extends React.Component {
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
-							<li className={this.isActive('new')}>NEW</li>
-							<li className={this.isActive('cancelledByBusiness')}>CANCELLED</li>
-							<li className={this.isActive('accepted')}>ASSIGNED</li>
-							<li className={this.isActive('done')}>COMPLETED</li>
+							<li className={this.isActive(newOrder)}>New</li>
+							<li className={this.isActive(cancelledByClient)}>Withdrawn</li>
+							<li className={this.isActive(cancelledByBusiness)}>Cancelled</li>
+							<li className={this.isActive(accepted)}>Assigned</li>
+							<li className={this.isActive(done)}>Completed</li>
 						</ul>
 						<ToggleButton
 							size="small"

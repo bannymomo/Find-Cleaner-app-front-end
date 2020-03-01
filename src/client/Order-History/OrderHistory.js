@@ -10,6 +10,15 @@ import { fetchHisOrders } from "../../api/client";
 
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
+
+import { 
+	clientRole,
+    newOrder, 
+    cancelledByClient, 
+    accepted, 
+    cancelledByBusiness, 
+    done 
+} from "../../utils/variables";
 class OrderHistory extends React.Component {
 
 	state = {
@@ -20,17 +29,17 @@ class OrderHistory extends React.Component {
 			page:1,
 			pageSize:5
 		},
-		role: 'client',
+		role: clientRole,
 	}
 
 	componentDidMount() {
 		this.loadOrders();
 	}
 
-	loadOrders = (page, pageSize) => {
+	loadOrders = (page, pageSize, search) => {
 		this.setState({ isLoading: true, orders: [] }, () => {
 			const clientId = this.props.match.params.clientId;
-			fetchHisOrders(clientId, page, pageSize)
+			fetchHisOrders(clientId, page, pageSize, search)
 				.then(this.updateOrderData)
 				.catch(error => this.setState({ error }));
 		});
@@ -48,6 +57,25 @@ class OrderHistory extends React.Component {
 		this.loadOrders(data)
 	}
 
+	handleSearchNew = () => {
+		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, newOrder);
+	}
+	
+	handlesearchAccepted = () => {
+		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, accepted);
+	}
+
+	handlesearchDone = () => {
+		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, done);
+	}
+
+	handleSearchWithdraw = () => {
+		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByClient);
+	}
+
+	handlesearchCancelled = () => {
+		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByBusiness);
+	}
 
 
 	render() {
@@ -58,13 +86,16 @@ class OrderHistory extends React.Component {
 			<Container className="order-history__container">
 				<Grid container spacing={2}>
 					<Grid item xs={4}>
-						<OrderNavBar />
+						<OrderNavBar
+							role={this.state.role} 
+							searchAll={this.loadOrders}
+							searchNew={this.handleSearchNew}
+							searchAccepted={this.handlesearchAccepted}
+							searchDone={this.handlesearchDone}
+							searchWithdraw={this.handleSearchWithdraw}
+							searchCancelled={this.handlesearchCancelled}
+						/>
 					</Grid>
-					{
-						this.state.isLoading && (
-							<LinearProgress />
-						)
-					}
 					<Grid item xs={6}  className="order-history__cardlist">
 						<Pagination 
 							page={this.state.pagination.page}
@@ -75,7 +106,10 @@ class OrderHistory extends React.Component {
 						{!!this.state.error && (
 							<ErrorMessage error={this.state.error} />
 						)}
-						{ !this.state.isLoading && !this.state.orders.length && (
+						{this.state.isLoading && (
+								<LinearProgress />
+						)}
+						{!this.state.isLoading && !this.state.orders.length && (
 							<p> You don't have any order yet. </p>
 						)}
 						{

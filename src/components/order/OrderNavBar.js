@@ -9,7 +9,16 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import "./style/orderHistory.scss";
 
-const OrderNavBar = () => {
+import { 
+    clientRole,
+    newOrder, 
+    cancelledByClient, 
+    accepted, 
+    cancelledByBusiness, 
+    done 
+} from "../../utils/variables";
+
+const OrderNavBar = props => {
     return (
         <div className="order-history__navbar">
             <header className="order-history__navbar--header">ORDER MANAGEMENT</header>
@@ -23,23 +32,52 @@ const OrderNavBar = () => {
             </div>
 
             <List>
-                <ListItem button>
+                <ListItem button
+                    onClick={props.searchAll}
+                >
                     <ListItemText primary="All Orders" />
                 </ListItem>
+                { props.role === clientRole && 
+                    <React.Fragment>
+                        <Divider />
+                        <ListItem button
+                            status= {newOrder}
+                            onClick={props.searchNew}
+                        >
+                            <ListItemText primary="Placed Orders" />
+                        </ListItem>
+                    </React.Fragment>
+                }
                 <Divider />
-                <ListItem button>
-                    <ListItemText primary="Placed Orders" />
-                </ListItem>
-                <Divider />
-                <ListItem button>
+                <ListItem button
+                    status= {accepted}
+                    onClick={props.searchAccepted}
+                >
                     <ListItemText primary="Assigned Orders" />
                 </ListItem>
                 <Divider />
-                <ListItem button>
+                <ListItem button
+                    status= {done}
+                    onClick={props.searchDone}
+                >
                     <ListItemText primary="Completed Orders" />
                 </ListItem>
+                { props.role === clientRole && 
+                    <React.Fragment>
+                        <Divider />
+                        <ListItem button
+                            status= {cancelledByClient}
+                            onClick={props.searchWithdraw}
+                        >
+                            <ListItemText primary="Withdrawn Orders" />
+                        </ListItem>
+                    </React.Fragment>
+                }
                 <Divider />
-                <ListItem button>
+                <ListItem button
+                    status= {cancelledByBusiness}
+                    onClick={props.searchCancelled}
+                >
                     <ListItemText primary="Cancelled Orders" />
                 </ListItem>
             </List>

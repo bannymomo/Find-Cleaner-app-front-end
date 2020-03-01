@@ -18,6 +18,8 @@ import { fetchAllNewOrders } from "../../api/order";
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 
+import { businessRole } from "../../utils/variables";
+
 class BrowseOrder extends Component {
 	state = {
 		orders: [],
@@ -27,7 +29,7 @@ class BrowseOrder extends Component {
 			page:1,
 			pageSize:5
 		},
-		role: 'business',
+		role: businessRole,
 	}
 
 	componentDidMount() {
