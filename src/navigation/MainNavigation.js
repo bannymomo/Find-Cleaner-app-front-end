@@ -111,7 +111,9 @@ class MainNavigation extends Component {
 								color: "white"
 							}}
 						>
-							Post your task
+							{getBusinessId()
+								? `Browse your task`
+								: `Post your task`}
 						</Button>
 					</div>
 				</div>
