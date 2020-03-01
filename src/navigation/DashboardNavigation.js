@@ -4,8 +4,7 @@ import Button from "@material-ui/core/Button";
 import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import pic from "../assets/images/pic.png";
+
 import {
 	HOMEPAGE_URL,
 	CLIENT_BASE_URL,
@@ -79,9 +78,7 @@ class DashboardNavigation extends Component {
 						<li>{this.renderLink(0)}</li>
 						<li>{this.renderLink(1)}</li>
 					</ul>
-					<div className="nav-bar__avatar--container">
-						<Avatar alt="users" src={pic} />
-					</div>
+
 					<div className="nav-bar__button--blue">
 						<Button
 							variant="contained"
