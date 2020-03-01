@@ -33,11 +33,7 @@ const useStyles = makeStyles(theme => ({
 const useStylesModal = makeStyles(theme => ({
 	openButton: {
 		margin: "1.8rem 2rem 0 ",
-		borderRadius: "100px",
 		padding: "0.7rem 2rem",
-		fontSize: "0.9rem",
-		letterSpacing: "1px",
-		fontWeight: "700"
 	},
 	modal: {
 		display: "flex",

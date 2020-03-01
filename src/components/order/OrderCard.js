@@ -16,11 +16,13 @@ import "./style/orderHistory.scss";
 const useStyles = makeStyles({
 	root: {
 		padding: "0 20px",
+		// margin: "20px 40px",
 		marginBottom: "20px",
-		borderLeft: "solid 5px #43a047"
+		borderLeft: "solid 5px #3f88de"
 	},
 	card_container: {
-		borderTop: "solid 2px lightgrey"
+		borderBottom: "solid 2px lightgrey",
+		paddingTop: 10
 	},
 	media: {
 		height: 70
@@ -42,7 +44,6 @@ export default function OrderCard(props) {
 			to={props.to}
 		>
 			<Card className={classes.root}>
-				<p className="order-card__status">{props.status}</p>
 				<Grid container className={classes.card_container} spacing={1}>
 					<Grid item xs={9}>
 						<Typography
@@ -82,6 +83,7 @@ export default function OrderCard(props) {
 						/>
 					</Grid>
 				</Grid>
+				<p className="order-card__status">{props.status}</p>
 			</Card>
 		</CardActionArea>
 	);

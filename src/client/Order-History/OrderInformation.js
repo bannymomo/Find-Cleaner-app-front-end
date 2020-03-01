@@ -1,16 +1,17 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-
-import Typography from "@material-ui/core/Typography";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Box from "@material-ui/core/Box";
+import {
+	Card,
+	CardActions,
+	CardContent,
+	Typography,
+	InputLabel,
+	FormControl,
+	Select,
+	Box,
+	Button
+} from "@material-ui/core";
 
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -19,10 +20,18 @@ import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
 
-import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+
+import { 
+    newOrder, 
+    cancelledByClient, 
+    accepted, 
+    cancelledByBusiness, 
+    done 
+} from "../../utils/variables";
+
 
 const listArray = [
 	{
@@ -52,7 +61,6 @@ class OrderInformaiton extends React.Component {
 		super(props);
 
 		this.state = {
-			role: "client",
 			order: {},
 			error: null,
 			isLoading: false,
@@ -70,43 +78,47 @@ class OrderInformaiton extends React.Component {
 		this.loadOrder(orderId);
 	}
 
-	loadOrder = orderId =>
+	loadOrder = orderId => {
 		this.setState({ isLoading: true }, () => {
 			fetchOrderById(orderId)
 				.then(order => this.setState({ order, isLoading: false }))
 				.catch(error => this.setState({ error }));
 		});
+	}
+
 	getButtonText = () => {
 		let buttonText;
-		if (this.state.order.status === "new") {
+		if (this.state.order.status === newOrder) {
 			buttonText = "Cancel Order";
-		} else if (this.state.order.status === "accepted") {
+		} else if (this.state.order.status === accepted) {
 			buttonText = "Order is Done";
 		}
 		return buttonText;
-	};
+	}
 
 	handleChangeSelected = () => {
 		this.setState({ selected: !this.state.selected });
-	};
+	}
 
 	handleChangeOptions = event => {
 		this.setState({
 			options: event.target.value,
 			labelWidth: this.inputLabelRef.current.offsetWidth
 		});
-	};
+	}
+
 	isActive = value => {
 		return this.state.order.status === value
 			? "order-information__status-active"
 			: "";
-	};
+	}
+
 	handleChangeStatus = () => {
 		let status;
-		if (this.state.order.status === "new") {
-			status = "cancelledByClient";
-		} else if (this.state.order.status === "accepted") {
-			status = "done";
+		if (this.state.order.status === newOrder) {
+			status = cancelledByClient;
+		} else if (this.state.order.status === accepted) {
+			status = done;
 		}
 		this.setState({}, () => {
 			const orderId = this.state.order._id;
@@ -115,7 +127,7 @@ class OrderInformaiton extends React.Component {
 				.then(() => this.loadOrder(orderId))
 				.catch(error => this.setState({error}));
 		});
-	};
+	}
 
 	render() {
 		return (
@@ -127,20 +139,11 @@ class OrderInformaiton extends React.Component {
 					<Grid item xs={8}>
 						<div className="order-information__head">
 							<ul className="order-information__status">
-								<li className={this.isActive("new")}>NEW</li>
-								<li
-									className={this.isActive(
-										"cancelledByClient"
-									)}
-								>
-									CANCELLED
-								</li>
-								<li className={this.isActive("accepted")}>
-									ASSIGNED
-								</li>
-								<li className={this.isActive("done")}>
-									COMPLETED
-								</li>
+								<li className={this.isActive(newOrder)}>New</li>
+								<li className={this.isActive(cancelledByClient)}>Withdrawn</li>
+								<li className={this.isActive(cancelledByBusiness)}>Cancelled</li>
+								<li className={this.isActive(accepted)}>Assigned</li>
+								<li className={this.isActive(done)}>Completed</li>
 							</ul>
 							<ToggleButton
 								size="small"
@@ -169,19 +172,23 @@ class OrderInformaiton extends React.Component {
 								</Typography>
 							</CardContent>
 							<CardActions className="order-information__offer">
-								<button
-									className="order-information__offer--btn"
-									onClick={this.handleChangeStatus}
-								>
-									{this.getButtonText()}
-								</button>
-								<button
-									as={Link}
-									to={`${this.props.location.pathname}/edit`}
-									className="order-information__offer--btn"
-								>
-									Edit Order
-								</button>
+								{this.getButtonText() && (
+									<Button 
+										variant="contained"
+										color={"primary"}
+										onClick={this.handleChangeStatus}>
+										{this.getButtonText()}
+									</Button>
+								)}
+								{this.state.order.status === newOrder && (
+									<Button 
+										component={Link} 
+										to={`${this.props.location.pathname}/edit`} 
+										variant="contained" 
+										color={"primary"}>
+											Edit Order
+									</Button>
+								)}
 							</CardActions>
 						</Card>
 						<FormControl
@@ -225,6 +232,7 @@ class OrderInformaiton extends React.Component {
 								{listArray.map(list => {
 									return (
 										<a
+											key={list.description}
 											href={list.link}
 											className="order-information__share--single"
 										>
@@ -237,40 +245,30 @@ class OrderInformaiton extends React.Component {
 					</Grid>
 				</Grid>
 				<div className="order-information__details">
-					<Typography variant="h6" component="p">
-						DETAILS
-					</Typography>
-					<ul className="order-information__details--list">
-						<li>Number of bedrooms: {this.state.order.bedrooms}</li>
-						<li>
-							Number of bathrooms: {this.state.order.bathrooms}
-						</li>
-						<li>
-							End-of-lease clean:{" "}
-							{this.state.order.endOfLease ? "Yes" : "No"}
-						</li>
-						<li>Oven: {this.state.order.oven ? "Yes" : "No"}</li>
-						<li>
-							Windows: {this.state.order.windows ? "Yes" : "No"}
-						</li>
-						<li>
-							Cabinets: {this.state.order.cabinets ? "Yes" : "No"}
-						</li>
-						<li>
-							Carpet: {this.state.order.carpet ? "Yes" : "No"}
-						</li>
-					</ul>
-					<Typography variant="body1" component="p">
-						I need dlkalgj aepwgk'ape [apeg[ap aEOihgao ]]
-						jeofiahgiuh ioweja owea a aeg aweoig. dlkalgj aepwgk'ape
-						[apeg[ap aEOihgao ]] jeofiahgiuh ioweja owea a aeg
-						aweoig. dlkalgj aepwgk'ape [apeg[ap aEOihgao ]]
-						jeofiahgiuh ioweja owea a aeg aweoig.
-					</Typography>
-				</div>
+				<Typography variant="h6" component="p">
+					DETAILS
+				</Typography>
+				<ul className="order-information__details--list">
+					<li>Number of bedrooms: {this.state.order.bedrooms}</li>
+					<li>Number of bathrooms: {this.state.order.bathrooms}</li>
+					<li>End-of-lease clean: {this.state.order.endOfLease? "Yes": "No"}</li>
+					<li>Oven: {this.state.order.oven? "Yes": "No"}</li>
+					<li>Windows: {this.state.order.windows? "Yes": "No"}</li>
+					<li>Cabinets: {this.state.order.cabinets? "Yes": "No"}</li>
+					<li>Carpet: {this.state.order.carpet? "Yes": "No"}</li>
+				</ul>
+				<Typography variant="body1" component="p">
+					I need dlkalgj aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh
+					ioweja owea a aeg aweoig. dlkalgj aepwgk'ape [apeg[ap
+					aEOihgao ]] jeofiahgiuh ioweja owea a aeg aweoig. dlkalgj
+					aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh ioweja owea a
+					aeg aweoig.
+				</Typography>
 			</div>
-		);
+		</div>
+		)
 	}
 }
+
 
 export default withRouter(OrderInformaiton);

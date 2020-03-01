@@ -28,15 +28,17 @@ export const updateBusinessById = (id, business) => {
     return put(url, business);
 }
 
-export const fetchHisOrders = (id, page=1, pageSize=5) => {
+export const fetchHisOrders = (id, page=1, pageSize=5, status) => {
     const  stringified = queryString.stringify({
         page,
-        pageSize
+        pageSize,
+        status
     });
     const url = `${getApiBusinessUrlWithId(id)}/orders/?${stringified}`;
 
     return get(url).then(res => ({
         orders: res.data.data.data,
-        pagination: res.data.data.pagination
+        pagination: res.data.data.pagination,
+        status: res.data.data.search
     }));
 }

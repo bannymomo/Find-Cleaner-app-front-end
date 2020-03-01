@@ -1,17 +1,17 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 
-
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-
-import Typography from "@material-ui/core/Typography";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Box from "@material-ui/core/Box";
+import {
+	Card,
+	CardActions,
+	CardContent,
+	Typography,
+	InputLabel,
+	FormControl,
+	Select,
+	Box,
+	Button
+} from "@material-ui/core";
 
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -20,7 +20,16 @@ import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByBusiness } from "../../api/order";
 
-import { BUSINESS_BASE_URL } from "../../routes/URLMap";
+import ErrorMessage from "../../UI/ErrorMessage";
+
+import { 
+	businessRole,
+    newOrder, 
+    cancelledByClient, 
+    accepted, 
+    cancelledByBusiness, 
+    done 
+} from "../../utils/variables";
 
 const listArray = [
 	{
@@ -51,7 +60,7 @@ class OrderInformaiton extends React.Component {
 		super(props);
 
 		this.state = {
-			role: 'business',
+			role: businessRole,
 			order: {},
 			error: null,
 			isLoading: false,
@@ -69,37 +78,43 @@ class OrderInformaiton extends React.Component {
 		this.loadOrder(orderId);
 	}
 
-	loadOrder = orderId => this.setState({isLoading:true}, () => {
-		fetchOrderById(orderId)
-			.then(order => this.setState({ order, isLoading: false }))
-			.catch(error => this.setState({error}));
-	})
+	loadOrder = orderId => {
+		this.setState({ isLoading:true }, () => {
+			fetchOrderById(orderId)
+				.then(order => this.setState({ order, isLoading: false }))
+				.catch(error => this.setState({error}));
+		})
+	} 
 	getButtonText = () => {
 		let buttonText;
-		if (this.state.order.status === "new") {
+		if (this.state.order.status === newOrder) {
 			buttonText = "Accept Order"
-		} else if (this.state.order.status === "accepted") {
+		} else if (this.state.order.status === accepted) {
 			buttonText = "Cancel Order"
 		}
 		return buttonText;
 	}
 
 	handleChangeSelected = () => {
-		this.setState({selected: !this.state.selected})
+		this.setState({ selected: !this.state.selected })
 	}
 
 	handleChangeOptions = event => {
-		this.setState({options: event.target.value, labelWidth: this.inputLabelRef.current.offsetWidth});
+		this.setState({ options: event.target.value, 
+			labelWidth: this.inputLabelRef.current.offsetWidth
+		});
 	}
+	
 	isActive = value => {
 		return ((this.state.order.status === value)? "order-information__status-active":"")
 	}
+
 	handleChangeStatus = () => {
 		let status;
-		if (this.state.order.status === "new") {
-			status = "accepted"
-		} else if (this.state.order.status === "accepted") {
-			status = "cancelledByBusiness"
+		if (this.state.order.status === newOrder) {
+			status = accepted;
+		} else if (this.state.order.status === accepted) {
+			status = cancelledByBusiness;
 		}
 		this.setState({}, () => {
 			const orderId = this.state.order._id;
@@ -114,13 +129,17 @@ class OrderInformaiton extends React.Component {
 		return (
 		<div className="order-information">
 			<Grid container className="order-information__top" spacing={2}>
+				{!!this.state.error && (
+					<ErrorMessage error={this.state.error} />
+				)}
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
-							<li className={this.isActive('new')}>NEW</li>
-							<li className={this.isActive('cancelledByBusiness')}>CANCELLED</li>
-							<li className={this.isActive('accepted')}>ASSIGNED</li>
-							<li className={this.isActive('done')}>COMPLETED</li>
+							<li className={this.isActive(newOrder)}>New</li>
+							<li className={this.isActive(cancelledByClient)}>Withdrawn</li>
+							<li className={this.isActive(cancelledByBusiness)}>Cancelled</li>
+							<li className={this.isActive(accepted)}>Assigned</li>
+							<li className={this.isActive(done)}>Completed</li>
 						</ul>
 						<ToggleButton
 							size="small"
@@ -153,9 +172,14 @@ class OrderInformaiton extends React.Component {
 							</Typography>
 						</CardContent>
 						<CardActions className="order-information__offer">
-							<button  className="order-information__offer--btn" onClick={this.handleChangeStatus}>
-								{this.getButtonText()}
-							</button>
+							{this.getButtonText() && (
+									<Button 
+										variant="contained"
+										color={"primary"}
+										onClick={this.handleChangeStatus}>
+										{this.getButtonText()}
+									</Button>
+								)}
 						</CardActions>
 					</Card>
 					<FormControl
@@ -199,6 +223,7 @@ class OrderInformaiton extends React.Component {
 							{listArray.map(list => {
 								return (
 									<a
+										key={list.description}
 										href={list.link}
 										className="order-information__share--single"
 									>
