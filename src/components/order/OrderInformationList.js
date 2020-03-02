@@ -50,7 +50,7 @@ export default function OrderInformationList(props) {
                             variant="body2"
                             color="textPrimary"
                         >
-                            Gaurav L.
+                            {props.clientName}
                         </Typography>
                     }
                 />
@@ -117,7 +117,7 @@ export default function OrderInformationList(props) {
                             variant="body2"
                             color="textPrimary"
                         >
-                            Top Clean
+                            {props.businessName}
                         </Typography>
                     }
                 />
