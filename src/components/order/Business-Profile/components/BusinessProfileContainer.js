@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
-	const [value, setValue] = React.useState(4.5);
+	const [value] = React.useState(4.5);
 
 	const images = [
 		{
