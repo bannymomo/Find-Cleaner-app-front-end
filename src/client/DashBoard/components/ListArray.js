@@ -1,5 +1,11 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
+import house from "../../../assets/images/house.png";
+import kitchen from "../../../assets/images/kitchen.png";
+import carpet from "../../../assets/images/carpet.png";
+import rent from "../../../assets/images/rent.png";
+import bathroom from "../../../assets/images/bathroom.png";
+import glass from "../../../assets/images/glass.png";
 import {
 	makeStyles,
 	createMuiTheme,
@@ -20,7 +26,7 @@ const useStyles = makeStyles(theme =>
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: "#2196f3"
+			main: "#3F88DE"
 		},
 		secondary: {
 			main: "#f50057"
@@ -33,18 +39,24 @@ export default function FloatingActionButtonSize() {
 		from: { opacity: 0 }
 	});
 	const listArray = [
-		{ icon: "fas fa-broom", description: "Home Cleaning" },
-		{ icon: "fas fa-truck", description: "Full House Removals" },
-		{ icon: "fas fa-dolly-flatbed", description: "Few items Removals" },
-		{ icon: "fas fa-briefcase", description: "Business & Admin" },
-		{ icon: "fas fa-desktop", description: "Computers & IT" },
-		{ icon: "fas fa-tools", description: "Furniture Assembly" },
-		{ icon: "fas fa-paint-roller", description: "Handyman" },
-		{ icon: "fas fa-pencil-ruler", description: "Marketing & Design" },
-		{ icon: "fas fa-video", description: "Events & Photography" },
-		{ icon: "fas fa-music", description: "Fun & Quirky" },
-		{ icon: "fas fa-seedling", description: "Home & Gardening" },
-		{ icon: "fas fa-basketball-ball", description: "Anything" }
+		{ img: house, alt: "Home Cleaning", description: "Home Cleaning" },
+		{ img: carpet, alt: "Carpet Cleaning", description: "Carpet Cleaning" },
+		{
+			img: rent,
+			alt: "End of Lease Cleaning",
+			description: "End of Lease Cleaning"
+		},
+		{ img: glass, alt: "Glass  Cleaning", description: "Glass Cleaning" },
+		{
+			img: kitchen,
+			alt: "Kitchen Cleaning",
+			description: "Kitchen Cleaning"
+		},
+		{
+			img: bathroom,
+			alt: "Bathroom Cleaning",
+			description: "Bathroom Cleaning"
+		}
 	];
 	const classes = useStyles();
 
@@ -59,7 +71,11 @@ export default function FloatingActionButtonSize() {
 						>
 							<div>
 								<Fab color="primary" className={classes.margin}>
-									<i className={list.icon}></i>
+									<img
+										src={list.img}
+										alt={list.alt}
+										style={{ width: 28, height: 28 }}
+									/>
 								</Fab>
 							</div>
 							<span>{list.description}</span>

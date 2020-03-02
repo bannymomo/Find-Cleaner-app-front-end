@@ -82,7 +82,7 @@ export default function OrderInformationList(props) {
 					primary="POSTED BY"
 					secondary={
 						<Typography variant="body2" color="textPrimary">
-							Gaurav L.
+							{props.clientName}
 						</Typography>
 					}
 				/>
@@ -135,7 +135,7 @@ export default function OrderInformationList(props) {
 					primary="TAKEN BY"
 					secondary={
 						<Typography variant="body2" color="textPrimary">
-							Top Clean
+							{props.businessName}
 						</Typography>
 					}
 				/>

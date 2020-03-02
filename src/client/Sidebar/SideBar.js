@@ -5,13 +5,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Divider from "@material-ui/core/Divider";
-import Avatar from "../UI/Avatar";
+import ClientAvatar from "./Avatar";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
-import { CLIENT_BASE_URL, HOMEPAGE_URL } from "../routes/URLMap";
-import TakeOrder from "../client/Take-Order/TakeOrder";
+import { CLIENT_BASE_URL, HOMEPAGE_URL } from "../../routes/URLMap";
+import TakeOrder from "../Take-Order/TakeOrder";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -20,8 +20,8 @@ import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
 import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
-import { removeToken, removeClientId } from "../utils/auth";
-import { getClientId } from "../utils/auth";
+import { removeToken, removeClientId } from "../../utils/auth";
+import { getClientId } from "../../utils/auth";
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -92,10 +92,7 @@ export default function SimpleList() {
 
 	return (
 		<div>
-			<div className="client__avatar-container--left-top">
-				<Avatar />
-				<p>client name</p>
-			</div>
+			<ClientAvatar />
 			<div className={classes.root}>
 				<Divider />
 				<div className={modalClasses.root}>

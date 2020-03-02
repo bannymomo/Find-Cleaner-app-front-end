@@ -6,9 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 import Store from "@material-ui/icons/Store";
-import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
-import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
@@ -42,7 +40,7 @@ export default function Chart() {
 		from: { opacity: 0 }
 	});
 	return (
-		<div style={{ padding: 20 + "px" }}>
+		<div style={{ padding: `${20}px ${20}px ${10}px` }}>
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
 					<Card>
@@ -60,43 +58,7 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Member Expires
-						</animated.h3>
-
-						<CardFooter stats>
-							<animated.div
-								style={props}
-								className={classes.stats}
-							>
-								<Warning />
-
-								<a
-									href="#pablo"
-									onClick={e => e.preventDefault()}
-								>
-									Get more info
-								</a>
-							</animated.div>
-						</CardFooter>
-					</Card>
-				</GridItem>
-				<GridItem xs={12} sm={6} md={3}>
-					<Card>
-						<CardHeader color="success" stats icon>
-							<animated.div style={props}>
-								<CardIcon color="success">
-									<Store />
-								</CardIcon>
-							</animated.div>
-							<p className={classes.cardCategory}>45</p>
-						</CardHeader>
-						<animated.h3
-							style={props}
-							className={
-								(classes.cardTitle, "card__title--black")
-							}
-						>
-							Total Orders
+							Total orders
 						</animated.h3>
 
 						<CardFooter stats>
@@ -126,7 +88,7 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Fixed Issues
+							Awaiting offers
 						</animated.h3>
 
 						<CardFooter stats>
@@ -134,8 +96,38 @@ export default function Chart() {
 								style={props}
 								className={classes.stats}
 							>
-								<LocalOffer />
-								Make a note
+								<DateRange />
+								Last 6 months
+							</animated.div>
+						</CardFooter>
+					</Card>
+				</GridItem>
+				<GridItem xs={12} sm={6} md={3}>
+					<Card>
+						<CardHeader color="success" stats icon>
+							<animated.div style={props}>
+								<CardIcon color="success">
+									<Store />
+								</CardIcon>
+							</animated.div>
+							<p className={classes.cardCategory}>45</p>
+						</CardHeader>
+						<animated.h3
+							style={props}
+							className={
+								(classes.cardTitle, "card__title--black")
+							}
+						>
+							Completed Orders
+						</animated.h3>
+
+						<CardFooter stats>
+							<animated.div
+								style={props}
+								className={classes.stats}
+							>
+								<DateRange />
+								Last 6 months
 							</animated.div>
 						</CardFooter>
 					</Card>
@@ -156,7 +148,7 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Followers
+							Favorite cleaners
 						</animated.h3>
 
 						<CardFooter stats>

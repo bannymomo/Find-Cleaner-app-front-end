@@ -60,6 +60,8 @@ class MainNavigation extends Component {
 	};
 
 	render() {
+		const clientId = getClientId();
+		const businessId = getBusinessId();
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -88,14 +90,13 @@ class MainNavigation extends Component {
 					<div className="nav-bar__avatar--container">
 						<Link
 							to={
-								getClientId()
-									? `${CLIENT_BASE_URL}/${getClientId()}`
-									: `${BUSINESS_BASE_URL}/${getBusinessId()}`
+								clientId
+									? `${CLIENT_BASE_URL}/${clientId}`
+									: `${BUSINESS_BASE_URL}/${businessId}`
 							}
 							style={{
 								display:
-									isLoggedIn() &&
-									(getClientId() || getBusinessId())
+									isLoggedIn() && (clientId || businessId)
 										? ""
 										: "none"
 							}}
@@ -111,9 +112,7 @@ class MainNavigation extends Component {
 								color: "white"
 							}}
 						>
-							{getBusinessId()
-								? `Browse your task`
-								: `Post your task`}
+							{businessId ? `Browse your task` : `Post your task`}
 						</Button>
 					</div>
 				</div>
