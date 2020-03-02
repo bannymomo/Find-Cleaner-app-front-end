@@ -48,11 +48,10 @@ const useStylesModal = makeStyles(theme => ({
 		boxSizing: "border-box",
 		position: "relative",
 		width: "960px",
-		height: "98%",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
-		padding: theme.spacing(2, 4, 3),
+		padding: theme.spacing(1, 4, 2),
 		outline: 0
 	},
 	button: {
@@ -118,7 +117,8 @@ function SimpleList(props) {
 						disableScrollLock
 						BackdropComponent={Backdrop}
 						BackdropProps={{
-							timeout: 1000
+							timeout: 1000,
+							open: modalOpen ? true : false
 						}}
 					>
 						<Fade in={modalOpen}>
