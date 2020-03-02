@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { BUSINESS_BASE_URL } from "./URLMap";
-import Dashboard from "../business/DashBoard/DashBoard";
+import BusinessDashboard from "../business/DashBoard/BusinessDashBoard";
 import Account from "../business/Account/Account";
 import Password from "../business/Password/Password";
 import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
@@ -20,12 +20,12 @@ const BusinessRoutes = () => (
 			exact
 			from={`${BUSINESS_BASE_URL}/:businessId`}
 			to={`${BUSINESS_BASE_URL}/:businessId/dashboard`}
-			component={Dashboard}
+			component={BusinessDashboard}
 		/>
 		<Route
 			exact
 			path={`${BUSINESS_BASE_URL}/:businessId/dashboard`}
-			component={Dashboard}
+			component={BusinessDashboard}
 		/>
 		<Route
 			exact
