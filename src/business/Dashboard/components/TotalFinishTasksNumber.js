@@ -1,26 +1,26 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { fetchHisOrders } from "../../../api/client";
+import { fetchHisOrders } from "../../../api/business";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-class TotalFinishOrderNumber extends React.Component {
+class TotalFinishTasksNumber extends React.Component {
 	state = {
-		totalFinishOrderNumber: 0,
+		totalFinishTasksNumber: 0,
 		isLoading: false,
 		error: null
 	};
 
 	componentDidMount() {
-		const clientId = this.props.match.params.clientId;
-		this.getTotalFinishOrderNumber(clientId);
+		const businessId = this.props.match.params.businessId;
+		this.getTotalFinishTasksNumber(businessId);
 	}
 
-	getTotalFinishOrderNumber = clientId => {
+	getTotalFinishTasksNumber = businessId => {
 		this.setState({ isLoading: true }, () => {
-			fetchHisOrders(clientId, null, null, "done")
-				.then(client => {
-					const totalFinishOrderNumber = client.orders.length;
-					this.setState({ totalFinishOrderNumber, isLoading: false });
+			fetchHisOrders(businessId, null, null, "done")
+				.then(business => {
+					const totalFinishTasksNumber = business.orders.length;
+					this.setState({ totalFinishTasksNumber, isLoading: false });
 				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
@@ -35,10 +35,10 @@ class TotalFinishOrderNumber extends React.Component {
 			</div>
 		) : (
 			<p className="card__number--top-right">
-				{this.state.totalFinishOrderNumber}
+				{this.state.totalFinishTasksNumber}
 			</p>
 		);
 	}
 }
 
-export default withRouter(TotalFinishOrderNumber);
+export default withRouter(TotalFinishTasksNumber);

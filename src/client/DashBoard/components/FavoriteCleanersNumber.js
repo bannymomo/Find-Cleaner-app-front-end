@@ -3,24 +3,35 @@ import { withRouter } from "react-router";
 import { fetchClientById } from "../../../api/client";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-class TotalOrderNumber extends React.Component {
+class FavoriteCleanersNumber extends React.Component {
 	state = {
-		totalOrderNumber: 0,
+		FavoriteCleanersNumber: 0,
 		isLoading: false,
 		error: null
 	};
 
 	componentDidMount() {
 		const clientId = this.props.match.params.clientId;
-		this.getTotalOrderNumber(clientId);
+		this.getFavoriteCleanersNumber(clientId);
 	}
 
-	getTotalOrderNumber = clientId => {
+	getFavoriteCleanersNumber = clientId => {
 		this.setState({ isLoading: true }, () => {
 			fetchClientById(clientId)
 				.then(client => {
-					const totalOrderNumber = client.orders.length;
-					this.setState({ totalOrderNumber, isLoading: false });
+					const totalOrders = client.orders;
+					const haveBusinessOrders = totalOrders.filter(order => {
+						return order.business;
+					});
+					const businessArray = haveBusinessOrders.map(order => {
+						return order.business;
+					});
+					const removeDuplicateItems = arr => [...new Set(arr)];
+
+					const FavoriteCleanersNumber = removeDuplicateItems(
+						businessArray
+					).length;
+					this.setState({ FavoriteCleanersNumber, isLoading: false });
 				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
@@ -35,10 +46,10 @@ class TotalOrderNumber extends React.Component {
 			</div>
 		) : (
 			<p className="card__number--top-right">
-				{this.state.totalOrderNumber}
+				{this.state.FavoriteCleanersNumber}
 			</p>
 		);
 	}
 }
 
-export default withRouter(TotalOrderNumber);
+export default withRouter(FavoriteCleanersNumber);

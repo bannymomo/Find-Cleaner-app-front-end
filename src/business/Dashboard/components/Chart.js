@@ -22,10 +22,10 @@ import CardHeader from "./card/CardHeader";
 import CardBody from "./card/CardBody";
 import CardFooter from "./card/CardFooter";
 import CardIcon from "./card/CardIcon.js";
-import TotalOrdersNumber from "./TotalOrdersNumber";
-import TotalNewOrdersNumber from "./TotalNewOrdersNumber";
-import TotalAssignedOrdersNumber from "./TotalAssignedOrdersNumber";
-import FavoriteCleanersNumber from "./FavoriteCleanersNumber";
+import TotalTasksNumber from "./TotalTasksNumber";
+import TotalUnfinishedTasksNumber from "./TotalUnfinishedTasksNumber";
+import TotalFinishTasksNumber from "./TotalFinishTasksNumber";
+import FollowersNumber from "./FollowersNumber";
 
 import {
 	dailySalesChart,
@@ -61,9 +61,9 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Total orders
+							Total tasks
 						</animated.h3>
-						<TotalOrdersNumber />
+						<TotalTasksNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -90,9 +90,9 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Awaiting offers
+							Unfinished Tasks
 						</animated.h3>
-						<TotalNewOrdersNumber />
+						<TotalUnfinishedTasksNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -119,9 +119,9 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Assigned orders
+							Completed Tasks
 						</animated.h3>
-						<TotalAssignedOrdersNumber />
+						<TotalFinishTasksNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -148,9 +148,9 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Favorite cleaners
+							Followers
 						</animated.h3>
-						<FavoriteCleanersNumber />
+						<FollowersNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -182,7 +182,7 @@ export default function Chart() {
 									<ArrowUpward
 										className={classes.upArrowCardCategory}
 									/>{" "}
-									55%
+									70%
 								</span>
 								increase this week.
 							</p>
@@ -209,7 +209,7 @@ export default function Chart() {
 							/>
 						</CardHeader>
 						<CardBody>
-							<h4 className={classes.cardTitle}>Bill</h4>
+							<h4 className={classes.cardTitle}>Income</h4>
 							<p className={classes.cardCategory}>
 								Last 6 months Performance
 							</p>
@@ -233,9 +233,7 @@ export default function Chart() {
 							/>
 						</CardHeader>
 						<CardBody>
-							<h4 className={classes.cardTitle}>
-								Completed Tasks
-							</h4>
+							<h4 className={classes.cardTitle}>Rating Stars</h4>
 							<p className={classes.cardCategory}>
 								Last Campaign Performance
 							</p>
