@@ -2,19 +2,15 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 
 import {
+	LinearProgress,
 	Card,
-	CardActions,
 	CardContent,
 	Typography,
 	InputLabel,
-	FormControl,
-	Select,
 	Box,
-	Button
+	Button,
+	Collapse
 } from "@material-ui/core";
-
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
@@ -54,7 +50,6 @@ const listArray = [
 	}
 ];
 
-
 class OrderInformaiton extends React.Component {
 	constructor(props) {
 		super(props);
@@ -64,13 +59,10 @@ class OrderInformaiton extends React.Component {
 			order: {},
 			error: null,
 			isLoading: false,
+			isUpdating: false,
 
-			selected: false,
-			options: '',
-			labelWidth: 0
+			expanded: false
 		};
-
-		this.inputLabelRef = React.createRef();
 	}
 
 	componentDidMount() {
@@ -81,8 +73,8 @@ class OrderInformaiton extends React.Component {
 	loadOrder = orderId => {
 		this.setState({ isLoading:true }, () => {
 			fetchOrderById(orderId)
-				.then(order => this.setState({ order, isLoading: false }))
-				.catch(error => this.setState({error}));
+				.then(order => this.setState({ order, isLoading: false, isUpdating: false }))
+				.catch(error => this.setState({ error }));
 		})
 	} 
 	getButtonText = () => {
@@ -95,18 +87,29 @@ class OrderInformaiton extends React.Component {
 		return buttonText;
 	}
 
-	handleChangeSelected = () => {
-		this.setState({ selected: !this.state.selected })
-	}
-
-	handleChangeOptions = event => {
-		this.setState({ options: event.target.value, 
-			labelWidth: this.inputLabelRef.current.offsetWidth
-		});
+	getStatusText =() => {
+		let buttonText;
+		 if (this.state.order.status === cancelledByBusiness) {
+			buttonText = "Cancelled";
+		} else if (this.state.order.status === done) {
+			buttonText = "Completed";
+		} 
+		return buttonText;
 	}
 	
 	isActive = value => {
-		return ((this.state.order.status === value)? "order-information__status-active":"")
+		return this.state.order.status === value? 
+		"order-information__status-active" : "";
+	}
+
+	isEditDisabled = () => {
+		if (this.state.order.status === newOrder) return false;
+		return true;
+	}
+
+	isDisabled = value => {
+		return value === true ?
+		"order-information__btn-disabled" : "";
 	}
 
 	handleChangeStatus = () => {
@@ -116,22 +119,30 @@ class OrderInformaiton extends React.Component {
 		} else if (this.state.order.status === accepted) {
 			status = cancelledByBusiness;
 		}
-		this.setState({}, () => {
+		this.setState({ isUpdating: true }, () => {
 			const orderId = this.state.order._id;
 			const businessId = this.props.match.params.businessId;
 			changeOrderStatusByBusiness(orderId, businessId, status)
 				.then(() => this.loadOrder(orderId))
-				.catch(error => this.setState({error}));
+				.catch(error => this.setState({ error }));
 		});
+	}
+
+	handleExpand = () => {
+		this.setState({expanded: !this.state.expanded});
 	}
 
 	render() {
 		return (
 		<div className="order-information">
+			<header className="order-information__header">ORDER INFORMATION</header>
+			{!!this.state.error && (
+				<ErrorMessage error={this.state.error} />
+			)}
+			{(this.state.isLoading || this.state.isUpdating) && (
+				<LinearProgress />
+			)}
 			<Grid container className="order-information__top" spacing={2}>
-				{!!this.state.error && (
-					<ErrorMessage error={this.state.error} />
-				)}
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
@@ -141,15 +152,6 @@ class OrderInformaiton extends React.Component {
 							<li className={this.isActive(accepted)}>Assigned</li>
 							<li className={this.isActive(done)}>Completed</li>
 						</ul>
-						<ToggleButton
-							size="small"
-							value="follow"
-							selected={this.state.selected}
-							onChange={this.handleChangeSelected}
-						>
-							<FavoriteBorderIcon fontSize="small" />
-							<p>Follow</p>
-						</ToggleButton>
 					</div>
 					<Typography variant="h4" component="h2">
 						House Cleaning
@@ -158,8 +160,7 @@ class OrderInformaiton extends React.Component {
 						location={this.state.order.location}
 						dueDate={this.state.order.dueDate}
 						role={this.state.role}
-					/>
-					
+					/>					
 				</Grid>
 				<Grid item xs={4}>
 					<Card>
@@ -171,45 +172,26 @@ class OrderInformaiton extends React.Component {
 								${this.state.order.price}
 							</Typography>
 						</CardContent>
-						<CardActions className="order-information__offer">
+						<div className="order-information__offer">
 							{this.getButtonText() && (
-									<Button 
-										variant="contained"
-										color={"primary"}
-										onClick={this.handleChangeStatus}>
-										{this.getButtonText()}
-									</Button>
-								)}
-						</CardActions>
+								<Button 
+									variant="contained"
+									color={"primary"}
+									onClick={this.handleChangeStatus}>
+									{this.getButtonText()}
+								</Button>
+							)}
+							{this.getStatusText() && (
+								<Button 
+								disabled={true}
+								variant="contained" 
+								color={"primary"}
+								>
+									{this.getStatusText()}
+								</Button>
+							)}
+						</div>
 					</Card>
-					<FormControl
-						variant="outlined"
-						className="order-information__options"
-					>
-						<InputLabel
-							margin="dense"
-							ref={this.inputLabelRef}
-							htmlFor="more-options"
-						>
-							More Options
-						</InputLabel>
-						<Select
-							native
-							margin="dense"
-							value={this.state.options}
-							onChange={this.handleChangeOptions}
-							labelWidth={this.state.labelWidth}
-							inputProps={{
-								name: "options",
-								id: "more-options"
-							}}
-						>
-							<option value="" />
-							<option value={10}>Ten</option>
-							<option value={20}>Twenty</option>
-							<option value={30}>Thirty</option>
-						</Select>
-					</FormControl>
 					<Box
 						border={1}
 						borderRadius={5}
@@ -253,8 +235,17 @@ class OrderInformaiton extends React.Component {
 					ioweja owea a aeg aweoig. dlkalgj aepwgk'ape [apeg[ap
 					aEOihgao ]] jeofiahgiuh ioweja owea a aeg aweoig. dlkalgj
 					aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh ioweja owea a
-					aeg aweoig.
+					aeg aweoig.rtt er, erware ea eaqoh [wp] euigh aerhaer
 				</Typography>
+				<p className="order-information__details--collapse" onClick={this.handleExpand}>View all</p>
+				<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+					<p>
+						ioweja owea a aeg aweoig. dlkalgj aepwgk'ape [apeg[ap
+						aEOihgao ]] jeofiahgiuh ioweja owea a aeg aweoig. dlkalgj
+						aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh ioweja owea a
+						aeg aweoig. awegaeaer wejfawg we aewoi wo woigjoa.
+					</p>
+				</Collapse>
 			</div>
 		</div>
 		)

@@ -10,6 +10,9 @@ import Price from "./components/Price";
 import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
+import ErrorMessage from "../../UI/ErrorMessage";
+import LinearProgress from "@material-ui/core/LinearProgress";
+
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
 class TakeOrder extends React.Component {
@@ -27,7 +30,8 @@ class TakeOrder extends React.Component {
 			location: '',
 			dueDate: '',
 			price: 0,
-			error: null
+			error: null,
+			isCreating: false
 		};
 	}
 
@@ -37,7 +41,6 @@ class TakeOrder extends React.Component {
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
 		} else if (key === "location" || key === "dueDate") {
-			// value = value;
 		} else {
 			value = value === "false";
 		}
@@ -69,7 +72,7 @@ class TakeOrder extends React.Component {
 		if (match && match.params.clientId) {
 			clientId = match.params.clientId;
 		}
-		this.setState({}, () => {
+		this.setState({ isCreating: true }, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {
 					this.props.history.push(
@@ -83,6 +86,12 @@ class TakeOrder extends React.Component {
 	render() {
 		return (
 			<div className="client__take-order-page">
+				{!!this.state.error && (
+					<ErrorMessage error={this.state.error} />
+				)}
+				{this.state.isCreating && (
+					<LinearProgress />
+				)}
 				<p id="take-order">See how little it will cost...</p>
 				<Bedrooms
 					bedrooms={this.state.bedrooms}
