@@ -21,11 +21,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	tasksButton: {
 		margin: "0.3rem 0.5rem",
-		borderRadius: "100px",
 		padding: "0.7rem 1.6rem",
-		fontSize: "0.9rem",
-		letterSpacing: "1px",
-		fontWeight: "700"
 	}
 }));
 
@@ -64,7 +60,7 @@ export default function SimpleList() {
 							color="secondary"
 							to="browse-order"
 						>
-							Browser Tasks
+							Browse Tasks
 						</Button>
 					</ListItemLink>
 					<ListItemLink
