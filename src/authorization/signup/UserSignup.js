@@ -21,7 +21,7 @@ import Background from "../../assets/images/auth-background.png";
 import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
-import { SIGNUP_URL, LOGIN_URL } from "../../routes/URLMap";
+import { LOGIN_URL } from "../../routes/URLMap";
 import "./style/signup.scss";
 import { Link } from "react-router-dom";
 

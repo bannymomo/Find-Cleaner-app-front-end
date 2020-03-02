@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import ListArray from "./components/ListArray";
 import "./style/dashboard.scss";
 import Chart from "./components/Chart";

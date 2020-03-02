@@ -34,10 +34,13 @@ const Routes = () => {
 			/>
 			<Route exact path={HOMEPAGE_URL} component={HomePage} />
 			<ProtectedBusinessRoute
-				path={BUSINESS_BASE_URL}
+				path={`${BUSINESS_BASE_URL}/:businessId`}
 				component={Business}
 			/>
-			<ProtectedClientRoute path={CLIENT_BASE_URL} component={Client} />
+			<ProtectedClientRoute
+				path={`${CLIENT_BASE_URL}/:clientId`}
+				component={Client}
+			/>
 		</Switch>
 	);
 };

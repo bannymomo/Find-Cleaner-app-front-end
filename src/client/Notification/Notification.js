@@ -8,7 +8,7 @@ function Notification() {
 			<img
 				className="notification__img--center"
 				src="https://www.airtasker.com/images/empty_pages/notifications.png"
-				alt="notification picture"
+				alt="notification"
 			/>
 			This is where we'll let you know about tasks, comments and other
 			stuff.

@@ -39,12 +39,24 @@ export default function FloatingActionButtonSize() {
 		from: { opacity: 0 }
 	});
 	const listArray = [
-		{ img: house, description: "Home Cleaning" },
-		{ img: carpet, description: "Carpet Cleaning" },
-		{ img: rent, description: "End of Lease Cleaning" },
-		{ img: glass, description: "Glass Cleaning" },
-		{ img: kitchen, description: "Kitchen Cleaning" },
-		{ img: bathroom, description: "Bathroom Cleaning" }
+		{ img: house, alt: "Home Cleaning", description: "Home Cleaning" },
+		{ img: carpet, alt: "Carpet Cleaning", description: "Carpet Cleaning" },
+		{
+			img: rent,
+			alt: "End of Lease Cleaning",
+			description: "End of Lease Cleaning"
+		},
+		{ img: glass, alt: "Glass  Cleaning", description: "Glass Cleaning" },
+		{
+			img: kitchen,
+			alt: "Kitchen Cleaning",
+			description: "Kitchen Cleaning"
+		},
+		{
+			img: bathroom,
+			alt: "Bathroom Cleaning",
+			description: "Bathroom Cleaning"
+		}
 	];
 	const classes = useStyles();
 
@@ -61,6 +73,7 @@ export default function FloatingActionButtonSize() {
 								<Fab color="primary" className={classes.margin}>
 									<img
 										src={list.img}
+										alt={list.alt}
 										style={{ width: 28, height: 28 }}
 									/>
 								</Fab>
