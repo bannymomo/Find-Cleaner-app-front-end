@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 		"& > *": {
 			margin: theme.spacing(1),
 			marginBottom: theme.spacing(3),
-			width: 200
+			width: 250
 		}
 	}
 }));
@@ -35,8 +35,8 @@ export default function BasicTextFields(props) {
 					onChange={props.handleChange}
 					id="outlined-basic"
 					required
-					placeholder="4000"
-					label="Enter a suburb"
+					placeholder="Ann st Brisbane City QLD"
+					label="Enter your location"
 					variant="outlined"
 					margin="dense"
 					color="secondary"
