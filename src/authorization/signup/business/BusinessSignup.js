@@ -19,7 +19,11 @@ import logo from "../../../assets/images/logo.png";
 import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
 import MainNavigation from "../../../navigation/MainNavigation";
-import { setBusinessId } from "../../../utils/auth";
+import {
+	setBusinessId,
+	removeBusinessId,
+	removeClientId
+} from "../../../utils/auth";
 
 const theme = createMuiTheme({
 	palette: {
@@ -90,6 +94,8 @@ class BusinessSignup extends Component {
 		this.setState({ isLoading: true }, () => {
 			createBusiness(businessInfo).then(data => {
 				this.setState({ isLoading: false }, () => {
+					removeClientId();
+					removeBusinessId();
 					const businessId = data._id;
 					setBusinessId(businessId);
 					const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;

@@ -4,6 +4,7 @@ import { fetchBusinessById } from "../../api/business";
 import { Avatar } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ErrorMessage from "../../UI/ErrorMessage";
 const useStyles = theme => ({
 	root: {
 		display: "flex",
@@ -26,7 +27,8 @@ class BusinessAvatar extends React.Component {
 	state = {
 		businessName: "",
 		avatar: "",
-		isLoading: false
+		isLoading: false,
+		error: null
 	};
 
 	componentDidMount() {
@@ -44,13 +46,15 @@ class BusinessAvatar extends React.Component {
 						isLoading: false
 					})
 				)
-				.catch(error => this.setState({ error }));
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
 	render() {
 		const { classes } = this.props;
-		return this.state.isLoading ? (
+		return this.state.error ? (
+			<ErrorMessage error={this.state.error} />
+		) : this.state.isLoading ? (
 			<div className="client__avatar-progress--container">
 				<CircularProgress disableShrink size={140} color="inherit" />
 			</div>

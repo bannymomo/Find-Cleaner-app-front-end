@@ -12,13 +12,7 @@ import {
 	BUSINESS_BASE_URL,
 	CLIENT_BASE_URL
 } from "../routes/URLMap";
-import {
-	removeToken,
-	removeClientId,
-	removeBusinessId,
-	getClientId,
-	getBusinessId
-} from "../utils/auth";
+import { getBusinessId, getClientId } from "../utils/auth";
 import { isLoggedIn } from "../utils/auth";
 
 class MainNavigation extends Component {
@@ -53,15 +47,9 @@ class MainNavigation extends Component {
 		this.setState({ linksActive });
 	};
 
-	handleLogOut = () => {
-		removeToken();
-		removeClientId();
-		removeBusinessId();
-	};
-
 	render() {
-		const clientId = getClientId();
-		const businessId = getBusinessId();
+		const loginClient = getClientId();
+		const loginBussiness = getBusinessId();
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -83,20 +71,25 @@ class MainNavigation extends Component {
 						<li>{this.renderLink(0)}</li>
 						<li>{this.renderLink(1)}</li>
 						<li>{this.renderLink(2)}</li>
-						<li style={{ display: isLoggedIn() ? "none" : " " }}>
+						<li
+							style={{
+								display: isLoggedIn() ? "none" : ""
+							}}
+						>
 							{this.renderLink(3)}
 						</li>
 					</ul>
 					<div className="nav-bar__avatar--container">
 						<Link
 							to={
-								clientId
-									? `${CLIENT_BASE_URL}/${clientId}`
-									: `${BUSINESS_BASE_URL}/${businessId}`
+								loginClient
+									? `${CLIENT_BASE_URL}/${loginClient}`
+									: `${BUSINESS_BASE_URL}/${loginBussiness}`
 							}
 							style={{
 								display:
-									isLoggedIn() && (clientId || businessId)
+									isLoggedIn() &&
+									(loginClient || loginBussiness)
 										? ""
 										: "none"
 							}}
@@ -112,7 +105,9 @@ class MainNavigation extends Component {
 								color: "white"
 							}}
 						>
-							{businessId ? `Browse your task` : `Post your task`}
+							{loginBussiness && isLoggedIn()
+								? `Browse your task`
+								: `Post your task`}
 						</Button>
 					</div>
 				</div>

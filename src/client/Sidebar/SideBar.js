@@ -20,8 +20,12 @@ import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
 import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
-import { removeToken, removeClientId } from "../../utils/auth";
-import { getClientId } from "../../utils/auth";
+import {
+	removeToken,
+	removeBusinessId,
+	removeClientId
+} from "../../utils/auth";
+import { withRouter } from "react-router";
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -66,7 +70,7 @@ function ListItemLink(props) {
 	return <ListItem button component={Link} {...props} />;
 }
 
-export default function SimpleList() {
+function SimpleList(props) {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(true);
 	const handleClick = () => {
@@ -85,10 +89,11 @@ export default function SimpleList() {
 		setModalOpen(false);
 	};
 
-	const clientId = getClientId();
+	const clientId = props.match.params.clientId;
 	const handleLogOut = () => {
 		removeToken();
 		removeClientId();
+		removeBusinessId();
 	};
 
 	return (
@@ -193,3 +198,5 @@ export default function SimpleList() {
 		</div>
 	);
 }
+
+export default withRouter(SimpleList);

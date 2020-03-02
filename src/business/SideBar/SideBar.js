@@ -11,7 +11,12 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { BUSINESS_BASE_URL, HOMEPAGE_URL } from "../../routes/URLMap";
-import { removeToken, getBusinessId, removeBusinessId } from "../../utils/auth";
+import {
+	removeToken,
+	removeClientId,
+	removeBusinessId
+} from "../../utils/auth";
+import { withRouter } from "react-router";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -29,15 +34,16 @@ function ListItemLink(props) {
 	return <ListItem button component={Link} {...props} />;
 }
 
-export default function SimpleList() {
+function SimpleList(props) {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(true);
 	const handleClick = () => {
 		setOpen(!open);
 	};
-	const businessId = getBusinessId();
+	const businessId = props.match.params.businessId;
 	const handleLogOut = () => {
 		removeToken();
+		removeClientId();
 		removeBusinessId();
 	};
 
@@ -113,3 +119,5 @@ export default function SimpleList() {
 		</div>
 	);
 }
+
+export default withRouter(SimpleList);
