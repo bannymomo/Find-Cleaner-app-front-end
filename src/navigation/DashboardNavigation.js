@@ -18,18 +18,20 @@ class DashboardNavigation extends Component {
 	};
 
 	renderLink = index => {
+		const businessId = getBusinessId();
+		const clientId = getClientId();
 		const links = [
 			{
 				name: "Notification",
-				to: getClientId()
-					? `${CLIENT_BASE_URL}/${getClientId()}/notification`
-					: `${BUSINESS_BASE_URL}/${getBusinessId()}/notification`
+				to: clientId
+					? `${CLIENT_BASE_URL}/${clientId}/notification`
+					: `${BUSINESS_BASE_URL}/${businessId}/notification`
 			},
 			{
 				name: "Message",
-				to: getClientId()
-					? `${CLIENT_BASE_URL}/${getClientId()}/message`
-					: `${BUSINESS_BASE_URL}/${getBusinessId()}/message`
+				to: clientId
+					? `${CLIENT_BASE_URL}/${clientId}/message`
+					: `${BUSINESS_BASE_URL}/${businessId}/message`
 			}
 		];
 		return (
@@ -52,6 +54,7 @@ class DashboardNavigation extends Component {
 		this.setState({ linksActive });
 	};
 	render() {
+		const businessId = getBusinessId();
 		return (
 			<header
 				className="nav-bar__header--white"
@@ -87,9 +90,7 @@ class DashboardNavigation extends Component {
 								color: "white"
 							}}
 						>
-							{getBusinessId()
-								? `Browse your task`
-								: `Post your task`}
+							{businessId ? `Browse your task` : `Post your task`}
 						</Button>
 					</div>
 				</div>
