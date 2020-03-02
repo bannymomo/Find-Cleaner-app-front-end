@@ -27,8 +27,9 @@ class OrderHistory extends React.Component {
 		isLoading: false,
 		pagination: {
 			page:1,
-			pageSize:5
+			pageSize:5,
 		},
+		searchStatus: '',
 		role: clientRole,
 	}
 
@@ -54,27 +55,34 @@ class OrderHistory extends React.Component {
 	}
 	
 	handlePageChange = (event, data) => {
-		this.loadOrders(data)
+		const pageSize = this.state.pagination.pageSize;
+		const status = this.state.searchStatus
+		this.loadOrders(data, pageSize, status);
 	}
 
 	handleSearchNew = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, newOrder);
+		this.setState({ searchStatus: newOrder });
 	}
 	
 	handlesearchAccepted = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, accepted);
+		this.setState({ searchStatus: accepted });
 	}
 
 	handlesearchDone = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, done);
+		this.setState({ searchStatus: done });
 	}
 
 	handleSearchWithdraw = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByClient);
+		this.setState({ searchStatus: cancelledByClient });
 	}
 
 	handlesearchCancelled = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByBusiness);
+		this.setState({ cancelledByBusiness });
 	}
 
 

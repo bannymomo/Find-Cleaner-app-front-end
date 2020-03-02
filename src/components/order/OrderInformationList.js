@@ -84,7 +84,9 @@ export default function OrderInformationList(props) {
                         open={open1}
                         onClick={handleClose}
                     >
-                        <Maps />
+                        <Maps 
+                            address={props.location}
+                        />
                     </Backdrop>
                 </div>
             </ListItem>

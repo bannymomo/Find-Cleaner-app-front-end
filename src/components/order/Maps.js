@@ -5,11 +5,15 @@ import {
 	GoogleMap,
 	Marker
 } from "react-google-maps";
+import getLocation from '../.././api/geocoding'; 
+
+
 
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 const CustomSkinMap = withScriptjs(
-	withGoogleMap(() => (
+	withGoogleMap( props => (
+		console.log(getLocation(props.address)),
 		<GoogleMap
 			defaultZoom={13}
 			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
@@ -84,18 +88,21 @@ const CustomSkinMap = withScriptjs(
 				]
 			}}
 		>
-			<Marker position={{ lat: 40.748817, lng: -73.985428 }} />
+			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
+			
+			{/* <Marker position={getLocation(props.address)} /> */}
 		</GoogleMap>
 	))
 );
 
-export default function Maps() {
+export default function Maps(props) {
 	return (
 		<CustomSkinMap
 			googleMapURL={googleMapURL}
 			loadingElement={<div style={{ height: `100%` }} />}
 			containerElement={<div style={{ height: `100%`, width: `100%` }} />}
 			mapElement={<div style={{ height: `100%` }} />}
+			address={props.address}
 		/>
 	);
 }
