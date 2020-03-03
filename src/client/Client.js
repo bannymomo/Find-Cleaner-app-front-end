@@ -17,7 +17,7 @@ class Client extends Component {
 						</div>
 					</div>
 
-					<div className="client__content-container--page-ight">
+					<div className="client__content-container--page-right">
 						<div className="client__burgerIcon">
 							<TemporaryDrawer />
 						</div>
