@@ -21,8 +21,12 @@ import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
 import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
-import { removeToken, removeClientId } from "../../utils/auth";
-import { getClientId } from "../../utils/auth";
+import {
+	removeToken,
+	removeBusinessId,
+	removeClientId
+} from "../../utils/auth";
+import { withRouter } from "react-router";
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -50,7 +54,7 @@ const useStylesModal = makeStyles(theme => ({
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
-		padding: theme.spacing(2, 4, 3),
+		padding: theme.spacing(1, 4, 2),
 		outline: 0
 	},
 	button: {
@@ -87,10 +91,11 @@ function SimpleList(props) {
 		setModalOpen(false);
 	};
 
-	const clientId = getClientId();
+	const clientId = props.match.params.clientId;
 	const handleLogOut = () => {
 		removeToken();
 		removeClientId();
+		removeBusinessId();
 	};
 
 	props.history.listen(() => setModalOpen(false))
@@ -117,7 +122,8 @@ function SimpleList(props) {
 						disableScrollLock
 						BackdropComponent={Backdrop}
 						BackdropProps={{
-							timeout: 1000
+							timeout: 1000,
+							open: modalOpen ? true : false
 						}}
 					>
 						<Fade in={modalOpen}>
@@ -199,3 +205,4 @@ function SimpleList(props) {
 }
 
 export default withRouter(SimpleList);
+

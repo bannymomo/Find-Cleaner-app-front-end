@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { CLIENT_BASE_URL } from "./URLMap";
-import DashBoard from "../client/DashBoard/DashBoard";
+import ClientDashboard from "../client/DashBoard/ClientDashBoard";
 import Account from "../client/ClientSetting/Account/Account";
 import Password from "../client/ClientSetting/Password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
@@ -18,12 +18,12 @@ const ClientRoutes = () => (
 			exact
 			from={`${CLIENT_BASE_URL}/:clientId`}
 			to={`${CLIENT_BASE_URL}/:clientId/dashboard`}
-			component={DashBoard}
+			component={ClientDashboard}
 		/>
 		<Route
 			exact
 			path={`${CLIENT_BASE_URL}/:clientId/dashboard`}
-			component={DashBoard}
+			component={ClientDashboard}
 		/>
 		<Route
 			exact

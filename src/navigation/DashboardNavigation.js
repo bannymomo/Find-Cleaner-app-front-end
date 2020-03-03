@@ -10,7 +10,8 @@ import {
 	CLIENT_BASE_URL,
 	BUSINESS_BASE_URL
 } from "../routes/URLMap";
-import { getClientId, getBusinessId } from "../utils/auth";
+
+import { withRouter } from "react-router";
 
 class DashboardNavigation extends Component {
 	state = {
@@ -18,8 +19,8 @@ class DashboardNavigation extends Component {
 	};
 
 	renderLink = index => {
-		const businessId = getBusinessId();
-		const clientId = getClientId();
+		const businessId = this.props.match.params.businessId;
+		const clientId = this.props.match.params.clientId;
 		const links = [
 			{
 				name: "Notification",
@@ -54,7 +55,7 @@ class DashboardNavigation extends Component {
 		this.setState({ linksActive });
 	};
 	render() {
-		const businessId = getBusinessId();
+		const businessId = this.props.match.params.businessId;
 		return (
 			<header
 				className="nav-bar__header--white"
@@ -99,4 +100,4 @@ class DashboardNavigation extends Component {
 	}
 }
 
-export default DashboardNavigation;
+export default withRouter(DashboardNavigation);

@@ -1,0 +1,86 @@
+@import "../../../../theme/variables.scss";
+
+.business-profile__sidebar--page-left {
+	// width: 360px;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	box-shadow: 5px 0px 53px -4px rgba(0, 0, 0, 0.05);
+	& .business-profile__sidebar {
+		& li {
+			padding: 0 3rem;
+			margin: 10px auto;
+		}
+		& li.MuiDivider-middle {
+			margin: 14px 3rem;
+		}
+		& .MuiTypography-body1 {
+			text-align: justify;
+			font-size: 1.2rem;
+			font-weight: 500;
+			line-height: 2;
+			margin: 0;
+			letter-spacing: 1px;
+		}
+		& .MuiTypography-body2 {
+			font-size: 0.9rem;
+			& > span {
+				color: $primary-color-blue;
+			}
+		}
+		& .MuiTypography-subtitle1 {
+			font-size: 1rem;
+			line-height: 1.5;
+			font-weight: 500;
+			margin-left: -10px;
+			color: $primary-color-blue;
+		}
+
+		& .MuiTypography-subtitle2 {
+			font-size: 0.9rem;
+			line-height: 1.5;
+		}
+
+		& .MuiTypography-overline {
+			text-decoration: none;
+			color: $primary-color-blue;
+			text-transform: lowercase;
+			font-size: 0.9rem;
+			font-weight: 300;
+			margin: 0;
+		}
+
+		& .MuiListItem-root > .MuiSvgIcon-root {
+			margin: auto 20px auto 0;
+			color: #757575;
+		}
+		& .business-profile__avatar {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			& > .MuiListItemText-root:nth-child(2) {
+				margin-top: 0.5rem;
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.business-profile__container--page-right {
+	width: 600px;
+	display: flex;
+	padding: 1.2rem 2rem;
+
+	& .business-profile__container {
+		& h6.MuiTypography-subtitle1 {
+			text-transform: capitalize;
+			font-size: 1.2rem;
+			font-weight: 500;
+		}
+
+		& .MuiTypography-body2 {
+			text-align: left;
+			font-size: 0.9rem;
+			line-height: 1.7;
+		}
+	}
+}

@@ -22,6 +22,10 @@ import CardHeader from "./card/CardHeader";
 import CardBody from "./card/CardBody";
 import CardFooter from "./card/CardFooter";
 import CardIcon from "./card/CardIcon.js";
+import TotalOrdersNumber from "./TotalOrdersNumber";
+import TotalNewOrdersNumber from "./TotalNewOrdersNumber";
+import TotalAssignedOrdersNumber from "./TotalAssignedOrdersNumber";
+import FavoriteCleanersNumber from "./FavoriteCleanersNumber";
 
 import {
 	dailySalesChart,
@@ -50,7 +54,6 @@ export default function Chart() {
 									<Icon>content_copy</Icon>
 								</CardIcon>
 							</animated.div>
-							<p className={classes.cardCategory}>2023</p>
 						</CardHeader>
 						<animated.h3
 							style={props}
@@ -60,7 +63,7 @@ export default function Chart() {
 						>
 							Total orders
 						</animated.h3>
-
+						<TotalOrdersNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -80,7 +83,6 @@ export default function Chart() {
 									<Icon>info_outline</Icon>
 								</CardIcon>
 							</animated.div>
-							<p className={classes.cardCategory}>75</p>
 						</CardHeader>
 						<animated.h3
 							style={props}
@@ -90,7 +92,7 @@ export default function Chart() {
 						>
 							Awaiting offers
 						</animated.h3>
-
+						<TotalNewOrdersNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -110,7 +112,6 @@ export default function Chart() {
 									<Store />
 								</CardIcon>
 							</animated.div>
-							<p className={classes.cardCategory}>45</p>
 						</CardHeader>
 						<animated.h3
 							style={props}
@@ -118,9 +119,9 @@ export default function Chart() {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Completed Orders
+							Assigned orders
 						</animated.h3>
-
+						<TotalAssignedOrdersNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}
@@ -140,7 +141,6 @@ export default function Chart() {
 									<Accessibility />
 								</CardIcon>
 							</animated.div>
-							<p className={classes.cardCategory}>355+</p>
 						</CardHeader>
 						<animated.h3
 							style={props}
@@ -150,7 +150,7 @@ export default function Chart() {
 						>
 							Favorite cleaners
 						</animated.h3>
-
+						<FavoriteCleanersNumber />
 						<CardFooter stats>
 							<animated.div
 								style={props}

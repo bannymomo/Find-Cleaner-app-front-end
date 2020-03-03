@@ -22,9 +22,11 @@ import {
 } from "../../routes/URLMap";
 import {
 	setToken,
+	getTokenRole,
 	setClientId,
 	setBusinessId,
-	getTokenRole
+	removeClientId,
+	removeBusinessId
 } from "../../utils/auth";
 import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
@@ -61,6 +63,8 @@ class Login extends React.Component {
 				.then(data => {
 					this.setState({ isLoading: false }, () => {
 						setToken(data.token);
+						removeClientId();
+						removeBusinessId();
 						if (getTokenRole() === "client") {
 							setClientId(data.clientId);
 							const locationState = this.props.location.state;

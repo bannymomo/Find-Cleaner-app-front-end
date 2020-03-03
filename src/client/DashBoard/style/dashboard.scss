@@ -62,4 +62,18 @@
 		color: #757575;
 		margin: 10px 0 0 18px;
 	}
+	.card__number--top-right {
+		position: absolute;
+		right: 15px;
+		top: 0;
+		color: #999999;
+	}
+
+	.card__number-container--top-right {
+		position: absolute;
+		right: 15px;
+		top: 10px;
+		text-align: center;
+		color: #ebebeb;
+	}
 }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ListArray from "./components/ListArray";
 import "./style/dashboard.scss";
 import Chart from "./components/Chart";
+import CommentArry from "./components/CommentArray";
 
-class Dashboard extends Component {
+class BusinessDashboard extends Component {
 	render() {
 		return (
 			<div className="dashboard__container--whole">
@@ -13,15 +13,15 @@ class Dashboard extends Component {
 						Get it done today
 					</span>
 					<p className="dashboard__paragraph--content">
-						To-do list never getting shorter? Take the burden off
-						and find the help you need on Broomer.
+						Massive work is waiting for you, go and see the task
+						list
 					</p>
 				</div>
 				<Chart />
-				<ListArray />
+				<CommentArry />
 			</div>
 		);
 	}
 }
 
-export default Dashboard;
+export default BusinessDashboard;

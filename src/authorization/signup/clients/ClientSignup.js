@@ -19,7 +19,11 @@ import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
 import MainNavigation from "../../../navigation/MainNavigation";
 import { createClient } from "../../../api/client";
-import { setClientId } from "../../../utils/auth";
+import {
+	setClientId,
+	removeBusinessId,
+	removeClientId
+} from "../../../utils/auth";
 
 const theme = createMuiTheme({
 	palette: {
@@ -93,6 +97,8 @@ class ClientSignup extends Component {
 		this.setState({ isLoading: true }, () => {
 			createClient(clientInfo).then(data => {
 				this.setState({ isLoading: false }, () => {
+					removeClientId();
+					removeBusinessId();
 					const clientId = data._id;
 					setClientId(clientId);
 					const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
