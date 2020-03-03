@@ -85,7 +85,7 @@ class BrowseOrder extends Component {
 					)}
 					<Grid item xs={6}>
 						{ !this.state.isLoading && !this.state.orders.length && (
-							<p> There is no orders at the moment. </p>
+							<p> There is no opened orders at the moment. </p>
 						)}
 						{
 							this.state.orders.map( order => (

@@ -101,7 +101,7 @@ class OrderHistory extends React.Component {
 								<LinearProgress />
 						)}
 						{!this.state.isLoading && !this.state.orders.length && (
-							<p> You don't have any order yet. </p>
+							<p>  There isn't any order. </p>
 						)}
 						{
 							this.state.orders.map( order => (

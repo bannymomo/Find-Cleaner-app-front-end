@@ -10,6 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { CLIENT_BASE_URL, HOMEPAGE_URL } from "../../routes/URLMap";
 import TakeOrder from "../Take-Order/TakeOrder";
 import Modal from "@material-ui/core/Modal";
@@ -45,6 +46,7 @@ const useStylesModal = makeStyles(theme => ({
 		position: "relative",
 		width: "960px",
 		height: "98%",
+		overflow: "scroll",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
@@ -66,7 +68,7 @@ function ListItemLink(props) {
 	return <ListItem button component={Link} {...props} />;
 }
 
-export default function SimpleList() {
+function SimpleList(props) {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(true);
 	const handleClick = () => {
@@ -90,6 +92,8 @@ export default function SimpleList() {
 		removeToken();
 		removeClientId();
 	};
+
+	props.history.listen(() => setModalOpen(false))
 
 	return (
 		<div>
@@ -193,3 +197,5 @@ export default function SimpleList() {
 		</div>
 	);
 }
+
+export default withRouter(SimpleList);

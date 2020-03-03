@@ -50,28 +50,28 @@ export default function CustomizedDividers(props) {
 					value="0"
 					aria-label="no bathroom"
 				>
-					0
+					<span className="MuiTouchRipple-root">0</span>
 				</ToggleButton>
 				<ToggleButton
 					name="bathrooms"
 					value="1"
 					aria-label="one bathroom"
 				>
-					1
+					<span className="MuiTouchRipple-root">1</span>
 				</ToggleButton>
 				<ToggleButton
 					name="bathrooms"
 					value="2"
 					aria-label="two bathrooms"
 				>
-					2
+					<span className="MuiTouchRipple-root">2</span>
 				</ToggleButton>
 				<ToggleButton
 					name="bathrooms"
 					value="3"
 					aria-label="three bathrooms"
 				>
-					3+
+					<span className="MuiTouchRipple-root">3+</span>
 				</ToggleButton>
 			</StyledToggleButtonGroup>
 		</div>

@@ -13,7 +13,7 @@ const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 const CustomSkinMap = withScriptjs(
 	withGoogleMap( props => (
-		console.log(getLocation(props.address)),
+		// console.log(getLocation(props.address)),
 		<GoogleMap
 			defaultZoom={13}
 			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
