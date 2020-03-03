@@ -3,7 +3,7 @@ import "./style/dashboard.scss";
 import Chart from "./components/Chart";
 import CommentArry from "./components/CommentArray";
 
-class Dashboard extends Component {
+class BusinessDashboard extends Component {
 	render() {
 		return (
 			<div className="dashboard__container--whole">
@@ -24,4 +24,4 @@ class Dashboard extends Component {
 	}
 }
 
-export default Dashboard;
+export default BusinessDashboard;
