@@ -154,13 +154,13 @@ export default function OrderInformationList(props) {
                             variant="body2"
                             color="textPrimary"
                         >
-                            {props.businessName}
+                            {props.business && props.business.businessName}
                         </Typography>
                     }
                 />
                 <div className="order-information__business">
                     <div className={modalClasses.root}>
-                        <Button onClick={handleToggle2}>View Business</Button>
+                        <Button onClick={handleToggle2} disabled={props.business? false: true}>View Business</Button>
                         <Modal
                             className={modalClasses.modal}
                             open={open2}

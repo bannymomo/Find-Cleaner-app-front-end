@@ -57,6 +57,8 @@ class OrderInformaiton extends React.Component {
 		this.state = {
 			role: businessRole,
 			order: {},
+			clientName: "",
+			business: "",
 			error: null,
 			isLoading: false,
 			isUpdating: false,
@@ -74,6 +76,10 @@ class OrderInformaiton extends React.Component {
 		this.setState({ isLoading:true }, () => {
 			fetchOrderById(orderId)
 				.then(order => this.setState({ order, isLoading: false, isUpdating: false }))
+				.then(() => this.setState({ 
+					business: this.state.order.business,
+					clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}` 
+				}))
 				.catch(error => this.setState({ error }));
 		})
 	} 
@@ -157,8 +163,10 @@ class OrderInformaiton extends React.Component {
 						House Cleaning
 					</Typography>
 					<OrderInformationList 
+						clientName={this.state.clientName}
 						location={this.state.order.location}
 						dueDate={this.state.order.dueDate}
+						business={this.state.business}
 						role={this.state.role}
 					/>					
 				</Grid>
