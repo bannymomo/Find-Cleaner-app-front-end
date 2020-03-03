@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 // import ProtectedRoute from './components/ProtectedRoute'
 import Login from "../authorization/login/login";
-import ChooseRole from "../authorization/signup/ChooseRole";
 import UserSignup from "../authorization/signup/UserSignup";
 import HomePage from "../homepage/HomePage";
 import Business from "../business/Business";
@@ -23,14 +22,25 @@ const Routes = () => {
 		<Switch>
 			<Redirect exact from="/" to={HOMEPAGE_URL} />
 			<Route exact path={LOGIN_URL} component={Login} />
-			<Route exact path={SIGNUP_URL} component={ChooseRole} />
-			<Route exact path={`${SIGNUP_URL}/user`} component={UserSignup} />
+			<Route
+				exact
+				path={`${SIGNUP_URL}/user/client`}
+				component={UserSignup}
+			/>
+			<Route
+				exact
+				path={`${SIGNUP_URL}/user/business`}
+				component={UserSignup}
+			/>
 			<Route exact path={HOMEPAGE_URL} component={HomePage} />
 			<ProtectedBusinessRoute
-				path={BUSINESS_BASE_URL}
+				path={`${BUSINESS_BASE_URL}/:businessId`}
 				component={Business}
 			/>
-			<ProtectedClientRoute path={CLIENT_BASE_URL} component={Client} />
+			<ProtectedClientRoute
+				path={`${CLIENT_BASE_URL}/:clientId`}
+				component={Client}
+			/>
 		</Switch>
 	);
 };

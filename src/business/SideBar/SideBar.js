@@ -4,14 +4,19 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import Avatar from "../UI/Avatar";
+import BusinessAvatar from "./Avatar";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { BUSINESS_BASE_URL, HOMEPAGE_URL } from "../routes/URLMap";
-import { removeToken, getBusinessId, removeBusinessId } from "../utils/auth";
+import { BUSINESS_BASE_URL, HOMEPAGE_URL } from "../../routes/URLMap";
+import {
+	removeToken,
+	removeClientId,
+	removeBusinessId
+} from "../../utils/auth";
+import { withRouter } from "react-router";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -21,11 +26,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	tasksButton: {
 		margin: "0.3rem 0.5rem",
-		borderRadius: "100px",
-		padding: "0.7rem 1.6rem",
-		fontSize: "0.9rem",
-		letterSpacing: "1px",
-		fontWeight: "700"
+		padding: "0.7rem 1.6rem"
 	}
 }));
 
@@ -33,22 +34,23 @@ function ListItemLink(props) {
 	return <ListItem button component={Link} {...props} />;
 }
 
-export default function SimpleList() {
+function SimpleList(props) {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(true);
 	const handleClick = () => {
 		setOpen(!open);
 	};
-	const businessId = getBusinessId();
+	const businessId = props.match.params.businessId;
 	const handleLogOut = () => {
 		removeToken();
+		removeClientId();
 		removeBusinessId();
 	};
 
 	return (
 		<div>
 			<div className="client__avatar-container--left-top">
-				<Avatar />
+				<BusinessAvatar />
 				<p>business name</p>
 			</div>
 			<div className={classes.root}>
@@ -64,7 +66,7 @@ export default function SimpleList() {
 							color="secondary"
 							to="browse-order"
 						>
-							Browser Tasks
+							Browse Tasks
 						</Button>
 					</ListItemLink>
 					<ListItemLink
@@ -80,7 +82,7 @@ export default function SimpleList() {
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
 					>
-						<ListItemText primary="OrderHistory" />
+						<ListItemText primary="Order Management" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
 						<ListItemText primary="Setting" />
@@ -117,3 +119,5 @@ export default function SimpleList() {
 		</div>
 	);
 }
+
+export default withRouter(SimpleList);

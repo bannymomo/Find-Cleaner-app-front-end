@@ -40,7 +40,10 @@
 	& .take-order--toggle-button-group {
 		& div.MuiToggleButtonGroup-root {
 			margin-bottom: 1rem;
-
+			& .MuiTouchRipple-root {
+				top: auto;
+				bottom: auto;
+			}
 			& button:hover {
 				background-color: #3489cf;
 			}
@@ -144,4 +147,18 @@
 
 .MuiDialogActions-root button.MuiButton-textPrimary span.MuiButton-label {
 	color: $primary-color-blue;
+}
+
+.client__order-edit-page {
+	position: relative;
+	padding-left: 50px;
+	& .submitButton {
+		position: absolute;
+		right: 50px;
+		bottom: 0;
+		background-color: $primary-color-blue;
+		&:hover {
+			background-color: $primary-color-blue;
+		}
+	}
 }

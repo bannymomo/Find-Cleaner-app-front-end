@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
 	TextField,
@@ -21,9 +22,11 @@ import {
 } from "../../routes/URLMap";
 import {
 	setToken,
+	getTokenRole,
 	setClientId,
 	setBusinessId,
-	getTokenRole
+	removeClientId,
+	removeBusinessId
 } from "../../utils/auth";
 import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
@@ -60,6 +63,8 @@ class Login extends React.Component {
 				.then(data => {
 					this.setState({ isLoading: false }, () => {
 						setToken(data.token);
+						removeClientId();
+						removeBusinessId();
 						if (getTokenRole() === "client") {
 							setClientId(data.clientId);
 							const locationState = this.props.location.state;
@@ -166,7 +171,9 @@ class Login extends React.Component {
 											label="Remember me"
 										/>
 										{this.state.isLoading ? (
-											<LinearProgress />
+											<LinearProgress
+												className={classes.loading}
+											/>
 										) : (
 											<Button
 												onClick={this.login}
@@ -177,6 +184,18 @@ class Login extends React.Component {
 												Sign In
 											</Button>
 										)}
+										<div className="login__text--bottom">
+											Not sign up?{" "}
+											<Link
+												className="login__link--bottom"
+												to={{
+													pathname: `${SIGNUP_URL}/user/client`,
+													role: "client"
+												}}
+											>
+												Create an account.
+											</Link>{" "}
+										</div>
 										{!!this.state.error && (
 											<Alert severity="error">
 												Account not exits or{" "}

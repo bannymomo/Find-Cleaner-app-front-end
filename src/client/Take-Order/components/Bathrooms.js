@@ -24,12 +24,8 @@ const StyledToggleButtonGroup = withStyles(theme => ({
 	}
 }))(ToggleButtonGroup);
 
-export default function CustomizedDividers() {
-	const [number, setNumber] = React.useState("1");
-
-	const handleNumber = (event, newNumber) => {
-		setNumber(newNumber);
-	};
+export default function CustomizedDividers(props) {
+	const number = props.bathrooms.toString();
 
 	return (
 		<div className="take-order--toggle-button-group">
@@ -46,17 +42,36 @@ export default function CustomizedDividers() {
 				size="small"
 				value={number}
 				exclusive
-				onChange={handleNumber}
+				onChange={props.handleChange}
 				aria-label="bathrooms"
 			>
-				<ToggleButton value="1" aria-label="one bathroom">
-					1
+				<ToggleButton
+					name="bathrooms"
+					value="0"
+					aria-label="no bathroom"
+				>
+					<span className="MuiTouchRipple-root">0</span>
 				</ToggleButton>
-				<ToggleButton value="2" aria-label="two bathrooms">
-					2
+				<ToggleButton
+					name="bathrooms"
+					value="1"
+					aria-label="one bathroom"
+				>
+					<span className="MuiTouchRipple-root">1</span>
 				</ToggleButton>
-				<ToggleButton value="3+" aria-label="three bathrooms">
-					3+
+				<ToggleButton
+					name="bathrooms"
+					value="2"
+					aria-label="two bathrooms"
+				>
+					<span className="MuiTouchRipple-root">2</span>
+				</ToggleButton>
+				<ToggleButton
+					name="bathrooms"
+					value="3"
+					aria-label="three bathrooms"
+				>
+					<span className="MuiTouchRipple-root">3+</span>
 				</ToggleButton>
 			</StyledToggleButtonGroup>
 		</div>

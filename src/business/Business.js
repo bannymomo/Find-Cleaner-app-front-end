@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import SideBar from "./SideBar";
+import SideBar from "./SideBar/SideBar";
 import BusinessRoutes from "../routes/BusinessRoutes";
 import "./style/business.scss";
 import DashboardNavigation from "../navigation/DashboardNavigation";

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../routes/URLMap";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -13,17 +12,17 @@ import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 
 import "./style/orderHistory.scss";
-import { getClientId, getBusinessId } from "../../utils/auth";
 
 const useStyles = makeStyles({
 	root: {
 		padding: "0 20px",
+		// margin: "20px 40px",
 		marginBottom: "20px",
-		borderLeft: "solid 5px #43a047"
-		// width: "50%"
+		borderLeft: "solid 5px #3f88de"
 	},
 	card_container: {
-		borderTop: "solid 2px lightgrey"
+		borderBottom: "solid 2px lightgrey",
+		paddingTop: 10
 	},
 	media: {
 		height: 70
@@ -38,22 +37,13 @@ const useStyles = makeStyles({
 
 export default function OrderCard(props) {
 	const classes = useStyles();
-	const clientId = getClientId();
-	const businessId = getBusinessId();
-	let BASE_URL;
-	if (props.role === "client") {
-		BASE_URL = `${CLIENT_BASE_URL}/${clientId}`;
-	} else if (props.role === "business") {
-		BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;
-	}
 
 	return (
 		<CardActionArea
 			component={Link}
-			to={`${BASE_URL}/orders/${props.orderId}`}
+			to={props.to}
 		>
 			<Card className={classes.root}>
-				<p className="order-card__status">NEW</p>
 				<Grid container className={classes.card_container} spacing={1}>
 					<Grid item xs={9}>
 						<Typography
@@ -68,11 +58,11 @@ export default function OrderCard(props) {
 							<ul className="order-card__list">
 								<li>
 									<AddLocationOutlinedIcon fontSize="small" />
-									<span>116 Adelaide St, Brisbane City</span>
+									<span>{props.location}</span>
 								</li>
 								<li>
 									<DateRangeOutlinedIcon fontSize="small" />
-									<span>Sat, 15 Feb</span>
+									<span>{props.dueDate}</span>
 								</li>
 							</ul>
 						</div>
@@ -84,7 +74,7 @@ export default function OrderCard(props) {
 							variant="h5"
 							component="h2"
 						>
-							$180
+							${props.price}
 						</Typography>
 						<Avatar
 							className="order-card__avatar"
@@ -93,6 +83,7 @@ export default function OrderCard(props) {
 						/>
 					</Grid>
 				</Grid>
+				<p className="order-card__status">{props.status}</p>
 			</Card>
 		</CardActionArea>
 	);

@@ -44,7 +44,10 @@ function ProductHero(props) {
 					size="large"
 					className={classes.button}
 					component={Link}
-					to={SIGNUP_URL}
+					to={{
+						pathname: `${SIGNUP_URL}/user/client`,
+						role: "client"
+					}}
 				>
 					Get started now
 				</Button>

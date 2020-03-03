@@ -5,19 +5,25 @@ import {
 	TextField,
 	Container,
 	CssBaseline,
-	Typography,
 	withStyles,
 	Box,
 	createMuiTheme,
-	ThemeProvider
+	ThemeProvider,
+	LinearProgress
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import Background from "../../../assets/images/auth-background.png";
-import { CLIENT_BASE_URL } from "../../../routes/URLMap";
-// import {createClient} from '../../api/client'
+import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
+import { createBusiness } from "../../../api/business";
 import logo from "../../../assets/images/logo.png";
 import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
 import MainNavigation from "../../../navigation/MainNavigation";
+import {
+	setBusinessId,
+	removeBusinessId,
+	removeClientId
+} from "../../../utils/auth";
 
 const theme = createMuiTheme({
 	palette: {
@@ -36,7 +42,7 @@ const styles = theme => ({
 		height: "100vh"
 	},
 	backGround: {
-		backgroundImage: `url(${Background})`,
+		backgroundImage: `linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(${Background})`,
 		backgroundPosition: "center",
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
@@ -48,8 +54,7 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		backgroundColor: "#FBFCFF",
-		borderRadius: "10px",
-		height: "50vh"
+		borderRadius: "10px"
 	},
 	form: {
 		width: "100%",
@@ -60,36 +65,44 @@ const styles = theme => ({
 	},
 	grid: {
 		marginTop: theme.spacing(1)
+	},
+	loading: {
+		margin: theme.spacing(2, 0)
 	}
 });
 
-class MoreInfo extends Component {
+class BusinessSignup extends Component {
 	state = {
-		firstName: "",
-		lastName: "",
+		businessName: "",
+		address: "",
 		postcode: "",
-		gender: "",
-		invalidName: false
+		telephoneNumber: "",
+		ABNNumber: "",
+		error: null,
+		isLoading: false
 	};
 
-	postClient = () => {
-		// if (this.state.firstName.length < 2 && this.state.lastName.length < 2)  {
-		//     this.setState({invalidName: true})
-		//     return;
-		// }
-		// const clientInfo= {
-		//     firstName: this.state.firstName,
-		//     lastName:this.state.lastName,
-		//     gender:this.state.gender,
-		//     email:this.props.email,
-		//     postcode:this.state.postcode
-		// }
-		// createClient(clientInfo).then( data => {
-		//   const clientId = data._id;
-		//   const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
-		//   this.props.history.replace(redirectTo);
-		// });
-		this.props.history.replace(`${CLIENT_BASE_URL}`);
+	postBusiness = () => {
+		const businessInfo = {
+			businessName: this.state.businessName,
+			address: this.state.address,
+			telephoneNumber: this.state.telephoneNumber,
+			email: this.props.email,
+			postcode: this.state.postcode,
+			ABNNumber: this.state.ABNNumber
+		};
+		this.setState({ isLoading: true }, () => {
+			createBusiness(businessInfo).then(data => {
+				this.setState({ isLoading: false }, () => {
+					removeClientId();
+					removeBusinessId();
+					const businessId = data._id;
+					setBusinessId(businessId);
+					const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
+					this.props.history.replace(redirectTo);
+				});
+			});
+		});
 	};
 
 	render() {
@@ -128,57 +141,34 @@ class MoreInfo extends Component {
 											spacing={2}
 											className={classes.grid}
 										>
-											<Grid item xs={12} sm={6}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="First Name"
-													value={this.state.firstName}
-													onChange={event =>
-														this.setState({
-															firstName:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12} sm={6}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Last Name"
-													value={this.state.lastName}
-													onChange={event =>
-														this.setState({
-															lastName:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											{this.state.invalidName ? (
-												<Typography
-													variant="h5"
-													color="secondary"
-												>
-													The length of name must be
-													longer than 2
-												</Typography>
-											) : null}
 											<Grid item xs={12}>
 												<TextField
 													variant="outlined"
 													required
 													fullWidth
-													label="Gender"
-													value={this.state.gender}
+													label="Business Name"
+													value={
+														this.state.businessName
+													}
 													onChange={event =>
 														this.setState({
-															gender:
+															businessName:
+																event.target
+																	.value
+														})
+													}
+												/>
+											</Grid>
+											<Grid item xs={12}>
+												<TextField
+													variant="outlined"
+													required
+													fullWidth
+													label="Address"
+													value={this.state.address}
+													onChange={event =>
+														this.setState({
+															address:
 																event.target
 																	.value
 														})
@@ -202,16 +192,62 @@ class MoreInfo extends Component {
 													}
 												/>
 											</Grid>
+											<Grid item xs={12}>
+												<TextField
+													variant="outlined"
+													required
+													fullWidth
+													label="Telephone Number"
+													value={
+														this.state
+															.telephoneNumber
+													}
+													onChange={event =>
+														this.setState({
+															telephoneNumber:
+																event.target
+																	.value
+														})
+													}
+												/>
+											</Grid>
+											<Grid item xs={12}>
+												<TextField
+													variant="outlined"
+													required
+													fullWidth
+													label="ABN Number"
+													value={this.state.ABNNumber}
+													onChange={event =>
+														this.setState({
+															ABNNumber:
+																event.target
+																	.value
+														})
+													}
+												/>
+											</Grid>
 										</Grid>
-										<Button
-											variant="contained"
-											fullWidth
-											color="primary"
-											className={classes.submit}
-											onClick={this.postClient}
-										>
-											Sign up
-										</Button>
+										{this.state.isLoading ? (
+											<LinearProgress
+												className={classes.loading}
+											/>
+										) : (
+											<Button
+												variant="contained"
+												fullWidth
+												color="primary"
+												className={classes.submit}
+												onClick={this.postBusiness}
+											>
+												Sign up
+											</Button>
+										)}
+										{!!this.state.error && (
+											<Alert severity="error">
+												Account not exits or{" "}
+											</Alert>
+										)}
 									</form>
 								</div>
 							</Box>
@@ -223,4 +259,4 @@ class MoreInfo extends Component {
 	}
 }
 
-export default withStyles(styles)(MoreInfo);
+export default withStyles(styles)(BusinessSignup);

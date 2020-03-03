@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./style/client.scss";
-import SideBar from "./SideBar";
+import SideBar from "./Sidebar/SideBar";
 import ClientRoutes from "../routes/ClientRoutes";
 import TemporaryDrawer from "./TemporaryDrawer";
 import DashboardNavigation from "../navigation/DashboardNavigation";

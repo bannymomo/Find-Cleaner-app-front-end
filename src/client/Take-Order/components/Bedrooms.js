@@ -25,12 +25,8 @@ const StyledToggleButtonGroup = withStyles(theme => ({
 	}
 }))(ToggleButtonGroup);
 
-export default function CustomizedDividers() {
-	const [number, setNumber] = React.useState("1");
-
-	const handleNumber = (event, newNumber) => {
-		setNumber(newNumber);
-	};
+export default function CustomizedDividers(props) {
+	const number = props.bedrooms.toString();
 
 	return (
 		<div className="take-order--toggle-button-group">
@@ -47,23 +43,46 @@ export default function CustomizedDividers() {
 				size="small"
 				value={number}
 				exclusive
-				onChange={handleNumber}
+				onChange={props.handleChange}
 				aria-label="bedrooms"
 			>
-				<ToggleButton value="1" aria-label="one bedroom">
-					1
+				<ToggleButton name="bedrooms" value="0" aria-label="no bedroom">
+					<span className="MuiTouchRipple-root">0</span>
 				</ToggleButton>
-				<ToggleButton value="2" aria-label="two bedrooms">
-					2
+				<ToggleButton
+					name="bedrooms"
+					value="1"
+					aria-label="one bedroom"
+				>
+					<span className="MuiTouchRipple-root">1</span>
 				</ToggleButton>
-				<ToggleButton value="3" aria-label="three bedrooms">
-					3
+				<ToggleButton
+					name="bedrooms"
+					value="2"
+					aria-label="two bedrooms"
+				>
+					<span className="MuiTouchRipple-root">2</span>
 				</ToggleButton>
-				<ToggleButton value="4" aria-label="four bedrooms">
-					4
+				<ToggleButton
+					name="bedrooms"
+					value="3"
+					aria-label="three bedrooms"
+				>
+					<span className="MuiTouchRipple-root">3</span>
 				</ToggleButton>
-				<ToggleButton value="5+" aria-label="five more bedrooms">
-					5+
+				<ToggleButton
+					name="bedrooms"
+					value="4"
+					aria-label="four bedrooms"
+				>
+					<span className="MuiTouchRipple-root">4</span>
+				</ToggleButton>
+				<ToggleButton
+					name="bedrooms"
+					value="5"
+					aria-label="five more bedrooms"
+				>
+					<span className="MuiTouchRipple-root">5+</span>
 				</ToggleButton>
 			</StyledToggleButtonGroup>
 		</div>
