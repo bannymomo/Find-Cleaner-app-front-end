@@ -26,7 +26,7 @@ import {
 	removeBusinessId,
 	removeClientId
 } from "../../utils/auth";
-import { withRouter } from "react-router";
+
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
