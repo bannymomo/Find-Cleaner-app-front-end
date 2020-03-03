@@ -10,6 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { CLIENT_BASE_URL, HOMEPAGE_URL } from "../../routes/URLMap";
 import TakeOrder from "../Take-Order/TakeOrder";
 import Modal from "@material-ui/core/Modal";
@@ -48,6 +49,8 @@ const useStylesModal = makeStyles(theme => ({
 		boxSizing: "border-box",
 		position: "relative",
 		width: "960px",
+		height: "98%",
+		overflow: "scroll",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
@@ -94,6 +97,8 @@ function SimpleList(props) {
 		removeClientId();
 		removeBusinessId();
 	};
+
+	props.history.listen(() => setModalOpen(false))
 
 	return (
 		<div>
@@ -200,3 +205,4 @@ function SimpleList(props) {
 }
 
 export default withRouter(SimpleList);
+

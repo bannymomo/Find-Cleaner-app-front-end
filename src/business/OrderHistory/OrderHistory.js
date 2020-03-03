@@ -27,6 +27,7 @@ class OrderHistory extends React.Component {
 			page:1,
 			pageSize:5
 		},
+		searchStatus: '',
 		role: businessRole,
 	}
 
@@ -52,19 +53,24 @@ class OrderHistory extends React.Component {
 	}
 
 	handlePageChange = (event, data) => {
-		this.loadOrders(data)
+		const pageSize = this.state.pagination.pageSize;
+		const status = this.state.searchStatus
+		this.loadOrders(data, pageSize, status);
 	}
 
 	handlesearchAccepted = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, accepted);
+		this.setState({ searchStatus: accepted });
 	}
 
 	handlesearchDone = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, done);
+		this.setState({ searchStatus: done });
 	}
 
 	handlesearchCancelled = () => {
 		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByBusiness);
+		this.setState({ cancelledByBusiness });
 	}
 
 	render () {
@@ -95,7 +101,7 @@ class OrderHistory extends React.Component {
 								<LinearProgress />
 						)}
 						{!this.state.isLoading && !this.state.orders.length && (
-							<p> You don't have any order yet. </p>
+							<p>  There isn't any order. </p>
 						)}
 						{
 							this.state.orders.map( order => (

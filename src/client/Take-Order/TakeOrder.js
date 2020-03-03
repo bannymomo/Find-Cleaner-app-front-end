@@ -45,7 +45,6 @@ class TakeOrder extends React.Component {
 			value = value === "false";
 		}
 
-		// this.setState({ [key]: value });
 		this.setState({ [key]: value }, () => {
 			let totalPrice =
 				this.state.bedrooms * 22 +
