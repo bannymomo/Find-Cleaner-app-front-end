@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { BUSINESS_BASE_URL } from "./URLMap";
-import BusinessDashboard from "../business/Dashboard/BusinessDashBoard";
+import BusinessDashboard from "../business/DashBoard/BusinessDashBoard";
 import Account from "../business/Account/Account";
 import Password from "../business/Password/Password";
 import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
