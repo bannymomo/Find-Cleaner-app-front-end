@@ -58,6 +58,8 @@ class Login extends React.Component {
 			password: this.state.password
 		};
 
+		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+
 		this.setState({ error: null, isLoading: true }, () => {
 			loginFn(loginInfo)
 				.then(data => {
@@ -69,6 +71,8 @@ class Login extends React.Component {
 							setClientId(data.clientId);
 							const locationState = this.props.location.state;
 							const redirectTo =
+								localStorage.getItem(POST_ORDER_AT_HOMEPAGE)?
+								`${CLIENT_BASE_URL}/${data.clientId}` :
 								(locationState && locationState.from) ||
 								`${CLIENT_BASE_URL}/${data.clientId}`;
 							this.props.history.replace(redirectTo);
