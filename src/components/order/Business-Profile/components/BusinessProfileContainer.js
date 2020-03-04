@@ -122,7 +122,7 @@ export default function BusinessProfileSidebar(props) {
 					<ListItemText
 						primary={
 							<Typography variant="subtitle1" color="textPrimary">
-								Services
+								About Business
 							</Typography>
 						}
 						secondary={
