@@ -15,6 +15,7 @@ import {
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
+// import { fetchClientById } from "../../api/client";
 
 import ErrorMessage from "../../UI/ErrorMessage";
 import { withRouter } from "react-router";
@@ -58,6 +59,8 @@ class OrderInformaiton extends React.Component {
 
 		this.state = {
 			order: {},
+			clientName: "",
+			business: "",
 			error: null,
 			isLoading: false,
 			isUpdating: false,
@@ -68,16 +71,30 @@ class OrderInformaiton extends React.Component {
 
 	componentDidMount() {
 		const orderId = this.props.match.params.orderId;
+		// const clientId = this.props.match.params.clientId;
 		this.loadOrder(orderId);
+		// this.getClientName(clientId);
 	}
 
 	loadOrder = orderId => {
-		this.setState({ isLoading: true }, () => {
+		this.setState({ isLoading:true }, () => {
 			fetchOrderById(orderId)
-				.then(order => this.setState({ order, isLoading: false, isUpdating:false }))
+				.then(order => this.setState({ order, isLoading: false, isUpdating: false }))
+				.then(() => this.setState({ 
+					business: this.state.order.business,
+					clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}` 
+				}))
 				.catch(error => this.setState({ error }));
-		});
-	}
+		})
+	} 
+
+	// getClientName = (clientId) => {
+	// 	this.setState({ isLoading: true }, () => {
+	// 		fetchClientById(clientId)
+	// 			.then(client => this.setState({ clientName: `${client.firstName} ${client.lastName}`, isLoading: false }))
+	// 			.catch(error => this.setState({ error }));
+	// 	});
+	// }
 
 	getButtonText = () => {
 		let buttonText;
@@ -163,10 +180,10 @@ class OrderInformaiton extends React.Component {
 							House Cleaning
 						</Typography>
 						<OrderInformationList
-							clientName="Gary L."
+							clientName={this.state.clientName}
 							location={this.state.order.location}
 							dueDate={this.state.order.dueDate}
-							businessName="Top Clean"
+							business={this.state.business}
 						/>
 					</Grid>
 					<Grid item xs={4}>

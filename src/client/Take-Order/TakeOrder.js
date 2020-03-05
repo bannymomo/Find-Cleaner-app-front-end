@@ -67,10 +67,15 @@ class TakeOrder extends React.Component {
 			path: "/clients/:clientId"
 		});
 
+		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+		localStorage.removeItem(POST_ORDER_AT_HOMEPAGE); 
+
 		let clientId;
 		if (match && match.params.clientId) {
 			clientId = match.params.clientId;
 		}
+		clientId = localStorage.getItem("clientId");
+		
 		this.setState({ isCreating: true }, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {

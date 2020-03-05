@@ -12,6 +12,7 @@ import {
 } from "../routes/URLMap";
 
 import { withRouter } from "react-router";
+import PostOrderBtn from "../components/order/PostOrderBtn";
 
 class DashboardNavigation extends Component {
 	state = {
@@ -86,15 +87,22 @@ class DashboardNavigation extends Component {
 					</ul>
 
 					<div className="nav-bar__button--blue">
-						<Button
-							variant="contained"
-							style={{
-								backgroundColor: "#3f88de",
-								color: "white"
-							}}
-						>
-							{businessId ? `Browse your task` : `Post your task`}
-						</Button>
+						{businessId ? 
+							(<Button
+								component={Link}
+								to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
+								variant="contained"
+								style={{
+									backgroundColor: "#3f88de",
+									color: "white"
+								}}
+							>
+								Browse your task
+							</Button>) :
+							<PostOrderBtn 
+								buttonInNav= {true}
+							/>
+						}
 					</div>
 				</div>
 			</header>

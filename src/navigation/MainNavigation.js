@@ -15,6 +15,7 @@ import {
 } from "../routes/URLMap";
 import { getBusinessId, getClientId } from "../utils/auth";
 import { isLoggedIn } from "../utils/auth";
+import PostOrderBtn from "../components/order/PostOrderBtn";
 
 class MainNavigation extends Component {
 	state = {
@@ -51,6 +52,7 @@ class MainNavigation extends Component {
 	render() {
 		const loginClient = getClientId();
 		const loginBussiness = getBusinessId();
+		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -99,17 +101,34 @@ class MainNavigation extends Component {
 						</Link>
 					</div>
 					<div className="nav-bar__button--blue">
-						<Button
-							variant="contained"
-							style={{
-								backgroundColor: "#3f88de",
-								color: "white"
-							}}
-						>
-							{loginBussiness && isLoggedIn()
-								? `Browse your task`
-								: `Post your task`}
-						</Button>
+						{loginBussiness && isLoggedIn() ? 
+							(<Button
+								component={Link}
+								to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
+								variant="contained"
+								style={{
+									backgroundColor: "#3f88de",
+									color: "white"
+							}}>
+								Browse your task
+							</Button>) 
+							: loginClient && isLoggedIn() ?
+							<PostOrderBtn />
+							: 
+							<Button
+								component={Link}
+								to={`${CLIENT_BASE_URL}/${loginClient}`}
+								onClick={() => {
+									localStorage.setItem(POST_ORDER_AT_HOMEPAGE, true);
+								}}
+								variant="contained"
+								style={{
+									backgroundColor: "#3f88de",
+									color: "white"
+							}}>
+								Post your task
+							</Button>
+						}
 					</div>
 				</div>
 			</header>
