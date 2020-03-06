@@ -7,10 +7,12 @@ import {
 } from "react-google-maps";
 import Geocode from "react-geocode";
 
+
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 
 const CustomSkinMap = withScriptjs(
+
 	withGoogleMap( props => (
 		<GoogleMap
 			defaultZoom={13}
@@ -86,6 +88,7 @@ const CustomSkinMap = withScriptjs(
 				]
 			}}
 		>
+
 			<Marker position={ props.location } />
 		</GoogleMap>
 	))

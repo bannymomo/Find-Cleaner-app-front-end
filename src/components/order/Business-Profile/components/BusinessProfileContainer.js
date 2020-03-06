@@ -69,6 +69,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
+	const { description } = props.business;
 	const [value] = React.useState(4.5);
 
 	const images = [
@@ -126,11 +127,13 @@ export default function BusinessProfileSidebar(props) {
 							</Typography>
 						}
 						secondary={
-							<Typography variant="body2" color="textSecondary">
-								Prestige is a locally based cleaning company
-								that specializes in providing the best quality
-								commercial and domestic cleaning services to our
-								continually growing list of clients.
+							<Typography
+								variant="body2"
+								color="textSecondary"
+								row="5"
+								multiline
+							>
+								{description}
 							</Typography>
 						}
 					/>

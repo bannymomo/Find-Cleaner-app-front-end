@@ -24,6 +24,7 @@ export default function CheckboxLabels(props) {
 					<FormControlLabel
 						control={
 							<Checkbox
+								checked={props.endOfLease}
 								name="endOfLease"
 								value={props.endOfLease}
 								onChange={props.handleChange}

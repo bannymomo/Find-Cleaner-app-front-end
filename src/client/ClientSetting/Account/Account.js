@@ -162,7 +162,6 @@ class Account extends Component {
 							/>
 							<KeyboardDatePicker
 								className="account__form--input"
-								disabled={this.state.canNotEdit}
 								disableToolbar
 								variant="inline"
 								format="MM/dd/yyyy"

@@ -161,4 +161,12 @@
 			background-color: $primary-color-blue;
 		}
 	}
+	& .take-order--typography {
+		& b {
+			font-size: 1.1rem;
+			& > span {
+				color: $primary-color-blue;
+			}
+		}
+	}
 }

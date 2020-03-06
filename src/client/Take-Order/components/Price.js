@@ -9,8 +9,8 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles(theme => ({
 	root: {
 		position: "absolute",
-		top: "2rem",
-		right: "3rem",
+		top: "3rem",
+		right: "4rem",
 		width: "15rem",
 		textAlign: "center"
 	},
