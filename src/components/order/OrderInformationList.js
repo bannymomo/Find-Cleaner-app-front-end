@@ -22,7 +22,6 @@ import "./style/orderHistory.scss";
 import Modal from "@material-ui/core/Modal";
 import Fade from "@material-ui/core/Fade";
 import { makeStyles } from "@material-ui/core/styles";
-// import { nominalTypeHack } from "prop-types";
 
 const useStylesModal = makeStyles(theme => ({
 	modal: {

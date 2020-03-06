@@ -2,21 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-
+import { 
+	Grid,
+	Card,
+	CardActionArea,
+	Avatar,
+	Typography
+} from "@material-ui/core";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
+
+import getStatusText from "../../utils/getStatusText";
 
 import "./style/orderHistory.scss";
 
 const useStyles = makeStyles({
 	root: {
 		padding: "0 20px",
-		// margin: "20px 40px",
 		marginBottom: "20px",
 		borderLeft: "solid 5px #3f88de"
 	},
@@ -79,11 +81,11 @@ export default function OrderCard(props) {
 						<Avatar
 							className="order-card__avatar"
 							alt="user1"
-							src="/1.jpg"
+							src=""
 						/>
 					</Grid>
 				</Grid>
-				<p className="order-card__status">{props.status}</p>
+				<p className="order-card__status">{getStatusText(props.status)}</p>
 			</Card>
 		</CardActionArea>
 	);

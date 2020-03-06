@@ -88,6 +88,7 @@ class TakeOrder extends React.Component {
 					this.props.history.push(
 						`${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`
 					);
+					window.location.reload(false);
 				})
 				.catch(error => this.setState({ error }));
 		});
