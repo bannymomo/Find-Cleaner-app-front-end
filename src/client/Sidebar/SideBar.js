@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
 		width: "100%",
 		maxWidth: 360,
 		backgroundColor: theme.palette.background.paper
+	},
+	divider: {
+		marginBottom: theme.spacing(3)
 	}
 }));
 
@@ -56,10 +59,8 @@ function SimpleList(props) {
 		<div>
 			<ClientAvatar />
 			<div className={classes.root}>
-				<Divider />
-				<PostOrderBtn 
-					buttonInNav= {false}
-				/>
+				<Divider className={classes.divider} />
+				<PostOrderBtn buttonInNav={false} />
 				<List component="nav" aria-label="secondary mailbox folders">
 					<ListItemLink
 						to={`${CLIENT_BASE_URL}/${clientId}/dashboard`}
@@ -123,4 +124,3 @@ function SimpleList(props) {
 }
 
 export default withRouter(SimpleList);
-
