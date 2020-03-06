@@ -15,7 +15,6 @@ import {
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
-// import { fetchClientById } from "../../api/client";
 
 import ErrorMessage from "../../UI/ErrorMessage";
 import { withRouter } from "react-router";
@@ -28,7 +27,7 @@ import {
     cancelledByBusiness, 
     done 
 } from "../../utils/variables";
-
+import getStatusText from "../../utils/getStatusText";
 
 const listArray = [
 	{
@@ -71,9 +70,7 @@ class OrderInformaiton extends React.Component {
 
 	componentDidMount() {
 		const orderId = this.props.match.params.orderId;
-		// const clientId = this.props.match.params.clientId;
 		this.loadOrder(orderId);
-		// this.getClientName(clientId);
 	}
 
 	loadOrder = orderId => {
@@ -87,14 +84,6 @@ class OrderInformaiton extends React.Component {
 				.catch(error => this.setState({ error }));
 		})
 	} 
-
-	// getClientName = (clientId) => {
-	// 	this.setState({ isLoading: true }, () => {
-	// 		fetchClientById(clientId)
-	// 			.then(client => this.setState({ clientName: `${client.firstName} ${client.lastName}`, isLoading: false }))
-	// 			.catch(error => this.setState({ error }));
-	// 	});
-	// }
 
 	getButtonText = () => {
 		let buttonText;
@@ -120,11 +109,6 @@ class OrderInformaiton extends React.Component {
 		return buttonText;
 	}
 
-	isActive = value => {
-		return this.state.order.status === value ?
-			"order-information__status-active" : "";
-	}
-
 	isEditDisabled = () => {
 		if (this.state.order.status === newOrder) return false;
 		return true;
@@ -137,18 +121,26 @@ class OrderInformaiton extends React.Component {
 
 	handleChangeStatus = () => {
 		let status;
+		const orderId = this.state.order._id;
+		const clientId = this.props.match.params.clientId;
+
 		if (this.state.order.status === newOrder) {
 			status = cancelledByClient;
+			if (window.confirm(`Do you want to cancel this order?`)) {
+				this.setState({isUpdating: true}, () => {
+					changeOrderStatusByClient(orderId, clientId, status)
+						.then(() => this.loadOrder(orderId))
+						.catch(error => this.setState({error}));
+				});
+			}
 		} else if (this.state.order.status === accepted) {
 			status = done;
+			this.setState({isUpdating: true}, () => {
+				changeOrderStatusByClient(orderId, clientId, status)
+					.then(() => this.loadOrder(orderId))
+					.catch(error => this.setState({error}));
+			});
 		}
-		this.setState({isUpdating: true}, () => {
-			const orderId = this.state.order._id;
-			const clientId = this.props.match.params.clientId;
-			changeOrderStatusByClient(orderId, clientId, status)
-				.then(() => this.loadOrder(orderId))
-				.catch(error => this.setState({error}));
-		});
 	}
 	
 	handleExpand = () => {
@@ -169,11 +161,7 @@ class OrderInformaiton extends React.Component {
 					<Grid item xs={8}>
 						<div className="order-information__head">
 							<ul className="order-information__status">
-								<li className={this.isActive(newOrder)}>New</li>
-								<li className={this.isActive(cancelledByClient)}>Withdrawn</li>
-								<li className={this.isActive(cancelledByBusiness)}>Cancelled</li>
-								<li className={this.isActive(accepted)}>Assigned</li>
-								<li className={this.isActive(done)}>Completed</li>
+								<li className="order-information__status-active">{getStatusText(this.state.order.status)}</li>
 							</ul>
 						</div>
 						<Typography variant="h5" component="h2">

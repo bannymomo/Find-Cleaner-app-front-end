@@ -48,6 +48,17 @@ const OrderNavBar = props => {
                         </ListItem>
                     </React.Fragment>
                 }
+                { props.role === clientRole && 
+                    <React.Fragment>
+                        <Divider />
+                        <ListItem button
+                            status= {cancelledByClient}
+                            onClick={props.searchWithdraw}
+                        >
+                            <ListItemText primary="Orders Cancelled by Client" />
+                        </ListItem>
+                    </React.Fragment>
+                }
                 <Divider />
                 <ListItem button
                     status= {accepted}
@@ -57,28 +68,17 @@ const OrderNavBar = props => {
                 </ListItem>
                 <Divider />
                 <ListItem button
+                    status= {cancelledByBusiness}
+                    onClick={props.searchCancelled}
+                >
+                    <ListItemText primary="Orders Cancelled by Business" />
+                </ListItem>
+                <Divider />
+                <ListItem button
                     status= {done}
                     onClick={props.searchDone}
                 >
                     <ListItemText primary="Completed Orders" />
-                </ListItem>
-                { props.role === clientRole && 
-                    <React.Fragment>
-                        <Divider />
-                        <ListItem button
-                            status= {cancelledByClient}
-                            onClick={props.searchWithdraw}
-                        >
-                            <ListItemText primary="Withdrawn Orders" />
-                        </ListItem>
-                    </React.Fragment>
-                }
-                <Divider />
-                <ListItem button
-                    status= {cancelledByBusiness}
-                    onClick={props.searchCancelled}
-                >
-                    <ListItemText primary="Cancelled Orders" />
                 </ListItem>
             </List>
         </div>
