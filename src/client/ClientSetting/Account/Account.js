@@ -173,7 +173,6 @@ class Account extends Component {
 								KeyboardButtonProps={{
 									"aria-label": "change date"
 								}}
-								disabled={this.state.canNotEdit}
 							/>
 						</div>
 					</div>

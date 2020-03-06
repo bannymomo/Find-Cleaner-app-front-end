@@ -4,7 +4,7 @@ import OrderCard from "../../components/order/OrderCard";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
-import Maps from "../../components/order/Maps";
+import Maps from "./components/Maps";
 import SearchBar from "./components/Search";
 import DatePosted from "./components/DatePosted";
 import NewTasks from "./components/NewTasks";
@@ -102,7 +102,11 @@ class BrowseOrder extends Component {
 						}
 					</Grid>
 					<Grid item xs={6}>
-						<Maps />
+						{!this.state.isLoading &&
+							<Maps 
+								orders={this.state.orders}
+							/>
+						}
 					</Grid>
 				</Grid>
 			</Container>

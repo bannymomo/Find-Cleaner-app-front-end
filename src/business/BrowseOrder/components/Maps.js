@@ -7,16 +7,14 @@ import {
 } from "react-google-maps";
 import Geocode from "react-geocode";
 
-
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 
 const CustomSkinMap = withScriptjs(
-
 	withGoogleMap( props => (
 		<GoogleMap
 			defaultZoom={13}
-			defaultCenter={props.location}
+			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
 			defaultOptions={{
 				scrollwheel: false,
 				zoomControl: true,
@@ -88,41 +86,52 @@ const CustomSkinMap = withScriptjs(
 				]
 			}}
 		>
+			{/* {console.log(props.locations)} */}
+			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
+			{/* {
+				props.locations.map( location => (
+					<Marker position={ location } />
+				))
+			} */}
 
-			<Marker position={ props.location } />
 		</GoogleMap>
 	))
 );
 
 export default function Maps(props) {	
-	useEffect(() => {
-		getLocation(props.address);
-	}, [ props ]);
+	// const addresses = props.orders.map( order => order.location );
 
-	const [location, setLocation] = React.useState({ lat: -27.468055, lng: 153.025035 });
+	// const [locations, setLocations] = React.useState([]);
 
-	Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
-	Geocode.setLanguage("en");
-	Geocode.setRegion("au");
-	
-	const getLocation = address => {
-		if (!address) {
-			address = "116 adelaide st, brisbane";
-		}
-		Geocode.fromAddress(`${address}`).then(
-			response => {
-				const { lat, lng } = response.results[0].geometry.location;
-				setLocation({ lat, lng });
-			},
-			error => {
-				console.error(error);
-			}
-		);
-	};
+	// Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+	// Geocode.setLanguage("en");
+	// Geocode.setRegion("au");
+
+	// useEffect(() => {
+	// 	addresses.forEach( address => {
+	// 		getLocation(address);
+	// 	});
+	// }, [addresses]);
+
+	// const getLocation = address => {
+	// 	if (!address) {
+	// 		address = "116 adelaide st, brisbane";
+	// 	}
+	// 	Geocode.fromAddress(`${address}`).then(
+	// 		response => {
+	// 			const { lat, lng } = response.results[0].geometry.location;
+	// 			locations.push({ lat, lng });
+	// 			setLocations(locations);
+	// 		},
+	// 		error => {
+	// 			console.error(error);
+	// 		}
+	// 	);
+	// };
 
 	return (
 		<CustomSkinMap
-			location={location}
+			// locations={locations}
 			googleMapURL={googleMapURL}
 			loadingElement={<div style={{ height: `100%` }} />}
 			containerElement={<div style={{ height: `100%`, width: `100%` }} />}

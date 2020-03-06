@@ -21,11 +21,11 @@ import ErrorMessage from "../../UI/ErrorMessage";
 import { 
 	businessRole,
     newOrder, 
-    cancelledByClient, 
     accepted, 
     cancelledByBusiness, 
     done 
 } from "../../utils/variables";
+import getStatusText from "../../utils/getStatusText";
 
 const listArray = [
 	{
@@ -102,11 +102,6 @@ class OrderInformaiton extends React.Component {
 		} 
 		return buttonText;
 	}
-	
-	isActive = value => {
-		return this.state.order.status === value? 
-		"order-information__status-active" : "";
-	}
 
 	isEditDisabled = () => {
 		if (this.state.order.status === newOrder) return false;
@@ -120,18 +115,26 @@ class OrderInformaiton extends React.Component {
 
 	handleChangeStatus = () => {
 		let status;
+		const orderId = this.state.order._id;
+		const businessId = this.props.match.params.businessId;
 		if (this.state.order.status === newOrder) {
 			status = accepted;
+			this.setState({ isUpdating: true }, () => {
+				changeOrderStatusByBusiness(orderId, businessId, status)
+					.then(() => this.loadOrder(orderId))
+					.catch(error => this.setState({ error }));
+			});
 		} else if (this.state.order.status === accepted) {
 			status = cancelledByBusiness;
+			if (window.confirm(`Do you want to cancel this order?`)) {
+				this.setState({ isUpdating: true }, () => {
+					changeOrderStatusByBusiness(orderId, businessId, status)
+						.then(() => this.loadOrder(orderId))
+						.catch(error => this.setState({ error }));
+				});
+			}
 		}
-		this.setState({ isUpdating: true }, () => {
-			const orderId = this.state.order._id;
-			const businessId = this.props.match.params.businessId;
-			changeOrderStatusByBusiness(orderId, businessId, status)
-				.then(() => this.loadOrder(orderId))
-				.catch(error => this.setState({ error }));
-		});
+
 	}
 
 	handleExpand = () => {
@@ -152,11 +155,7 @@ class OrderInformaiton extends React.Component {
 				<Grid item xs={8}>
 					<div className="order-information__head">
 						<ul className="order-information__status">
-							<li className={this.isActive(newOrder)}>New</li>
-							<li className={this.isActive(cancelledByClient)}>Withdrawn</li>
-							<li className={this.isActive(cancelledByBusiness)}>Cancelled</li>
-							<li className={this.isActive(accepted)}>Assigned</li>
-							<li className={this.isActive(done)}>Completed</li>
+							<li className="order-information__status-active">{getStatusText(this.state.order.status)}</li>
 						</ul>
 					</div>
 					<Typography variant="h4" component="h2">
