@@ -1,22 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	withScriptjs,
 	withGoogleMap,
 	GoogleMap,
 	Marker
 } from "react-google-maps";
-import getLocation from '../.././api/geocoding'; 
-
-
+import Geocode from "react-geocode";
 
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
+
 const CustomSkinMap = withScriptjs(
 	withGoogleMap( props => (
-		// console.log(getLocation(props.address)),
 		<GoogleMap
 			defaultZoom={13}
-			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
+			defaultCenter={props.location}
 			defaultOptions={{
 				scrollwheel: false,
 				zoomControl: true,
@@ -88,21 +86,44 @@ const CustomSkinMap = withScriptjs(
 				]
 			}}
 		>
-			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
-			
-			{/* <Marker position={getLocation(props.address)} /> */}
+			<Marker position={ props.location } />
 		</GoogleMap>
 	))
 );
 
-export default function Maps(props) {
+export default function Maps(props) {	
+	useEffect(() => {
+		getLocation(props.address);
+	}, [ props ]);
+
+	const [location, setLocation] = React.useState({ lat: -27.468055, lng: 153.025035 });
+
+	Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+	Geocode.setLanguage("en");
+	Geocode.setRegion("au");
+	
+	const getLocation = address => {
+		if (!address) {
+			address = "116 adelaide st, brisbane";
+		}
+		Geocode.fromAddress(`${address}`).then(
+			response => {
+				const { lat, lng } = response.results[0].geometry.location;
+				setLocation({ lat, lng });
+			},
+			error => {
+				console.error(error);
+			}
+		);
+	};
+
 	return (
 		<CustomSkinMap
+			location={location}
 			googleMapURL={googleMapURL}
 			loadingElement={<div style={{ height: `100%` }} />}
 			containerElement={<div style={{ height: `100%`, width: `100%` }} />}
 			mapElement={<div style={{ height: `100%` }} />}
-			address={props.address}
 		/>
 	);
 }
