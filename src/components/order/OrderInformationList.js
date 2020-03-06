@@ -160,7 +160,9 @@ export default function OrderInformationList(props) {
 						>
 							<Fade in={open2}>
 								<div className={modalClasses.paper}>
-									<BusinessProfile />
+									<BusinessProfile
+										business={props.business}
+									/>
 									<Button
 										onClick={handleClose}
 										className={modalClasses.button}
