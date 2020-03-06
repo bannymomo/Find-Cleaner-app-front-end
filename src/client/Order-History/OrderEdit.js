@@ -32,6 +32,7 @@ class OrderEdit extends React.Component {
 			carpet: false,
 			location: "",
 			dueDate: "",
+			description: "",
 			price: 0,
 
 			error: null,
@@ -59,7 +60,7 @@ class OrderEdit extends React.Component {
 						location: order.location,
 						dueDate: order.dueDate,
 						price: order.price,
-						description: "",
+						description: order.description,
 						isLoading: false,
 						isUpdating: false
 					})
