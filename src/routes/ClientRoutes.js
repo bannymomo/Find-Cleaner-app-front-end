@@ -59,6 +59,7 @@ const ClientRoutes = () => (
 			exact
 			path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId/edit`}
 			component={OrderEdit}
+			// render={props => <OrderEdit {...props} isAuthed={true} />}
 		/>
 		<Route
 			exact

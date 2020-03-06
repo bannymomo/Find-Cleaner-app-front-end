@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
 	root: {
+		marginBottom: theme.spacing(3),
 		"& > *": {
 			marginLeft: theme.spacing(1.2)
 		}
@@ -17,7 +18,7 @@ function BasicDateTimePicker(props) {
 	const handleOnChange = (value, newDate) => {
 		handleDateChange(newDate);
 		props.handleChangeDate(value);
-	}
+	};
 
 	return (
 		<div className="take-order--date-time-picker">

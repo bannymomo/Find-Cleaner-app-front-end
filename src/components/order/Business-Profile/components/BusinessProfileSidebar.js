@@ -38,7 +38,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
-
+	const {
+		ABNNumber,
+		photo,
+		businessName,
+		email,
+		address,
+		telephoneNumber,
+		postcode,
+		memberSince,
+		lastOnline
+	} = props.business;
 	return (
 		<div className="business-profile__sidebar">
 			<List>
@@ -46,10 +56,10 @@ export default function BusinessProfileSidebar(props) {
 					<Avatar
 						className={classes.avatar}
 						alt="Business"
-						src="/1.jpg"
+						src={photo}
 					/>
 
-					<ListItemText primary="Prestige Home Cleaning" />
+					<ListItemText primary={businessName} />
 
 					<div className={classes.rating}>
 						<Rating
@@ -72,7 +82,7 @@ export default function BusinessProfileSidebar(props) {
 					<ListItemText
 						secondary={
 							<Typography variant="body2" color="textSecondary">
-								ABN <span>70 967 556 765</span>
+								ABN <span>{ABNNumber}</span>
 							</Typography>
 						}
 					/>
@@ -101,7 +111,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								07 46 987 038
+								{telephoneNumber}
 							</Typography>
 						}
 					/>
@@ -115,7 +125,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								prestige@info.com
+								{email}
 							</Typography>
 						}
 					/>
@@ -128,25 +138,13 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								PO BOX 90 Brisbane City QLD 4000
+								{address}, {postcode}
 							</Typography>
 						}
 					/>
 				</ListItem>
 				<Divider variant="middle" component="li" />
-				{/* <ListItem alignItems="flex-start">
-					<LanguageOutlinedIcon />
-					<ListItemText
-						secondary={
-							<Typography
-								variant="subtitle2"
-								color="textSecondary"
-							>
-								Speak English, Manderin
-							</Typography>
-						}
-					/>
-				</ListItem> */}
+
 				<ListItem alignItems="flex-start">
 					<UpdateOutlinedIcon />
 					<ListItemText
@@ -155,7 +153,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Member since May 2018
+								Member since: {memberSince}
 							</Typography>
 						}
 					/>
@@ -168,7 +166,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Last online 2 days ago
+								Last online: {lastOnline}
 							</Typography>
 						}
 					/>

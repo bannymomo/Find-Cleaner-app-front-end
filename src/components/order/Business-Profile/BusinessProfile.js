@@ -8,12 +8,12 @@ export default function BusinessProfile(props) {
 		<Fragment>
 			<div className="business-profile__sidebar--page-left">
 				<div>
-					<BusinessProfileSideBar />
+					<BusinessProfileSideBar business={props.business} />
 				</div>
 			</div>
 
 			<div className="business-profile__container--page-right">
-				<BusinessProfileContainer />
+				<BusinessProfileContainer business={props.business} />
 			</div>
 		</Fragment>
 	);

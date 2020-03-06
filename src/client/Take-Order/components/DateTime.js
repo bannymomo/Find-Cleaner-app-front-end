@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import EventAvailableOutlinedIcon from "@material-ui/icons/EventAvailableOutlined";
+// import { format } from "date-fns";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -22,25 +23,25 @@ export default function BasicTextFields(props) {
 		<div className="take-order--textfield">
 			<Grid container>
 				<Grid>
-					<LocationOnOutlinedIcon />
+					<EventAvailableOutlinedIcon />
 				</Grid>
 				<Grid>
-					<Typography>Where do you need the cleaning?</Typography>
+					<Typography>When do you need the cleaning?</Typography>
 				</Grid>
 			</Grid>
 
 			<form className={classes.root} autoComplete="off">
 				<TextField
-					name="location"
+					name="dueDate"
 					onChange={props.handleChange}
 					id="outlined-basic"
 					required
-					placeholder="Ann st Brisbane City QLD"
-					label="Enter your location"
+					placeholder="July 1st 09:30 a.m."
+					label="Enter your date & time"
 					variant="outlined"
 					margin="dense"
 					color="secondary"
-					value={props.location}
+					value={props.dueDate}
 				/>
 			</form>
 		</div>

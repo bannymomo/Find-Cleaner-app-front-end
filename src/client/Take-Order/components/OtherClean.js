@@ -44,12 +44,15 @@ export default function FormControlLabelPosition(props) {
 						<Paper elevation={0}>
 							<FormControlLabel
 								value="oven"
-								control={<Checkbox
-									name="oven" 
-									value={props.oven}
-									onChange={props.handleChange}
-									color="secondary" 
-									/>}
+								control={
+									<Checkbox
+										name="oven"
+										value={props.oven}
+										checked={props.oven}
+										onChange={props.handleChange}
+										color="secondary"
+									/>
+								}
 								label={<CallToActionOutlinedIcon />}
 								labelPlacement="start"
 							/>{" "}
@@ -60,12 +63,15 @@ export default function FormControlLabelPosition(props) {
 						<Paper elevation={0}>
 							<FormControlLabel
 								value="windows"
-								control={<Checkbox 
-									name="windows" 
-									value={props.windows}
-									onChange={props.handleChange}
-									color="secondary" 
-									/>}
+								control={
+									<Checkbox
+										name="windows"
+										checked={props.windows}
+										value={props.windows}
+										onChange={props.handleChange}
+										color="secondary"
+									/>
+								}
 								label={<SettingsSystemDaydreamIcon />}
 								labelPlacement="start"
 							/>{" "}
@@ -76,12 +82,15 @@ export default function FormControlLabelPosition(props) {
 						<Paper elevation={0}>
 							<FormControlLabel
 								value="cabinets"
-								control={<Checkbox 
-									name="cabinets" 
-									value={props.cabinets}
-									onChange={props.handleChange}
-									color="secondary" 
-									/>}
+								control={
+									<Checkbox
+										name="cabinets"
+										value={props.cabinets}
+										checked={props.cabinets}
+										onChange={props.handleChange}
+										color="secondary"
+									/>
+								}
 								label={<StorageIcon />}
 								labelPlacement="start"
 							/>{" "}
@@ -92,12 +101,15 @@ export default function FormControlLabelPosition(props) {
 						<Paper elevation={0}>
 							<FormControlLabel
 								value="carpet"
-								control={<Checkbox 
-									name="carpet" 
-									value={props.carpet}
-									onChange={props.handleChange}
-									color="secondary" 
-									/>}
+								control={
+									<Checkbox
+										name="carpet"
+										value={props.carpet}
+										checked={props.carpet}
+										onChange={props.handleChange}
+										color="secondary"
+									/>
+								}
 								label={<GridOnIcon />}
 								labelPlacement="start"
 							/>{" "}

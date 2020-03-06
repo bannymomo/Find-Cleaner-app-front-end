@@ -7,6 +7,7 @@ import Location from "./components/Location";
 import Date from "./components/Date";
 import Time from "./components/Time";
 import Price from "./components/Price";
+import Description from "./components/Description";
 import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
@@ -27,9 +28,10 @@ class TakeOrder extends React.Component {
 			windows: false,
 			cabinets: false,
 			carpet: false,
-			location: '',
-			dueDate: '',
+			location: "",
+			dueDate: "",
 			price: 0,
+			description: "",
 			error: null,
 			isCreating: false
 		};
@@ -40,7 +42,11 @@ class TakeOrder extends React.Component {
 		let value = event.target.value;
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
-		} else if (key === "location" || key === "dueDate") {
+		} else if (
+			key === "location" ||
+			key === "dueDate" ||
+			key === "description"
+		) {
 		} else {
 			value = value === "false";
 		}
@@ -68,20 +74,21 @@ class TakeOrder extends React.Component {
 		});
 
 		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
-		localStorage.removeItem(POST_ORDER_AT_HOMEPAGE); 
+		localStorage.removeItem(POST_ORDER_AT_HOMEPAGE);
 
 		let clientId;
 		if (match && match.params.clientId) {
 			clientId = match.params.clientId;
 		}
 		clientId = localStorage.getItem("clientId");
-		
+
 		this.setState({ isCreating: true }, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {
 					this.props.history.push(
 						`${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`
 					);
+					window.location.reload(false);
 				})
 				.catch(error => this.setState({ error }));
 		});
@@ -93,9 +100,7 @@ class TakeOrder extends React.Component {
 				{!!this.state.error && (
 					<ErrorMessage error={this.state.error} />
 				)}
-				{this.state.isCreating && (
-					<LinearProgress />
-				)}
+				{this.state.isCreating && <LinearProgress />}
 				<p id="take-order">See how little it will cost...</p>
 				<Bedrooms
 					bedrooms={this.state.bedrooms}
@@ -127,6 +132,10 @@ class TakeOrder extends React.Component {
 				<Time
 					dueDate={this.state.dueDate}
 					handleChangeDate={this.handleChangeDate}
+				/>
+				<Description
+					description={this.state.description}
+					handleChange={this.handleChange}
 				/>
 				<Price
 					price={this.state.price}

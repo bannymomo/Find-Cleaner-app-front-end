@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function FormControlLabelPosition(props) {
 	let today = new Date();
-	today.setHours(23,59,59,999);
+	today.setHours(23, 59, 59, 999);
 	const inAWeek = new Date(Date.now() + 604800000);
 
 	const [selectedValue, setSelectedValue] = React.useState("");
@@ -28,11 +28,11 @@ export default function FormControlLabelPosition(props) {
 	const handleChangeToday = event => {
 		props.handleChange(event);
 		setSelectedValue("today");
-	}
+	};
 	const handleChangeInAWeek = event => {
 		props.handleChange(event);
 		setSelectedValue("in-a-week");
-	}
+	};
 	const classes = useStyles();
 
 	return (
@@ -48,30 +48,36 @@ export default function FormControlLabelPosition(props) {
 			<FormControl className={classes.root} component="fieldset">
 				<FormControlLabel
 					label="Today"
-					control={<Radio
-						checked={selectedValue === "today"}
-						onChange={handleChangeToday}
-						value={today}
-						name="dueDate"
-					/>}
-				/>
-				<FormControlLabel
-					label="By a certain day"
-					control={<Radio
-						checked={selectedValue === "by-a-certain-day"}
-						onChange={handleChange}
-						value="by-a-certain-day"
-						name="dueDate"
-					/>}
+					control={
+						<Radio
+							checked={selectedValue === "today"}
+							onChange={handleChangeToday}
+							value={today}
+							name="dueDate"
+						/>
+					}
 				/>
 				<FormControlLabel
 					label="Within 1 week"
-					control={<Radio
-						checked={selectedValue === "in-a-week"}
-						onChange={handleChangeInAWeek}
-						value={inAWeek}
-						name="dueDate"
-					/>}
+					control={
+						<Radio
+							checked={selectedValue === "in-a-week"}
+							onChange={handleChangeInAWeek}
+							value={inAWeek}
+							name="dueDate"
+						/>
+					}
+				/>
+				<FormControlLabel
+					label="By a certain day"
+					control={
+						<Radio
+							checked={selectedValue === "by-a-certain-day"}
+							onChange={handleChange}
+							value="by-a-certain-day"
+							name="dueDate"
+						/>
+					}
 				/>
 			</FormControl>
 		</div>
