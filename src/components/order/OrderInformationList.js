@@ -22,7 +22,6 @@ import "./style/orderHistory.scss";
 import Modal from "@material-ui/core/Modal";
 import Fade from "@material-ui/core/Fade";
 import { makeStyles } from "@material-ui/core/styles";
-import { nominalTypeHack } from "prop-types";
 
 const useStylesModal = makeStyles(theme => ({
     modal: {
@@ -76,7 +75,7 @@ export default function OrderInformationList(props) {
         <List>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt="user1" src="/1.jpg" />
+                    <Avatar alt="user1" src="" />
                 </ListItemAvatar>
                 <ListItemText
                     primary="POSTED BY"
@@ -145,7 +144,7 @@ export default function OrderInformationList(props) {
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt="business1" src="/1.jpg" />
+                    <Avatar alt="business1" src="" />
                 </ListItemAvatar>
                 <ListItemText
                     primary="TAKEN BY"
