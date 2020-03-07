@@ -80,11 +80,10 @@ const PostOrderBtn = props => {
 	return (
 		<div className={modalClasses.root}>
 			<Button
-				className={modalClasses.openButton}
 				variant="contained"
 				type="button"
 				onClick={handleOpen}
-				color="secondary"
+				color="primary"
 			>
 				Post a Task
 			</Button>

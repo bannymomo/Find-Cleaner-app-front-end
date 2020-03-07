@@ -6,7 +6,6 @@ import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import pic from "../assets/images/pic.png";
-import ListRoundedIcon from '@material-ui/icons/ListRounded';
 import {
 	LOGIN_URL,
 	HOMEPAGE_URL,
@@ -33,7 +32,7 @@ class MainNavigation extends Component {
 			<Link
 				to={links[index].to}
 				style={{
-					color: this.state.linksActive[index] ? "#3f88de" : ""
+					color: this.state.linksActive[index] ? "primary" : ""
 				}}
 				onClick={() => this.handleClick(index)}
 				className="nav-bar__link--black"
@@ -101,34 +100,36 @@ class MainNavigation extends Component {
 						</Link>
 					</div>
 					<div className="nav-bar__button--blue">
-						{loginBussiness && isLoggedIn() ? 
-							(<Button
+						{loginBussiness && isLoggedIn() ? (
+							<Button
 								component={Link}
 								to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
 								variant="contained"
-								style={{
-									backgroundColor: "#3f88de",
-									color: "white"
-							}}>
-								Browse your task
-							</Button>) 
-							: loginClient && isLoggedIn() ?
+								color="primary"
+							>
+								Browse all tasks
+							</Button>
+						) : loginClient && isLoggedIn() ? (
 							<PostOrderBtn />
-							: 
+						) : (
 							<Button
 								component={Link}
 								to={`${CLIENT_BASE_URL}/${loginClient}`}
 								onClick={() => {
-									localStorage.setItem(POST_ORDER_AT_HOMEPAGE, true);
+									localStorage.setItem(
+										POST_ORDER_AT_HOMEPAGE,
+										true
+									);
 								}}
 								variant="contained"
 								style={{
 									backgroundColor: "#3f88de",
 									color: "white"
-							}}>
-								Post your task
+								}}
+							>
+								Post a task
 							</Button>
-						}
+						)}
 					</div>
 				</div>
 			</header>

@@ -80,7 +80,7 @@ export default function SimpleCard(props) {
 						className={classes.button}
 						size="large"
 						variant="contained"
-						color="secondary"
+						color="primary"
 						onClick={props.handleSubmit}
 					>
 						Post My Task

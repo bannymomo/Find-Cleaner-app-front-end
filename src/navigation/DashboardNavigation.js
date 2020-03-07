@@ -16,7 +16,7 @@ import PostOrderBtn from "../components/order/PostOrderBtn";
 
 class DashboardNavigation extends Component {
 	state = {
-		linksActive: Array(2).fill(false),
+		linksActive: Array(2).fill(false)
 	};
 
 	renderLink = index => {
@@ -40,7 +40,7 @@ class DashboardNavigation extends Component {
 			<Link
 				to={links[index].to}
 				style={{
-					color: this.state.linksActive[index] ? "#3f88de" : ""
+					color: this.state.linksActive[index] ? "primary" : ""
 				}}
 				onClick={() => this.handleClick(index)}
 				className="nav-bar__link--black"
@@ -60,12 +60,7 @@ class DashboardNavigation extends Component {
 		const businessId = this.props.match.params.businessId;
 
 		return (
-			<header
-				className="nav-bar__header--white"
-				style={{
-					boxShadow: `${4}px ${4}px ${24}px rgba(0, 0, 0, 0.25)`
-				}}
-			>
+			<header className="nav-bar__header--white">
 				<div>
 					<Link to={HOMEPAGE_URL}>
 						<img
@@ -87,22 +82,18 @@ class DashboardNavigation extends Component {
 					</ul>
 
 					<div className="nav-bar__button--blue">
-						{businessId ? 
-							(<Button
+						{businessId ? (
+							<Button
 								component={Link}
 								to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
 								variant="contained"
-								style={{
-									backgroundColor: "#3f88de",
-									color: "white"
-								}}
+								color="primary"
 							>
-								Browse your task
-							</Button>) :
-							<PostOrderBtn 
-								buttonInNav= {true}
-							/>
-						}
+								Browse all tasks
+							</Button>
+						) : (
+							<PostOrderBtn buttonInNav={true} />
+						)}
 					</div>
 				</div>
 			</header>

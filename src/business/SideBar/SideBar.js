@@ -55,20 +55,18 @@ function SimpleList(props) {
 			</div>
 			<div className={classes.root}>
 				<Divider />
-				<List component="nav" aria-label="secondary mailbox folders">
-					<ListItemLink
+				<div className="business__button-container">
+					<Button
+						variant="contained"
+						type="button"
+						color="primary"
+						component={Link}
 						to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
 					>
-						<Button
-							className={classes.tasksButton}
-							variant="contained"
-							type="button"
-							color="secondary"
-							to="browse-order"
-						>
-							Browse Tasks
-						</Button>
-					</ListItemLink>
+						Browse all Tasks
+					</Button>
+				</div>
+				<List component="nav" aria-label="secondary mailbox folders">
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/dashboard`}
 					>

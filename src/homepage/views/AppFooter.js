@@ -21,10 +21,7 @@ export default function AppFooter() {
 					<ul>
 						<li>
 							<Link
-								style={{
-									textDecoration: "none",
-									color: "white"
-								}}
+								className="footer__links--white"
 								to={{
 									pathname: `${SIGNUP_URL}/user/business`,
 									role: "business"
@@ -57,7 +54,7 @@ export default function AppFooter() {
 					</ul>
 				</div>
 				<div className="footer__column-container--single">
-					<h3 style={{ minWidth: 150 + "px" }}>Download our APP</h3>
+					<h3>Download our APP</h3>
 					<button>
 						<img
 							className="footer__button-img--single"
@@ -77,7 +74,7 @@ export default function AppFooter() {
 			<div className="footer__copywirte--black">
 				<div>
 					Copyright © 2020 - 2022{" "}
-					<span style={{ fontWeight: "bold" }}>· Broomer </span>
+					<span className="footer__logo--white">· Broomer </span>
 				</div>
 
 				<div>Content · IntegrityTerms & Conditions · Terms of use</div>

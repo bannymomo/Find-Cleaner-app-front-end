@@ -44,7 +44,7 @@ export default function Chart() {
 		from: { opacity: 0 }
 	});
 	return (
-		<div style={{ padding: `${20}px ${20}px ${10}px` }}>
+		<div className="Chart__container--whole">
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
 					<Card>
