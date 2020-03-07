@@ -1,4 +1,4 @@
-import { post, put } from "./axios";
+import { post, put, get } from "./axios";
 
 const API_LOGIN_URL = "/auth";
 const API_SIGNUP_URL = "/users";
@@ -19,3 +19,9 @@ export const changePasswordById = (userId, password) => {
 	const url = `${API_SIGNUP_URL}/${userId}`;
 	return put(url, password);
 };
+
+export const getUserId = () => {
+	return get(`${API_SIGNUP_URL}/me`).then( res => 
+		 res.data.data._id
+	)
+}
