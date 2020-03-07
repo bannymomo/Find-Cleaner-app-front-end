@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ListArray from "../../client/DashBoard/components/ListArray";
 import "./style/service.scss";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import { HOMEPAGE_URL } from "../../routes/URLMap";
 
 class Service extends Component {
 	render() {
@@ -14,7 +17,15 @@ class Service extends Component {
 					To-do list never getting shorter? Take the burden off and
 					find the help you need on Broomer.
 				</p>
+
 				<ListArray />
+				<Button
+					component={Link}
+					to={`${HOMEPAGE_URL}`}
+					className="service__button--homepage"
+				>
+					Back to Homepage
+				</Button>
 			</div>
 		);
 	}
