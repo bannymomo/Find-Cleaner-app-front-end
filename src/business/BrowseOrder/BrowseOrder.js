@@ -9,7 +9,7 @@ import DatePosted from "./components/DatePosted";
 import NewTasks from "./components/NewTasks";
 import "./style/browseorders.scss";
 import Pagination from "@material-ui/lab/Pagination";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchAllNewOrders } from "../../api/order";
 
@@ -38,7 +38,7 @@ class BrowseOrder extends Component {
 		this.setState({ isLoading: true, orders: [] }, () => {
 			fetchAllNewOrders(page, pageSize)
 				.then(this.updateOrderData)
-				.catch(error => this.setState({ error }));
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
@@ -73,7 +73,14 @@ class BrowseOrder extends Component {
 							onChange={this.handlePageChange}
 							shape="rounded"
 						/>
-						{this.state.isLoading && <LinearProgress />}
+						{this.state.isLoading && (
+							<div className="browse-orders-progress__container">
+								<CircularProgress
+									size={200}
+									color="secondary"
+								/>
+							</div>
+						)}
 						<Grid
 							container
 							spacing={3}

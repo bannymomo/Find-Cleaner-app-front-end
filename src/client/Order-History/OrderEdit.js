@@ -13,10 +13,10 @@ import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import Button from "@material-ui/core/Button";
 import { fetchOrderById } from "../../api/order";
 import ErrorMessage from "../../UI/ErrorMessage";
-import { LinearProgress } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
-// import { matchPath } from "react-router-dom";
 import DateTime from "../Take-Order/components/DateTime";
+import "./order.scss";
 
 class OrderEdit extends React.Component {
 	constructor(props) {
@@ -66,7 +66,7 @@ class OrderEdit extends React.Component {
 					})
 				)
 
-				.catch(error => this.setState({ error }));
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
@@ -126,47 +126,48 @@ class OrderEdit extends React.Component {
 	render() {
 		return (
 			<div className="client__order-edit-page">
-				{!!this.state.error && (
+				{this.state.isLoading || this.state.isUpdating ? (
+					<div className="edit-orders-progress__container">
+						<CircularProgress size={200} color="secondary" />
+					</div>
+				) : !!this.state.error ? (
 					<ErrorMessage error={this.state.error} />
-				)}
-				{(this.state.isLoading || this.state.isUpdating) && (
-					<LinearProgress />
-				)}
-				<div className="client__take-order-page">
-					<p id="take-order">Update your order here...</p>
-					<Bedrooms
-						bedrooms={this.state.bedrooms}
-						handleChange={this.handleChange}
-					/>
-					<Bathrooms
-						bathrooms={this.state.bathrooms}
-						handleChange={this.handleChange}
-					/>
-					<LeaseEnd
-						endOfLease={this.state.endOfLease}
-						handleChange={this.handleChange}
-					/>
-					<OtherClean
-						oven={this.state.oven}
-						windows={this.state.windows}
-						cabinets={this.state.cabinets}
-						carpet={this.state.carpet}
-						handleChange={this.handleChange}
-					/>
-					<Location
-						location={this.state.location}
-						handleChange={this.handleChange}
-					/>
-					<DateTime
-						dueDate={this.state.dueDate}
-						handleChange={this.handleChange}
-					/>
-					<Description
-						description={this.state.description}
-						handleChange={this.handleChange}
-					/>
-					<TotalPrice price={this.state.price} />
-					{/* <Date
+				) : (
+					<div className="client__take-order-page">
+						<p id="take-order">Update your order here...</p>
+						<Bedrooms
+							bedrooms={this.state.bedrooms}
+							handleChange={this.handleChange}
+						/>
+						<Bathrooms
+							bathrooms={this.state.bathrooms}
+							handleChange={this.handleChange}
+						/>
+						<LeaseEnd
+							endOfLease={this.state.endOfLease}
+							handleChange={this.handleChange}
+						/>
+						<OtherClean
+							oven={this.state.oven}
+							windows={this.state.windows}
+							cabinets={this.state.cabinets}
+							carpet={this.state.carpet}
+							handleChange={this.handleChange}
+						/>
+						<Location
+							location={this.state.location}
+							handleChange={this.handleChange}
+						/>
+						<DateTime
+							dueDate={this.state.dueDate}
+							handleChange={this.handleChange}
+						/>
+						<Description
+							description={this.state.description}
+							handleChange={this.handleChange}
+						/>
+						<TotalPrice price={this.state.price} />
+						{/* <Date
 						dueDate={this.state.dueDate}
 						handleChange={this.handleChange}
 					/>
@@ -174,16 +175,17 @@ class OrderEdit extends React.Component {
 						dueDate={this.state.dueDate}
 						handleChangeDate={this.handleChangeDate}
 					/> */}
-					<Button
-						className="submitButton"
-						size="large"
-						variant="contained"
-						color="secondary"
-						onClick={this.handleSubmit}
-					>
-						Update my order
-					</Button>
-				</div>
+						<Button
+							className="submitButton"
+							size="large"
+							variant="contained"
+							color="secondary"
+							onClick={this.handleSubmit}
+						>
+							Update my order
+						</Button>
+					</div>
+				)}
 			</div>
 		);
 	}

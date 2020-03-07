@@ -79,9 +79,9 @@ const useStyles = makeStyles(theme => ({
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
 	const {
-		// ABNNumber,
-		// photo,
-		// businessName,
+		ABNNumber,
+		photo,
+		businessName,
 		email,
 		address,
 		telephoneNumber,
@@ -141,11 +141,6 @@ export default function BusinessProfileSidebar(props) {
 			<List>
 				<ListItem alignItems="flex-start">
 					<ListItemText
-						primary={
-							<Typography variant="h5" color="textPrimary">
-								About Business
-							</Typography>
-						}
 						secondary={
 							<Typography
 								variant="body2"

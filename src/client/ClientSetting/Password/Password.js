@@ -18,6 +18,7 @@ class Password extends Component {
 	render() {
 		return (
 			<Fragment>
+				<h3 className="password__form--header">Password</h3>
 				<div className="password__form">
 					<ul>
 						<li>

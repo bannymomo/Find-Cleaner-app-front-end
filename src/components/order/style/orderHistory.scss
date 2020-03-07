@@ -1,230 +1,228 @@
-@import '../../../theme/variables.scss';
+@import "../../../theme/variables.scss";
 
 $secondary-text-color: rgb(194, 194, 194);
 
 .order-history__navbar {
-    position: relative;
-    padding-top: 40px;
-    height: 100%;
-    min-height: 100vh;
-    &--header {
-        padding-top: 10px;
-        padding-left: 10px;
-        color: $primary-color-blue;
-        font-weight: 550;
-    }
-    &--search {
-        display: inline-block;
-        border: solid 1px $secondary-text-color;
-        margin: 10px;
-        border-radius: 5px;
-        .MuiSvgIcon-root {
-            position: relative;
-            font-size: 20px;
-            top: 5px;
-            left: 5px;
-            margin-right: 5px;
-            color: $secondary-text-color;
-        }
-        .MuiInputBase-root {
-            font-size: 15px;
-        }
-    }
+	font-family: Nunito;
+	font-style: normal;
+	position: relative;
+	height: 100%;
+	min-height: 100vh;
+	&--header {
+		font-weight: bold;
+		font-size: 20px;
+		line-height: 27px;
+		text-transform: uppercase;
+		color: $primary-color-blue;
+		margin: 15px;
+	}
+	&--search {
+		display: inline-block;
+		border: solid 1px $secondary-text-color;
+		margin: 10px;
+		border-radius: 5px;
+		.MuiSvgIcon-root {
+			position: relative;
+			font-size: 20px;
+			top: 5px;
+			left: 5px;
+			margin-right: 5px;
+			color: $secondary-text-color;
+		}
+		.MuiInputBase-root {
+			font-size: 15px;
+		}
+	}
 }
 
-.client__content-container--page-right
-.order-history__container {
-    padding-left: 0;
-    .MuiGrid-spacing-xs-2 {
-        margin: 0;
-        &> .MuiGrid-item {
-            padding: 0;
-            &:first-child {
-                border-right: solid 1px $secondary-text-color;
-            }
-        }
-    }
-    .order-history__cardlist {
-        margin: 20px auto 20px auto;
-        .MuiPagination-root {
-            margin-bottom: 10px;
-        }
-    }
+.client__content-container--page-right .order-history__container {
+	padding-left: 0;
+	.MuiGrid-spacing-xs-2 {
+		margin: 0;
+		& > .MuiGrid-item {
+			padding: 0;
+			&:first-child {
+				border-right: solid 1px $secondary-text-color;
+			}
+		}
+	}
+	.order-history__cardlist {
+		margin: 20px auto 20px auto;
+		.MuiPagination-root {
+			margin-bottom: 10px;
+		}
+	}
 }
-.business__content-container--page-right
-.order-history__container {
-    padding-left: 0;
-    .MuiGrid-spacing-xs-2 {
-        margin: 0;
-        &> .MuiGrid-item {
-            padding: 0;
-            &:first-child {
-                border-right: solid 1px $secondary-text-color;
-            }
-        }
-    }
-    .order-history__cardlist {
-        margin: 20px auto 20px auto;
-        .MuiPagination-root {
-            margin-bottom: 10px;
-        }
-    }
+.business__content-container--page-right .order-history__container {
+	padding-left: 0;
+	.MuiGrid-spacing-xs-2 {
+		margin: 0;
+		& > .MuiGrid-item {
+			padding: 0;
+			&:first-child {
+				border-right: solid 1px $secondary-text-color;
+			}
+		}
+	}
+	.order-history__cardlist {
+		margin: 20px auto 20px auto;
+		.MuiPagination-root {
+			margin-bottom: 10px;
+		}
+	}
 }
 
 .order-card__status {
-    font-family: $primary-font-family;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 10px 0;
-    color: $primary-color-blue;
-    text-transform: capitalize;
+	font-family: $primary-font-family;
+	font-size: 16px;
+	font-weight: 500;
+	margin: 10px 0;
+	color: $primary-color-blue;
+	text-transform: capitalize;
 }
 
 .order-card__list {
-    font-family: $primary-font-family;
-    list-style: none;
-    padding: 0px;
-    font-size: 15px;
-    margin-bottom: 0px;
-    li {
-        line-height: 24px;
-        display: flex;
-        vertical-align: middle;
-        margin-bottom: 5px;
-        span {
-            padding-left: 10px;
-        }
-    }
-
+	font-family: $primary-font-family;
+	list-style: none;
+	padding: 0px;
+	font-size: 15px;
+	margin-bottom: 0px;
+	li {
+		line-height: 24px;
+		display: flex;
+		vertical-align: middle;
+		margin-bottom: 5px;
+		span {
+			padding-left: 10px;
+		}
+	}
 }
 .order-card__right {
-    text-align: right;
-    .order-card__avatar {
-        margin: auto 0 auto auto;
-        width: 40px;
-        height: 40px;
-    }
+	text-align: right;
+	.order-card__avatar {
+		margin: auto 0 auto auto;
+		width: 40px;
+		height: 40px;
+	}
 }
 
 .order-information {
-    padding: 20px;
-    margin-bottom: 40px;
-    border-top: solid 3px #eee;
-    &__header {
-        padding-top: 10px;
-        color: $primary-color-blue;
-        font-weight: 550;
-    }
-    &__top .MuiListItemText-primary {
-        font-size: 0.9rem;
-        color: $secondary-text-color;
-    }
-    &__head {
-        display: flex;
-        align-items: center;
-    }
-    &__status {
-        display: flex;
-        list-style: none;
-        padding: 0;
-        font-family: $primary-font-family;
-        font-size: 15px;
-        li {
-            padding: 5px 10px;
-            border-radius: 20px;
-            color: $secondary-text-color;
-        }
-    }
-    &__postTime {
-        font-family: $primary-font-family;
-        color: $secondary-text-color;
-    }
-    &__map {
-        .MuiButton-text {
-            color: $primary-color-blue;
-        }
-        .MuiBackdrop-root {
-            z-index: 10;
-        }
-    } 
-    &__business {
-        .MuiButton-text {
-            color: $primary-color-blue;
-        }
-        .MuiBackdrop-root {
-            z-index: 10;
-            background-color: white;
-        }
-    }
-    &__budget {
-        text-align: center;
-    }
-    &__offer {
-        text-align: center;
-        margin-bottom: 20px;
-        .MuiButton-root {
-            margin-bottom: 10px;
-            width: 80%;
-        }
-        .order-information__btn-disabled {
-            background-color: $secondary-text-color;
-        }
-    }
-    &__share {
-        margin-top: 30px;
-        &--label {
-            background: white;
-            width: fit-content;
-            margin: auto;
-            margin-top: -10px;
-        }
-        .MuiFormLabel-root {
-            padding: 0 10px;
-        }
-        &--whole {
-            display: flex;
-            justify-content: center;
-        }
-        &--single {
-            margin: 10px;
-            color: $secondary-text-color;
-        }
-    }
-    &__details {
-        margin-top: 40px;
-        &--list {
-            list-style: none;
-            line-height: 1.5;
-            padding-left: 10px;
-        }
-        &--collapse {
-            margin: 0;
-            color: $primary-color-blue;
-            text-decoration: underline;
-            text-align: right;
-            cursor: pointer;
-        }
-    }
+	padding: 20px;
+	margin-bottom: 40px;
+	border-top: solid 3px #eee;
+	&__header {
+		padding-top: 10px;
+		color: $primary-color-blue;
+		font-weight: 550;
+	}
+	&__top .MuiListItemText-primary {
+		font-size: 0.9rem;
+		color: $secondary-text-color;
+	}
+	&__head {
+		display: flex;
+		align-items: center;
+	}
+	&__status {
+		display: flex;
+		list-style: none;
+		padding: 0;
+		font-family: $primary-font-family;
+		font-size: 15px;
+		li {
+			padding: 5px 10px;
+			border-radius: 20px;
+			color: $secondary-text-color;
+		}
+	}
+	&__postTime {
+		font-family: $primary-font-family;
+		color: $secondary-text-color;
+	}
+	&__map {
+		.MuiButton-text {
+			color: $primary-color-blue;
+		}
+		.MuiBackdrop-root {
+			z-index: 10;
+		}
+	}
+	&__business {
+		.MuiButton-text {
+			color: $primary-color-blue;
+		}
+		.MuiBackdrop-root {
+			z-index: 10;
+			background-color: white;
+		}
+	}
+	&__budget {
+		text-align: center;
+	}
+	&__offer {
+		text-align: center;
+		margin-bottom: 20px;
+		.MuiButton-root {
+			margin-bottom: 10px;
+			width: 80%;
+		}
+		.order-information__btn-disabled {
+			background-color: $secondary-text-color;
+		}
+	}
+	&__share {
+		margin-top: 30px;
+		&--label {
+			background: white;
+			width: fit-content;
+			margin: auto;
+			margin-top: -10px;
+		}
+		.MuiFormLabel-root {
+			padding: 0 10px;
+		}
+		&--whole {
+			display: flex;
+			justify-content: center;
+		}
+		&--single {
+			margin: 10px;
+			color: $secondary-text-color;
+		}
+	}
+	&__details {
+		margin-top: 40px;
+		&--list {
+			list-style: none;
+			line-height: 1.5;
+			padding-left: 10px;
+		}
+		&--collapse {
+			margin: 0;
+			color: $primary-color-blue;
+			text-decoration: underline;
+			text-align: right;
+			cursor: pointer;
+		}
+	}
 }
 
 .order-information__status .order-information__status-active {
-    color: white;
-    background-color: $primary-color-blue;
+	color: white;
+	background-color: $primary-color-blue;
 }
 .MuiGrid-container .MuiToggleButton-root {
-    border: none;
-    line-height: 1;
-    border-radius: 20px;
-    background-color: #eee;
+	border: none;
+	line-height: 1;
+	border-radius: 20px;
+	background-color: #eee;
 }
 .order-information__head .MuiToggleButton-root.Mui-selected {
-    color: $secondary-color-darkgreen;
+	color: $secondary-color-darkgreen;
 }
 
 .MuiGrid-root .order-information__options {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
 }
-
-

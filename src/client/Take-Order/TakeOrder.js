@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Bedrooms from "./components/Bedrooms";
 import Bathrooms from "./components/Bathrooms";
 import LeaseEnd from "./components/LeaseEnd";
@@ -12,7 +12,7 @@ import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
 import ErrorMessage from "../../UI/ErrorMessage";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
@@ -90,57 +90,63 @@ class TakeOrder extends React.Component {
 					);
 					window.location.reload(false);
 				})
-				.catch(error => this.setState({ error }));
+				.catch(error => this.setState({ error, isCreating: false }));
 		});
 	};
 
 	render() {
 		return (
 			<div className="client__take-order-page">
-				{!!this.state.error && (
+				{this.state.isCreating ? (
+					<div className="edit-orders-progress__container">
+						<CircularProgress size={200} color="secondary" />
+					</div>
+				) : !!this.state.error ? (
 					<ErrorMessage error={this.state.error} />
+				) : (
+					<Fragment>
+						<p id="take-order">See how little it will cost...</p>
+						<Bedrooms
+							bedrooms={this.state.bedrooms}
+							handleChange={this.handleChange}
+						/>
+						<Bathrooms
+							bathrooms={this.state.bathrooms}
+							handleChange={this.handleChange}
+						/>
+						<LeaseEnd
+							endOfLease={this.state.endOfLease}
+							handleChange={this.handleChange}
+						/>
+						<OtherClean
+							oven={this.state.oven}
+							windows={this.state.windows}
+							cabinets={this.state.cabinets}
+							carpet={this.state.carpet}
+							handleChange={this.handleChange}
+						/>
+						<Location
+							location={this.state.location}
+							handleChange={this.handleChange}
+						/>
+						<Date
+							dueDate={this.state.dueDate}
+							handleChange={this.handleChange}
+						/>
+						<Time
+							dueDate={this.state.dueDate}
+							handleChangeDate={this.handleChangeDate}
+						/>
+						<Description
+							description={this.state.description}
+							handleChange={this.handleChange}
+						/>
+						<Price
+							price={this.state.price}
+							handleSubmit={this.handleSubmit}
+						/>
+					</Fragment>
 				)}
-				{this.state.isCreating && <LinearProgress />}
-				<p id="take-order">See how little it will cost...</p>
-				<Bedrooms
-					bedrooms={this.state.bedrooms}
-					handleChange={this.handleChange}
-				/>
-				<Bathrooms
-					bathrooms={this.state.bathrooms}
-					handleChange={this.handleChange}
-				/>
-				<LeaseEnd
-					endOfLease={this.state.endOfLease}
-					handleChange={this.handleChange}
-				/>
-				<OtherClean
-					oven={this.state.oven}
-					windows={this.state.windows}
-					cabinets={this.state.cabinets}
-					carpet={this.state.carpet}
-					handleChange={this.handleChange}
-				/>
-				<Location
-					location={this.state.location}
-					handleChange={this.handleChange}
-				/>
-				<Date
-					dueDate={this.state.dueDate}
-					handleChange={this.handleChange}
-				/>
-				<Time
-					dueDate={this.state.dueDate}
-					handleChangeDate={this.handleChangeDate}
-				/>
-				<Description
-					description={this.state.description}
-					handleChange={this.handleChange}
-				/>
-				<Price
-					price={this.state.price}
-					handleSubmit={this.handleSubmit}
-				/>
 			</div>
 		);
 	}

@@ -3,38 +3,45 @@ import OrderCard from "../../components/order/OrderCard";
 import OrderNavBar from "../../components/order/OrderNavBar";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Pagination from '@material-ui/lab/Pagination';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Pagination from "@material-ui/lab/Pagination";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchHisOrders } from "../../api/client";
 
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 
-import { 
+import {
 	clientRole,
-    newOrder, 
-    cancelledByClient, 
-    accepted, 
-    cancelledByBusiness, 
-    done 
+	newOrder,
+	cancelledByClient,
+	accepted,
+	cancelledByBusiness,
+	done
 } from "../../utils/variables";
 class OrderHistory extends React.Component {
-
 	state = {
 		orders: [],
 		error: null,
 		isLoading: false,
 		pagination: {
-			page:1,
-			pageSize:5,
+			page: 1,
+			pageSize: 5
 		},
-		searchStatus: '',
-		role: clientRole,
-	}
+		searchStatus: "",
+		role: clientRole
+	};
 
 	componentDidMount() {
-		this.loadOrders();
+		if (this.props.location.state) {
+			this.loadOrders(
+				this.state.pagination.page, 
+				this.state.pagination.pageSize, 
+				this.props.location.state.searchStatus
+			);
+		} else {
+			this.loadOrders();
+		}
 	}
 
 	loadOrders = (page, pageSize, search) => {
@@ -42,7 +49,7 @@ class OrderHistory extends React.Component {
 			const clientId = this.props.match.params.clientId;
 			fetchHisOrders(clientId, page, pageSize, search)
 				.then(this.updateOrderData)
-				.catch(error => this.setState({ error }));
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
@@ -51,40 +58,59 @@ class OrderHistory extends React.Component {
 			orders: orderData.orders,
 			isLoading: false,
 			pagination: orderData.pagination
-		})
-	}
-	
+		});
+	};
+
 	handlePageChange = (event, data) => {
 		const pageSize = this.state.pagination.pageSize;
-		const status = this.state.searchStatus
+		const status = this.state.searchStatus;
 		this.loadOrders(data, pageSize, status);
-	}
+	};
 
 	handleSearchNew = () => {
-		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, newOrder);
+		this.loadOrders(
+			this.state.pagination.page,
+			this.state.pagination.pageSize,
+			newOrder
+		);
 		this.setState({ searchStatus: newOrder });
-	}
-	
+	};
+
 	handlesearchAccepted = () => {
-		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, accepted);
+		this.loadOrders(
+			this.state.pagination.page,
+			this.state.pagination.pageSize,
+			accepted
+		);
 		this.setState({ searchStatus: accepted });
-	}
+	};
 
 	handlesearchDone = () => {
-		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, done);
+		this.loadOrders(
+			this.state.pagination.page,
+			this.state.pagination.pageSize,
+			done
+		);
 		this.setState({ searchStatus: done });
-	}
+	};
 
 	handleSearchWithdraw = () => {
-		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByClient);
+		this.loadOrders(
+			this.state.pagination.page,
+			this.state.pagination.pageSize,
+			cancelledByClient
+		);
 		this.setState({ searchStatus: cancelledByClient });
-	}
+	};
 
 	handlesearchCancelled = () => {
-		this.loadOrders(this.state.pagination.page, this.state.pagination.pageSize, cancelledByBusiness);
+		this.loadOrders(
+			this.state.pagination.page,
+			this.state.pagination.pageSize,
+			cancelledByBusiness
+		);
 		this.setState({ cancelledByBusiness });
-	}
-
+	};
 
 	render() {
 		const clientId = this.props.match.params.clientId;
@@ -95,7 +121,7 @@ class OrderHistory extends React.Component {
 				<Grid container spacing={2}>
 					<Grid item xs={4}>
 						<OrderNavBar
-							role={this.state.role} 
+							role={this.state.role}
 							searchAll={this.loadOrders}
 							searchNew={this.handleSearchNew}
 							searchAccepted={this.handlesearchAccepted}
@@ -104,25 +130,28 @@ class OrderHistory extends React.Component {
 							searchCancelled={this.handlesearchCancelled}
 						/>
 					</Grid>
-					<Grid item xs={6}  className="order-history__cardlist">
-						<Pagination 
+					<Grid item xs={6} className="order-history__cardlist">
+						<Pagination
 							page={this.state.pagination.page}
 							count={this.state.pagination.pages}
-							onChange={this.handlePageChange} 
-							shape="rounded" 
+							onChange={this.handlePageChange}
+							shape="rounded"
 						/>
-						{!!this.state.error && (
+						{this.state.isLoading ? (
+							<div className="order-history-progress__container">
+								<CircularProgress
+									size={200}
+									color="secondary"
+								/>
+							</div>
+						) : !!this.state.error ? (
 							<ErrorMessage error={this.state.error} />
-						)}
-						{this.state.isLoading && (
-								<LinearProgress />
-						)}
-						{!this.state.isLoading && !this.state.orders.length && (
+						) : !this.state.isLoading &&
+						  !this.state.orders.length ? (
 							<p> There isn't any order. </p>
-						)}
-						{
-							this.state.orders.map( order => (
-								<OrderCard 
+						) : (
+							this.state.orders.map(order => (
+								<OrderCard
 									key={order._id}
 									role={this.state.role}
 									location={order.location}
@@ -132,8 +161,7 @@ class OrderHistory extends React.Component {
 									to={`${BASE_URL}/orders/${order._id}`}
 								/>
 							))
-						}
-
+						)}
 					</Grid>
 				</Grid>
 			</Container>

@@ -5,11 +5,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import BusinessAvatar from "./Avatar";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
+import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
+import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
+import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
 import { BUSINESS_BASE_URL, HOMEPAGE_URL } from "../../routes/URLMap";
 import {
 	removeToken,
@@ -70,19 +75,31 @@ function SimpleList(props) {
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/dashboard`}
 					>
+						<ListItemIcon>
+							<DashboardRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Dashboard" />
 					</ListItemLink>
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/profile`}
 					>
+						<ListItemIcon>
+							<AccountBoxRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Profile" />
 					</ListItemLink>
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
 					>
+						<ListItemIcon>
+							<HistoryRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Order Management" />
 					</ListItemLink>
 					<ListItem button onClick={handleClick}>
+						<ListItemIcon>
+							<SettingsApplicationsRoundedIcon />
+						</ListItemIcon>
 						<ListItemText primary="Setting" />
 						{open ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
