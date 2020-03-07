@@ -11,7 +11,7 @@ const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 
 const CustomSkinMap = withScriptjs(
-	withGoogleMap( props => (
+	withGoogleMap(props => (
 		<GoogleMap
 			defaultZoom={13}
 			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
@@ -93,12 +93,11 @@ const CustomSkinMap = withScriptjs(
 					<Marker position={ location } />
 				))
 			} */}
-
 		</GoogleMap>
 	))
 );
 
-export default function Maps(props) {	
+export default function Maps(props) {
 	// const addresses = props.orders.map( order => order.location );
 
 	// const [locations, setLocations] = React.useState([]);
