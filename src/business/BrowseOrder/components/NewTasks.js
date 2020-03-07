@@ -14,6 +14,7 @@ export default function FormControlLabelPosition() {
 						control={<Switch color="secondary" />}
 						label="Available Tasks Only"
 						labelPlacement="start"
+						checked
 					/>
 				</FormGroup>
 			</FormControl>

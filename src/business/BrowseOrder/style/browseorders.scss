@@ -1,63 +1,79 @@
 @import "../../../theme/variables.scss";
 
 .business__container--whole-page {
-	& .browse-orders--top-bar {
-		background-color: #2195f31a;
-		display: flex;
-		flex-direction: row;
-		// align-items: flex-end;
-		justify-content: flex-end;
-		align-items: stretch;
-		padding-top: 0.5rem;
+	& .browse-orders {
+		& .browse-orders--top-bar {
+			background-color: #05274206;
+			display: flex;
+			flex-direction: row;
+			// align-items: flex-end;
+			justify-content: flex-end;
+			align-items: stretch;
+			padding-top: 0.8rem;
+			padding-bottom: 0.6rem;
 
-		& .MuiInput-colorSecondary.MuiInput-underline:after {
-			border-bottom-color: $primary-color-blue;
-		}
+			margin-bottom: 0.4rem;
 
-		& .MuiButton-textSecondary {
-			color: $primary-color-blue;
-			&:hover {
-				background-color: #2195f31a;
+			& .MuiInput-colorSecondary.MuiInput-underline:after {
+				border-bottom-color: $primary-color-blue;
 			}
-		}
 
-		&--date-posted {
-			& .MuiFormControl-root {
-				// margin-bottom: 5px;
-				& .MuiInputBase-root {
-					font-size: 13px;
-					color: #0009;
+			& .MuiButton-textSecondary {
+				color: $primary-color-blue;
+				&:hover {
+					background-color: #2195f31a;
 				}
 			}
-		}
 
-		&--search {
-			margin-left: 15rem;
-			& .MuiInputBase-root {
-				font-size: 13px;
-				color: #000;
-			}
-		}
-
-		&--new-tasks {
-			& .MuiFormControlLabel-labelPlacementStart {
-				margin-left: 3rem;
-				& .MuiTypography-body1 {
-					font-size: 13px;
-					color: #0009;
-				}
-
-				& .MuiSwitch-colorSecondary.Mui-checked {
-					color: $primary-color-blue;
-
-					&:hover {
-						background-color: #2195f31a;
+			&--date-posted {
+				& .MuiFormControl-root {
+					// margin-bottom: 5px;
+					& .MuiInputBase-root {
+						font-size: 13px;
+						color: #0009;
 					}
 				}
-				& .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
-					background-color: $primary-color-blue;
+			}
+
+			&--search {
+				margin-left: 15rem;
+				& .MuiInputBase-root {
+					font-size: 13px;
+					color: #000;
 				}
+			}
+
+			&--new-tasks {
+				& .MuiFormControlLabel-labelPlacementStart {
+					margin-left: 3rem;
+					& .MuiTypography-body1 {
+						font-size: 13px;
+						color: #0009;
+					}
+
+					& .MuiSwitch-colorSecondary.Mui-checked {
+						color: $primary-color-blue;
+
+						&:hover {
+							background-color: #2195f31a;
+						}
+					}
+					& .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+						background-color: $primary-color-blue;
+					}
+				}
+			}
+		}
+
+		& .order-history__container {
+			margin: 0 10px 0 15px;
+			& .browse-orders--container {
+				margin-top: 0;
+				margin-bottom: 0;
 			}
 		}
 	}
+
+	// & .browse-orders--pagination {
+	// }
 }
