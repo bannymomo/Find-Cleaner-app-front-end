@@ -14,24 +14,12 @@ function Notification() {
 			stuff.
 			<br /> Let's post a task or make an offer!
 			<div className="notification__button-container--center">
-				<Button
-					variant="contained"
-					style={{
-						backgroundColor: "#3f88de",
-						color: "white"
-					}}
-				>
+				<Button variant="contained" color="primary">
 					{" "}
-					Post your task
+					Post a task
 				</Button>
-				<Button
-					variant="contained"
-					style={{
-						backgroundColor: "transparent",
-						color: "#3f88de"
-					}}
-				>
-					Browse your task
+				<Button variant="contained" color="secondary">
+					Browse all tasks
 				</Button>
 			</div>
 		</div>

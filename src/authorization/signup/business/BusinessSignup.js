@@ -7,8 +7,6 @@ import {
 	CssBaseline,
 	withStyles,
 	Box,
-	createMuiTheme,
-	ThemeProvider,
 	LinearProgress
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
@@ -24,17 +22,6 @@ import {
 	removeBusinessId,
 	removeClientId
 } from "../../../utils/auth";
-
-const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: "#2196f3"
-		},
-		secondary: {
-			main: "#f50057"
-		}
-	}
-});
 
 const styles = theme => ({
 	container: {
@@ -112,147 +99,137 @@ class BusinessSignup extends Component {
 			<Fragment>
 				<MainNavigation />
 				<div className={classes.backGround}>
-					<ThemeProvider theme={theme}>
-						<Container
-							component="main"
-							maxWidth="xs"
-							className={classes.container}
-						>
-							<CssBaseline />
+					<Container
+						component="main"
+						maxWidth="xs"
+						className={classes.container}
+					>
+						<CssBaseline />
 
-							<Box className={classes.box}>
-								<div className={classes.paper}>
-									<div className="signUp__logo">
-										<img
-											className="signUp__logo--pic"
-											src={logo}
-											alt="logo"
-										/>
-										<img
-											className="signUp__logo--font"
-											src={brandName}
-											alt="brandname"
-										/>
-									</div>
-									<form className={classes.form} noValidate>
-										<label>More about you~</label>
-										<Grid
-											container
-											spacing={2}
-											className={classes.grid}
-										>
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Business Name"
-													value={
-														this.state.businessName
-													}
-													onChange={event =>
-														this.setState({
-															businessName:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Address"
-													value={this.state.address}
-													onChange={event =>
-														this.setState({
-															address:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													color="primary"
-													variant="outlined"
-													required
-													fullWidth
-													label="postcode"
-													value={this.state.postcode}
-													onChange={event =>
-														this.setState({
-															postcode:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Telephone Number"
-													value={
-														this.state
-															.telephoneNumber
-													}
-													onChange={event =>
-														this.setState({
-															telephoneNumber:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="ABN Number"
-													value={this.state.ABNNumber}
-													onChange={event =>
-														this.setState({
-															ABNNumber:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-										</Grid>
-										{this.state.isLoading ? (
-											<LinearProgress
-												className={classes.loading}
-											/>
-										) : (
-											<Button
-												variant="contained"
-												fullWidth
-												color="primary"
-												className={classes.submit}
-												onClick={this.postBusiness}
-											>
-												Sign up
-											</Button>
-										)}
-										{!!this.state.error && (
-											<Alert severity="error">
-												Account not exits or{" "}
-											</Alert>
-										)}
-									</form>
+						<Box className={classes.box}>
+							<div className={classes.paper}>
+								<div className="signUp__logo">
+									<img
+										className="signUp__logo--pic"
+										src={logo}
+										alt="logo"
+									/>
+									<img
+										className="signUp__logo--font"
+										src={brandName}
+										alt="brandname"
+									/>
 								</div>
-							</Box>
-						</Container>
-					</ThemeProvider>
+								<form className={classes.form} noValidate>
+									<label>More about you~</label>
+									<Grid
+										container
+										spacing={2}
+										className={classes.grid}
+									>
+										<Grid item xs={12}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="Business Name"
+												value={this.state.businessName}
+												onChange={event =>
+													this.setState({
+														businessName:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="Address"
+												value={this.state.address}
+												onChange={event =>
+													this.setState({
+														address:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<TextField
+												color="primary"
+												variant="outlined"
+												required
+												fullWidth
+												label="postcode"
+												value={this.state.postcode}
+												onChange={event =>
+													this.setState({
+														postcode:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="Telephone Number"
+												value={
+													this.state.telephoneNumber
+												}
+												onChange={event =>
+													this.setState({
+														telephoneNumber:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="ABN Number"
+												value={this.state.ABNNumber}
+												onChange={event =>
+													this.setState({
+														ABNNumber:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+									</Grid>
+									{this.state.isLoading ? (
+										<LinearProgress
+											className={classes.loading}
+										/>
+									) : (
+										<Button
+											variant="contained"
+											fullWidth
+											color="primary"
+											className={classes.submit}
+											onClick={this.postBusiness}
+										>
+											Sign up
+										</Button>
+									)}
+									{!!this.state.error && (
+										<Alert severity="error">
+											Account not exits or{" "}
+										</Alert>
+									)}
+								</form>
+							</div>
+						</Box>
+					</Container>
 				</div>
 			</Fragment>
 		);

@@ -60,7 +60,9 @@ function SimpleList(props) {
 			<ClientAvatar />
 			<div className={classes.root}>
 				<Divider className={classes.divider} />
-				<PostOrderBtn buttonInNav={false} />
+				<div className="clinet__button--container">
+					<PostOrderBtn buttonInNav={false} />
+				</div>
 				<List component="nav" aria-label="secondary mailbox folders">
 					<ListItemLink
 						to={`${CLIENT_BASE_URL}/${clientId}/dashboard`}
@@ -69,12 +71,6 @@ function SimpleList(props) {
 							<DashboardRoundedIcon />
 						</ListItemIcon>
 						<ListItemText primary="Dashboard" />
-					</ListItemLink>
-					<ListItemLink to={`${CLIENT_BASE_URL}/${clientId}/profile`}>
-						<ListItemIcon>
-							<AccountBoxRoundedIcon />
-						</ListItemIcon>
-						<ListItemText primary="Profile" />
 					</ListItemLink>
 					<ListItemLink
 						to={`${CLIENT_BASE_URL}/${clientId}/order-history`}

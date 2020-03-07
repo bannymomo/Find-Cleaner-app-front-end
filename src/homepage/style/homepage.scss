@@ -161,8 +161,16 @@
 		width: 165px;
 		margin: 0;
 		padding: 0;
+
+		.footer__column-container--single h3 {
+			min-width: 150px;
+		}
 	}
 
+	.footer__links--white {
+		text-decoration: none;
+		color: white;
+	}
 	button {
 		border-radius: 10px;
 		padding: 0;
@@ -180,4 +188,8 @@
 	justify-content: space-around;
 	min-height: 54px;
 	align-items: center;
+}
+
+.footer__logo--white {
+	font-weight: bold;
 }

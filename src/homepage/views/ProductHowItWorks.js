@@ -52,7 +52,7 @@ function ProductHowItWorks(props) {
 										src={howitworks01}
 										alt="how-it-works-pic-01"
 									/>
-									<div>Post your task</div>
+									<div>Post a task</div>
 									<p>
 										Answer a few simple questions about your
 										job to receive competitive quotes.

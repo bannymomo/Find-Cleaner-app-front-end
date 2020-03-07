@@ -7,8 +7,6 @@ import {
 	CssBaseline,
 	withStyles,
 	Box,
-	createMuiTheme,
-	ThemeProvider,
 	LinearProgress
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
@@ -24,17 +22,6 @@ import {
 	removeBusinessId,
 	removeClientId
 } from "../../../utils/auth";
-
-const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: "#2196f3"
-		},
-		secondary: {
-			main: "#f50057"
-		}
-	}
-});
 
 const styles = theme => ({
 	container: {
@@ -115,132 +102,125 @@ class ClientSignup extends Component {
 			<Fragment>
 				<MainNavigation />
 				<div className={classes.backGround}>
-					<ThemeProvider theme={theme}>
-						<Container
-							component="main"
-							maxWidth="xs"
-							className={classes.container}
-						>
-							<CssBaseline />
+					<Container
+						component="main"
+						maxWidth="xs"
+						className={classes.container}
+					>
+						<CssBaseline />
 
-							<Box className={classes.box}>
-								<div className={classes.paper}>
-									<div className="signUp__logo">
-										<img
-											className="signUp__logo--pic"
-											src={logo}
-											alt="logo"
-										/>
-										<img
-											className="signUp__logo--font"
-											src={brandName}
-											alt="brandname"
-										/>
-									</div>
-									<form className={classes.form} noValidate>
-										<label>More about you~</label>
-										<Grid
-											container
-											spacing={2}
-											className={classes.grid}
-										>
-											<Grid item xs={12} sm={6}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="First Name"
-													value={this.state.firstName}
-													onChange={event =>
-														this.setState({
-															firstName:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12} sm={6}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Last Name"
-													value={this.state.lastName}
-													onChange={event =>
-														this.setState({
-															lastName:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											{this.state.invalidName ? (
-												<Alert severity="error">
-													The length must longer than
-													3
-												</Alert>
-											) : null}
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Gender"
-													value={this.state.gender}
-													onChange={event =>
-														this.setState({
-															gender:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													color="primary"
-													variant="outlined"
-													required
-													fullWidth
-													label="postcode"
-													value={this.state.postcode}
-													onChange={event =>
-														this.setState({
-															postcode:
-																event.target
-																	.value
-														})
-													}
-												/>
-											</Grid>
-										</Grid>
-										{this.state.isLoading ? (
-											<LinearProgress
-												className={classes.loading}
-											/>
-										) : (
-											<Button
-												variant="contained"
-												fullWidth
-												color="primary"
-												className={classes.submit}
-												onClick={this.postClient}
-											>
-												Sign up
-											</Button>
-										)}
-										{!!this.state.error && (
-											<Alert severity="error">
-												Account not exits or{" "}
-											</Alert>
-										)}
-									</form>
+						<Box className={classes.box}>
+							<div className={classes.paper}>
+								<div className="signUp__logo">
+									<img
+										className="signUp__logo--pic"
+										src={logo}
+										alt="logo"
+									/>
+									<img
+										className="signUp__logo--font"
+										src={brandName}
+										alt="brandname"
+									/>
 								</div>
-							</Box>
-						</Container>
-					</ThemeProvider>
+								<form className={classes.form} noValidate>
+									<label>More about you~</label>
+									<Grid
+										container
+										spacing={2}
+										className={classes.grid}
+									>
+										<Grid item xs={12} sm={6}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="First Name"
+												value={this.state.firstName}
+												onChange={event =>
+													this.setState({
+														firstName:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										<Grid item xs={12} sm={6}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="Last Name"
+												value={this.state.lastName}
+												onChange={event =>
+													this.setState({
+														lastName:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										{this.state.invalidName ? (
+											<Alert severity="error">
+												The length must longer than 3
+											</Alert>
+										) : null}
+										<Grid item xs={12}>
+											<TextField
+												variant="outlined"
+												required
+												fullWidth
+												label="Gender"
+												value={this.state.gender}
+												onChange={event =>
+													this.setState({
+														gender:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<TextField
+												color="primary"
+												variant="outlined"
+												required
+												fullWidth
+												label="postcode"
+												value={this.state.postcode}
+												onChange={event =>
+													this.setState({
+														postcode:
+															event.target.value
+													})
+												}
+											/>
+										</Grid>
+									</Grid>
+									{this.state.isLoading ? (
+										<LinearProgress
+											className={classes.loading}
+										/>
+									) : (
+										<Button
+											variant="contained"
+											fullWidth
+											color="primary"
+											className={classes.submit}
+											onClick={this.postClient}
+										>
+											Sign up
+										</Button>
+									)}
+									{!!this.state.error && (
+										<Alert severity="error">
+											Account not exits or{" "}
+										</Alert>
+									)}
+								</form>
+							</div>
+						</Box>
+					</Container>
 				</div>
 			</Fragment>
 		);

@@ -6,7 +6,6 @@ import ClientDashboard from "../client/DashBoard/ClientDashBoard";
 import Account from "../client/ClientSetting/Account/Account";
 import Password from "../client/ClientSetting/Password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
-import Profile from "../client/Profile/UserProfile";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../client/Order-History/OrderInformation";
 import OrderEdit from "../client/Order-History/OrderEdit";
@@ -40,11 +39,7 @@ const ClientRoutes = () => (
 			path={`${CLIENT_BASE_URL}/:clientId/take-order`}
 			component={TakeOrder}
 		/>
-		<Route
-			exact
-			path={`${CLIENT_BASE_URL}/:clientId/profile`}
-			component={Profile}
-		/>
+
 		<Route
 			exact
 			path={`${CLIENT_BASE_URL}/:clientId/order-history`}
