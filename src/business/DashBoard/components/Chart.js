@@ -1,4 +1,5 @@
 import React from "react";
+import {Link, withRouter} from "react-router-dom";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -35,115 +36,144 @@ import {
 
 import styles from "../style/card/tempelate-dashboardStyle";
 
+import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
+import { CardActionArea } from "@material-ui/core";
+import { accepted, done } from "../../../utils/variables";
+
+
 const useStyles = makeStyles(styles);
 
-export default function Chart() {
+function Chart(props) {
 	const classes = useStyles();
-	const props = useSpring({
+	const animatedProps = useSpring({
 		opacity: 1,
 		from: { opacity: 0 }
 	});
+
+	const businessId = props.match.params.businessId;
+
 	return (
 		<div className="Chart__container--whole">
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
-					<Card>
-						<CardHeader color="warning" stats icon>
-							<animated.div style={props}>
-								<CardIcon color="warning">
-									<Icon>content_copy</Icon>
-								</CardIcon>
-							</animated.div>
-						</CardHeader>
-						<animated.h3
-							style={props}
-							className={
-								(classes.cardTitle, "card__title--black")
-							}
-						>
-							Total tasks
-						</animated.h3>
-						<TotalTasksNumber />
-						<CardFooter stats>
-							<animated.div
-								style={props}
-								className={classes.stats}
+					<CardActionArea 
+						component={Link} 
+						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
+					>
+						<Card>
+							<CardHeader color="warning" stats icon>
+								<animated.div style={animatedProps}>
+									<CardIcon color="warning">
+										<Icon>content_copy</Icon>
+									</CardIcon>
+								</animated.div>
+							</CardHeader>
+							<animated.h3
+								style={animatedProps}
+								className={
+									(classes.cardTitle, "card__title--black")
+								}
 							>
-								<DateRange />
-								Last 6 months
-							</animated.div>
-						</CardFooter>
-					</Card>
+								Total tasks
+							</animated.h3>
+							<TotalTasksNumber />
+							<CardFooter stats>
+								<animated.div
+									style={animatedProps}
+									className={classes.stats}
+								>
+									<DateRange />
+									Last 6 months
+								</animated.div>
+							</CardFooter>
+						</Card>
+					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
-					<Card>
-						<CardHeader color="danger" stats icon>
-							<animated.div style={props}>
-								<CardIcon color="danger">
-									<Icon>info_outline</Icon>
-								</CardIcon>
-							</animated.div>
-						</CardHeader>
-						<animated.h3
-							style={props}
-							className={
-								(classes.cardTitle, "card__title--black")
-							}
-						>
-							Unfinished Tasks
-						</animated.h3>
-						<TotalUnfinishedTasksNumber />
-						<CardFooter stats>
-							<animated.div
-								style={props}
-								className={classes.stats}
+					<CardActionArea 
+						component={Link} 
+						to={{
+							pathname: `${BUSINESS_BASE_URL}/${businessId}/order-history`,
+							state: {searchStatus: accepted}
+						}}
+					>
+						<Card>
+							<CardHeader color="danger" stats icon>
+								<animated.div style={animatedProps}>
+									<CardIcon color="danger">
+										<Icon>info_outline</Icon>
+									</CardIcon>
+								</animated.div>
+							</CardHeader>
+							<animated.h3
+								style={animatedProps}
+								className={
+									(classes.cardTitle, "card__title--black")
+								}
 							>
-								<DateRange />
-								Last 6 months
-							</animated.div>
-						</CardFooter>
-					</Card>
+								Unfinished Tasks
+							</animated.h3>
+							<TotalUnfinishedTasksNumber />
+							<CardFooter stats>
+								<animated.div
+									style={animatedProps}
+									className={classes.stats}
+								>
+									<DateRange />
+									Last 6 months
+								</animated.div>
+							</CardFooter>
+						</Card>
+					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
-					<Card>
-						<CardHeader color="success" stats icon>
-							<animated.div style={props}>
-								<CardIcon color="success">
-									<Store />
-								</CardIcon>
-							</animated.div>
-						</CardHeader>
-						<animated.h3
-							style={props}
-							className={
-								(classes.cardTitle, "card__title--black")
-							}
-						>
-							Completed Tasks
-						</animated.h3>
-						<TotalFinishTasksNumber />
-						<CardFooter stats>
-							<animated.div
-								style={props}
-								className={classes.stats}
+					<CardActionArea 
+						component={Link} 
+						to={{
+							pathname: `${BUSINESS_BASE_URL}/${businessId}/order-history`,
+							state: {searchStatus: done}
+						}}
+					>
+						<Card>
+							<CardHeader color="success" stats icon>
+								<animated.div style={animatedProps}>
+									<CardIcon color="success">
+										<Store />
+									</CardIcon>
+								</animated.div>
+							</CardHeader>
+							<animated.h3
+								style={animatedProps}
+								className={
+									(classes.cardTitle, "card__title--black")
+								}
 							>
-								<DateRange />
-								Last 6 months
-							</animated.div>
-						</CardFooter>
-					</Card>
+								Completed Tasks
+							</animated.h3>
+							<TotalFinishTasksNumber />
+							<CardFooter stats>
+								<animated.div
+									style={animatedProps}
+									className={classes.stats}
+								>
+									<DateRange />
+									Last 6 months
+								</animated.div>
+							</CardFooter>
+						</Card>
+					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
 					<Card>
 						<CardHeader color="info" stats icon>
-							<animated.div style={props}>
+							<animated.div style={animatedProps}>
 								<CardIcon color="info">
 									<Accessibility />
 								</CardIcon>
 							</animated.div>
 						</CardHeader>
 						<animated.h3
-							style={props}
+							style={animatedProps}
 							className={
 								(classes.cardTitle, "card__title--black")
 							}
@@ -153,7 +183,7 @@ export default function Chart() {
 						<FollowersNumber />
 						<CardFooter stats>
 							<animated.div
-								style={props}
+								style={animatedProps}
 								className={classes.stats}
 							>
 								<Update />
@@ -249,3 +279,5 @@ export default function Chart() {
 		</div>
 	);
 }
+
+export default withRouter(Chart);
