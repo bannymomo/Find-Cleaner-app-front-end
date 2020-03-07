@@ -1,5 +1,15 @@
 @import "../../../theme/variables.scss";
 
+.browse-orders-progress__container {
+	text-align: center;
+	padding-top: 25%;
+}
+
+.order-history-progress__container {
+	text-align: center;
+	padding-top: 60%;
+}
+
 .business__container--whole-page {
 	& .browse-orders {
 		& .browse-orders--top-bar {

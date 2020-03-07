@@ -27,7 +27,9 @@ class Account extends Component {
 			contactNumber: "",
 			isLoading: false,
 			error: null,
-			canNotEdit: true
+			canNotEdit: true,
+			updateButtonHidden: true,
+			editButtonHidden: false
 		};
 	}
 
@@ -37,6 +39,7 @@ class Account extends Component {
 
 	updateDefaultValue = () => {
 		const clientID = this.props.match.params.clientId;
+		this.setState({ isLoading: true });
 		fetchClientById(clientID).then(data => {
 			this.setState({
 				defaultValue: {
@@ -47,7 +50,8 @@ class Account extends Component {
 					email: data.email,
 					// need to be changed
 					location: data.postcode
-				}
+				},
+				isLoading: false
 			});
 		});
 	};
@@ -66,7 +70,11 @@ class Account extends Component {
 	};
 
 	disableEdit = () => {
-		this.setState({ canNotEdit: !this.state.canNotEdit });
+		this.setState({
+			canNotEdit: false,
+			updateButtonHidden: false,
+			editButtonHidden: true
+		});
 	};
 
 	updateInfo = () => {
@@ -96,7 +104,12 @@ class Account extends Component {
 			updateClientById(clientID, clientInfo)
 				.then(data => {
 					this.setState(
-						{ isLoading: false, canNotEdit: true },
+						{
+							isLoading: false,
+							updateButtonHidden: true,
+							editButtonHidden: false,
+							canNotEdit: true
+						},
 						() => {
 							this.updateDefaultValue();
 						}
@@ -109,120 +122,132 @@ class Account extends Component {
 	render() {
 		return (
 			<Fragment>
-				<h3>Account</h3>
-				<h5>Personal Details</h5>
-				<div className="account__form--container">
-					<div className="account__form--edit">
-						<Button variant="outlined" onClick={this.disableEdit}>
-							Edit
-						</Button>
+				<h3 className="account__form--header">Account</h3>
+				{this.state.isLoading ? (
+					<div className="account__progress--container">
+						<CircularProgress size={200} color="secondary" />
 					</div>
-					<div className="account__form--personal">
-						<TextField
-							variant="outlined"
-							className="account__form--input"
-							label="First Name"
-							name="firstName"
-							disabled={this.state.canNotEdit}
-							value={
-								this.state.canNotEdit
-									? this.state.defaultValue.firstName
-									: this.state.firstName
-							}
-							onChange={this.changeHandler}
-						/>
-						<TextField
-							variant="outlined"
-							className="account__form--input"
-							label="Last Name"
-							name="lastName"
-							margin="normal"
-							disabled={this.state.canNotEdit}
-							value={
-								this.state.canNotEdit
-									? this.state.defaultValue.lastName
-									: this.state.lastName
-							}
-							onChange={this.changeHandler}
-						/>
-						<KeyboardDatePicker
-							className="account__form--input"
-							disableToolbar
-							variant="inline"
-							format="MM/dd/yyyy"
-							margin="normal"
-							id="date-picker-inline"
-							label="Birthday"
-							value={this.state.birthday}
-							onChange={this.handleDateChange}
-							KeyboardButtonProps={{
-								"aria-label": "change date"
-							}}
-						/>
-					</div>
-				</div>
+				) : (
+					<Fragment>
+						<h5>Personal Details</h5>
+						<div className="account__form--container">
+							<div className="account__form--edit">
+								{!this.state.editButtonHidden ? (
+									<Button
+										variant="outlined"
+										onClick={this.disableEdit}
+									>
+										Edit
+									</Button>
+								) : null}
+							</div>
+							<div className="account__form--personal">
+								<TextField
+									variant="outlined"
+									className="account__form--input"
+									label="First Name"
+									name="firstName"
+									disabled={this.state.canNotEdit}
+									value={
+										this.state.canNotEdit
+											? this.state.defaultValue.firstName
+											: this.state.firstName
+									}
+									onChange={this.changeHandler}
+								/>
+								<TextField
+									variant="outlined"
+									className="account__form--input"
+									label="Last Name"
+									name="lastName"
+									margin="normal"
+									disabled={this.state.canNotEdit}
+									value={
+										this.state.canNotEdit
+											? this.state.defaultValue.lastName
+											: this.state.lastName
+									}
+									onChange={this.changeHandler}
+								/>
+								<KeyboardDatePicker
+									className="account__form--input"
+									disableToolbar
+									variant="inline"
+									format="MM/dd/yyyy"
+									margin="normal"
+									id="date-picker-inline"
+									label="Birthday"
+									value={this.state.birthday}
+									onChange={this.handleDateChange}
+									KeyboardButtonProps={{
+										"aria-label": "change date"
+									}}
+								/>
+							</div>
+						</div>
 
-				<h5>Contact Details</h5>
-				<div className="account__form--contact">
-					<TextField
-						variant="outlined"
-						className="account__form--input"
-						label="Contact Number"
-						name="contactNumber"
-						disabled={this.state.canNotEdit}
-						value={
-							this.state.canNotEdit
-								? this.state.defaultValue.contactNumber
-								: this.state.contactNumber
-						}
-						onChange={this.changeHandler}
-					/>
-					<TextField
-						variant="outlined"
-						className="account__form--input"
-						label="Email Address"
-						name="email"
-						margin="normal"
-						disabled={this.state.canNotEdit}
-						value={
-							this.state.canNotEdit
-								? this.state.defaultValue.email
-								: this.state.email
-						}
-						onChange={this.changeHandler}
-					/>
-					<TextField
-						variant="outlined"
-						className="account__form--input"
-						label="Current Residential Address"
-						name="location"
-						margin="normal"
-						disabled={this.state.canNotEdit}
-						value={this.state.location}
-						onChange={this.changeHandler}
-					/>
-				</div>
-				<div className="account__from--button">
-					{this.state.isLoading ? (
-						<CircularProgress />
-					) : (
-						<Button
-							variant="contained"
-							color="primary"
-							onClick={this.updateInfo}
-						>
-							UPDATE
-						</Button>
-					)}
-					{!!this.state.error && (
-						<Alert
-							severity="error"
-							className="account__form--error"
-						>
-							Update fail, please try again.
-						</Alert>
-					)}
-				</div>
+						<h5>Contact Details</h5>
+						<div className="account__form--contact">
+							<TextField
+								variant="outlined"
+								className="account__form--input"
+								label="Contact Number"
+								name="contactNumber"
+								disabled={this.state.canNotEdit}
+								value={
+									this.state.canNotEdit
+										? this.state.defaultValue.contactNumber
+										: this.state.contactNumber
+								}
+								onChange={this.changeHandler}
+							/>
+							<TextField
+								variant="outlined"
+								className="account__form--input"
+								label="Email Address"
+								name="email"
+								margin="normal"
+								disabled={this.state.canNotEdit}
+								value={
+									this.state.canNotEdit
+										? this.state.defaultValue.email
+										: this.state.email
+								}
+								onChange={this.changeHandler}
+							/>
+							<TextField
+								variant="outlined"
+								className="account__form--input"
+								label="Current Residential Address"
+								name="location"
+								margin="normal"
+								disabled={this.state.canNotEdit}
+								value={this.state.location}
+								onChange={this.changeHandler}
+							/>
+						</div>
+						<div className="account__from--button">
+							{!this.state.updateButtonHidden ? (
+								<Button
+									variant="contained"
+									color="primary"
+									onClick={this.updateInfo}
+								>
+									UPDATE
+								</Button>
+							) : null}
+
+							{!!this.state.error && (
+								<Alert
+									severity="error"
+									className="account__form--error"
+								>
+									Update fail, please try again.
+								</Alert>
+							)}
+						</div>
+					</Fragment>
+				)}
 			</Fragment>
 		);
 	}

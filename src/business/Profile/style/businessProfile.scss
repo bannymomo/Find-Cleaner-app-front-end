@@ -1,8 +1,25 @@
-.business-profile__container {
-    width: 90%;
-    padding: 1rem 2rem;
+@import "../../../theme/variables.scss";
 
-    & .business-profile__container {
+.business-profile__header {
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 27px;
+	text-transform: uppercase;
+	color: $primary-color-blue;
+	margin: 15px;
+}
+
+.business-profile__progress--container {
+	text-align: center;
+	padding-top: 30%;
+}
+
+.business-profile__container {
+	width: 90%;
+
+	& .business-profile__container {
 		& h6.MuiTypography-subtitle1 {
 			text-transform: capitalize;
 			font-size: 1.2rem;
