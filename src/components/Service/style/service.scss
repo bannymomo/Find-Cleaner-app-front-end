@@ -1,0 +1,80 @@
+@import "../../../theme/variables.scss";
+
+.service__container--whole {
+	font-family: Nunito;
+	font-style: normal;
+	text-align: center;
+
+	.service__header--top {
+		font-weight: bold;
+		font-size: 2rem;
+		line-height: 3rem;
+		text-transform: uppercase;
+		color: #3f88de;
+		margin: 0 auto;
+		padding-top: 30px;
+	}
+
+	.service__paragraph--title {
+		display: inline-block;
+		font-weight: bold;
+		font-size: 20px;
+		line-height: 3rem;
+		color: #000000;
+	}
+
+	.service__paragraph--content {
+		margin: 0 15px 10px;
+		font-size: 16px;
+		line-height: 22px;
+		color: #949494;
+	}
+
+	.service__post-button--pink {
+		background: $primary-color-rose;
+		border-radius: 200px;
+		color: #fff;
+		cursor: pointer;
+		font-size: 15px;
+		font-weight: bolder;
+		height: 40px;
+		margin: auto;
+		text-align: center;
+		text-shadow: 0 1px 1px #9a0137;
+		width: 120px;
+		outline: none;
+		display: block;
+	}
+
+	.list-array__container--whole {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		width: 60vw;
+		margin: 0 auto;
+		padding-bottom: 3rem;
+	}
+
+	.list-array__icon--single {
+		height: 6rem;
+		width: 6rem;
+	}
+
+	.list-array__container--single {
+		text-align: center;
+		display: inline-block;
+		margin: 1rem 2rem;
+
+		& .MuiFab-root {
+			border-radius: 5px;
+			width: 12rem;
+			height: 12rem;
+			margin-bottom: 15px;
+		}
+
+		& span {
+			font-size: 1.2rem;
+		}
+	}
+}

@@ -78,17 +78,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
-    const {
-		ABNNumber,
-		photo,
-		businessName,
+	const {
+		// ABNNumber,
+		// photo,
+		// businessName,
 		email,
 		address,
 		telephoneNumber,
 		postcode,
 		memberSince,
-        lastOnline,
-        description
+		lastOnline,
+		description
 	} = props.business;
 	const [value] = React.useState(4.5);
 
@@ -159,7 +159,7 @@ export default function BusinessProfileSidebar(props) {
 				</ListItem>
 				<Divider variant="middle" component="li" />
 
-                <ListItem alignItems="flex-start">
+				<ListItem alignItems="flex-start">
 					<PhoneAndroidOutlinedIcon />
 					<ListItemText
 						secondary={
