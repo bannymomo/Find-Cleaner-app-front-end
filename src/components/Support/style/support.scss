@@ -1,21 +1,22 @@
 @import "../../../theme/variables.scss";
 
-.service__container--whole {
+.support__container--whole {
 	font-family: Nunito;
 	font-style: normal;
 	text-align: center;
+	background-color: #fff;
 
-	.service__header--top {
+	.support__header--top {
 		font-weight: bold;
 		font-size: 2rem;
 		line-height: 3rem;
 		text-transform: uppercase;
 		color: #3f88de;
 		margin: 0 auto;
-		padding-top: 20px;
+		padding-top: 3rem;
 	}
 
-	.service__paragraph--title {
+	.support__paragraph--title {
 		display: inline-block;
 		font-weight: bold;
 		font-size: 20px;
@@ -23,46 +24,17 @@
 		color: #000000;
 	}
 
-	.service__paragraph--content {
-		margin: 0 15px 10px;
-		font-size: 16px;
-		line-height: 22px;
-		color: #949494;
-	}
-
 	.list-array__container--whole {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		width: 60vw;
-		margin: 0 auto;
+		width: 80vw;
+		margin: 20px auto;
+		padding: 2rem auto;
 	}
 
-	.list-array__icon--single {
-		height: 6rem;
-		width: 6rem;
-	}
-
-	.list-array__container--single {
-		text-align: center;
-		display: inline-block;
-		margin: 0.8rem 2rem;
-
-		& .MuiFab-root {
-			border-radius: 5px;
-			width: 12rem;
-			height: 12rem;
-			margin-bottom: 15px;
-		}
-
-		& span {
-			font-size: 1.2rem;
-		}
-	}
-	.service__button--homepage {
-		margin-left: 50rem;
-		margin-top: 10px;
+	.support__button--homepage {
 		font-size: 14px;
 		color: #0008;
 		border-radius: 0;
