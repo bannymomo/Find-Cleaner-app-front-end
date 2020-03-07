@@ -14,8 +14,8 @@ import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutline
 import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined";
 import HistoryOutlinedIcon from "@material-ui/icons/HistoryOutlined";
 // import LanguageOutlinedIcon from "@material-ui/icons/LanguageOutlined";
-import "../../../../theme/theme";
-import "../../../../theme/variables.scss";
+import "../../../theme/theme";
+import "../../../theme/variables.scss";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {

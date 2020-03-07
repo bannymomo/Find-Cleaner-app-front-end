@@ -1,0 +1,18 @@
+.business-profile__container {
+    width: 90%;
+    padding: 1rem 2rem;
+
+    & .business-profile__container {
+		& h6.MuiTypography-subtitle1 {
+			text-transform: capitalize;
+			font-size: 1.2rem;
+			font-weight: 500;
+		}
+
+		& .MuiTypography-body2 {
+			text-align: left;
+			font-size: 0.9rem;
+			line-height: 1.7;
+		}
+	}
+}
