@@ -8,6 +8,7 @@ import HomePage from "../homepage/HomePage";
 import Business from "../business/Business";
 import Client from "../client/Client";
 import Service from "../components/Service/Service";
+import Support from "../components/Support/Support";
 import ProtectedClientRoute from "./components/ProtectedClientRoute";
 import ProtectedBusinessRoute from "./components/ProtectedBusinessRoute";
 import {
@@ -16,7 +17,8 @@ import {
 	LOGIN_URL,
 	SIGNUP_URL,
 	HOMEPAGE_URL,
-	SERVICE_URL
+	SERVICE_URL,
+	SUPPORT_URL
 } from "./URLMap";
 
 const Routes = () => {
@@ -36,6 +38,8 @@ const Routes = () => {
 			/>
 			<Route exact path={HOMEPAGE_URL} component={HomePage} />
 			<Route exact path={SERVICE_URL} component={Service} />
+			<Route exact path={SUPPORT_URL} component={Support} />
+
 			<ProtectedBusinessRoute
 				path={`${BUSINESS_BASE_URL}/:businessId`}
 				component={Business}

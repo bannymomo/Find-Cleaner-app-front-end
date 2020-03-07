@@ -79,9 +79,9 @@ const useStyles = makeStyles(theme => ({
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
 	const {
-		ABNNumber,
-		photo,
-		businessName,
+		// ABNNumber,
+		// photo,
+		// businessName,
 		email,
 		address,
 		telephoneNumber,
