@@ -31,7 +31,15 @@ class OrderHistory extends React.Component {
 	};
 
 	componentDidMount() {
-		this.loadOrders();
+		if (this.props.location.state) {
+			this.loadOrders(
+				this.state.pagination.page, 
+				this.state.pagination.pageSize, 
+				this.props.location.state.searchStatus
+			);
+		} else {
+			this.loadOrders();
+		}
 	}
 
 	loadOrders = (page, pageSize, search) => {
