@@ -119,7 +119,9 @@ class User extends Component {
 									/>
 								</div>
 								<form className={classes.form} noValidate>
-									<label>Sign up</label>
+									<label className="sign-up__header">
+										{this.props.location.role} Sign up
+									</label>
 									<Grid
 										container
 										spacing={2}
@@ -157,7 +159,7 @@ class User extends Component {
 										</Grid>
 										<Grid item xs={12}>
 											<TextField
-												color="secondary"
+												color="primary"
 												variant="outlined"
 												required
 												fullWidth
