@@ -16,7 +16,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 
 import Maps from "./Maps";
-import BusinessProfile from "./Business-Profile/BusinessProfile";
+import BusinessProfile from "../Business-Profile/BusinessProfile";
 import "./style/orderHistory.scss";
 
 import Modal from "@material-ui/core/Modal";
