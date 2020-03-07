@@ -9,6 +9,7 @@ import pic from "../assets/images/pic.png";
 import {
 	LOGIN_URL,
 	HOMEPAGE_URL,
+	SERVICE_URL,
 	BUSINESS_BASE_URL,
 	CLIENT_BASE_URL
 } from "../routes/URLMap";
@@ -24,7 +25,7 @@ class MainNavigation extends Component {
 	renderLink = index => {
 		const links = [
 			{ name: "Home", to: HOMEPAGE_URL },
-			{ name: "Serivce", to: HOMEPAGE_URL },
+			{ name: "Service", to: SERVICE_URL },
 			{ name: "Support", to: HOMEPAGE_URL },
 			{ name: "Login", to: LOGIN_URL }
 		];
