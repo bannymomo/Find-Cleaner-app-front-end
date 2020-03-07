@@ -86,52 +86,52 @@ const CustomSkinMap = withScriptjs(
 				]
 			}}
 		>
-			{console.log(props.locations)}
+			{/* {console.log(props.locations)} */}
 			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
-			{
+			{/* {
 				props.locations.map( location => (
 					console.log(location),
 					<Marker position={ location }  />
 				))
-			}
+			} */}
 		</GoogleMap>
 	))
 );
 
 export default function Maps(props) {
-	const addresses = props.orders.map( order => order.location );
+	// const addresses = props.orders.map( order => order.location );
 
-	const [locations, setLocations] = React.useState([]);
+	// const [locations, setLocations] = React.useState([]);
 
-	Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
-	Geocode.setLanguage("en");
-	Geocode.setRegion("au");
+	// Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+	// Geocode.setLanguage("en");
+	// Geocode.setRegion("au");
 
-	useEffect(() => {
-		addresses.forEach( address => {
-			getLocation(address);
-		});
-	}, [addresses]);
+	// useEffect(() => {
+	// 	addresses.forEach( address => {
+	// 		getLocation(address);
+	// 	});
+	// }, [addresses]);
 
-	const getLocation = address => {
-		if (!address) {
-			address = "116 adelaide st, brisbane";
-		}
-		Geocode.fromAddress(`${address}`).then(
-			response => {
-				const { lat, lng } = response.results[0].geometry.location;
-				locations.push({ lat, lng });
-				setLocations(locations);
-			},
-			error => {
-				console.error(error);
-			}
-		);
-	};
+	// const getLocation = address => {
+	// 	if (!address) {
+	// 		address = "116 adelaide st, brisbane";
+	// 	}
+	// 	Geocode.fromAddress(`${address}`).then(
+	// 		response => {
+	// 			const { lat, lng } = response.results[0].geometry.location;
+	// 			locations.push({ lat, lng });
+	// 			setLocations(locations);
+	// 		},
+	// 		error => {
+	// 			console.error(error);
+	// 		}
+	// 	);
+	// };
 
 	return (
 		<CustomSkinMap
-			locations={locations}
+			// locations={locations}
 			googleMapURL={googleMapURL}
 			loadingElement={<div style={{ height: `100%` }} />}
 			containerElement={<div style={{ height: `100%`, width: `100%` }} />}
