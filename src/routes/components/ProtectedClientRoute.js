@@ -3,6 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 
 import { isLoggedIn, getTokenRole } from "../../utils/auth";
 import { LOGIN_URL, HOMEPAGE_URL } from "../URLMap";
+import { CLIENT_ROLE } from "../../utils/variables";
 
 const ProtectedClientRoute = ({
 	component: ProtectedClientComponent,
@@ -21,7 +22,7 @@ const ProtectedClientRoute = ({
 							}}
 						/>
 					);
-				if (getTokenRole() !== "client")
+				if (getTokenRole() !== CLIENT_ROLE)
 					return (
 						<Redirect
 							to={{

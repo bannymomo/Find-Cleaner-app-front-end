@@ -31,6 +31,7 @@ import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
+import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
 
 const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 class Login extends React.Component {
@@ -77,9 +78,9 @@ class Login extends React.Component {
 				.then(data => {
 					this.setState({ isLoading: false }, () => {
 						this.loginInitialSetup(data);
-						if (getTokenRole() === "client") {
+						if (getTokenRole() === CLIENT_ROLE) {
 							this.clientLogin(data);
-						} else if (getTokenRole() === "business") {
+						} else if (getTokenRole() === BUSINESS_ROLE) {
 							this.businessLogin(data);
 						} else {
 							this.props.history.replace(SIGNUP_URL);
@@ -166,7 +167,7 @@ class Login extends React.Component {
 						className="login__link--bottom"
 						to={{
 							pathname: `${SIGNUP_URL}/user/client`,
-							role: "client"
+							role: CLIENT_ROLE
 						}}
 					>
 						Create an account.
