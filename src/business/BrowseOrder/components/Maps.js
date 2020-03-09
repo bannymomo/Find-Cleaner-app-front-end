@@ -10,6 +10,10 @@ import Geocode from "react-geocode";
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 
+Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+Geocode.setLanguage("en");
+Geocode.setRegion("au");
+
 const CustomSkinMap = withScriptjs(
 	withGoogleMap(props => (
 		<GoogleMap
@@ -86,52 +90,45 @@ const CustomSkinMap = withScriptjs(
 				]
 			}}
 		>
-			{/* {console.log(props.locations)} */}
 			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
-			{/* {
+			{
 				props.locations.map( location => (
-					console.log(location),
 					<Marker position={ location }  />
 				))
-			} */}
+			}
 		</GoogleMap>
 	))
 );
 
 export default function Maps(props) {
-	// const addresses = props.orders.map( order => order.location );
+	const addresses = props.orders.map( order => order.location );
 
-	// const [locations, setLocations] = React.useState([]);
+	const [locations, setLocations] = React.useState([]);
 
-	// Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
-	// Geocode.setLanguage("en");
-	// Geocode.setRegion("au");
+	const getLocation = address => {
+		if (!address) {
+			address = "116 adelaide st, brisbane";
+		}
+		Geocode.fromAddress(`${address}`).then(
+			response => {
+				const { lat, lng } = response.results[0].geometry.location;
+				setLocations(locations => [...locations, { lat, lng }]);
+			},
+			error => {
+				console.error(error);
+			}
+		);
+	};
 
-	// useEffect(() => {
-	// 	addresses.forEach( address => {
-	// 		getLocation(address);
-	// 	});
-	// }, [addresses]);
-
-	// const getLocation = address => {
-	// 	if (!address) {
-	// 		address = "116 adelaide st, brisbane";
-	// 	}
-	// 	Geocode.fromAddress(`${address}`).then(
-	// 		response => {
-	// 			const { lat, lng } = response.results[0].geometry.location;
-	// 			locations.push({ lat, lng });
-	// 			setLocations(locations);
-	// 		},
-	// 		error => {
-	// 			console.error(error);
-	// 		}
-	// 	);
-	// };
+	useEffect(() => {
+		addresses.forEach( address => {
+			getLocation(address);
+		});
+	}, [props.orders]);
 
 	return (
 		<CustomSkinMap
-			// locations={locations}
+			locations={locations}
 			googleMapURL={googleMapURL}
 			loadingElement={<div style={{ height: `100%` }} />}
 			containerElement={<div style={{ height: `100%`, width: `100%` }} />}
