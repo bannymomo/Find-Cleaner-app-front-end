@@ -31,6 +31,26 @@ const useStylesModal = makeStyles(theme => ({
 		alignItems: "center",
 		justifyContent: "center"
 	},
+	map: {
+		position: "relative",
+		width: 600,
+		height: 500
+	},
+	mapButton: {
+		position: "absolute",
+		right: -30,
+		backgroundColor: "white",
+		minWidth: 30,
+		top: 0,
+		border: "none",
+		borderRadius: 0,
+		fontSize: "1rem",
+		"&:hover": {
+			color: "#2196f3",
+			backgroundColor: "white"
+		}
+
+	},
 	paper: {
 		display: "flex",
 		boxSizing: "border-box",
@@ -46,7 +66,6 @@ const useStylesModal = makeStyles(theme => ({
 		position: "absolute",
 		right: -18,
 		top: -5,
-
 		border: "none",
 		borderRadius: "100px",
 		fontSize: "1rem",
@@ -59,18 +78,18 @@ const useStylesModal = makeStyles(theme => ({
 
 export default function OrderInformationList(props) {
 	const modalClasses = useStylesModal();
-	// backdrop for google map
-	const [open1, setOpen1] = React.useState(false);
-	const [open2, setOpen2] = React.useState(false);
+
+	const [openMap, setOpenMap] = React.useState(false);
+	const [openBusiness, setOpenBusiness] = React.useState(false);
 	const handleClose = () => {
-		setOpen1(false);
-		setOpen2(false);
+		setOpenMap(false);
+		setOpenBusiness(false);
 	};
-	const handleToggle1 = () => {
-		setOpen1(!open1);
+	const handleToggleMap = () => {
+		setOpenMap(!openMap);
 	};
-	const handleToggle2 = () => {
-		setOpen2(!open2);
+	const handleToggleBusiness = () => {
+		setOpenBusiness(!openBusiness);
 	};
 
 	return (
@@ -103,14 +122,30 @@ export default function OrderInformationList(props) {
 					}
 				/>
 				<div className="order-information__map">
-					<Button onClick={handleToggle1}>View Map</Button>
-					<Backdrop
-						className="order-information__map--backdrop"
-						open={open1}
-						onClick={handleClose}
+					<Button onClick={handleToggleMap}>View Map</Button>
+					<Modal
+						className={modalClasses.modal}
+						open={openMap}
+						BackdropComponent={Backdrop}
+						BackdropProps={{
+							timeout: 1000,
+							open: openMap
+						}}
 					>
-						<Maps address={props.location} />
-					</Backdrop>
+						<Fade in={openMap}>
+							<div className={modalClasses.map}>
+								<Maps 
+									address={props.location} 
+								/>
+								<Button
+									onClick={handleClose}
+									className={modalClasses.mapButton}
+								>
+									✕
+								</Button>
+							</div>
+						</Fade>
+					</Modal>
 				</div>
 			</ListItem>
 			<Divider variant="inset" component="li" />
@@ -145,23 +180,21 @@ export default function OrderInformationList(props) {
 				<div className="order-information__business">
 					<div className={modalClasses.root}>
 						<Button
-							onClick={handleToggle2}
+							onClick={handleToggleBusiness}
 							disabled={props.business ? false : true}
 						>
 							View Business
 						</Button>
 						<Modal
 							className={modalClasses.modal}
-							open={open2}
-							closeAfterTransition
-							disableScrollLock
+							open={openBusiness}
 							BackdropComponent={Backdrop}
 							BackdropProps={{
 								timeout: 1000,
-								open: open2 ? true : false
+								open: openBusiness
 							}}
 						>
-							<Fade in={open2}>
+							<Fade in={openBusiness}>
 								<div className={modalClasses.paper}>
 									<BusinessProfile
 										business={props.business}
