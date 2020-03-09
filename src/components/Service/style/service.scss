@@ -2,7 +2,7 @@
 
 .service__container--whole {
 	top: 70px;
-    position: relative;
+	position: relative;
 	font-family: Nunito;
 	font-style: normal;
 	text-align: center;
@@ -61,21 +61,6 @@
 
 		& span {
 			font-size: 1.2rem;
-		}
-	}
-	.service__button--homepage {
-		margin-left: 50rem;
-		margin-top: 10px;
-		font-size: 14px;
-		color: #0008;
-		border-radius: 0;
-		border-bottom: 1px solid #0008;
-		padding: 0;
-		text-transform: none;
-		&:hover {
-			color: $primary-color-blue;
-			border-bottom: 1px solid $primary-color-blue;
-			background-color: transparent;
 		}
 	}
 }
