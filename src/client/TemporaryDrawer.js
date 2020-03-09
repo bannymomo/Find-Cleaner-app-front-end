@@ -26,7 +26,7 @@ export default function TemporaryDrawer() {
 		<div>
 			<MenuRoundedIcon
 				onClick={toggleDrawer("left", true)}
-                fontSize="large"
+				fontSize="large"
 			/>
 			<Drawer open={state.left} onClose={toggleDrawer("left", false)}>
 				<SideBar />

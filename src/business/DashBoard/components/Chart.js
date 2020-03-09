@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -40,7 +40,6 @@ import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
 import { CardActionArea } from "@material-ui/core";
 import { accepted, done } from "../../../utils/variables";
 
-
 const useStyles = makeStyles(styles);
 
 function Chart(props) {
@@ -56,8 +55,8 @@ function Chart(props) {
 		<div className="Chart__container--whole">
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
-					<CardActionArea 
-						component={Link} 
+					<CardActionArea
+						component={Link}
 						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
 					>
 						<Card>
@@ -90,11 +89,11 @@ function Chart(props) {
 					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
-					<CardActionArea 
-						component={Link} 
+					<CardActionArea
+						component={Link}
 						to={{
 							pathname: `${BUSINESS_BASE_URL}/${businessId}/order-history`,
-							state: {searchStatus: accepted}
+							state: { searchStatus: accepted }
 						}}
 					>
 						<Card>
@@ -127,11 +126,11 @@ function Chart(props) {
 					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
-					<CardActionArea 
-						component={Link} 
+					<CardActionArea
+						component={Link}
 						to={{
 							pathname: `${BUSINESS_BASE_URL}/${businessId}/order-history`,
-							state: {searchStatus: done}
+							state: { searchStatus: done }
 						}}
 					>
 						<Card>

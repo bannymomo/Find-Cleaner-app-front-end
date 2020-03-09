@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -54,8 +54,8 @@ function Chart(props) {
 		<div style={{ padding: `${20}px ${20}px ${10}px` }}>
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
-					<CardActionArea 
-						component={Link} 
+					<CardActionArea
+						component={Link}
 						to={`${CLIENT_BASE_URL}/${clientId}/order-history`}
 					>
 						<Card>
@@ -88,11 +88,11 @@ function Chart(props) {
 					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
-					<CardActionArea 
-						component={Link} 
+					<CardActionArea
+						component={Link}
 						to={{
 							pathname: `${CLIENT_BASE_URL}/${clientId}/order-history`,
-							state: {searchStatus: newOrder}
+							state: { searchStatus: newOrder }
 						}}
 					>
 						<Card>
@@ -125,11 +125,11 @@ function Chart(props) {
 					</CardActionArea>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={3}>
-					<CardActionArea 
-						component={Link} 
+					<CardActionArea
+						component={Link}
 						to={{
 							pathname: `${CLIENT_BASE_URL}/${clientId}/order-history`,
-							state: {searchStatus: accepted}
+							state: { searchStatus: accepted }
 						}}
 					>
 						<Card>
