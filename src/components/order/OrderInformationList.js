@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 
 import {
 	List,
@@ -121,7 +122,9 @@ export default function OrderInformationList(props) {
 					primary="DUE DATE"
 					secondary={
 						<Typography variant="body2" color="textPrimary">
-							{props.dueDate}
+							<Moment format="DD-MM-YY HH:mm">
+								{props.dueDate}
+							</Moment>
 						</Typography>
 					}
 				/>

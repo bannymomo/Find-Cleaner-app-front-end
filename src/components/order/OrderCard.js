@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { 
@@ -64,7 +65,11 @@ export default function OrderCard(props) {
 								</li>
 								<li>
 									<DateRangeOutlinedIcon fontSize="small" />
-									<span>{props.dueDate}</span>
+									<span>							
+										<Moment format="DD-MM-YY HH:mm">
+											{props.dueDate}
+										</Moment>
+									</span>
 								</li>
 							</ul>
 						</div>
