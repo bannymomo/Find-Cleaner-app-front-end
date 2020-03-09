@@ -1,27 +1,28 @@
 import React from "react";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+import {
+	List,
+	ListItem,
+	ListItemIcon,
+	Divider,
+	ListItemText,
+	ListItemAvatar,
+	Avatar,
+	Typography,
+	Backdrop,
+	Button,
+	Modal,
+	Fade
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Typography from "@material-ui/core/Typography";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
-
-import Backdrop from "@material-ui/core/Backdrop";
-import Button from "@material-ui/core/Button";
 
 import Maps from "./Maps";
 import BusinessProfile from "../Business-Profile/BusinessProfile";
 import "./style/orderHistory.scss";
 
-import Modal from "@material-ui/core/Modal";
-import Fade from "@material-ui/core/Fade";
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStylesModal = makeStyles(theme => ({
 	modal: {

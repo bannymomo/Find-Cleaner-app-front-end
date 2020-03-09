@@ -12,12 +12,12 @@ import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 
 import {
-	clientRole,
-	newOrder,
-	cancelledByClient,
-	accepted,
-	cancelledByBusiness,
-	done
+	CLIENT_ROLE,
+	NEW_ORDER,
+	CANCELLED_BY_CLIENT,
+	ACCEPTED,
+	CANCELLED_BY_BUSINESS,
+	DONE
 } from "../../utils/variables";
 class OrderHistory extends React.Component {
 	state = {
@@ -29,7 +29,7 @@ class OrderHistory extends React.Component {
 			pageSize: 5
 		},
 		searchStatus: "",
-		role: clientRole
+		role: CLIENT_ROLE
 	};
 
 	componentDidMount() {
@@ -71,45 +71,45 @@ class OrderHistory extends React.Component {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			newOrder
+			NEW_ORDER
 		);
-		this.setState({ searchStatus: newOrder });
+		this.setState({ searchStatus: NEW_ORDER });
 	};
 
 	handlesearchAccepted = () => {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			accepted
+			ACCEPTED
 		);
-		this.setState({ searchStatus: accepted });
+		this.setState({ searchStatus: ACCEPTED });
 	};
 
 	handlesearchDone = () => {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			done
+			DONE
 		);
-		this.setState({ searchStatus: done });
+		this.setState({ searchStatus: DONE });
 	};
 
 	handleSearchWithdraw = () => {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			cancelledByClient
+			CANCELLED_BY_CLIENT
 		);
-		this.setState({ searchStatus: cancelledByClient });
+		this.setState({ searchStatus: CANCELLED_BY_CLIENT });
 	};
 
 	handlesearchCancelled = () => {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			cancelledByBusiness
+			CANCELLED_BY_BUSINESS
 		);
-		this.setState({ cancelledByBusiness });
+		this.setState({ CANCELLED_BY_BUSINESS });
 	};
 
 	render() {

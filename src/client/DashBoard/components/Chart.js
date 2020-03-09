@@ -38,7 +38,7 @@ import styles from "../style/card/tempelate-dashboardStyle";
 
 import { CLIENT_BASE_URL } from "../../../routes/URLMap";
 import { CardActionArea } from "@material-ui/core";
-import { accepted, newOrder } from "../../../utils/variables";
+import { NEW_ORDER, ACCEPTED } from "../../../utils/variables";
 
 const useStyles = makeStyles(styles);
 
@@ -92,7 +92,7 @@ function Chart(props) {
 						component={Link}
 						to={{
 							pathname: `${CLIENT_BASE_URL}/${clientId}/order-history`,
-							state: { searchStatus: newOrder }
+							state: { searchStatus: NEW_ORDER }
 						}}
 					>
 						<Card>
@@ -129,7 +129,7 @@ function Chart(props) {
 						component={Link}
 						to={{
 							pathname: `${CLIENT_BASE_URL}/${clientId}/order-history`,
-							state: { searchStatus: accepted }
+							state: { searchStatus: ACCEPTED }
 						}}
 					>
 						<Card>

@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TakeOrder from "../../client/Take-Order/TakeOrder";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
 
+const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+
 const useStylesModal = makeStyles(theme => ({
 	openButton: {
 		margin: "0 2rem",
@@ -27,22 +29,10 @@ const useStylesModal = makeStyles(theme => ({
 		padding: theme.spacing(1, 4, 2),
 		outline: 0
 	},
-	// button: {
-	// 	position: "absolute",
-	// 	// left: window.innerWidth >= "1440" ? "43px" : "860px",
-	// 	// bottom: window.innerWidth >= "1440" ? "85px" : "20px",
-	// 	right: "20px",
-	// 	bottom: "20px",
-	// 	color: "#2196f3",
-	// 	borderColor: "#0005",
-	// 	textTransform: "Capitalize",
-	// 	fontSize: "0.9rem"
-	// }
 	button: {
 		position: "absolute",
 		right: 5,
 		top: 5,
-
 		border: "none",
 		borderRadius: "100px",
 		fontSize: "1.2rem",
@@ -54,8 +44,6 @@ const useStylesModal = makeStyles(theme => ({
 }));
 
 const PostOrderBtn = props => {
-	const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
-
 	//modal
 	const modalClasses = useStylesModal();
 	const [modalOpen, setModalOpen] = React.useState(false);

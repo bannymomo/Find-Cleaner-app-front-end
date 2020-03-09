@@ -18,11 +18,11 @@ import { fetchOrderById, changeOrderStatusByBusiness } from "../../api/order";
 import ErrorMessage from "../../UI/ErrorMessage";
 
 import {
-	businessRole,
-	newOrder,
-	accepted,
-	cancelledByBusiness,
-	done
+	BUSINESS_ROLE,
+	NEW_ORDER,
+	ACCEPTED,
+	CANCELLED_BY_BUSINESS,
+	DONE
 } from "../../utils/variables";
 import getStatusText from "../../utils/getStatusText";
 
@@ -54,7 +54,7 @@ class OrderInformaiton extends React.Component {
 		super(props);
 
 		this.state = {
-			role: businessRole,
+			role: BUSINESS_ROLE,
 			order: {},
 			clientName: "",
 			business: "",
@@ -92,9 +92,9 @@ class OrderInformaiton extends React.Component {
 	};
 	getButtonText = () => {
 		let buttonText;
-		if (this.state.order.status === newOrder) {
+		if (this.state.order.status === NEW_ORDER) {
 			buttonText = "Accept Order";
-		} else if (this.state.order.status === accepted) {
+		} else if (this.state.order.status === ACCEPTED) {
 			buttonText = "Cancel Order";
 		}
 		return buttonText;
@@ -102,16 +102,16 @@ class OrderInformaiton extends React.Component {
 
 	getStatusText = () => {
 		let buttonText;
-		if (this.state.order.status === cancelledByBusiness) {
+		if (this.state.order.status === CANCELLED_BY_BUSINESS) {
 			buttonText = "Cancelled";
-		} else if (this.state.order.status === done) {
+		} else if (this.state.order.status === DONE) {
 			buttonText = "Completed";
 		}
 		return buttonText;
 	};
 
 	isEditDisabled = () => {
-		if (this.state.order.status === newOrder) return false;
+		if (this.state.order.status === NEW_ORDER) return false;
 		return true;
 	};
 
@@ -123,15 +123,15 @@ class OrderInformaiton extends React.Component {
 		let status;
 		const orderId = this.state.order._id;
 		const businessId = this.props.match.params.businessId;
-		if (this.state.order.status === newOrder) {
-			status = accepted;
+		if (this.state.order.status === NEW_ORDER) {
+			status = ACCEPTED;
 			this.setState({ isUpdating: true }, () => {
 				changeOrderStatusByBusiness(orderId, businessId, status)
 					.then(() => this.loadOrder(orderId))
 					.catch(error => this.setState({ error }));
 			});
-		} else if (this.state.order.status === accepted) {
-			status = cancelledByBusiness;
+		} else if (this.state.order.status === ACCEPTED) {
+			status = CANCELLED_BY_BUSINESS;
 			if (window.confirm(`Do you want to cancel this order?`)) {
 				this.setState({ isUpdating: true }, () => {
 					changeOrderStatusByBusiness(orderId, businessId, status)

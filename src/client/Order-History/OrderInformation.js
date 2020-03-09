@@ -21,11 +21,11 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 
 import {
-	newOrder,
-	cancelledByClient,
-	accepted,
-	cancelledByBusiness,
-	done
+	NEW_ORDER,
+	CANCELLED_BY_CLIENT,
+	ACCEPTED,
+	CANCELLED_BY_BUSINESS,
+	DONE
 } from "../../utils/variables";
 import getStatusText from "../../utils/getStatusText";
 
@@ -95,9 +95,9 @@ class OrderInformaiton extends React.Component {
 
 	getButtonText = () => {
 		let buttonText;
-		if (this.state.order.status === newOrder) {
+		if (this.state.order.status === NEW_ORDER) {
 			buttonText = "Cancel Order";
-		} else if (this.state.order.status === accepted) {
+		} else if (this.state.order.status === ACCEPTED) {
 			buttonText = "Order is Done";
 		}
 		return buttonText;
@@ -106,13 +106,13 @@ class OrderInformaiton extends React.Component {
 	getEditButtonText = () => {
 		let buttonText;
 		if (
-			this.state.order.status === cancelledByClient ||
-			this.state.order.status === cancelledByBusiness
+			this.state.order.status === CANCELLED_BY_CLIENT ||
+			this.state.order.status === CANCELLED_BY_BUSINESS
 		) {
 			buttonText = "Cancelled";
-		} else if (this.state.order.status === accepted) {
+		} else if (this.state.order.status === ACCEPTED) {
 			buttonText = "Assigned";
-		} else if (this.state.order.status === done) {
+		} else if (this.state.order.status === DONE) {
 			buttonText = "Completed";
 		} else {
 			buttonText = "Edit Order";
@@ -121,7 +121,7 @@ class OrderInformaiton extends React.Component {
 	};
 
 	isEditDisabled = () => {
-		if (this.state.order.status === newOrder) return false;
+		if (this.state.order.status === NEW_ORDER) return false;
 		return true;
 	};
 
@@ -134,8 +134,8 @@ class OrderInformaiton extends React.Component {
 		const orderId = this.state.order._id;
 		const clientId = this.props.match.params.clientId;
 
-		if (this.state.order.status === newOrder) {
-			status = cancelledByClient;
+		if (this.state.order.status === NEW_ORDER) {
+			status = CANCELLED_BY_CLIENT;
 			if (window.confirm(`Do you want to cancel this order?`)) {
 				this.setState({ isUpdating: true }, () => {
 					changeOrderStatusByClient(orderId, clientId, status)
@@ -143,8 +143,8 @@ class OrderInformaiton extends React.Component {
 						.catch(error => this.setState({ error }));
 				});
 			}
-		} else if (this.state.order.status === accepted) {
-			status = done;
+		} else if (this.state.order.status === ACCEPTED) {
+			status = DONE;
 			this.setState({ isUpdating: true }, () => {
 				changeOrderStatusByClient(orderId, clientId, status)
 					.then(() => this.loadOrder(orderId))
