@@ -79,17 +79,125 @@ class BusinessSignup extends Component {
 			ABNNumber: this.state.ABNNumber
 		};
 		this.setState({ isLoading: true }, () => {
-			createBusiness(businessInfo).then(data => {
-				this.setState({ isLoading: false }, () => {
-					removeClientId();
-					removeBusinessId();
-					const businessId = data._id;
-					setBusinessId(businessId);
-					const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
-					this.props.history.replace(redirectTo);
+			createBusiness(businessInfo)
+				.then(data => {
+					this.setState({ isLoading: false }, () => {
+						removeClientId();
+						removeBusinessId();
+						const businessId = data._id;
+						setBusinessId(businessId);
+						const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
+						this.props.history.replace(redirectTo);
+					});
+				})
+				.catch(error => {
+					this.setState({ error, isLoading: false });
 				});
-			});
 		});
+	};
+
+	renderButton = classes => {
+		if (this.state.isLoading) {
+			return <LinearProgress className={classes.loading} />;
+		} else {
+			return (
+				<Button
+					variant="contained"
+					fullWidth
+					color="primary"
+					className={classes.submit}
+					onClick={this.postBusiness}
+				>
+					Sign up
+				</Button>
+			);
+		}
+	};
+
+	renderForm = classes => {
+		return (
+			<form className={classes.form} noValidate>
+				<label>More about you~</label>
+				<Grid container spacing={2} className={classes.grid}>
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="Business Name"
+							value={this.state.businessName}
+							onChange={event =>
+								this.setState({
+									businessName: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="Address"
+							value={this.state.address}
+							onChange={event =>
+								this.setState({
+									address: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							color="primary"
+							variant="outlined"
+							required
+							fullWidth
+							label="postcode"
+							value={this.state.postcode}
+							onChange={event =>
+								this.setState({
+									postcode: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="Telephone Number"
+							value={this.state.telephoneNumber}
+							onChange={event =>
+								this.setState({
+									telephoneNumber: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="ABN Number"
+							value={this.state.ABNNumber}
+							onChange={event =>
+								this.setState({
+									ABNNumber: event.target.value
+								})
+							}
+						/>
+					</Grid>
+				</Grid>
+				{this.renderButton(classes)}
+
+				{!!this.state.error && (
+					<Alert severity="error">Illegal input data </Alert>
+				)}
+			</form>
+		);
 	};
 
 	render() {
@@ -120,113 +228,7 @@ class BusinessSignup extends Component {
 										alt="brandname"
 									/>
 								</div>
-								<form className={classes.form} noValidate>
-									<label>More about you~</label>
-									<Grid
-										container
-										spacing={2}
-										className={classes.grid}
-									>
-										<Grid item xs={12}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="Business Name"
-												value={this.state.businessName}
-												onChange={event =>
-													this.setState({
-														businessName:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="Address"
-												value={this.state.address}
-												onChange={event =>
-													this.setState({
-														address:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<TextField
-												color="primary"
-												variant="outlined"
-												required
-												fullWidth
-												label="postcode"
-												value={this.state.postcode}
-												onChange={event =>
-													this.setState({
-														postcode:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="Telephone Number"
-												value={
-													this.state.telephoneNumber
-												}
-												onChange={event =>
-													this.setState({
-														telephoneNumber:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="ABN Number"
-												value={this.state.ABNNumber}
-												onChange={event =>
-													this.setState({
-														ABNNumber:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-									</Grid>
-									{this.state.isLoading ? (
-										<LinearProgress
-											className={classes.loading}
-										/>
-									) : (
-										<Button
-											variant="contained"
-											fullWidth
-											color="primary"
-											className={classes.submit}
-											onClick={this.postBusiness}
-										>
-											Sign up
-										</Button>
-									)}
-									{!!this.state.error && (
-										<Alert severity="error">
-											Account not exits or{" "}
-										</Alert>
-									)}
-								</form>
+								{this.renderForm(classes)}
 							</div>
 						</Box>
 					</Container>

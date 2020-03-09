@@ -19,11 +19,41 @@ import { isLoggedIn } from "../utils/auth";
 import PostOrderBtn from "../components/order/PostOrderBtn";
 import styled from "styled-components";
 
+const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 class MainNavigation extends Component {
+	renderButton = (loginClient, loginBussiness) => {
+		if (loginBussiness && isLoggedIn()) {
+			return (
+				<Button
+					component={Link}
+					to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
+					variant="contained"
+					color="primary"
+				>
+					Browse all tasks
+				</Button>
+			);
+		} else if (loginClient && isLoggedIn()) {
+			return <PostOrderBtn />;
+		} else {
+			return (
+				<Button
+					component={Link}
+					to={`${CLIENT_BASE_URL}/${loginClient}`}
+					onClick={() => {
+						localStorage.setItem(POST_ORDER_AT_HOMEPAGE, true);
+					}}
+					variant="contained"
+					color="primary"
+				>
+					Post a task
+				</Button>
+			);
+		}
+	};
 	render() {
 		const loginClient = getClientId();
 		const loginBussiness = getBusinessId();
-		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 		const StyledLogin = styled(Link)`
 			display: ${isLoggedIn() ? "none" : ""};
 		`;
@@ -97,33 +127,7 @@ class MainNavigation extends Component {
 						</StyleAvartarButton>
 					</div>
 					<div className="nav-bar__button--blue">
-						{loginBussiness && isLoggedIn() ? (
-							<Button
-								component={Link}
-								to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
-								variant="contained"
-								color="primary"
-							>
-								Browse all tasks
-							</Button>
-						) : loginClient && isLoggedIn() ? (
-							<PostOrderBtn />
-						) : (
-							<Button
-								component={Link}
-								to={`${CLIENT_BASE_URL}/${loginClient}`}
-								onClick={() => {
-									localStorage.setItem(
-										POST_ORDER_AT_HOMEPAGE,
-										true
-									);
-								}}
-								variant="contained"
-								color="primary"
-							>
-								Post a task
-							</Button>
-						)}
+						{this.renderButton(loginClient, loginBussiness)}
 					</div>
 				</div>
 			</header>

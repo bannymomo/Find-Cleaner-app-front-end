@@ -51,22 +51,30 @@ class ClientAvatar extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-		return this.state.error ? (
-			<ErrorMessage error={this.state.error} />
-		) : this.state.isLoading ? (
-			<div className="client__avatar-progress--container">
-				<CircularProgress disableShrink size={140} color="inherit" />
-			</div>
-		) : (
-			<div className={"client__avatar-container--left-top"}>
-				<Avatar
-					className={classes.large}
-					src={this.state.avatar}
-					alt={this.state.clientName}
-				/>
-				<p>{this.state.clientName}</p>
-			</div>
-		);
+		if (this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} else if (this.state.isLoading) {
+			return (
+				<div className="client__avatar-progress--container">
+					<CircularProgress
+						disableShrink
+						size={140}
+						color="inherit"
+					/>
+				</div>
+			);
+		} else {
+			return (
+				<div className={"client__avatar-container--left-top"}>
+					<Avatar
+						className={classes.large}
+						src={this.state.avatar}
+						alt={this.state.clientName}
+					/>
+					<p>{this.state.clientName}</p>
+				</div>
+			);
+		}
 	}
 }
 

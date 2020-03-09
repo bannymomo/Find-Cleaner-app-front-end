@@ -82,17 +82,114 @@ class ClientSignup extends Component {
 			postcode: this.state.postcode
 		};
 		this.setState({ isLoading: true }, () => {
-			createClient(clientInfo).then(data => {
-				this.setState({ isLoading: false }, () => {
-					removeClientId();
-					removeBusinessId();
-					const clientId = data._id;
-					setClientId(clientId);
-					const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
-					this.props.history.replace(redirectTo);
+			createClient(clientInfo)
+				.then(data => {
+					this.setState({ isLoading: false }, () => {
+						removeClientId();
+						removeBusinessId();
+						const clientId = data._id;
+						setClientId(clientId);
+						const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
+						this.props.history.replace(redirectTo);
+					});
+				})
+				.catch(error => {
+					this.setState({ error, isLoading: false });
 				});
-			});
 		});
+	};
+
+	renderButton = classes => {
+		if (this.state.isLoading) {
+			return <LinearProgress className={classes.loading} />;
+		} else {
+			return (
+				<Button
+					variant="contained"
+					fullWidth
+					color="primary"
+					className={classes.submit}
+					onClick={this.postClient}
+				>
+					Sign up
+				</Button>
+			);
+		}
+	};
+	renderForm = classes => {
+		return (
+			<form className={classes.form} noValidate>
+				<label>More about you~</label>
+				<Grid container spacing={2} className={classes.grid}>
+					<Grid item xs={12} sm={6}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="First Name"
+							value={this.state.firstName}
+							onChange={event =>
+								this.setState({
+									firstName: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="Last Name"
+							value={this.state.lastName}
+							onChange={event =>
+								this.setState({
+									lastName: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					{this.state.invalidName ? (
+						<Alert severity="error">
+							The length must longer than 3
+						</Alert>
+					) : null}
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="Gender"
+							value={this.state.gender}
+							onChange={event =>
+								this.setState({
+									gender: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							color="primary"
+							variant="outlined"
+							required
+							fullWidth
+							label="postcode"
+							value={this.state.postcode}
+							onChange={event =>
+								this.setState({
+									postcode: event.target.value
+								})
+							}
+						/>
+					</Grid>
+				</Grid>
+				{this.renderButton(classes)}
+				{!!this.state.error && (
+					<Alert severity="error">Illegal input data </Alert>
+				)}
+			</form>
+		);
 	};
 
 	render() {
@@ -123,101 +220,7 @@ class ClientSignup extends Component {
 										alt="brandname"
 									/>
 								</div>
-								<form className={classes.form} noValidate>
-									<label>More about you~</label>
-									<Grid
-										container
-										spacing={2}
-										className={classes.grid}
-									>
-										<Grid item xs={12} sm={6}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="First Name"
-												value={this.state.firstName}
-												onChange={event =>
-													this.setState({
-														firstName:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										<Grid item xs={12} sm={6}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="Last Name"
-												value={this.state.lastName}
-												onChange={event =>
-													this.setState({
-														lastName:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										{this.state.invalidName ? (
-											<Alert severity="error">
-												The length must longer than 3
-											</Alert>
-										) : null}
-										<Grid item xs={12}>
-											<TextField
-												variant="outlined"
-												required
-												fullWidth
-												label="Gender"
-												value={this.state.gender}
-												onChange={event =>
-													this.setState({
-														gender:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<TextField
-												color="primary"
-												variant="outlined"
-												required
-												fullWidth
-												label="postcode"
-												value={this.state.postcode}
-												onChange={event =>
-													this.setState({
-														postcode:
-															event.target.value
-													})
-												}
-											/>
-										</Grid>
-									</Grid>
-									{this.state.isLoading ? (
-										<LinearProgress
-											className={classes.loading}
-										/>
-									) : (
-										<Button
-											variant="contained"
-											fullWidth
-											color="primary"
-											className={classes.submit}
-											onClick={this.postClient}
-										>
-											Sign up
-										</Button>
-									)}
-									{!!this.state.error && (
-										<Alert severity="error">
-											Account not exits or{" "}
-										</Alert>
-									)}
-								</form>
+								{this.renderForm(classes)}
 							</div>
 						</Box>
 					</Container>

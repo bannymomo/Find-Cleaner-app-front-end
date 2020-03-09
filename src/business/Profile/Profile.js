@@ -35,21 +35,29 @@ class Profile extends React.Component {
 		});
 	};
 
+	renderContent = () => {
+		if (this.state.isLoading || this.state.isUpdating) {
+			return (
+				<div className="business-profile__progress--container">
+					<CircularProgress color="secondary" size={200} />
+				</div>
+			);
+		} else if (!!this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} else {
+			return (
+				<div className="business-profile__container">
+					<BusinessProfile business={this.state.business} />
+				</div>
+			);
+		}
+	};
+
 	render() {
 		return (
 			<React.Fragment>
 				<div className="business-profile__header">Business Profile</div>
-				{this.state.isLoading || this.state.isUpdating ? (
-					<div className="business-profile__progress--container">
-						<CircularProgress color="secondary" size={200} />
-					</div>
-				) : !!this.state.error ? (
-					<ErrorMessage error={this.state.error} />
-				) : (
-					<div className="business-profile__container">
-						<BusinessProfile business={this.state.business} />
-					</div>
-				)}
+				{this.renderContent()}
 			</React.Fragment>
 		);
 	}

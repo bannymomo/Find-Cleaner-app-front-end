@@ -21,10 +21,9 @@ import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
 import { LOGIN_URL } from "../../routes/URLMap";
-import { CLIENT_ROLE } from '../../utils/variables';
+import { CLIENT_ROLE } from "../../utils/variables";
 
 import "./style/signup.scss";
-
 
 const styles = theme => ({
 	container: {
@@ -94,6 +93,91 @@ class User extends Component {
 		});
 	};
 
+	renderButton = classes => {
+		if (this.state.isLoading) {
+			return <LinearProgress className={classes.loading} />;
+		} else {
+			return (
+				<Button
+					onClick={() => this.postUserInfo()}
+					variant="contained"
+					fullWidth
+					color="primary"
+					className={classes.submit}
+				>
+					Continue
+				</Button>
+			);
+		}
+	};
+
+	renderForm = classes => {
+		return (
+			<form className={classes.form} noValidate>
+				<label className="sign-up__header">
+					{this.props.location.role} Sign up
+				</label>
+				<Grid container spacing={2} className={classes.grid}>
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="User Name"
+							value={this.state.username}
+							onChange={event =>
+								this.setState({
+									username: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							variant="outlined"
+							required
+							fullWidth
+							label="Email Address"
+							value={this.state.email}
+							onChange={event =>
+								this.setState({
+									email: event.target.value
+								})
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							color="primary"
+							variant="outlined"
+							required
+							fullWidth
+							label="Password"
+							type="password"
+							value={this.state.password}
+							onChange={event =>
+								this.setState({
+									password: event.target.value
+								})
+							}
+						/>
+					</Grid>
+				</Grid>
+				{this.renderButton(classes)}
+
+				<div className="signin__text--bottom">
+					Already have an account?{" "}
+					<Link className="signin__link--bottom" to={LOGIN_URL}>
+						Log in.
+					</Link>
+				</div>
+				{!!this.state.error && (
+					<Alert severity="error">User already exits~</Alert>
+				)}
+			</form>
+		);
+	};
+
 	render() {
 		const { classes } = this.props;
 		if (!this.state.basicInfo) {
@@ -121,100 +205,14 @@ class User extends Component {
 											alt="brandname"
 										/>
 									</div>
-									<form className={classes.form} noValidate>
-										<label className="sign-up__header">
-											{this.props.location.role} Sign up
-										</label>
-										<Grid
-											container
-											spacing={2}
-											className={classes.grid}
-										>
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="User Name"
-													value={this.state.username}
-													onChange={event =>
-														this.setState({
-															username:
-																event.target.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													variant="outlined"
-													required
-													fullWidth
-													label="Email Address"
-													value={this.state.email}
-													onChange={event =>
-														this.setState({
-															email:
-																event.target.value
-														})
-													}
-												/>
-											</Grid>
-											<Grid item xs={12}>
-												<TextField
-													color="primary"
-													variant="outlined"
-													required
-													fullWidth
-													label="Password"
-													type="password"
-													value={this.state.password}
-													onChange={event =>
-														this.setState({
-															password:
-																event.target.value
-														})
-													}
-												/>
-											</Grid>
-										</Grid>
-										{this.state.isLoading ? (
-											<LinearProgress
-												className={classes.loading}
-											/>
-										) : (
-												<Button
-													onClick={() => this.postUserInfo()}
-													variant="contained"
-													fullWidth
-													color="primary"
-													className={classes.submit}
-												>
-													Continue
-											</Button>
-											)}
-										<div className="signin__text--bottom">
-											Already have an account?{" "}
-											<Link
-												className="signin__link--bottom"
-												to={LOGIN_URL}
-											>
-												Log in.
-											</Link>
-										</div>
-										{!!this.state.error && (
-											<Alert severity="error">
-												User already exits~
-											</Alert>
-										)}
-									</form>
+									{this.renderForm(classes)}
 								</div>
 							</Box>
 						</Container>
 					</div>
 				</Fragment>
-			)
-		};
+			);
+		}
 
 		return this.state.role === CLIENT_ROLE ? (
 			<ClientSignup
@@ -222,11 +220,11 @@ class User extends Component {
 				history={this.state.history}
 			/>
 		) : (
-				<BusinessSignup
-					email={this.state.email}
-					history={this.state.history}
-				/>
-			);
+			<BusinessSignup
+				email={this.state.email}
+				history={this.state.history}
+			/>
+		);
 	}
 }
 
