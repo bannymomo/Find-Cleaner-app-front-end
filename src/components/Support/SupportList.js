@@ -5,14 +5,15 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { CLIENT_BASE_URL } from "../../routes/URLMap";
-import { BUSINESS_BASE_URL } from "../../routes/URLMap";
-// import { ORDER_BASE_URL } from "../../routes/URLMap";
-// import { LOGIN_URL } from "../../routes/URLMap";
-import { SIGNUP_URL } from "../../routes/URLMap";
-import { SERVICE_URL } from "../../routes/URLMap";
-import { getBusinessId, getClientId } from "../../utils/auth";
-import { isLoggedIn } from "../../utils/auth";
+
+import {
+	CLIENT_BASE_URL,
+	BUSINESS_BASE_URL,
+	SIGNUP_URL,
+	SERVICE_URL
+} from "../../routes/URLMap";
+
+import { getBusinessId, getClientId, isLoggedIn } from "../../utils/auth";
 
 const useStyles = makeStyles(theme => ({
 	supports: {

@@ -19,6 +19,7 @@ import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
 import ErrorMessage from "../../UI/ErrorMessage";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+import ButtonGoBack from "../../UI/ButtonGoBack";
 
 import {
 	NEW_ORDER,
@@ -156,6 +157,11 @@ class OrderInformaiton extends React.Component {
 	handleExpand = () => {
 		this.setState({ expanded: !this.state.expanded });
 	};
+
+	handleGoBack = () => {
+		this.props.history.go(-1);
+	};
+
 	renderContent = () => {
 		if (this.state.isLoading || this.state.isUpdating) {
 			return (
@@ -192,6 +198,7 @@ class OrderInformaiton extends React.Component {
 							/>
 						</Grid>
 						<Grid item xs={4}>
+							<ButtonGoBack handleGoBack={this.handleGoBack} />
 							<Card>
 								<CardContent className="order-information__budget">
 									<Typography gutterBottom>Price</Typography>

@@ -25,6 +25,7 @@ import {
 	DONE
 } from "../../utils/variables";
 import getStatusText from "../../utils/getStatusText";
+import ButtonGoBack from "../../UI/ButtonGoBack";
 
 const listArray = [
 	{
@@ -146,6 +147,10 @@ class OrderInformaiton extends React.Component {
 		this.setState({ expanded: !this.state.expanded });
 	};
 
+	handleGoBack = () => {
+		this.props.history.go(-1);
+	};
+
 	renderContent = () => {
 		if (this.state.isLoading || this.state.isUpdating) {
 			return (
@@ -183,6 +188,7 @@ class OrderInformaiton extends React.Component {
 							/>
 						</Grid>
 						<Grid item xs={4}>
+							<ButtonGoBack handleGoBack={this.handleGoBack} />
 							<Card>
 								<CardContent className="order-information__budget">
 									<Typography gutterBottom>Price</Typography>
