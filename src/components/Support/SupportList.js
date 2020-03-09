@@ -74,7 +74,7 @@ export default function SupportList(props) {
 			link: `${SERVICE_URL}`
 		},
 
-		{ name: "Business Register", link: `${SIGNUP_URL}` },
+		{ name: "Business Register", link: `${SIGNUP_URL}/user/business` },
 		{
 			name: "Business Browse All Tasks",
 			link: `${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`
