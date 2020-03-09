@@ -44,7 +44,12 @@ export default function SupportList(props) {
 	const loginBussiness = getBusinessId();
 
 	const supports = [
-		{ name: "Homecleaning", link: `${SERVICE_URL}` },
+		{
+			name: "Client Sign Up",
+			link: `${SIGNUP_URL}/user/client`
+		},
+		{ name: "Home Cleaning", link: `${SERVICE_URL}` },
+
 		{
 			name: "Client Dashboard",
 			link: `${CLIENT_BASE_URL}/${loginClient}/dashboard`
@@ -69,11 +74,6 @@ export default function SupportList(props) {
 			name: "Client Message",
 			link: `${CLIENT_BASE_URL}/${loginClient}/message`
 		},
-		{
-			name: "End-of-lease Cleaning",
-			link: `${SERVICE_URL}`
-		},
-
 		{ name: "Business Register", link: `${SIGNUP_URL}/user/business` },
 		{
 			name: "Business Browse All Tasks",

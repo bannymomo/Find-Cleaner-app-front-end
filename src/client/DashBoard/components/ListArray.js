@@ -5,7 +5,7 @@ import kitchen from "../../../assets/images/kitchen.png";
 import carpet from "../../../assets/images/carpet.png";
 import rent from "../../../assets/images/rent.png";
 import bathroom from "../../../assets/images/bathroom.png";
-import glass from "../../../assets/images/glass.png";
+import window from "../../../assets/images/window.png";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../../routes/URLMap";
@@ -29,9 +29,13 @@ export default function FloatingActionButtonSize() {
 	});
 	const listArray = [
 		{ img: house, alt: "Home Cleaning", description: "Home Cleaning" },
+		{
+			img: rent,
+			alt: "End of Lease Cleaning",
+			description: "End of Lease Cleaning"
+		},
 		{ img: carpet, alt: "Carpet Cleaning", description: "Carpet Cleaning" },
 
-		{ img: glass, alt: "Glass  Cleaning", description: "Glass Cleaning" },
 		{
 			img: kitchen,
 			alt: "Oven Cleaning",
@@ -42,11 +46,7 @@ export default function FloatingActionButtonSize() {
 			alt: "Bathroom Cleaning",
 			description: "Bathroom Cleaning"
 		},
-		{
-			img: rent,
-			alt: "End of Lease Cleaning",
-			description: "End of Lease Cleaning"
-		}
+		{ img: window, alt: "Window Cleaning", description: "Window Cleaning" }
 	];
 	const classes = useStyles();
 	const loginClient = getClientId();
