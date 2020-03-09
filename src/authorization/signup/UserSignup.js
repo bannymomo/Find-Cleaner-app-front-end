@@ -21,7 +21,7 @@ import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
 import { LOGIN_URL } from "../../routes/URLMap";
-import {clientRole} from '../../utils/variables';
+import { CLIENT_ROLE } from '../../utils/variables';
 
 import "./style/signup.scss";
 
@@ -216,7 +216,7 @@ class User extends Component {
 			)
 		};
 
-		return this.state.role === clientRole ? (
+		return this.state.role === CLIENT_ROLE ? (
 			<ClientSignup
 				email={this.state.email}
 				history={this.state.history}

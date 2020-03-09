@@ -9,13 +9,13 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import "./style/orderHistory.scss";
 
-import { 
-    clientRole,
-    newOrder, 
-    cancelledByClient, 
-    accepted, 
-    cancelledByBusiness, 
-    done 
+import {     
+    NEW_ORDER,
+    CANCELLED_BY_CLIENT,
+    ACCEPTED,
+    CANCELLED_BY_BUSINESS,
+    DONE,
+    CLIENT_ROLE
 } from "../../utils/variables";
 
 const OrderNavBar = props => {
@@ -37,22 +37,22 @@ const OrderNavBar = props => {
                 >
                     <ListItemText primary="All Orders" />
                 </ListItem>
-                { props.role === clientRole && 
+                { props.role === CLIENT_ROLE && 
                     <React.Fragment>
                         <Divider />
                         <ListItem button
-                            status= {newOrder}
+                            status= {NEW_ORDER}
                             onClick={props.searchNew}
                         >
                             <ListItemText primary="Placed Orders" />
                         </ListItem>
                     </React.Fragment>
                 }
-                { props.role === clientRole && 
+                { props.role === CLIENT_ROLE && 
                     <React.Fragment>
                         <Divider />
                         <ListItem button
-                            status= {cancelledByClient}
+                            status= {CANCELLED_BY_CLIENT}
                             onClick={props.searchWithdraw}
                         >
                             <ListItemText primary="Orders Cancelled by Client" />
@@ -61,21 +61,21 @@ const OrderNavBar = props => {
                 }
                 <Divider />
                 <ListItem button
-                    status= {accepted}
+                    status= {ACCEPTED}
                     onClick={props.searchAccepted}
                 >
                     <ListItemText primary="Assigned Orders" />
                 </ListItem>
                 <Divider />
                 <ListItem button
-                    status= {cancelledByBusiness}
+                    status= {CANCELLED_BY_BUSINESS}
                     onClick={props.searchCancelled}
                 >
                     <ListItemText primary="Orders Cancelled by Business" />
                 </ListItem>
                 <Divider />
                 <ListItem button
-                    status= {done}
+                    status= {DONE}
                     onClick={props.searchDone}
                 >
                     <ListItemText primary="Completed Orders" />

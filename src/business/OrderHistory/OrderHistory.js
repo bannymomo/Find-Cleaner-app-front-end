@@ -12,10 +12,10 @@ import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 
 import {
-	businessRole,
-	accepted,
-	cancelledByBusiness,
-	done
+	BUSINESS_ROLE,
+	ACCEPTED,
+	CANCELLED_BY_BUSINESS,
+	DONE
 } from "../../utils/variables";
 class OrderHistory extends React.Component {
 	state = {
@@ -27,7 +27,7 @@ class OrderHistory extends React.Component {
 			pageSize: 5
 		},
 		searchStatus: "",
-		role: businessRole
+		role: BUSINESS_ROLE
 	};
 
 	componentDidMount() {
@@ -69,27 +69,27 @@ class OrderHistory extends React.Component {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			accepted
+			ACCEPTED
 		);
-		this.setState({ searchStatus: accepted });
+		this.setState({ searchStatus: ACCEPTED });
 	};
 
 	handlesearchDone = () => {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			done
+			DONE
 		);
-		this.setState({ searchStatus: done });
+		this.setState({ searchStatus: DONE });
 	};
 
 	handlesearchCancelled = () => {
 		this.loadOrders(
 			this.state.pagination.page,
 			this.state.pagination.pageSize,
-			cancelledByBusiness
+			CANCELLED_BY_BUSINESS
 		);
-		this.setState({ cancelledByBusiness });
+		this.setState({ CANCELLED_BY_BUSINESS });
 	};
 
 	render() {

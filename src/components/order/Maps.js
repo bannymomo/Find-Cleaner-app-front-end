@@ -10,6 +10,10 @@ import Geocode from "react-geocode";
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`;
 
+Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+Geocode.setLanguage("en");
+Geocode.setRegion("au");
+
 const CustomSkinMap = withScriptjs(
 	withGoogleMap(props => (
 		<GoogleMap
@@ -92,18 +96,10 @@ const CustomSkinMap = withScriptjs(
 );
 
 export default function Maps(props) {
-	useEffect(() => {
-		getLocation(props.address);
-	}, [props]);
-
 	const [location, setLocation] = React.useState({
 		lat: -27.468055,
 		lng: 153.025035
 	});
-
-	Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
-	Geocode.setLanguage("en");
-	Geocode.setRegion("au");
 
 	const getLocation = address => {
 		if (!address) {
@@ -119,6 +115,10 @@ export default function Maps(props) {
 			}
 		);
 	};
+
+	useEffect(() => {
+		getLocation(props.address);
+	}, [props]);
 
 	return (
 		<CustomSkinMap

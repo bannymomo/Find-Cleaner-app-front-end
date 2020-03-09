@@ -1,23 +1,31 @@
 import { 
-    newOrder, 
-    cancelledByClient, 
-    accepted, 
-    cancelledByBusiness, 
-    done 
+    NEW_ORDER,
+    CANCELLED_BY_CLIENT,
+    ACCEPTED,
+    CANCELLED_BY_BUSINESS,
+    DONE
 } from "../utils/variables";
 
 const getStatusText = status => {
     let statusText;
-    if (status === newOrder) {
-        statusText = "Placed Order";
-    } else if (status === cancelledByClient) {
-        statusText = "Cancelled by Client";
-    } else if (status === accepted) {
-        statusText = "Assigned";
-    } else if (status === cancelledByBusiness) {
-        statusText = "Cancelled by Business";
-    } else if (status === done) {
-        statusText = "Completed";
+    switch(status) {
+        case NEW_ORDER:
+            statusText = "Placed Order";
+            break;
+        case CANCELLED_BY_CLIENT:
+            statusText = "Cancelled by Client";
+            break;
+        case ACCEPTED:
+            statusText = "Assigned";
+            break;
+        case CANCELLED_BY_BUSINESS:
+            statusText = "Cancelled by Business";
+            break;
+        case DONE:
+            statusText = "Completed";
+            break;
+        default:
+            statusText = "";
     }
     return statusText;
 }
