@@ -1,5 +1,3 @@
-import withRoot from "./withRoot";
-// --- Post bootstrap -----
 import React from "react";
 import ProductCategories from "./views/ProductCategories";
 import AppFooter from "./views/AppFooter";
@@ -23,4 +21,4 @@ function HomePage() {
 	);
 }
 
-export default withRoot(HomePage);
+export default HomePage;
