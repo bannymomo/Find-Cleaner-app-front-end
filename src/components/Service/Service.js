@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import MainNavigation from "../../navigation/MainNavigation";
 import ListArray from "../../client/DashBoard/components/ListArray";
 import "./style/service.scss";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import { HOMEPAGE_URL } from "../../routes/URLMap";
 
 class Service extends Component {
 	render() {
@@ -19,6 +22,13 @@ class Service extends Component {
 					</p>
 
 					<ListArray />
+					<Button
+						component={Link}
+						to={`${HOMEPAGE_URL}`}
+						className="service__button--homepage"
+					>
+						Back to Homepage
+					</Button>
 				</div>
 			</React.Fragment>
 		);
