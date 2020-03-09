@@ -1,4 +1,6 @@
 import React from "react";
+import Moment from "react-moment";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -13,7 +15,7 @@ import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined";
 import HistoryOutlinedIcon from "@material-ui/icons/HistoryOutlined";
-// import LanguageOutlinedIcon from "@material-ui/icons/LanguageOutlined";
+
 import "../../../theme/theme";
 import "../../../theme/variables.scss";
 
@@ -153,7 +155,10 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Member since: {memberSince}
+								Member since: 
+								<Moment format="DD-MM-YY HH:mm">
+									{memberSince}
+								</Moment>
 							</Typography>
 						}
 					/>
@@ -166,7 +171,10 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Last online: {lastOnline}
+								Last online: 
+								<Moment format="DD-MM-YY HH:mm">
+									{lastOnline}
+								</Moment>								
 							</Typography>
 						}
 					/>

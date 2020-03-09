@@ -1,9 +1,12 @@
 @import "../../../theme/variables.scss";
 
 .service__container--whole {
+	top: 70px;
+    position: relative;
 	font-family: Nunito;
 	font-style: normal;
 	text-align: center;
+	background-color: #fff;
 
 	.service__header--top {
 		font-weight: bold;

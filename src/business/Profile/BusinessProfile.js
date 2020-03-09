@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 import Reviews from "../../UI/Reviews";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -79,7 +80,7 @@ const useStyles = makeStyles(theme => ({
 export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
 	const {
-		// ABNNumber,
+		ABNNumber,
 		// photo,
 		// businessName,
 		email,
@@ -151,6 +152,13 @@ export default function BusinessProfileSidebar(props) {
 							</Typography>
 						}
 					/>
+					<ListItemText
+						secondary={
+							<Typography variant="body2" color="textSecondary">
+								ABN <span>{ABNNumber}</span>
+							</Typography>
+						}
+					/>
 				</ListItem>
 				<Divider variant="middle" component="li" />
 
@@ -203,7 +211,10 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Member since: {memberSince}
+								Member since: 
+								<Moment format="DD-MM-YY HH:mm">
+									{memberSince}
+								</Moment>
 							</Typography>
 						}
 					/>
@@ -216,7 +227,10 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Last online: {lastOnline}
+								Last online: 
+								<Moment format="DD-MM-YY HH:mm">
+									{lastOnline}
+								</Moment>
 							</Typography>
 						}
 					/>

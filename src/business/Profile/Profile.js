@@ -37,7 +37,7 @@ class Profile extends React.Component {
 
 	render() {
 		return (
-			<React.Fragment>
+			<div className="profile__container">
 				<div className="business-profile__header">Business Profile</div>
 				{this.state.isLoading || this.state.isUpdating ? (
 					<div className="business-profile__progress--container">
@@ -50,7 +50,7 @@ class Profile extends React.Component {
 						<BusinessProfile business={this.state.business} />
 					</div>
 				)}
-			</React.Fragment>
+			</div>
 		);
 	}
 }

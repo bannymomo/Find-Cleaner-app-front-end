@@ -12,7 +12,6 @@ import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
 import ErrorMessage from "../../UI/ErrorMessage";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
@@ -97,11 +96,7 @@ class TakeOrder extends React.Component {
 	render() {
 		return (
 			<div className="client__take-order-page">
-				{this.state.isCreating ? (
-					<div className="edit-orders-progress__container">
-						<CircularProgress size={200} color="secondary" />
-					</div>
-				) : !!this.state.error ? (
+				{this.state.error ? (
 					<ErrorMessage error={this.state.error} />
 				) : (
 					<Fragment>
@@ -144,6 +139,7 @@ class TakeOrder extends React.Component {
 						<Price
 							price={this.state.price}
 							handleSubmit={this.handleSubmit}
+							isCreating={this.state.isCreating}
 						/>
 					</Fragment>
 				)}
