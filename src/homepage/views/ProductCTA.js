@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "../style/homepage.scss";
+import styled from "styled-components";
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -24,6 +25,9 @@ function ProductCTA() {
 
 		setOpen(false);
 	};
+	const StyledTextField = styled(TextField)`
+		background: #e5e5e5;
+	`;
 
 	return (
 		<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
@@ -45,12 +49,11 @@ function ProductCTA() {
 				</div>
 				<form noValidate autoComplete="off">
 					<div className="product-container__input-container--whole">
-						<TextField
+						<StyledTextField
 							id="outlined-basic"
 							label="Email-address"
 							variant="outlined"
 							fullWidth={true}
-							style={{ backgroundColor: "#E5E5E5" }}
 						/>
 						<div className="product-container__button--blue">
 							<Button

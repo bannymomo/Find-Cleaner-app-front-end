@@ -16,6 +16,7 @@ import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined";
 import HistoryOutlinedIcon from "@material-ui/icons/HistoryOutlined";
+import styled from "styled-components";
 
 import "../../theme/theme";
 import "../../theme/variables.scss";
@@ -233,28 +234,30 @@ export default function BusinessProfileSidebar(props) {
 				</ListItem>
 				<ListItem alignItems="flex-start">
 					<Grid container spacing={2}>
-						{images.map(image => (
-							<Grid
-								item
-								xs
-								className={classes.images}
-								key={image.title}
-							>
-								<ButtonBase
-									className={classes.imageWrapper}
-									style={{
-										width: image.width
-									}}
+						{images.map(image => {
+							const StyledButtonBase = styled(ButtonBase)`
+								width: ${image.width};
+							`;
+							const StyledDiv = styled.div`
+								background-image: url(${image.url});
+							`;
+							return (
+								<Grid
+									item
+									xs
+									className={classes.images}
+									key={image.title}
 								>
-									<div
-										className={classes.imageSrc}
-										style={{
-											backgroundImage: `url(${image.url})`
-										}}
-									/>
-								</ButtonBase>
-							</Grid>
-						))}
+									<StyledButtonBase
+										className={classes.imageWrapper}
+									>
+										<StyledDiv
+											className={classes.imageSrc}
+										/>
+									</StyledButtonBase>
+								</Grid>
+							);
+						})}
 					</Grid>
 				</ListItem>
 

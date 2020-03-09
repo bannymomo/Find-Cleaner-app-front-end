@@ -51,7 +51,7 @@ function Chart(props) {
 
 	const clientId = props.match.params.clientId;
 	return (
-		<div style={{ padding: `${20}px ${20}px ${10}px` }}>
+		<div className="dashboard__chart--container">
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
 					<CardActionArea
