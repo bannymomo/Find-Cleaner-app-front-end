@@ -12,6 +12,7 @@ import { SIGNUP_URL } from "../../routes/URLMap";
 import howitworks01 from "../../assets/images/how-it-works-pic-01.png";
 import howitworks02 from "../../assets/images/how-it-works-pic-02.png";
 import howitworks03 from "../../assets/images/how-it-works-pic-03.png";
+import { BUSINESS_ROLE } from "../../utils/variables";
 
 const styles = theme => ({
 	root: {
@@ -96,7 +97,7 @@ function ProductHowItWorks(props) {
 						component={Link}
 						to={{
 							pathname: `${SIGNUP_URL}/user/business`,
-							role: "business"
+							role: BUSINESS_ROLE
 						}}
 					>
 						Register your business

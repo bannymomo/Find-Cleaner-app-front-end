@@ -38,17 +38,21 @@ class FavoriteCleanersNumber extends React.Component {
 	};
 
 	render() {
-		return this.state.error ? (
-			<div className="card__number--top-right">error</div>
-		) : this.state.isLoading ? (
-			<div className="card__number-container--top-right">
-				<CircularProgress disableShrink size={30} color="inherit" />
-			</div>
-		) : (
-			<p className="card__number--top-right">
-				{this.state.FavoriteCleanersNumber}
-			</p>
-		);
+		if (this.state.error) {
+			return <div className="card__number--top-right">error</div>;
+		} else if (this.state.isLoading) {
+			return (
+				<div className="card__number-container--top-right">
+					<CircularProgress disableShrink size={30} color="inherit" />
+				</div>
+			);
+		} else {
+			return (
+				<p className="card__number--top-right">
+					{this.state.FavoriteCleanersNumber}
+				</p>
+			);
+		}
 	}
 }
 

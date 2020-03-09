@@ -7,6 +7,7 @@ import Typography from "../components/Typography";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "../style/homepage.scss";
+import styled from "styled-components";
 
 const styles = theme => ({
 	root: {
@@ -154,34 +155,34 @@ function ProductCategories(props) {
 					home or office neat and tidy
 				</div>
 				<div className={classes.images}>
-					{images.map(image => (
-						<ButtonBase
-							key={image.title}
-							className={classes.imageWrapper}
-							style={{
-								width: image.width
-							}}
-						>
-							<div
-								className={classes.imageSrc}
-								style={{
-									backgroundImage: `url(${image.url})`
-								}}
-							/>
-							<div className={classes.imageBackdrop} />
-							<div className={classes.imageButton}>
-								<Typography
-									component="h3"
-									variant="h6"
-									color="inherit"
-									className={classes.imageTitle}
-								>
-									{image.title}
-									<div className={classes.imageMarked} />
-								</Typography>
-							</div>
-						</ButtonBase>
-					))}
+					{images.map(image => {
+						const StyledButtonBase = styled(ButtonBase)`
+							width: ${image.width};
+						`;
+						const StyledDiv = styled.div`
+							background-image: url(${image.url});
+						`;
+						return (
+							<StyledButtonBase
+								key={image.title}
+								className={classes.imageWrapper}
+							>
+								<StyledDiv className={classes.imageSrc} />
+								<div className={classes.imageBackdrop} />
+								<div className={classes.imageButton}>
+									<Typography
+										component="h3"
+										variant="h6"
+										color="inherit"
+										className={classes.imageTitle}
+									>
+										{image.title}
+										<div className={classes.imageMarked} />
+									</Typography>
+								</div>
+							</StyledButtonBase>
+						);
+					})}
 				</div>
 			</ScrollAnimation>
 		</Container>

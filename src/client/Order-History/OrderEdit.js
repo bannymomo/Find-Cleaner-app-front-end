@@ -123,69 +123,77 @@ class OrderEdit extends React.Component {
 		});
 	};
 
-	render() {
-		return (
-			<div className="client__order-edit-page">
-				{this.state.isLoading || this.state.isUpdating ? (
-					<div className="edit-orders-progress__container">
-						<CircularProgress size={200} color="secondary" />
-					</div>
-				) : !!this.state.error ? (
-					<ErrorMessage error={this.state.error} />
-				) : (
-					<div className="client__take-order-page">
-						<p id="take-order">Update your order here...</p>
-						<Bedrooms
-							bedrooms={this.state.bedrooms}
-							handleChange={this.handleChange}
-						/>
-						<Bathrooms
-							bathrooms={this.state.bathrooms}
-							handleChange={this.handleChange}
-						/>
-						<LeaseEnd
-							endOfLease={this.state.endOfLease}
-							handleChange={this.handleChange}
-						/>
-						<OtherClean
-							oven={this.state.oven}
-							windows={this.state.windows}
-							cabinets={this.state.cabinets}
-							carpet={this.state.carpet}
-							handleChange={this.handleChange}
-						/>
-						<Location
-							location={this.state.location}
-							handleChange={this.handleChange}
-						/>
-						<DateTime
-							dueDate={this.state.dueDate}
-							handleChange={this.handleChange}
-						/>
-						<Description
-							description={this.state.description}
-							handleChange={this.handleChange}
-						/>
-						<TotalPrice price={this.state.price} />
-						{/* <Date
+	renderContent = () => {
+		if (this.state.isLoading || this.state.isUpdating) {
+			return (
+				<div className="edit-orders-progress__container">
+					<CircularProgress size={200} color="secondary" />
+				</div>
+			);
+		} else if (!!this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} else {
+			return (
+				<div className="client__take-order-page">
+					<p id="take-order">Update your order here...</p>
+					<Bedrooms
+						bedrooms={this.state.bedrooms}
+						handleChange={this.handleChange}
+					/>
+					<Bathrooms
+						bathrooms={this.state.bathrooms}
+						handleChange={this.handleChange}
+					/>
+					<LeaseEnd
+						endOfLease={this.state.endOfLease}
+						handleChange={this.handleChange}
+					/>
+					<OtherClean
+						oven={this.state.oven}
+						windows={this.state.windows}
+						cabinets={this.state.cabinets}
+						carpet={this.state.carpet}
+						handleChange={this.handleChange}
+					/>
+					<Location
+						location={this.state.location}
+						handleChange={this.handleChange}
+					/>
+					<DateTime
 						dueDate={this.state.dueDate}
 						handleChange={this.handleChange}
 					/>
-					<Time
-						dueDate={this.state.dueDate}
-						handleChangeDate={this.handleChangeDate}
-					/> */}
-						<Button
-							className="submitButton"
-							size="large"
-							variant="contained"
-							color="secondary"
-							onClick={this.handleSubmit}
-						>
-							Update my order
-						</Button>
-					</div>
-				)}
+					<Description
+						description={this.state.description}
+						handleChange={this.handleChange}
+					/>
+					<TotalPrice price={this.state.price} />
+					{/* <Date
+			dueDate={this.state.dueDate}
+			handleChange={this.handleChange}
+		/>
+		<Time
+			dueDate={this.state.dueDate}
+			handleChangeDate={this.handleChangeDate}
+		/> */}
+					<Button
+						className="submitButton"
+						size="large"
+						variant="contained"
+						color="secondary"
+						onClick={this.handleSubmit}
+					>
+						Update my order
+					</Button>
+				</div>
+			);
+		}
+	};
+
+	render() {
+		return (
+			<div className="client__order-edit-page">
+				{this.renderContent()}
 			</div>
 		);
 	}

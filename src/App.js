@@ -21,8 +21,8 @@ function App() {
 	return (
 		<MuiThemeProvider theme={theme}>
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<div className="App" style={{ backgroundColor: "#f5f6fd" }}>
-					<main className="App__container--whole-page">
+				<div className="app">
+					<main className="app__container--whole-page">
 						<Routes />
 					</main>
 				</div>

@@ -112,6 +112,31 @@ class OrderHistory extends React.Component {
 		this.setState({ CANCELLED_BY_BUSINESS });
 	};
 
+	renderContent = BASE_URL => {
+		if (this.state.isLoading) {
+			return (
+				<div className="order-history-progress__container">
+					<CircularProgress size={200} color="secondary" />
+				</div>
+			);
+		} else if (!!this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} else if (!this.state.isLoading && !this.state.orders.length) {
+			return <p> There isn't any order. </p>;
+		} else {
+			return this.state.orders.map(order => (
+				<OrderCard
+					key={order._id}
+					role={this.state.role}
+					location={order.location}
+					dueDate={order.dueDate}
+					price={order.price}
+					status={order.status}
+					to={`${BASE_URL}/orders/${order._id}`}
+				/>
+			));
+		}
+	};
 	render() {
 		const clientId = this.props.match.params.clientId;
 		const BASE_URL = `${CLIENT_BASE_URL}/${clientId}`;
@@ -137,31 +162,7 @@ class OrderHistory extends React.Component {
 							onChange={this.handlePageChange}
 							shape="rounded"
 						/>
-						{this.state.isLoading ? (
-							<div className="order-history-progress__container">
-								<CircularProgress
-									size={200}
-									color="secondary"
-								/>
-							</div>
-						) : !!this.state.error ? (
-							<ErrorMessage error={this.state.error} />
-						) : !this.state.isLoading &&
-						  !this.state.orders.length ? (
-							<p> There isn't any order. </p>
-						) : (
-							this.state.orders.map(order => (
-								<OrderCard
-									key={order._id}
-									role={this.state.role}
-									location={order.location}
-									dueDate={order.dueDate}
-									price={order.price}
-									status={order.status}
-									to={`${BASE_URL}/orders/${order._id}`}
-								/>
-							))
-						)}
+						{this.renderContent(BASE_URL)}
 					</Grid>
 				</Grid>
 			</Container>

@@ -31,7 +31,9 @@ import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
+import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
 
+const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 class Login extends React.Component {
 	state = {
 		username: "",
@@ -40,38 +42,46 @@ class Login extends React.Component {
 		isLoading: false
 	};
 
+	loginInitialSetup = data => {
+		setToken(data.token);
+		removeClientId();
+		removeBusinessId();
+	};
+
+	clientLogin = data => {
+		setClientId(data.clientId);
+		const locationState = this.props.location.state;
+		const redirectTo = localStorage.getItem(POST_ORDER_AT_HOMEPAGE)
+			? `${CLIENT_BASE_URL}/${data.clientId}`
+			: (locationState && locationState.from) ||
+			  `${CLIENT_BASE_URL}/${data.clientId}`;
+		this.props.history.replace(redirectTo);
+	};
+
+	businessLogin = data => {
+		setBusinessId(data.businessId);
+		const locationState = this.props.location.state;
+		const redirectTo =
+			(locationState && locationState.from) ||
+			`${BUSINESS_BASE_URL}/${data.businessId}`;
+		this.props.history.replace(redirectTo);
+	};
+
 	login = () => {
 		const loginInfo = {
 			username: this.state.username,
 			password: this.state.password
 		};
 
-		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
-
 		this.setState({ error: null, isLoading: true }, () => {
 			loginFn(loginInfo)
 				.then(data => {
 					this.setState({ isLoading: false }, () => {
-						setToken(data.token);
-						removeClientId();
-						removeBusinessId();
-						if (getTokenRole() === "client") {
-							setClientId(data.clientId);
-							const locationState = this.props.location.state;
-							const redirectTo = localStorage.getItem(
-								POST_ORDER_AT_HOMEPAGE
-							)
-								? `${CLIENT_BASE_URL}/${data.clientId}`
-								: (locationState && locationState.from) ||
-								  `${CLIENT_BASE_URL}/${data.clientId}`;
-							this.props.history.replace(redirectTo);
-						} else if (getTokenRole() === "business") {
-							setBusinessId(data.businessId);
-							const locationState = this.props.location.state;
-							const redirectTo =
-								(locationState && locationState.from) ||
-								`${BUSINESS_BASE_URL}/${data.businessId}`;
-							this.props.history.replace(redirectTo);
+						this.loginInitialSetup(data);
+						if (getTokenRole() === CLIENT_ROLE) {
+							this.clientLogin(data);
+						} else if (getTokenRole() === BUSINESS_ROLE) {
+							this.businessLogin(data);
 						} else {
 							this.props.history.replace(SIGNUP_URL);
 						}
@@ -101,9 +111,77 @@ class Login extends React.Component {
 		}
 	};
 
+	renderButton = classes => {
+		if (this.state.isLoading) {
+			return <LinearProgress className={classes.loading} />;
+		} else {
+			return (
+				<Button
+					onClick={this.login}
+					variant="contained"
+					fullWidth
+					color={"primary"}
+				>
+					Sign In
+				</Button>
+			);
+		}
+	};
+
+	renderForm = classes => {
+		return (
+			<form className={classes.form} noValidate>
+				<label>Log in</label>
+				<TextField
+					onKeyDown={this.handleKeyPress}
+					variant="outlined"
+					required
+					margin="normal"
+					fullWidth
+					label="User Name"
+					value={this.state.username}
+					name="username"
+					onChange={this.handleChange}
+				/>
+				<TextField
+					onKeyDown={this.handleKeyPress}
+					variant="outlined"
+					required
+					margin="normal"
+					type="password"
+					fullWidth
+					label="Password"
+					name="password"
+					value={this.state.password}
+					onChange={this.handleChange}
+				/>
+				<FormControlLabel
+					control={<Checkbox value="remember" color="primary" />}
+					label="Remember me"
+				/>
+				{this.renderButton(classes)}
+
+				<div className="login__text--bottom">
+					Not sign up?{" "}
+					<Link
+						className="login__link--bottom"
+						to={{
+							pathname: `${SIGNUP_URL}/user/client`,
+							role: CLIENT_ROLE
+						}}
+					>
+						Create an account.
+					</Link>{" "}
+				</div>
+				{!!this.state.error && (
+					<Alert severity="error">Account not exits </Alert>
+				)}
+			</form>
+		);
+	};
+
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<Fragment>
 				<MainNavigation />
@@ -128,72 +206,7 @@ class Login extends React.Component {
 										alt="brandname"
 									/>
 								</div>
-								<form className={classes.form} noValidate>
-									<label>Log in</label>
-									<TextField
-										onKeyDown={this.handleKeyPress}
-										variant="outlined"
-										required
-										margin="normal"
-										fullWidth
-										label="User Name"
-										value={this.state.username}
-										name="username"
-										onChange={this.handleChange}
-									/>
-									<TextField
-										onKeyDown={this.handleKeyPress}
-										variant="outlined"
-										required
-										margin="normal"
-										type="password"
-										fullWidth
-										label="Password"
-										name="password"
-										value={this.state.password}
-										onChange={this.handleChange}
-									/>
-									<FormControlLabel
-										control={
-											<Checkbox
-												value="remember"
-												color="primary"
-											/>
-										}
-										label="Remember me"
-									/>
-									{this.state.isLoading ? (
-										<LinearProgress
-											className={classes.loading}
-										/>
-									) : (
-										<Button
-											onClick={this.login}
-											variant="contained"
-											fullWidth
-											color={"primary"}
-										>
-											Sign In
-										</Button>
-									)}
-									<div className="login__text--bottom">
-										Not sign up?{" "}
-										<Link
-											className="login__link--bottom"
-											to={{
-												pathname: `${SIGNUP_URL}/user/client`,
-												role: "client"
-											}}
-										>
-											Create an account.
-										</Link>{" "}
-									</div>
-									{!!this.state.error && (
-										<Alert severity="error">
-											Account not exits or{" "}
-										</Alert>
-									)}
-								</form>
+								{this.renderForm(classes)}
 							</div>
 						</Box>
 					</Container>

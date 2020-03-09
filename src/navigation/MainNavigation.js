@@ -17,43 +17,52 @@ import {
 import { getBusinessId, getClientId } from "../utils/auth";
 import { isLoggedIn } from "../utils/auth";
 import PostOrderBtn from "../components/order/PostOrderBtn";
+import styled from "styled-components";
 
+const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 class MainNavigation extends Component {
-	state = {
-		linksActive: [true, false, false, false]
+	renderButton = (loginClient, loginBussiness) => {
+		if (loginBussiness && isLoggedIn()) {
+			return (
+				<Button
+					component={Link}
+					to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
+					variant="contained"
+					color="primary"
+				>
+					Browse all tasks
+				</Button>
+			);
+		} else if (loginClient && isLoggedIn()) {
+			return <PostOrderBtn />;
+		} else {
+			return (
+				<Button
+					component={Link}
+					to={`${CLIENT_BASE_URL}/${loginClient}`}
+					onClick={() => {
+						localStorage.setItem(POST_ORDER_AT_HOMEPAGE, true);
+					}}
+					variant="contained"
+					color="primary"
+				>
+					Post a task
+				</Button>
+			);
+		}
 	};
-
-	renderLink = index => {
-		const links = [
-			{ name: "Home", to: HOMEPAGE_URL },
-			{ name: "Service", to: SERVICE_URL },
-			{ name: "Support", to: SUPPORT_URL },
-			{ name: "Login", to: LOGIN_URL }
-		];
-		return (
-			<Link
-				to={links[index].to}
-				style={{
-					color: this.state.linksActive[index] ? "primary" : ""
-				}}
-				onClick={() => this.handleClick(index)}
-				className="nav-bar__link--black"
-			>
-				{links[index].name}
-			</Link>
-		);
-	};
-
-	handleClick = index => {
-		const linksActive = Array(4).fill(false);
-		linksActive[index] = true;
-		this.setState({ linksActive });
-	};
-
 	render() {
 		const loginClient = getClientId();
 		const loginBussiness = getBusinessId();
-		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+		const StyledLogin = styled(Link)`
+			display: ${isLoggedIn() ? "none" : ""};
+		`;
+		const StyleAvartarButton = styled(Link)`
+			display: ${isLoggedIn() && (loginClient || loginBussiness)
+				? ""
+				: "none"};
+		`;
+
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -72,66 +81,53 @@ class MainNavigation extends Component {
 				</div>
 				<div className="nav-bar__items--container">
 					<ul className="nav-bar__ul--black">
-						<li>{this.renderLink(0)}</li>
-						<li>{this.renderLink(1)}</li>
-						<li>{this.renderLink(2)}</li>
-						<li
-							style={{
-								display: isLoggedIn() ? "none" : ""
-							}}
-						>
-							{this.renderLink(3)}
+						<li>
+							{" "}
+							<Link
+								to={HOMEPAGE_URL}
+								className="nav-bar__link--black"
+							>
+								Home
+							</Link>
+						</li>
+						<li>
+							<Link
+								to={SERVICE_URL}
+								className="nav-bar__link--black"
+							>
+								Service
+							</Link>
+						</li>
+						<li>
+							<Link
+								to={SUPPORT_URL}
+								className="nav-bar__link--black"
+							>
+								Support
+							</Link>
+						</li>
+						<li>
+							<StyledLogin
+								to={LOGIN_URL}
+								className="nav-bar__link--black"
+							>
+								Login
+							</StyledLogin>
 						</li>
 					</ul>
 					<div className="nav-bar__avatar--container">
-						<Link
+						<StyleAvartarButton
 							to={
 								loginClient
 									? `${CLIENT_BASE_URL}/${loginClient}`
 									: `${BUSINESS_BASE_URL}/${loginBussiness}`
 							}
-							style={{
-								display:
-									isLoggedIn() &&
-									(loginClient || loginBussiness)
-										? ""
-										: "none"
-							}}
 						>
 							<Avatar alt="users" src={pic} />
-						</Link>
+						</StyleAvartarButton>
 					</div>
 					<div className="nav-bar__button--blue">
-						{loginBussiness && isLoggedIn() ? (
-							<Button
-								component={Link}
-								to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
-								variant="contained"
-								color="primary"
-							>
-								Browse all tasks
-							</Button>
-						) : loginClient && isLoggedIn() ? (
-							<PostOrderBtn />
-						) : (
-							<Button
-								component={Link}
-								to={`${CLIENT_BASE_URL}/${loginClient}`}
-								onClick={() => {
-									localStorage.setItem(
-										POST_ORDER_AT_HOMEPAGE,
-										true
-									);
-								}}
-								variant="contained"
-								style={{
-									backgroundColor: "#3f88de",
-									color: "white"
-								}}
-							>
-								Post a task
-							</Button>
-						)}
+						{this.renderButton(loginClient, loginBussiness)}
 					</div>
 				</div>
 			</header>

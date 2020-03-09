@@ -15,50 +15,9 @@ import { withRouter } from "react-router";
 import PostOrderBtn from "../components/order/PostOrderBtn";
 
 class DashboardNavigation extends Component {
-	state = {
-		linksActive: Array(2).fill(false)
-	};
-
-	renderLink = index => {
-		const businessId = this.props.match.params.businessId;
-		const clientId = this.props.match.params.clientId;
-		const links = [
-			{
-				name: "Notification",
-				to: clientId
-					? `${CLIENT_BASE_URL}/${clientId}/notification`
-					: `${BUSINESS_BASE_URL}/${businessId}/notification`
-			},
-			{
-				name: "Message",
-				to: clientId
-					? `${CLIENT_BASE_URL}/${clientId}/message`
-					: `${BUSINESS_BASE_URL}/${businessId}/message`
-			}
-		];
-		return (
-			<Link
-				to={links[index].to}
-				style={{
-					color: this.state.linksActive[index] ? "primary" : ""
-				}}
-				onClick={() => this.handleClick(index)}
-				className="nav-bar__link--black"
-			>
-				{links[index].name}
-			</Link>
-		);
-	};
-
-	handleClick = index => {
-		const linksActive = Array(3).fill(false);
-		linksActive[index] = true;
-		this.setState({ linksActive });
-	};
-
 	render() {
 		const businessId = this.props.match.params.businessId;
-
+		const clientId = this.props.match.params.clientId;
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -77,8 +36,30 @@ class DashboardNavigation extends Component {
 				</div>
 				<div className="nav-bar__items--container">
 					<ul className="nav-bar__ul--black">
-						<li>{this.renderLink(0)}</li>
-						<li>{this.renderLink(1)}</li>
+						<li>
+							<Link
+								to={
+									clientId
+										? `${CLIENT_BASE_URL}/${clientId}/notification`
+										: `${BUSINESS_BASE_URL}/${businessId}/notification`
+								}
+								className="nav-bar__link--black"
+							>
+								Notification
+							</Link>
+						</li>
+						<li>
+							<Link
+								to={
+									clientId
+										? `${CLIENT_BASE_URL}/${clientId}/message`
+										: `${BUSINESS_BASE_URL}/${businessId}/message`
+								}
+								className="nav-bar__link--black"
+							>
+								Message
+							</Link>
+						</li>
 					</ul>
 
 					<div className="nav-bar__button--blue">

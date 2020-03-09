@@ -35,7 +35,6 @@ import {
 } from "./card/variable-charts";
 
 import styles from "../style/card/tempelate-dashboardStyle";
-
 import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
 import { CardActionArea } from "@material-ui/core";
 import { ACCEPTED, DONE } from "../../../utils/variables";
