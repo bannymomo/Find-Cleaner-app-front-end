@@ -10,6 +10,7 @@ import {
 	LOGIN_URL,
 	HOMEPAGE_URL,
 	SERVICE_URL,
+	SUPPORT_URL,
 	BUSINESS_BASE_URL,
 	CLIENT_BASE_URL
 } from "../routes/URLMap";
@@ -26,7 +27,7 @@ class MainNavigation extends Component {
 		const links = [
 			{ name: "Home", to: HOMEPAGE_URL },
 			{ name: "Service", to: SERVICE_URL },
-			{ name: "Support", to: HOMEPAGE_URL },
+			{ name: "Support", to: SUPPORT_URL },
 			{ name: "Login", to: LOGIN_URL }
 		];
 		return (

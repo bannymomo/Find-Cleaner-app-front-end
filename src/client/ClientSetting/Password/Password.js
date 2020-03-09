@@ -1,18 +1,39 @@
 import React, { Component, Fragment } from "react";
-import { TextField, Button } from "@material-ui/core";
-
+import { TextField, Button, LinearProgress } from "@material-ui/core";
+import { changePasswordById, getUserId } from '../../../api/auth';
+import Alert from "@material-ui/lab/Alert";
 import "./style/password.scss";
 
 class Password extends Component {
 	state = {
 		oldPassword: "",
 		newPassword: "",
-		doublecheckPassword: ""
+		doublecheckPassword: "",
+		isLoading: false,
+		error: null,
+		isFinished: false,
+		errorMessage: ""
 	};
-
 	changePassword = () => {
-		console.log("Done");
-		console.log(this.state);
+
+		const passwordInfo = {
+			oldPassword: this.state.oldPassword,
+			newPassword: this.state.newPassword,
+			doublecheckPassword: this.state.doublecheckPassword
+		}
+		this.setState({ isFinished: false, isLoading: true, error: null }, () => {
+			getUserId().then(userID => {
+				changePasswordById(userID, passwordInfo).then(res => {
+					this.setState({ isLoading: false, isFinished: true })
+				})
+					.catch(error => {
+						this.setState({
+							error, isLoading: false,
+							errorMessage: error.response.data.message
+						})
+					})
+			}).catch(error => this.setState({ error, isLoading: false }))
+		});
 	};
 
 	render() {
@@ -63,14 +84,27 @@ class Password extends Component {
 								}
 							/>
 						</li>
-						<li>
+						<li> {this.state.isLoading ?
+							<LinearProgress />
+							:
 							<Button
 								variant="contained"
 								color="primary"
 								onClick={this.changePassword}
 							>
 								DONE
-							</Button>
+							</Button>}
+						</li>
+						<li>{this.state.isFinished &&
+							<Alert severity="info"> Successful</Alert>
+						}
+							{!!this.state.error && (
+								<Alert
+									severity="error"
+								>
+									{this.state.errorMessage}
+								</Alert>
+							)}
 						</li>
 					</ul>
 				</div>
