@@ -1,6 +1,6 @@
 @import "../../../theme/variables.scss";
 
-$secondary-text-color: rgb(194, 194, 194);
+$secondary-text-color: #c2c2c2;
 
 .order-history__navbar {
 	font-family: Nunito;
@@ -77,7 +77,7 @@ $secondary-text-color: rgb(194, 194, 194);
 	font-size: 16px;
 	font-weight: 500;
 	margin: 10px 0;
-	color: $primary-color-blue;
+	color: $secondary-text-color;
 	text-transform: capitalize;
 }
 
