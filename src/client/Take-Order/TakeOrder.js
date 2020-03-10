@@ -63,7 +63,7 @@ class TakeOrder extends React.Component {
 		});
 	};
 	handleChangeDate = value => {
-		value = value.toString();
+		// value = value.toString();
 		this.setState({ dueDate: value });
 	};
 	handleSubmit = () => {
