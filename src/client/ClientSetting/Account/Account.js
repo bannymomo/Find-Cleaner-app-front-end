@@ -111,6 +111,7 @@ class Account extends Component {
 						},
 						() => {
 							this.updateDefaultValue();
+							window.location.reload();
 						}
 					);
 				})

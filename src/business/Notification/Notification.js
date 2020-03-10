@@ -1,8 +1,12 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import { BUSINESS_BASE_URL } from "../../routes/URLMap";
+import { Link } from "react-router-dom";
+
 import "./style/notification.scss";
 
-function Notification() {
+function Notification(props) {
+	const businessId = props.match.params.clientId;
 	return (
 		<div className="notification__container--whole">
 			<img
@@ -14,11 +18,12 @@ function Notification() {
 			stuff.
 			<br /> Let's post a task or make an offer!
 			<div className="notification__button-container--center">
-				<Button variant="contained" color="primary">
-					{" "}
-					Post a task
-				</Button>
-				<Button variant="contained" color="secondary">
+				<Button
+					variant="contained"
+					color="secondary"
+					component={Link}
+					to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
+				>
 					Browse all tasks
 				</Button>
 			</div>
