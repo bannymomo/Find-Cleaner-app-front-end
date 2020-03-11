@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../../routes/URLMap";
 import { getBusinessId, getClientId } from "../../../utils/auth";
 import { isLoggedIn } from "../../../utils/auth";
+import { POST_ORDER_AT_HOMEPAGE } from "../../../utils/variables";
 
 import Fab from "@material-ui/core/Fab";
 
@@ -51,7 +52,6 @@ export default function FloatingActionButtonSize() {
 	const classes = useStyles();
 	const loginClient = getClientId();
 	const loginBussiness = getBusinessId();
-	const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 	return (
 		<animated.div style={props} className="list-array__container--whole">
 			{listArray.map((list, index) => {
