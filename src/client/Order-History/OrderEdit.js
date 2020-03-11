@@ -16,7 +16,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
 import DateTime from "../Take-Order/components/DateTime";
 import "./order.scss";
-import { format } from "date-fns";
 
 class OrderEdit extends React.Component {
 	constructor(props) {
