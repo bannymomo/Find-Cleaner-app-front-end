@@ -4,8 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import TakeOrder from "../../client/Take-Order/TakeOrder";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
-
-const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
 const useStylesModal = makeStyles(theme => ({
 	openButton: {
