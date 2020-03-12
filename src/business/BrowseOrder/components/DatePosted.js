@@ -26,13 +26,15 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function ControlledOpenSelect() {
+export default function ControlledOpenSelect(props) {
 	const classes = useStyles();
-	const [dateOrder, setDateOrder] = React.useState("1");
+	const [dateOrder, setDateOrder] = React.useState(0);
 	const [open, setOpen] = React.useState(false);
 
 	const handleChange = event => {
 		setDateOrder(event.target.value);
+		if (event.target.value === 1) return props.sortAscending();
+		if (event.target.value === -1) return props.sortDescending();
 	};
 
 	const handleClose = () => {
@@ -46,7 +48,7 @@ export default function ControlledOpenSelect() {
 	return (
 		<div className="browse-orders--top-bar--date-posted">
 			<FormControl className={classes.formControl}>
-				<span id="select-label">Date posted</span>
+				<span id="select-label">Sort by Due Date</span>
 
 				<Select
 					labelId="select-label"
@@ -61,6 +63,10 @@ export default function ControlledOpenSelect() {
 					<div className={classes.menuTitle}>
 						<small>Order</small>
 					</div>
+
+					<MenuItem className={classes.menuItem} value={0}>
+						None
+					</MenuItem>
 					<MenuItem className={classes.menuItem} value={1}>
 						Ascending
 					</MenuItem>
