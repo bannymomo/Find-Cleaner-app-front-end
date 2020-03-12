@@ -18,8 +18,6 @@ import { matchPath } from "react-router-dom";
 
 import Geocode from "react-geocode";
 
-const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
-
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
 Geocode.setLanguage("en");
