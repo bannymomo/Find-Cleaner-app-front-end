@@ -8,6 +8,13 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "../style/homepage.scss";
 import styled from "styled-components";
+import TakeOrder from "../../client/Take-Order/TakeOrder";
+import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { isLoggedIn, getClientId, getBusinessId } from "../../utils/auth";
+import { LOGIN_URL, BUSINESS_BASE_URL } from "../../routes/URLMap";
+import { withRouter } from "react-router-dom";
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
 const styles = theme => ({
 	root: {
@@ -87,6 +94,30 @@ const styles = theme => ({
 	}
 });
 
+const useStylesModal = makeStyles(theme => ({
+	openButton: {
+		margin: "0 2rem",
+		padding: "0.7rem 2rem"
+	},
+	modal: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	paper: {
+		boxSizing: "border-box",
+		position: "relative",
+		width: "960px",
+		height: "98%",
+		overflow: "scroll",
+		backgroundColor: theme.palette.background.paper,
+		border: "2px solid #fff",
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(1, 4, 2),
+		outline: 0
+	}
+}));
+
 function ProductCategories(props) {
 	const { classes } = props;
 
@@ -147,6 +178,27 @@ function ProductCategories(props) {
 		}
 	];
 
+	const modalClasses = useStylesModal();
+	const businessId = getBusinessId();
+	const [modalOpen, setModalOpen] = React.useState(false);
+	const handleOpen = () => {
+		if (isLoggedIn() && getClientId()) {
+			setModalOpen(true);
+		} else if (isLoggedIn() && getBusinessId()) {
+			props.history.push(
+				`${BUSINESS_BASE_URL}/${businessId}/browse-order`
+			);
+		} else {
+			props.history.push(LOGIN_URL);
+			localStorage.setItem(POST_ORDER_AT_HOMEPAGE, true);
+		}
+	};
+
+	const handleClose = () => {
+		setModalOpen(false);
+		localStorage.removeItem(POST_ORDER_AT_HOMEPAGE);
+	};
+
 	return (
 		<Container className={classes.root} component="section">
 			<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
@@ -154,6 +206,30 @@ function ProductCategories(props) {
 					For all the needs to make your <br />
 					home or office neat and tidy
 				</div>
+				<Modal
+					className={modalClasses.modal}
+					open={modalOpen}
+					closeAfterTransition
+					disableScrollLock
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 1000,
+						open: modalOpen ? true : false
+					}}
+				>
+					<Fade in={modalOpen}>
+						<div className={modalClasses.paper}>
+							<TakeOrder />
+							<Button
+								onClick={handleClose}
+								color="primary"
+								className={modalClasses.button}
+							>
+								✕
+							</Button>
+						</div>
+					</Fade>
+				</Modal>
 				<div className={classes.images}>
 					{images.map(image => {
 						const StyledButtonBase = styled(ButtonBase)`
@@ -166,6 +242,7 @@ function ProductCategories(props) {
 							<StyledButtonBase
 								key={image.title}
 								className={classes.imageWrapper}
+								onClick={handleOpen}
 							>
 								<StyledDiv className={classes.imageSrc} />
 								<div className={classes.imageBackdrop} />
@@ -193,4 +270,4 @@ ProductCategories.propTypes = {
 	classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ProductCategories);
+export default withRouter(withStyles(styles)(ProductCategories));

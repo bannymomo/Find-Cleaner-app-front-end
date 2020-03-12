@@ -6,8 +6,7 @@ import OtherClean from "../Take-Order/components/OtherClean";
 import Location from "../Take-Order/components/Location";
 import TotalPrice from "../Take-Order/components/TotalPrice";
 import Description from "../Take-Order/components/Description";
-// import Date from "../Take-Order/components/Date";
-// import Time from "../Take-Order/components/Time";
+import Time from "../Take-Order/components/Time";
 import { updateOrderById } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import Button from "@material-ui/core/Button";
@@ -75,6 +74,7 @@ class OrderEdit extends React.Component {
 	handleChange = event => {
 		const key = event.target.name;
 		let value = event.target.value;
+
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
 		} else if (
@@ -98,10 +98,12 @@ class OrderEdit extends React.Component {
 			this.setState({ price: totalPrice });
 		});
 	};
-	// handleChangeDate = value => {
-	// 	value = value.toString();
-	// 	this.setState({ dueDate: value });
-	// };
+
+	handleChangeDate = value => {
+		// value = value.toString();
+		this.setState({ dueDate: value });
+	};
+
 
 	handleUpdateOrder = (orderId, order, clientId) => {
 		this.setState({ isUpdating: true }, () => {
@@ -166,19 +168,16 @@ class OrderEdit extends React.Component {
 						dueDate={this.state.dueDate}
 						handleChange={this.handleChange}
 					/>
+					<Time
+						dueDate={this.state.dueDate}
+						handleChangeDate={this.handleChangeDate}
+					/>
 					<Description
 						description={this.state.description}
 						handleChange={this.handleChange}
 					/>
 					<TotalPrice price={this.state.price} />
-					{/* <Date
-						dueDate={this.state.dueDate}
-						handleChange={this.handleChange}
-					/>
-					<Time
-						dueDate={this.state.dueDate}
-						handleChangeDate={this.handleChangeDate}
-					/> */}
+
 					{this.state.isUpdating ? (
 						<CircularProgress className="submitButtonCircularProgress" size={50} color="secondary" />
 					) : (
@@ -196,6 +195,7 @@ class OrderEdit extends React.Component {
 				)}
 			</div>
 		);
+
 	};
 
 	render() {

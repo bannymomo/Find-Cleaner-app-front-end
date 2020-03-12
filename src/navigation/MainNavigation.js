@@ -18,8 +18,7 @@ import { getBusinessId, getClientId } from "../utils/auth";
 import { isLoggedIn } from "../utils/auth";
 import PostOrderBtn from "../components/order/PostOrderBtn";
 import styled from "styled-components";
-
-const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+import { POST_ORDER_AT_HOMEPAGE } from "../utils/variables";
 class MainNavigation extends Component {
 	renderButton = (loginClient, loginBussiness) => {
 		if (loginBussiness && isLoggedIn()) {

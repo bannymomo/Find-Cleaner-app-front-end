@@ -21,6 +21,7 @@ import {
 	removeBusinessId,
 	removeClientId
 } from "../../utils/auth";
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -45,7 +46,6 @@ function SimpleList(props) {
 	};
 
 	const clientId = props.match.params.clientId;
-	const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
 	const handleLogOut = () => {
 		removeToken();
 		removeClientId();

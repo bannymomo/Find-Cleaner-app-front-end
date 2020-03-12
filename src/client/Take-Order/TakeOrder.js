@@ -10,7 +10,7 @@ import Price from "./components/Price";
 import Description from "./components/Description";
 import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
-
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 import ErrorMessage from "../../UI/ErrorMessage";
 
 import { withRouter } from "react-router";
@@ -69,7 +69,7 @@ class TakeOrder extends React.Component {
 	}
 
 	handleChangeDate = value => {
-		value = value.toString();
+		// value = value.toString();
 		this.setState({ dueDate: value });
 	}
 
