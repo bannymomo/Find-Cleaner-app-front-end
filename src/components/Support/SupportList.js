@@ -37,20 +37,34 @@ const useStyles = makeStyles(theme => ({
 			color: "#fff",
 			backgroundColor: "#3f88de"
 		}
+	},
+	margin: {
+		marginBottom: theme.spacing(1.5)
 	}
 }));
 export default function SupportList(props) {
 	const classes = useStyles();
 	const loginClient = getClientId();
-	const loginBussiness = getBusinessId();
+	const loginBusiness = getBusinessId();
 
-	const supports = [
+	const serviceSupports = [
+		{ name: "Home Cleaning", link: `${SERVICE_URL}` },
+		{ name: "End-of-Lease Cleaning", link: `${SERVICE_URL}` },
+		{ name: "Other Cleaning Service", link: `${SERVICE_URL}` }
+	];
+	const RegisterSupports = [
 		{
 			name: "Client Sign Up",
 			link: `${SIGNUP_URL}/user/client`
 		},
-		{ name: "Home Cleaning", link: `${SERVICE_URL}` },
 
+		{
+			name: "Business Register",
+			link: `${SIGNUP_URL}/user/business`
+		}
+	];
+
+	const mainSupports = [
 		{
 			name: "Client Dashboard",
 			link: `${CLIENT_BASE_URL}/${loginClient}/dashboard`
@@ -74,31 +88,33 @@ export default function SupportList(props) {
 		{
 			name: "Client Message",
 			link: `${CLIENT_BASE_URL}/${loginClient}/message`
-		},
-		{ name: "Business Register", link: `${SIGNUP_URL}/user/business` },
+		}
+	];
+
+	const subSupports = [
 		{
 			name: "Business Browse All Tasks",
-			link: `${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`
+			link: `${BUSINESS_BASE_URL}/${loginBusiness}/browse-order`
 		},
 		{
 			name: "Business Profile",
-			link: `${BUSINESS_BASE_URL}/${loginBussiness}/profile`
+			link: `${BUSINESS_BASE_URL}/${loginBusiness}/profile`
 		},
 		{
 			name: "Business Order History",
-			link: `${BUSINESS_BASE_URL}/${loginBussiness}/order-history`
+			link: `${BUSINESS_BASE_URL}/${loginBusiness}/order-history`
 		},
 		{
 			name: "Business Dashboard",
-			link: `${BUSINESS_BASE_URL}/${loginBussiness}/dashboard`
+			link: `${BUSINESS_BASE_URL}/${loginBusiness}/dashboard`
 		},
 		{
 			name: "Business Account Edit",
-			link: `${BUSINESS_BASE_URL}/${loginBussiness}/account`
+			link: `${BUSINESS_BASE_URL}/${loginBusiness}/account`
 		},
 		{
 			name: "Business Change Password",
-			link: `${BUSINESS_BASE_URL}/${loginBussiness}/password`
+			link: `${BUSINESS_BASE_URL}/${loginBusiness}/password`
 		}
 	];
 
@@ -108,23 +124,34 @@ export default function SupportList(props) {
 				alignItems="flex-start"
 				className="list-array__container--whole"
 			>
-				<Grid container spacing={3}>
-					{supports.map(support => (
+				<Grid container spacing={3} className={classes.margin}>
+					{serviceSupports.map(support => (
 						<Grid
 							item
 							xs={4}
 							className={classes.supports}
 							key={support.name}
 						>
-							{loginBussiness && isLoggedIn() ? (
-								<Button
-									component={Link}
-									to={support.link}
-									className={classes.supportButton}
-								>
-									{support.name}
-								</Button>
-							) : loginClient && isLoggedIn() ? (
+							<Button
+								component={Link}
+								to={support.link}
+								className={classes.supportButton}
+							>
+								{support.name}
+							</Button>
+						</Grid>
+					))}
+				</Grid>
+
+				<Grid container spacing={3} className={classes.margin}>
+					{mainSupports.map(support => (
+						<Grid
+							item
+							xs={4}
+							className={classes.supports}
+							key={support.name}
+						>
+							{loginClient && isLoggedIn() ? (
 								<Button
 									component={Link}
 									to={support.link}
@@ -135,12 +162,58 @@ export default function SupportList(props) {
 							) : (
 								<Button
 									component={Link}
-									to={support.link}
+									to={`${SIGNUP_URL}/user/client`}
 									className={classes.supportButton}
 								>
 									{support.name}
 								</Button>
 							)}
+						</Grid>
+					))}
+				</Grid>
+				<Grid container spacing={3} className={classes.margin}>
+					{subSupports.map(support => (
+						<Grid
+							item
+							xs={4}
+							className={classes.supports}
+							key={support.name}
+						>
+							{loginBusiness && isLoggedIn() ? (
+								<Button
+									component={Link}
+									to={support.link}
+									className={classes.supportButton}
+								>
+									{support.name}
+								</Button>
+							) : (
+								<Button
+									component={Link}
+									to={`${SIGNUP_URL}/user/business`}
+									className={classes.supportButton}
+								>
+									{support.name}
+								</Button>
+							)}
+						</Grid>
+					))}
+				</Grid>
+				<Grid container spacing={3}>
+					{RegisterSupports.map(support => (
+						<Grid
+							item
+							xs={6}
+							className={classes.supports}
+							key={support.name}
+						>
+							<Button
+								component={Link}
+								to={support.link}
+								className={classes.supportButton}
+							>
+								{support.name}
+							</Button>
 						</Grid>
 					))}
 				</Grid>
