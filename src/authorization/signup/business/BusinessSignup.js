@@ -13,6 +13,10 @@ import Alert from "@material-ui/lab/Alert";
 import Background from "../../../assets/images/auth-background.png";
 import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
 import { createBusiness } from "../../../api/business";
+
+import { signup as signupFn } from "../../../api/auth";
+import { setToken } from "../../../utils/auth";
+
 import logo from "../../../assets/images/logo.png";
 import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
@@ -22,6 +26,7 @@ import {
 	removeBusinessId,
 	removeClientId
 } from "../../../utils/auth";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const styles = theme => ({
 	container: {
@@ -70,6 +75,12 @@ class BusinessSignup extends Component {
 	};
 
 	postBusiness = () => {
+		const userInfo = {
+			username: this.props.username,
+			password: this.props.password,
+			role: this.props.role
+		};
+
 		const businessInfo = {
 			businessName: this.state.businessName,
 			address: this.state.address,
@@ -78,21 +89,25 @@ class BusinessSignup extends Component {
 			postcode: this.state.postcode,
 			ABNNumber: this.state.ABNNumber
 		};
+
 		this.setState({ isLoading: true }, () => {
-			createBusiness(businessInfo)
-				.then(data => {
-					this.setState({ isLoading: false }, () => {
-						removeClientId();
-						removeBusinessId();
-						const businessId = data._id;
-						setBusinessId(businessId);
-						const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
-						this.props.history.replace(redirectTo);
-					});
+			signupFn(userInfo)
+				.then(data => setToken(data.token))
+				.then(() => {
+					createBusiness(businessInfo)
+						.then(data => {
+							this.setState({ isLoading: false }, () => {
+								removeClientId();
+								removeBusinessId();
+								const businessId = data._id;
+								setBusinessId(businessId);
+								const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
+								this.props.history.replace(redirectTo);
+							});
+						})
+						.catch(error => this.setState({ error, isLoading: false }));
 				})
-				.catch(error => {
-					this.setState({ error, isLoading: false });
-				});
+				.catch(error => this.setState({ error, isLoading: false }))
 		});
 	};
 
@@ -102,11 +117,11 @@ class BusinessSignup extends Component {
 		} else {
 			return (
 				<Button
+					type="submit"
 					variant="contained"
 					fullWidth
 					color="primary"
 					className={classes.submit}
-					onClick={this.postBusiness}
 				>
 					Sign up
 				</Button>
@@ -116,11 +131,15 @@ class BusinessSignup extends Component {
 
 	renderForm = classes => {
 		return (
-			<form className={classes.form} noValidate>
+			<ValidatorForm
+				className={classes.form}
+				instantValidate
+				onSubmit={this.postBusiness}
+			>
 				<label>More about you~</label>
 				<Grid container spacing={2} className={classes.grid}>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							required
 							fullWidth
@@ -131,6 +150,8 @@ class BusinessSignup extends Component {
 									businessName: event.target.value
 								})
 							}
+							validators={['required', 'minStringLength:2']}
+                    		errorMessages={['this field is required', 'The length must longer than 2']}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -148,7 +169,7 @@ class BusinessSignup extends Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							color="primary"
 							variant="outlined"
 							required
@@ -160,10 +181,18 @@ class BusinessSignup extends Component {
 									postcode: event.target.value
 								})
 							}
+							validators={[
+								'required', 
+								'matchRegexp:^[0-9]{4}$'
+							]}
+							errorMessages={[
+								'this field is required', 
+								'postcode is not valid'
+							]}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							required
 							fullWidth
@@ -174,10 +203,18 @@ class BusinessSignup extends Component {
 									telephoneNumber: event.target.value
 								})
 							}
+							validators={[
+								'required', 
+								'matchRegexp:^[0-9]{10}$'
+							]}
+							errorMessages={[
+								'this field is required', 
+								'phone number is not valid'
+							]}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							required
 							fullWidth
@@ -188,15 +225,23 @@ class BusinessSignup extends Component {
 									ABNNumber: event.target.value
 								})
 							}
+							validators={[
+								'required', 
+								'matchRegexp:^[0-9]{11}$'
+							]}
+							errorMessages={[
+								'this field is required', 
+								'ABN is not valid'
+							]}
 						/>
 					</Grid>
 				</Grid>
 				{this.renderButton(classes)}
 
 				{!!this.state.error && (
-					<Alert severity="error">Illegal input data </Alert>
+					<Alert severity="error">{this.state.error} </Alert>
 				)}
-			</form>
+			</ValidatorForm>
 		);
 	};
 

@@ -18,6 +18,8 @@ import { withRouter } from "react-router";
 import DateTime from "../Take-Order/components/DateTime";
 import "./order.scss";
 
+import Geocode from "react-geocode";
+
 class OrderEdit extends React.Component {
 	constructor(props) {
 		super(props);
@@ -73,8 +75,6 @@ class OrderEdit extends React.Component {
 	handleChange = event => {
 		const key = event.target.name;
 		let value = event.target.value;
-		console.log(key);
-		console.log(value);
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
 		} else if (
@@ -82,15 +82,10 @@ class OrderEdit extends React.Component {
 			key === "dueDate" ||
 			key === "description"
 		) {
-		}
-		// else if (key === "dueDate") {
-		// 	value = format(value, "MMMM Do hh:mm aa");
-		// }
-		else {
+		} else {
 			value = value === "false";
 		}
 
-		// this.setState({ [key]: value });
 		this.setState({ [key]: value }, () => {
 			let totalPrice =
 				this.state.bedrooms * 22 +
@@ -99,7 +94,7 @@ class OrderEdit extends React.Component {
 				this.state.oven * 5 +
 				this.state.windows * 68 +
 				this.state.cabinets * 36 +
-				this.state.carpet * 18;
+				this.state.carpet * 18 + 20;
 			this.setState({ price: totalPrice });
 		});
 	};
@@ -107,34 +102,42 @@ class OrderEdit extends React.Component {
 	// 	value = value.toString();
 	// 	this.setState({ dueDate: value });
 	// };
-	handleSubmit = () => {
-		const order = { ...this.state };
 
-		const orderId = this.props.match.params.orderId;
-		const clientId = this.props.match.params.clientId;
-		this.setState({}, () => {
+	handleUpdateOrder = (orderId, order, clientId) => {
+		this.setState({ isUpdating: true }, () => {
 			updateOrderById(orderId, order)
-				.then(order => {
+				.then(() => {
 					this.props.history.push(
 						`${CLIENT_BASE_URL}/${clientId}/orders/${orderId}`
 					);
 				})
-				.catch(error => this.setState({ error }));
+				.catch(error => this.setState({ error, isUpdating: false }));
 		});
+	}
+
+	handleSubmit = () => {
+		const order = { ...this.state };
+		const orderId = this.props.match.params.orderId;
+		const clientId = this.props.match.params.clientId;
+
+		Geocode.fromAddress(`${order.location}`).then(
+			() => {
+				!order.dueDate ? alert("Please choose a due date") :
+				this.handleUpdateOrder(orderId, order, clientId)
+			},
+			() => {
+				alert("Location is invalid");
+			}
+		);
 	};
 
 	renderContent = () => {
-		if (this.state.isLoading || this.state.isUpdating) {
-			return (
-				<div className="edit-orders-progress__container">
-					<CircularProgress size={200} color="secondary" />
-				</div>
-			);
-		} else if (!!this.state.error) {
-			return <ErrorMessage error={this.state.error} />;
-		} else {
-			return (
-				<div className="client__take-order-page">
+		return (
+			<div className="client__take-order-page">
+				{this.state.error ? (
+					<ErrorMessage error={this.state.error} />
+				) : (
+				<React.Fragment>
 					<p id="take-order">Update your order here...</p>
 					<Bedrooms
 						bedrooms={this.state.bedrooms}
@@ -169,25 +172,30 @@ class OrderEdit extends React.Component {
 					/>
 					<TotalPrice price={this.state.price} />
 					{/* <Date
-			dueDate={this.state.dueDate}
-			handleChange={this.handleChange}
-		/>
-		<Time
-			dueDate={this.state.dueDate}
-			handleChangeDate={this.handleChangeDate}
-		/> */}
-					<Button
-						className="submitButton"
-						size="large"
-						variant="contained"
-						color="secondary"
-						onClick={this.handleSubmit}
-					>
-						Update my order
-					</Button>
-				</div>
-			);
-		}
+						dueDate={this.state.dueDate}
+						handleChange={this.handleChange}
+					/>
+					<Time
+						dueDate={this.state.dueDate}
+						handleChangeDate={this.handleChangeDate}
+					/> */}
+					{this.state.isUpdating ? (
+						<CircularProgress className="submitButtonCircularProgress" size={50} color="secondary" />
+					) : (
+						<Button
+							className="submitButton"
+							size="large"
+							variant="contained"
+							color="secondary"
+							onClick={this.handleSubmit}
+						>
+							Update my order
+						</Button>
+					)}
+				</React.Fragment>
+				)}
+			</div>
+		);
 	};
 
 	render() {

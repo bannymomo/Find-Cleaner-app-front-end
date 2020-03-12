@@ -15,6 +15,15 @@ import ErrorMessage from "../../UI/ErrorMessage";
 
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
+
+import Geocode from "react-geocode";
+
+const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+
+const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+Geocode.setLanguage("en");
+Geocode.setRegion("au");
 class TakeOrder extends React.Component {
 	constructor(props) {
 		super(props);
@@ -41,11 +50,7 @@ class TakeOrder extends React.Component {
 		let value = event.target.value;
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
-		} else if (
-			key === "location" ||
-			key === "dueDate" ||
-			key === "description"
-		) {
+		} else if (key === "location" || key === "dueDate" || key === "description") {
 		} else {
 			value = value === "false";
 		}
@@ -58,29 +63,17 @@ class TakeOrder extends React.Component {
 				this.state.oven * 5 +
 				this.state.windows * 68 +
 				this.state.cabinets * 36 +
-				this.state.carpet * 18;
+				this.state.carpet * 58 + 20;
 			this.setState({ price: totalPrice });
 		});
-	};
+	}
+
 	handleChangeDate = value => {
 		value = value.toString();
 		this.setState({ dueDate: value });
-	};
-	handleSubmit = () => {
-		const order = { ...this.state };
-		const match = matchPath(this.props.history.location.pathname, {
-			path: "/clients/:clientId"
-		});
+	}
 
-		const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
-		localStorage.removeItem(POST_ORDER_AT_HOMEPAGE);
-
-		let clientId;
-		if (match && match.params.clientId) {
-			clientId = match.params.clientId;
-		}
-		clientId = localStorage.getItem("clientId");
-
+	handleCreateOrder = (clientId, order) => {
 		this.setState({ isCreating: true }, () => {
 			createOrder(clientId, order)
 				.then(newOrder => {
@@ -91,7 +84,33 @@ class TakeOrder extends React.Component {
 				})
 				.catch(error => this.setState({ error, isCreating: false }));
 		});
-	};
+	}
+
+	handleSubmit = () => {
+		const order = { ...this.state };
+	
+		const match = matchPath(this.props.history.location.pathname, {
+			path: "/clients/:clientId"
+		});
+
+		localStorage.removeItem(POST_ORDER_AT_HOMEPAGE);
+
+		let clientId;
+		if (match && match.params.clientId) {
+			clientId = match.params.clientId;
+		}
+		clientId = localStorage.getItem("clientId");
+
+		Geocode.fromAddress(`${order.location}`).then(
+			() => {
+				!order.dueDate ? alert("Please choose a due date") :
+				this.handleCreateOrder(clientId, order)
+			},
+			() => {
+				alert("Location is invalid");
+			}
+		);
+	}
 
 	render() {
 		return (

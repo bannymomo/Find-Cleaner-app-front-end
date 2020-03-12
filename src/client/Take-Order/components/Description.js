@@ -33,7 +33,6 @@ export default function BasicTextFields(props) {
 				<TextField
 					name="description"
 					onChange={props.handleChange}
-					id="outlined-basic"
 					placeholder="I need ... "
 					label="Describe your task here ..."
 					multiline

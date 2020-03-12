@@ -68,6 +68,14 @@ class Login extends React.Component {
 	};
 
 	login = () => {
+		if (!this.state.username) {
+			alert("Username is empty, please fill your name");
+			return;
+		}
+		if (!this.state.password) {
+			alert("Password is empty, please fill your password");
+			return;
+		}
 		const loginInfo = {
 			username: this.state.username,
 			password: this.state.password
@@ -99,14 +107,6 @@ class Login extends React.Component {
 
 	handleKeyPress = event => {
 		if (event.key === "Enter") {
-			if (!this.state.username) {
-				alert("Username is empty, please fill your name");
-				return;
-			}
-			if (!this.state.password) {
-				alert("Password is empty, please fill your password");
-				return;
-			}
 			this.login();
 		}
 	};
@@ -130,7 +130,7 @@ class Login extends React.Component {
 
 	renderForm = classes => {
 		return (
-			<form className={classes.form} noValidate>
+			<form className={classes.form}>
 				<label>Log in</label>
 				<TextField
 					onKeyDown={this.handleKeyPress}
@@ -174,7 +174,7 @@ class Login extends React.Component {
 					</Link>{" "}
 				</div>
 				{!!this.state.error && (
-					<Alert severity="error">Account not exits </Alert>
+					<Alert severity="error">Login details are incorrect, please try again </Alert>
 				)}
 			</form>
 		);

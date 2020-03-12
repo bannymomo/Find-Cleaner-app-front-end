@@ -4,7 +4,7 @@ import googleplay from "../../assets/images/google-play.png";
 import appstore from "../../assets/images/app-store.png";
 import { Link } from "react-router-dom";
 import { SIGNUP_URL } from "../../routes/URLMap";
-import { BUSINESS_ROLE } from "../../utils/variables";
+// import { BUSINESS_ROLE } from "../../utils/variables";
 export default function AppFooter() {
 	return (
 		<footer>
@@ -25,7 +25,7 @@ export default function AppFooter() {
 								className="footer__links--white"
 								to={{
 									pathname: `${SIGNUP_URL}/user/business`,
-									role: BUSINESS_ROLE
+									// role: BUSINESS_ROLE
 								}}
 							>
 								Register your business

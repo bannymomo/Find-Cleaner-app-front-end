@@ -22,6 +22,13 @@ export const changePasswordById = (userId, password) => {
 
 export const getUserId = () => {
 	return get(`${API_SIGNUP_URL}/me`).then( res => 
-		 res.data.data._id
+		res.data.data._id
+	)
+}
+
+export const checkUsername = username => {
+	const url = `${API_SIGNUP_URL}/${username}`;
+	return post(url).then(res => 
+		res.data.data
 	)
 }
