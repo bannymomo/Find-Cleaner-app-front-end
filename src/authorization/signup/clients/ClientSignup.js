@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {
 	Button,
 	Grid,
@@ -17,6 +18,10 @@ import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
 import MainNavigation from "../../../navigation/MainNavigation";
 import { createClient } from "../../../api/client";
+
+import { signup as signupFn } from "../../../api/auth";
+import { setToken } from "../../../utils/auth";
+
 import {
 	setClientId,
 	removeBusinessId,
@@ -66,14 +71,16 @@ class ClientSignup extends Component {
 		gender: "",
 		invalidName: false,
 		error: null,
-		isLoading: false
+		isLoading: false,
 	};
 
 	postClient = () => {
-		if (this.state.firstName.length < 2 && this.state.lastName.length < 2) {
-			this.setState({ invalidName: true });
-			return;
-		}
+		const userInfo = {
+			username: this.props.username,
+			password: this.props.password,
+			role: this.props.role
+		};
+
 		const clientInfo = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
@@ -81,21 +88,25 @@ class ClientSignup extends Component {
 			email: this.props.email,
 			postcode: this.state.postcode
 		};
+
 		this.setState({ isLoading: true }, () => {
-			createClient(clientInfo)
-				.then(data => {
-					this.setState({ isLoading: false }, () => {
-						removeClientId();
-						removeBusinessId();
-						const clientId = data._id;
-						setClientId(clientId);
-						const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
-						this.props.history.replace(redirectTo);
-					});
+			signupFn(userInfo)
+				.then(data => setToken(data.token))
+				.then(() => {
+					createClient(clientInfo)
+						.then(data => {
+							this.setState({ isLoading: false }, () => {
+								removeClientId();
+								removeBusinessId();
+								const clientId = data._id;
+								setClientId(clientId);
+								const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
+								this.props.history.replace(redirectTo);
+							});
+						})
+						.catch(error => this.setState({ error, isLoading: false }))
 				})
-				.catch(error => {
-					this.setState({ error, isLoading: false });
-				});
+				.catch(error => this.setState({ error, isLoading: false }))
 		});
 	};
 
@@ -105,11 +116,11 @@ class ClientSignup extends Component {
 		} else {
 			return (
 				<Button
+					type="submit"
 					variant="contained"
 					fullWidth
 					color="primary"
 					className={classes.submit}
-					onClick={this.postClient}
 				>
 					Sign up
 				</Button>
@@ -118,11 +129,15 @@ class ClientSignup extends Component {
 	};
 	renderForm = classes => {
 		return (
-			<form className={classes.form} noValidate>
+			<ValidatorForm
+				className={classes.form}
+				instantValidate
+				onSubmit={this.postClient}
+			>
 				<label>More about you~</label>
 				<Grid container spacing={2} className={classes.grid}>
 					<Grid item xs={12} sm={6}>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							required
 							fullWidth
@@ -133,10 +148,12 @@ class ClientSignup extends Component {
 									firstName: event.target.value
 								})
 							}
+							validators={['required', 'minStringLength:2']}
+                    		errorMessages={['this field is required', 'The length must longer than 2']}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							required
 							fullWidth
@@ -147,13 +164,10 @@ class ClientSignup extends Component {
 									lastName: event.target.value
 								})
 							}
+							validators={['required', 'minStringLength:2']}
+                    		errorMessages={['this field is required', 'The length must longer than 2']}
 						/>
 					</Grid>
-					{this.state.invalidName ? (
-						<Alert severity="error">
-							The length must longer than 3
-						</Alert>
-					) : null}
 					<Grid item xs={12}>
 						<TextField
 							variant="outlined"
@@ -169,7 +183,7 @@ class ClientSignup extends Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							color="primary"
 							variant="outlined"
 							required
@@ -181,14 +195,22 @@ class ClientSignup extends Component {
 									postcode: event.target.value
 								})
 							}
+							validators={[
+								'required', 
+								'matchRegexp:^[0-9]{4}$'
+							]}
+							errorMessages={[
+								'this field is required', 
+								'postcode is not valid'
+							]}
 						/>
 					</Grid>
 				</Grid>
 				{this.renderButton(classes)}
 				{!!this.state.error && (
-					<Alert severity="error">Illegal input data </Alert>
+					<Alert severity="error">{this.state.error}</Alert>
 				)}
-			</form>
+			</ValidatorForm>
 		);
 	};
 

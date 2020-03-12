@@ -6,7 +6,7 @@ import ProductHeroLayout from "./ProductHeroLayout";
 import { SIGNUP_URL } from "../../routes/URLMap";
 import "../style/homepage.scss";
 import { Link } from "react-router-dom";
-import { CLIENT_ROLE } from "../../utils/variables";
+// import { CLIENT_ROLE } from "../../utils/variables";
 
 const styles = theme => ({
 	button: {
@@ -47,7 +47,7 @@ function ProductHero(props) {
 					component={Link}
 					to={{
 						pathname: `${SIGNUP_URL}/user/client`,
-						role: CLIENT_ROLE
+						// role: CLIENT_ROLE
 					}}
 				>
 					Get started now
