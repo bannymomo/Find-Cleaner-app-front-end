@@ -32,8 +32,7 @@ import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
 import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
-
-const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 class Login extends React.Component {
 	state = {
 		username: "",
@@ -60,6 +59,13 @@ class Login extends React.Component {
 
 	businessLogin = data => {
 		setBusinessId(data.businessId);
+		if (localStorage.getItem(POST_ORDER_AT_HOMEPAGE)) {
+			this.props.history.replace(
+				`${BUSINESS_BASE_URL}/${data.businessId}/browse-order`
+			);
+			localStorage.removeItem(POST_ORDER_AT_HOMEPAGE);
+			return;
+		}
 		const locationState = this.props.location.state;
 		const redirectTo =
 			(locationState && locationState.from) ||

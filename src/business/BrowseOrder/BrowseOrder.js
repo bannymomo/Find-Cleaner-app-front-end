@@ -53,7 +53,30 @@ class BrowseOrder extends Component {
 	handlePageChange = (event, data) => {
 		this.loadOrders(data);
 	};
+	sortAscending = () => {
+		const { orders } = this.state;
 
+		orders.sort((a, b) => {
+			let keyA = new Date(a.dueDate),
+				keyB = new Date(b.dueDate);
+			// if (keyA < keyB) return -1;
+			// if (keyA > keyB) return 1;
+			// return 0;
+			return keyA - keyB;
+		});
+		this.setState({ orders });
+	};
+
+	sortDescending = () => {
+		const { orders } = this.state;
+
+		orders.sort((a, b) => {
+			let keyA = new Date(a.dueDate),
+				keyB = new Date(b.dueDate);
+			return keyB - keyA;
+		});
+		this.setState({ orders });
+	};
 	render() {
 		const businessId = this.props.match.params.businessId;
 		const BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;
@@ -61,7 +84,10 @@ class BrowseOrder extends Component {
 			<React.Fragment>
 				<div className="browse-orders">
 					<div className="browse-orders--top-bar">
-						<DatePosted />
+						<DatePosted
+							sortAscending={this.sortAscending}
+							sortDescending={this.sortDescending}
+						/>
 						<NewTasks />
 						<SearchBar />
 					</div>

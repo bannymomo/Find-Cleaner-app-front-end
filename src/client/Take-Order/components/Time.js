@@ -11,14 +11,10 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function BasicDateTimePicker(props) {
-	const [selectedDate, handleDateChange] = useState(new Date());
-	const classes = useStyles();
+const BasicDateTimePicker = ({ handleChangeDate }) => {
+	const [newDate, handleDateChange] = useState(new Date());
 
-	const handleOnChange = (value, newDate) => {
-		handleDateChange(newDate);
-		props.handleChangeDate(value);
-	};
+	const classes = useStyles();
 
 	return (
 		<div className="take-order--date-time-picker">
@@ -28,14 +24,18 @@ function BasicDateTimePicker(props) {
 						name="dueDate"
 						label="DateTimePicker"
 						inputVariant="outlined"
-						value={selectedDate}
-						onChange={handleOnChange}
+						value={newDate}
+						onChange={newDate => {
+							const newDueDate = newDate;
+							handleDateChange(newDate);
+							handleChangeDate(newDueDate);
+						}}
 						color="secondary"
 					/>
 				</Fragment>
 			</div>
 		</div>
 	);
-}
+};
 
 export default BasicDateTimePicker;

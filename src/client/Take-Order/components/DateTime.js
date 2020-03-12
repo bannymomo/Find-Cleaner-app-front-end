@@ -1,10 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import EventAvailableOutlinedIcon from "@material-ui/icons/EventAvailableOutlined";
-// import { format } from "date-fns";
+import Moment from "react-moment";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -13,6 +12,23 @@ const useStyles = makeStyles(theme => ({
 			marginBottom: theme.spacing(3),
 			width: 250
 		}
+	},
+	dateTime: {
+		display: "inline-block",
+		fontSize: 16,
+		margin: theme.spacing(1, 0, 0.5, 1),
+		borderRadius: 5,
+		border: "1px solid #0005",
+		padding: theme.spacing(1.5, 1)
+	},
+	moment: {
+		padding: theme.spacing(1),
+		fontWeight: 600
+	},
+	newDateTime: {
+		margin: theme.spacing(1.5),
+		fontSize: "12px",
+		color: "#3f88de"
 	}
 }));
 
@@ -29,21 +45,18 @@ export default function BasicTextFields(props) {
 					<Typography>When do you need the cleaning?</Typography>
 				</Grid>
 			</Grid>
-
-			<form className={classes.root} autoComplete="off">
-				<TextField
-					name="dueDate"
-					onChange={props.handleChange}
-					id="outlined-basic"
-					required
-					placeholder="July 1st 09:30 a.m."
-					label="Enter your date & time"
-					variant="outlined"
-					margin="dense"
-					color="secondary"
-					value={props.dueDate}
-				/>
-			</form>
+			<div className={classes.dateTime}>
+				Service Time:
+				<Moment className={classes.moment} format="DD-MM-YY HH:mm">
+					{props.dueDate}
+				</Moment>
+			</div>
+			<div className={classes.newDateTime}>
+				<span>
+					Please pick a new date & time below if you need a change of
+					service time:
+				</span>
+			</div>
 		</div>
 	);
 }

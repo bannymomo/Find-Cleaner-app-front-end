@@ -6,3 +6,4 @@ export const DONE = "done";
 
 export const CLIENT_ROLE = "client";
 export const BUSINESS_ROLE = "business";
+export const POST_ORDER_AT_HOMEPAGE = "postOrderAtHomepage";
