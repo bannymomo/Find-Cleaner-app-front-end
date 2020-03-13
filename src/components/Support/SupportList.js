@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 	},
 
 	supportButton: {
+		fontSize: "0.9rem",
 		display: "block",
 		padding: 0,
 		borderRadius: 100,
@@ -33,6 +34,12 @@ const useStyles = makeStyles(theme => ({
 		textAlign: "center",
 		lineHeight: "4rem",
 		textTransform: "none",
+
+		[theme.breakpoints.only("sm")]: {
+			fontSize: "0.6rem",
+			height: "3rem",
+			lineHeight: "3rem"
+		},
 		"&:hover": {
 			color: "#fff",
 			backgroundColor: "#3f88de"
@@ -93,7 +100,7 @@ export default function SupportList(props) {
 
 	const subSupports = [
 		{
-			name: "Business Browse All Tasks",
+			name: "Browse All Tasks",
 			link: `${BUSINESS_BASE_URL}/${loginBusiness}/browse-order`
 		},
 		{
@@ -128,7 +135,8 @@ export default function SupportList(props) {
 					{serviceSupports.map(support => (
 						<Grid
 							item
-							xs={4}
+							sm={4}
+							xs={12}
 							className={classes.supports}
 							key={support.name}
 						>
@@ -147,7 +155,8 @@ export default function SupportList(props) {
 					{mainSupports.map(support => (
 						<Grid
 							item
-							xs={4}
+							sm={4}
+							xs={12}
 							className={classes.supports}
 							key={support.name}
 						>
@@ -175,7 +184,8 @@ export default function SupportList(props) {
 					{subSupports.map(support => (
 						<Grid
 							item
-							xs={4}
+							sm={4}
+							xs={12}
 							className={classes.supports}
 							key={support.name}
 						>
@@ -203,7 +213,8 @@ export default function SupportList(props) {
 					{RegisterSupports.map(support => (
 						<Grid
 							item
-							xs={6}
+							sm={6}
+							xs={12}
 							className={classes.supports}
 							key={support.name}
 						>

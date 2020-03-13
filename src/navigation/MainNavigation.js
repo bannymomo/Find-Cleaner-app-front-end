@@ -6,6 +6,8 @@ import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import pic from "../assets/images/pic.png";
+import MainMenu from "./MainMenu";
+
 import {
 	LOGIN_URL,
 	HOMEPAGE_URL,
@@ -19,6 +21,7 @@ import { isLoggedIn } from "../utils/auth";
 import PostOrderBtn from "../components/order/PostOrderBtn";
 import styled from "styled-components";
 import { POST_ORDER_AT_HOMEPAGE } from "../utils/variables";
+
 class MainNavigation extends Component {
 	renderButton = (loginClient, loginBussiness) => {
 		if (loginBussiness && isLoggedIn()) {
@@ -50,6 +53,59 @@ class MainNavigation extends Component {
 			);
 		}
 	};
+	renderItems = (
+		loginClient,
+		loginBussiness,
+		StyledLogin,
+		StyleAvartarButton
+	) => {
+		return (
+			<div className="nav-bar__items--container">
+				<ul className="nav-bar__ul--black">
+					<li>
+						<Link
+							to={HOMEPAGE_URL}
+							className="nav-bar__link--black"
+						>
+							Home
+						</Link>
+					</li>
+					<li>
+						<Link to={SERVICE_URL} className="nav-bar__link--black">
+							Service
+						</Link>
+					</li>
+					<li>
+						<Link to={SUPPORT_URL} className="nav-bar__link--black">
+							Support
+						</Link>
+					</li>
+					<li>
+						<StyledLogin
+							to={LOGIN_URL}
+							className="nav-bar__link--black"
+						>
+							Login
+						</StyledLogin>
+					</li>
+				</ul>
+				<div className="nav-bar__avatar--container">
+					<StyleAvartarButton
+						to={
+							loginClient
+								? `${CLIENT_BASE_URL}/${loginClient}`
+								: `${BUSINESS_BASE_URL}/${loginBussiness}`
+						}
+					>
+						<Avatar alt="users" src={pic} />
+					</StyleAvartarButton>
+				</div>
+				<div className="nav-bar__button--blue">
+					{this.renderButton(loginClient, loginBussiness)}
+				</div>
+			</div>
+		);
+	};
 	render() {
 		const loginClient = getClientId();
 		const loginBussiness = getBusinessId();
@@ -78,57 +134,13 @@ class MainNavigation extends Component {
 						/>
 					</Link>
 				</div>
-				<div className="nav-bar__items--container">
-					<ul className="nav-bar__ul--black">
-						<li>
-							{" "}
-							<Link
-								to={HOMEPAGE_URL}
-								className="nav-bar__link--black"
-							>
-								Home
-							</Link>
-						</li>
-						<li>
-							<Link
-								to={SERVICE_URL}
-								className="nav-bar__link--black"
-							>
-								Service
-							</Link>
-						</li>
-						<li>
-							<Link
-								to={SUPPORT_URL}
-								className="nav-bar__link--black"
-							>
-								Support
-							</Link>
-						</li>
-						<li>
-							<StyledLogin
-								to={LOGIN_URL}
-								className="nav-bar__link--black"
-							>
-								Login
-							</StyledLogin>
-						</li>
-					</ul>
-					<div className="nav-bar__avatar--container">
-						<StyleAvartarButton
-							to={
-								loginClient
-									? `${CLIENT_BASE_URL}/${loginClient}`
-									: `${BUSINESS_BASE_URL}/${loginBussiness}`
-							}
-						>
-							<Avatar alt="users" src={pic} />
-						</StyleAvartarButton>
-					</div>
-					<div className="nav-bar__button--blue">
-						{this.renderButton(loginClient, loginBussiness)}
-					</div>
-				</div>
+				{this.renderItems(
+					loginClient,
+					loginBussiness,
+					StyledLogin,
+					StyleAvartarButton
+				)}
+				<MainMenu />
 			</header>
 		);
 	}

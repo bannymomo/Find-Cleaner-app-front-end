@@ -35,6 +35,7 @@ const useStylesModal = makeStyles(theme => ({
 		border: "none",
 		borderRadius: "100px",
 		fontSize: "1.2rem",
+
 		"&:hover": {
 			color: "#2196f3",
 			backgroundColor: "transparent"

@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { HOMEPAGE_URL } from "../../routes/URLMap";
 
-class Service extends Component {
+class Support extends Component {
 	render() {
 		return (
 			<React.Fragment>
@@ -33,4 +33,4 @@ class Service extends Component {
 	}
 }
 
-export default Service;
+export default Support;

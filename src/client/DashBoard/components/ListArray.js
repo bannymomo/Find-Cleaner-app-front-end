@@ -12,7 +12,7 @@ import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../../routes/URLMap";
 import { getBusinessId, getClientId } from "../../../utils/auth";
 import { isLoggedIn } from "../../../utils/auth";
 import { POST_ORDER_AT_HOMEPAGE } from "../../../utils/variables";
-
+import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme =>
@@ -54,67 +54,72 @@ export default function FloatingActionButtonSize() {
 	const loginBussiness = getBusinessId();
 	return (
 		<animated.div style={props} className="list-array__container--whole">
-			{listArray.map((list, index) => {
-				return (
-					<div key={index} className="list-array__container--single">
-						<div>
-							{loginBussiness && isLoggedIn() ? (
-								<Fab
-									color="primary"
-									className={classes.margin}
-									component={Link}
-									to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
-								>
-									<img
-										src={list.img}
-										alt={list.alt}
-										className="list-array__icon--single"
-									/>
-								</Fab>
-							) : loginClient && isLoggedIn() ? (
-								<Fab
-									component={Link}
-									to={`${CLIENT_BASE_URL}/${loginClient}`}
-									onClick={() => {
-										localStorage.setItem(
-											POST_ORDER_AT_HOMEPAGE,
-											true
-										);
-									}}
-									color="primary"
-									className={classes.margin}
-								>
-									<img
-										src={list.img}
-										alt={list.alt}
-										className="list-array__icon--single"
-									/>
-								</Fab>
-							) : (
-								<Fab
-									component={Link}
-									to={`${CLIENT_BASE_URL}/${loginClient}`}
-									onClick={() => {
-										localStorage.setItem(
-											POST_ORDER_AT_HOMEPAGE,
-											true
-										);
-									}}
-									color="primary"
-									className={classes.margin}
-								>
-									<img
-										src={list.img}
-										alt={list.alt}
-										className="list-array__icon--single"
-									/>
-								</Fab>
-							)}
-						</div>
-						<span>{list.description}</span>
-					</div>
-				);
-			})}
+			<Grid container spacing={0} className={classes.margin}>
+				{listArray.map((list, index) => {
+					return (
+						<Grid item lg={4} md={6} sm={6} xs={12} key={index}>
+							<div className="list-array__container--single">
+								<div>
+									{loginBussiness && isLoggedIn() ? (
+										<Fab
+											color="primary"
+											className={classes.margin}
+											component={Link}
+											to={`${BUSINESS_BASE_URL}/${loginBussiness}/browse-order`}
+										>
+											<img
+												src={list.img}
+												alt={list.alt}
+												className="list-array__icon--single"
+											/>
+										</Fab>
+									) : loginClient && isLoggedIn() ? (
+										<Fab
+											component={Link}
+											to={`${CLIENT_BASE_URL}/${loginClient}`}
+											onClick={() => {
+												localStorage.setItem(
+													POST_ORDER_AT_HOMEPAGE,
+													true
+												);
+											}}
+											color="primary"
+											className={classes.margin}
+										>
+											<img
+												src={list.img}
+												alt={list.alt}
+												className="list-array__icon--single"
+											/>
+										</Fab>
+									) : (
+										<Fab
+											component={Link}
+											to={`${CLIENT_BASE_URL}/${loginClient}`}
+											onClick={() => {
+												localStorage.setItem(
+													POST_ORDER_AT_HOMEPAGE,
+													true
+												);
+											}}
+											color="primary"
+											className={classes.margin}
+										>
+											<img
+												src={list.img}
+												alt={list.alt}
+												className="list-array__icon--single"
+											/>
+										</Fab>
+									)}
+								</div>
+
+								<span>{list.description}</span>
+							</div>
+						</Grid>
+					);
+				})}
+			</Grid>
 		</animated.div>
 	);
 }
