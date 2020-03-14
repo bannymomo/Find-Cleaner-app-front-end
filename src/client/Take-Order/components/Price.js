@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 			position: "relative",
 			marginLeft: 75,
 			marginBottom: 50,
-			width: "18rem"
+			width: "17rem"
 		}
 	},
 	bullet: {

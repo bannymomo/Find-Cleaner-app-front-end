@@ -43,7 +43,6 @@
 	& .client__take-order-container {
 		max-width: 450px;
 		@media (max-width: $mediaXsWidth) {
-			width: 95vw;
 			& * {
 				font-size: 14px;
 			}
@@ -77,7 +76,7 @@
 			background-color: #2195f31a;
 			margin-bottom: 1.2rem;
 			@media (max-width: $mediaXsWidth) {
-				width: 300px;
+				width: 250px;
 			}
 
 			& .MuiFormControlLabel-root {
@@ -98,7 +97,15 @@
 			margin-top: 0.5rem;
 			@media (max-width: $mediaXsWidth) {
 				height: 60px;
-				width: 70px;
+				width: 100px;
+				margin-right: 20px;
+				margin-bottom: 20px;
+			}
+			@media (max-width: $mediaXxsWidth) {
+				height: 60px;
+				width: 80px;
+				margin-right: 20px;
+				margin-bottom: 20px;
 			}
 
 			& .MuiIconButton-root {
@@ -118,8 +125,8 @@
 				text-align: center;
 				font-size: 0.8rem;
 				@media (max-width: $mediaXsWidth) {
-					text-align: right;
-					padding-right: 12px;
+					// text-align: right;
+					padding-right: 5px;
 				}
 			}
 		}
