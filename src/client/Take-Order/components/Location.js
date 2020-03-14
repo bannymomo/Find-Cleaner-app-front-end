@@ -33,7 +33,6 @@ export default function BasicTextFields(props) {
 				<TextField
 					name="location"
 					onChange={props.handleChange}
-					id="outlined-basic"
 					required
 					placeholder="Ann st Brisbane City QLD"
 					label="Enter your location"

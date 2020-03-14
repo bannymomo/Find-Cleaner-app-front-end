@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import {
 	Button,
 	Grid,
-	TextField,
 	Container,
 	CssBaseline,
 	withStyles,
@@ -12,8 +11,9 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
 
-import { signup as signupFn } from "../../api/auth";
-import { setToken } from "../../utils/auth";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
+import { checkUsername } from "../../api/auth";
 import ClientSignup from "./clients/ClientSignup";
 import BusinessSignup from "./business/BusinessSignup";
 import Background from "../../assets/images/auth-background.png";
@@ -21,7 +21,7 @@ import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
 import { LOGIN_URL } from "../../routes/URLMap";
-import { CLIENT_ROLE } from "../../utils/variables";
+import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
 
 import "./style/signup.scss";
 
@@ -66,32 +66,33 @@ class User extends Component {
 		username: "",
 		password: "",
 		history: "",
-		role: this.props.location.role,
+		role: "",
+		basicInfo: false,
 		error: null,
-		isLoading: false
+		isLoading: false,
+		// isUsernameValid: false,
+		// isEmailValid: false,
+		// isPasswordValid: false,
 	};
 
-	postUserInfo = () => {
-		const userInfo = {
-			username: this.state.username,
-			password: this.state.password,
-			role: this.state.role
-		};
+	componentDidMount() {
+		const pathname = this.props.location.pathname;
+		if (pathname.includes(CLIENT_ROLE)) {
+			this.setState({ role: CLIENT_ROLE })
+		} else {
+			this.setState({ role: BUSINESS_ROLE })
+		}
+	}
 
-		this.setState({ isLoading: true }, () => {
-			signupFn(userInfo)
-				.then(data => {
-					this.setState({ basicInfo: true, isLoading: false }, () => {
-						setToken(data.token);
-						this.setState({
-							history: this.props.history,
-							basicInfo: true
-						});
-					});
-				})
-				.catch(error => this.setState({ error, isLoading: false }));
+	handleContinue = () => {
+		this.setState({ isLoading: true, error: null }, () => {
+			checkUsername(this.state.username)
+				.then(() => 
+					this.setState({ isLoading: false, basicInfo: true, history: this.props.history })
+				)
+				.catch(error => this.setState({ error,  isLoading: false }))
 		});
-	};
+	}
 
 	renderButton = classes => {
 		if (this.state.isLoading) {
@@ -99,7 +100,12 @@ class User extends Component {
 		} else {
 			return (
 				<Button
-					onClick={() => this.postUserInfo()}
+					// disabled={
+					// 	!this.state.isUsernameValid ||
+					// 	!this.state.isEmailValid ||
+					// 	!this.state.isPasswordValid
+					// }
+					type="submit"
 					variant="contained"
 					fullWidth
 					color="primary"
@@ -111,18 +117,33 @@ class User extends Component {
 		}
 	};
 
+	// validateUsername = (result) => {
+	// 	this.setState({ isUsernameValid: result})
+	// }
+	// validateEmail = (result) => {
+	// 	this.setState({ isEmailValid: result})
+	// }
+	// validatePassword = (result) => {
+	// 	this.setState({ isPasswordValid: result})
+	// }
+
 	renderForm = classes => {
+
 		return (
-			<form className={classes.form} noValidate>
+			<ValidatorForm
+				className={classes.form}
+				instantValidate={false}
+				onSubmit={this.handleContinue}
+            >
 				<label className="sign-up__header">
-					{this.props.location.role} Sign up
+					{this.state.role} Sign up
 				</label>
 				<Grid container spacing={2} className={classes.grid}>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
+							required
 							label="User Name"
 							value={this.state.username}
 							onChange={event =>
@@ -130,28 +151,36 @@ class User extends Component {
 									username: event.target.value
 								})
 							}
+							validators={['required', 'minStringLength: 2']}
+							errorMessages={['this field is required', 'username must be at least two characters']}
+							// validatorListener={this.validateUsername}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
+							color="primary"
 							variant="outlined"
 							required
 							fullWidth
-							label="Email Address"
-							value={this.state.email}
+							label="Email"
 							onChange={event =>
 								this.setState({
 									email: event.target.value
 								})
 							}
+							name="email"
+							value={this.state.email}
+							validators={['required', 'isEmail']}
+							errorMessages={['this field is required', 'email is not valid']}
+							// validatorListener={this.validateEmail}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							color="primary"
 							variant="outlined"
-							required
 							fullWidth
+							required
 							label="Password"
 							type="password"
 							value={this.state.password}
@@ -160,21 +189,23 @@ class User extends Component {
 									password: event.target.value
 								})
 							}
+							validators={['required', 'minStringLength: 2']}
+							errorMessages={['this field is required', 'password must be at least two characters']}
+							// validatorListener={this.validatePassword}
 						/>
 					</Grid>
 				</Grid>
 				{this.renderButton(classes)}
-
 				<div className="signin__text--bottom">
 					Already have an account?{" "}
 					<Link className="signin__link--bottom" to={LOGIN_URL}>
 						Log in.
 					</Link>
 				</div>
-				{!!this.state.error && (
+				{!this.state.isLoading && !!this.state.error && (
 					<Alert severity="error">User already exits~</Alert>
 				)}
-			</form>
+            </ValidatorForm>
 		);
 	};
 
@@ -218,11 +249,17 @@ class User extends Component {
 			<ClientSignup
 				email={this.state.email}
 				history={this.state.history}
+				username={this.state.username}
+				password={this.state.password}
+				role={this.state.role}
 			/>
 		) : (
 			<BusinessSignup
 				email={this.state.email}
 				history={this.state.history}
+				username={this.state.username}
+				password={this.state.password}
+				role={this.state.role}
 			/>
 		);
 	}

@@ -153,6 +153,11 @@
 	position: relative;
 	padding-left: 50px;
 	margin-bottom: 40px;
+	& .submitButtonCircularProgress {
+		position: absolute;
+		right: 50px;
+		bottom: 0;
+	}
 	& .submitButton {
 		position: absolute;
 		right: 50px;

@@ -12,19 +12,16 @@ class Account extends Component {
 		minDate.setFullYear(minDate.getFullYear() - 1);
 		minDate.setHours(0, 0, 0, 0);
 		this.state = {
-			defaultValue: {
-				firstName: "",
-				lastName: "",
-				email: "",
-				contactNumber: ""
-			},
 			firstName: "",
 			lastName: "",
 			birthday: minDate,
-			location: "",
+			postcode: "",
+			// location: "",
 			email: "",
 			contactNumber: "",
+
 			isLoading: false,
+			isUpdating: false,
 			error: null,
 			canNotEdit: true,
 			updateButtonHidden: true,
@@ -39,20 +36,19 @@ class Account extends Component {
 	updateDefaultValue = () => {
 		const clientID = this.props.match.params.clientId;
 		this.setState({ isLoading: true });
-		fetchClientById(clientID).then(data => {
-			this.setState({
-				defaultValue: {
+		fetchClientById(clientID)
+			.then(data => {
+				this.setState({
 					firstName: data.firstName,
 					lastName: data.lastName,
-					// need to be changed
 					contactNumber: data.description,
 					email: data.email,
-					// need to be changed
-					location: data.postcode
-				},
-				isLoading: false
-			});
-		});
+					postcode: data.postcode,
+					// location: data.postcode,
+					isLoading: false
+				});
+			})
+			.catch(error => this.setState({ error, isLoading: false }));
 	};
 
 	handleDateChange = (event, date) => {
@@ -78,33 +74,20 @@ class Account extends Component {
 
 	updateInfo = () => {
 		const clientInfo = {
-			firstName:
-				this.state.firstName === ""
-					? this.state.defaultValue.firstName
-					: this.state.firstName,
-			lastName:
-				this.state.lastName === ""
-					? this.state.defaultValue.lastName
-					: this.state.lastName,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
 			gender: "male",
-			email:
-				this.state.email === ""
-					? this.state.defaultValue.email
-					: this.state.email,
-			postcode: 12345,
-			// need to be changed
-			description:
-				this.state.contactNumber === ""
-					? this.state.defaultValue.contactNumber
-					: this.state.contactNumber
+			email: this.state.email,
+			postcode: this.state.postcode,
+			description: this.state.contactNumber
 		};
 		const clientID = this.props.match.params.clientId;
-		this.setState({ isLoading: true }, () => {
+		this.setState({ isUpdating: true }, () => {
 			updateClientById(clientID, clientInfo)
-				.then(data => {
+				.then(() => {
 					this.setState(
 						{
-							isLoading: false,
+							isUpdating: false,
 							updateButtonHidden: true,
 							editButtonHidden: false,
 							canNotEdit: true
@@ -115,7 +98,7 @@ class Account extends Component {
 						}
 					);
 				})
-				.catch(error => this.setState({ error, isLoading: false }));
+				.catch(error => this.setState({ error, isUpdating: false }));
 		});
 	};
 
@@ -148,11 +131,7 @@ class Account extends Component {
 								label="First Name"
 								name="firstName"
 								disabled={this.state.canNotEdit}
-								value={
-									this.state.canNotEdit
-										? this.state.defaultValue.firstName
-										: this.state.firstName
-								}
+								value={this.state.firstName}
 								onChange={this.changeHandler}
 							/>
 							<TextField
@@ -162,11 +141,7 @@ class Account extends Component {
 								name="lastName"
 								margin="normal"
 								disabled={this.state.canNotEdit}
-								value={
-									this.state.canNotEdit
-										? this.state.defaultValue.lastName
-										: this.state.lastName
-								}
+								value={this.state.lastName}
 								onChange={this.changeHandler}
 							/>
 							<KeyboardDatePicker
@@ -177,6 +152,7 @@ class Account extends Component {
 								margin="normal"
 								id="date-picker-inline"
 								label="Birthday"
+								disabled={this.state.canNotEdit}
 								value={this.state.birthday}
 								onChange={this.handleDateChange}
 								KeyboardButtonProps={{
@@ -194,11 +170,7 @@ class Account extends Component {
 							label="Contact Number"
 							name="contactNumber"
 							disabled={this.state.canNotEdit}
-							value={
-								this.state.canNotEdit
-									? this.state.defaultValue.contactNumber
-									: this.state.contactNumber
-							}
+							value={this.state.contactNumber}
 							onChange={this.changeHandler}
 						/>
 						<TextField
@@ -208,21 +180,17 @@ class Account extends Component {
 							name="email"
 							margin="normal"
 							disabled={this.state.canNotEdit}
-							value={
-								this.state.canNotEdit
-									? this.state.defaultValue.email
-									: this.state.email
-							}
+							value={this.state.email}
 							onChange={this.changeHandler}
 						/>
 						<TextField
 							variant="outlined"
 							className="account__form--input"
-							label="Current Residential Address"
-							name="location"
+							label="Current Residential Postcode"
+							name="postcode"
 							margin="normal"
 							disabled={this.state.canNotEdit}
-							value={this.state.location}
+							value={this.state.postcode}
 							onChange={this.changeHandler}
 						/>
 					</div>
