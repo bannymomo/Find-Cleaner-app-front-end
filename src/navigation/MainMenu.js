@@ -58,7 +58,7 @@ export default function LongMenu() {
 				PaperProps={{
 					style: {
 						maxHeight: ITEM_HEIGHT * 5,
-						width: 80,
+						width: 100,
 						backgroundColor: "#0006",
 						color: "#fff"
 					}
