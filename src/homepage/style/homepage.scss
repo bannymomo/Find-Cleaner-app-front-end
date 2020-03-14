@@ -1,3 +1,5 @@
+@import "../../theme/variables.scss";
+
 .product-hero__background--gradient {
 	background: linear-gradient(
 			rgba(254, 254, 254, 0.2),
@@ -6,6 +8,15 @@
 		url("../../assets/images/homepage.png");
 	background-size: cover;
 	height: 100vh;
+	@media (max-width: $mediaSmWidth) {
+		height: 650px;
+	}
+	@media (max-width: $mediaXsWidth) {
+		height: 600px;
+		.MuiContainer-root {
+			margin-bottom: 0;
+		}
+	}
 }
 
 .product-hero__title--black {
@@ -18,6 +29,16 @@
 	text-transform: uppercase;
 	text-align: center;
 	color: #000000;
+
+	@media (max-width: $mediaSmWidth) {
+		font-size: 36px;
+	}
+	@media (max-width: $mediaXsWidth) {
+		font-size: 24px;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		font-size: 20px;
+	}
 }
 
 .product-hero__text--black {
@@ -29,6 +50,15 @@
 	line-height: 55px;
 	text-align: center;
 	color: #000000;
+	@media (max-width: $mediaSmWidth) {
+		font-size: 24px;
+	}
+	@media (max-width: $mediaXsWidth) {
+		font-size: 18px;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		font-size: 14px;
+	}
 }
 .product-values__img--blue {
 	height: 60px;
@@ -72,22 +102,29 @@
 	font-size: 25px;
 	font-family: Nunito;
 }
-.product-how-it-works__single-container--grey {
-	height: 409px;
-	background: #e5e5e5;
-	border-radius: 20px;
-	padding: 40px;
-	min-width: 320px;
-	text-align: center;
-	div {
-		font-weight: 600;
-		font-size: 20px;
-		line-height: 27px;
-		margin-top: 20px;
-	}
-	p {
-		font-size: 18px;
-		line-height: 27px;
+.product-how-it-works {
+	.product-how-it-works__single-container--grey {
+		height: 409px;
+		background: #e5e5e5;
+		border-radius: 20px;
+		padding: 40px;
+		min-width: 320px;
+		text-align: center;
+		@media (max-width: $mediaMdWidth) {
+			min-width: 230px;
+			height: 380px;
+			padding: 20px 28px 0 20px;
+		}
+		div {
+			font-weight: 600;
+			font-size: 20px;
+			line-height: 27px;
+			margin-top: 20px;
+		}
+		p {
+			font-size: 18px;
+			line-height: 27px;
+		}
 	}
 }
 
@@ -99,8 +136,17 @@
 		url("../../assets/images/footpicture.jpg");
 	background-size: cover;
 	height: 420px;
-
 	padding-left: 180px;
+
+	@media (max-width: $mediaSmWidth) {
+		padding-left: 130px;
+	}
+	@media (max-width: $mediaXsWidth) {
+		padding-left: 40px;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		padding-left: 30px;
+	}
 
 	.productcta__title--black {
 		font-weight: bold;
@@ -108,18 +154,45 @@
 		line-height: 33px;
 		padding-top: 50px;
 		margin-bottom: 30px;
+		@media (max-width: $mediaXsWidth) {
+			font-size: 16px;
+			margin-bottom: 15px;
+		}
+		@media (max-width: $mediaXxsWidth) {
+			font-size: 14px;
+		}
 	}
 
 	.product-container__input-container--whole {
 		position: relative;
 		margin-top: 25px;
 		width: 700px;
+		@media (max-width: $mediaMdWidth) {
+			width: 500px;
+		}
+
+		@media (max-width: $mediaSmWidth) {
+			width: 400px;
+		}
+		@media (max-width: $mediaXsWidth) {
+			width: 280px;
+		}
+		@media (max-width: $mediaXxsWidth) {
+			width: 260px;
+		}
 	}
 
 	.product-container__button--blue {
 		position: absolute;
 		right: 0;
 		top: 0;
+
+		@media (max-width: $mediaXsWidth) {
+			width: 80px;
+		}
+		@media (max-width: "350px") {
+			padding: 65px 60px 0 0;
+		}
 	}
 
 	.product-container__button--blue-thin {
@@ -130,10 +203,24 @@
 
 .footer__container--main {
 	background-color: #646464;
-	padding: 40px 100px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+	padding: 2rem 0 2rem 5rem;
+
+	@media (max-width: $mediaMdWidth) {
+		padding: 2rem 0 2rem 1rem;
+	}
+	@media (max-width: $mediaSmWidth) {
+		padding: 2rem 0 2rem 2rem;
+	}
+	@media (max-width: $mediaXsWidth) {
+		padding: 2rem 0 2rem 2.5rem;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		padding: 2rem 0 2rem 2rem;
+	}
+
 	h3 {
 		font-family: Nunito;
 		font-style: normal;
@@ -141,7 +228,11 @@
 		font-size: 16px;
 		line-height: 22px;
 		color: #edf4ff;
+		@media (max-width: $mediaSmWidth) {
+			font-size: 14px;
+		}
 	}
+
 	ul {
 		list-style: none;
 		padding: 0;
@@ -162,10 +253,6 @@
 		width: 165px;
 		margin: 0;
 		padding: 0;
-
-		.footer__column-container--single h3 {
-			min-width: 150px;
-		}
 	}
 
 	.footer__links--white {
@@ -175,7 +262,7 @@
 	button {
 		border-radius: 10px;
 		padding: 0;
-		margin: 10px;
+		margin: 10px 0 10px -10px;
 		height: 53px;
 		background-color: black;
 		outline: none;
@@ -189,6 +276,12 @@
 	justify-content: space-around;
 	min-height: 54px;
 	align-items: center;
+	@media (max-width: $mediaXsWidth) {
+		font-size: 8px;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		font-size: 6px;
+	}
 }
 
 .footer__logo--white {

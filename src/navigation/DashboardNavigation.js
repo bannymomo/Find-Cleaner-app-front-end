@@ -4,7 +4,8 @@ import Button from "@material-ui/core/Button";
 import brandname from "../assets/images/brandname.png";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
-
+import NotificationsOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
+import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
 import {
 	HOMEPAGE_URL,
 	CLIENT_BASE_URL,
@@ -15,6 +16,52 @@ import { withRouter } from "react-router";
 import PostOrderBtn from "../components/order/PostOrderBtn";
 
 class DashboardNavigation extends Component {
+	renderItems = (clientId, businessId) => {
+		return (
+			<div className="nav-bar__items--container">
+				<ul className="nav-bar__ul--black">
+					<li>
+						<Link
+							to={
+								clientId
+									? `${CLIENT_BASE_URL}/${clientId}/notification`
+									: `${BUSINESS_BASE_URL}/${businessId}/notification`
+							}
+							className="nav-bar__link--black"
+						>
+							Notification
+						</Link>
+					</li>
+					<li>
+						<Link
+							to={
+								clientId
+									? `${CLIENT_BASE_URL}/${clientId}/message`
+									: `${BUSINESS_BASE_URL}/${businessId}/message`
+							}
+							className="nav-bar__link--black"
+						>
+							Message
+						</Link>
+					</li>
+				</ul>
+				<div className="nav-bar__button--blue">
+					{businessId ? (
+						<Button
+							component={Link}
+							to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
+							variant="contained"
+							color="primary"
+						>
+							Browse all tasks
+						</Button>
+					) : (
+						<PostOrderBtn buttonInNav={true} />
+					)}
+				</div>
+			</div>
+		);
+	};
 	render() {
 		const businessId = this.props.match.params.businessId;
 		const clientId = this.props.match.params.clientId;
@@ -34,8 +81,8 @@ class DashboardNavigation extends Component {
 						/>
 					</Link>
 				</div>
-				<div className="nav-bar__items--container">
-					<ul className="nav-bar__ul--black">
+				<div className="nav-bar__icons--container">
+					<ul className="nav-bar__icons">
 						<li>
 							<Link
 								to={
@@ -43,9 +90,8 @@ class DashboardNavigation extends Component {
 										? `${CLIENT_BASE_URL}/${clientId}/notification`
 										: `${BUSINESS_BASE_URL}/${businessId}/notification`
 								}
-								className="nav-bar__link--black"
 							>
-								Notification
+								<NotificationsOutlinedIcon />
 							</Link>
 						</li>
 						<li>
@@ -55,28 +101,14 @@ class DashboardNavigation extends Component {
 										? `${CLIENT_BASE_URL}/${clientId}/message`
 										: `${BUSINESS_BASE_URL}/${businessId}/message`
 								}
-								className="nav-bar__link--black"
 							>
-								Message
+								<MessageOutlinedIcon />
 							</Link>
 						</li>
 					</ul>
-
-					<div className="nav-bar__button--blue">
-						{businessId ? (
-							<Button
-								component={Link}
-								to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
-								variant="contained"
-								color="primary"
-							>
-								Browse all tasks
-							</Button>
-						) : (
-							<PostOrderBtn buttonInNav={true} />
-						)}
-					</div>
 				</div>
+
+				{this.renderItems(clientId, businessId)}
 			</header>
 		);
 	}

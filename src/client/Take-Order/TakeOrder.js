@@ -12,6 +12,7 @@ import { createOrder } from "../../api/order";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 import ErrorMessage from "../../UI/ErrorMessage";
+import Grid from "@material-ui/core/Grid";
 
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
@@ -48,7 +49,11 @@ class TakeOrder extends React.Component {
 		let value = event.target.value;
 		if (key === "bedrooms" || key === "bathrooms") {
 			value = parseInt(value);
-		} else if (key === "location" || key === "dueDate" || key === "description") {
+		} else if (
+			key === "location" ||
+			key === "dueDate" ||
+			key === "description"
+		) {
 		} else {
 			value = value === "false";
 		}
@@ -61,15 +66,16 @@ class TakeOrder extends React.Component {
 				this.state.oven * 5 +
 				this.state.windows * 68 +
 				this.state.cabinets * 36 +
-				this.state.carpet * 58 + 20;
+				this.state.carpet * 58 +
+				20;
 			this.setState({ price: totalPrice });
 		});
-	}
+	};
 
 	handleChangeDate = value => {
 		// value = value.toString();
 		this.setState({ dueDate: value });
-	}
+	};
 
 	handleCreateOrder = (clientId, order) => {
 		this.setState({ isCreating: true }, () => {
@@ -82,11 +88,11 @@ class TakeOrder extends React.Component {
 				})
 				.catch(error => this.setState({ error, isCreating: false }));
 		});
-	}
+	};
 
 	handleSubmit = () => {
 		const order = { ...this.state };
-	
+
 		const match = matchPath(this.props.history.location.pathname, {
 			path: "/clients/:clientId"
 		});
@@ -101,14 +107,15 @@ class TakeOrder extends React.Component {
 
 		Geocode.fromAddress(`${order.location}`).then(
 			() => {
-				!order.dueDate ? alert("Please choose a due date") :
-				this.handleCreateOrder(clientId, order)
+				!order.dueDate
+					? alert("Please choose a due date")
+					: this.handleCreateOrder(clientId, order);
 			},
 			() => {
 				alert("Location is invalid");
 			}
 		);
-	}
+	};
 
 	render() {
 		return (
@@ -117,42 +124,68 @@ class TakeOrder extends React.Component {
 					<ErrorMessage error={this.state.error} />
 				) : (
 					<Fragment>
-						<p id="take-order">See how little it will cost...</p>
-						<Bedrooms
-							bedrooms={this.state.bedrooms}
-							handleChange={this.handleChange}
-						/>
-						<Bathrooms
-							bathrooms={this.state.bathrooms}
-							handleChange={this.handleChange}
-						/>
-						<LeaseEnd
-							endOfLease={this.state.endOfLease}
-							handleChange={this.handleChange}
-						/>
-						<OtherClean
-							oven={this.state.oven}
-							windows={this.state.windows}
-							cabinets={this.state.cabinets}
-							carpet={this.state.carpet}
-							handleChange={this.handleChange}
-						/>
-						<Location
-							location={this.state.location}
-							handleChange={this.handleChange}
-						/>
-						<Date
-							dueDate={this.state.dueDate}
-							handleChange={this.handleChange}
-						/>
-						<Time
-							dueDate={this.state.dueDate}
-							handleChangeDate={this.handleChangeDate}
-						/>
-						<Description
-							description={this.state.description}
-							handleChange={this.handleChange}
-						/>
+						<Grid
+							container
+							spacing={1}
+							className="client__take-order-container"
+						>
+							<p id="take-order">
+								See how little it will cost...
+							</p>
+							<Grid item xs={12}>
+								<Bedrooms
+									bedrooms={this.state.bedrooms}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								{" "}
+								<Bathrooms
+									bathrooms={this.state.bathrooms}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<LeaseEnd
+									endOfLease={this.state.endOfLease}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<OtherClean
+									oven={this.state.oven}
+									windows={this.state.windows}
+									cabinets={this.state.cabinets}
+									carpet={this.state.carpet}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<Location
+									location={this.state.location}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<Date
+									dueDate={this.state.dueDate}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<Time
+									dueDate={this.state.dueDate}
+									handleChangeDate={this.handleChangeDate}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<Description
+									description={this.state.description}
+									handleChange={this.handleChange}
+								/>
+							</Grid>
+						</Grid>
+
 						<Price
 							price={this.state.price}
 							handleSubmit={this.handleSubmit}

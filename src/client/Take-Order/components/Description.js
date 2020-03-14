@@ -10,7 +10,11 @@ const useStyles = makeStyles(theme => ({
 		"& > *": {
 			margin: theme.spacing(1),
 			marginBottom: theme.spacing(3),
-			width: 400
+			width: 400,
+			[theme.breakpoints.down("xs")]: {
+				width: 270,
+				marginBottom: theme.spacing(0)
+			}
 		}
 	}
 }));

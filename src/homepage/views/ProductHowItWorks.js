@@ -46,7 +46,11 @@ function ProductHowItWorks(props) {
 					</div>
 
 					<div>
-						<Grid container spacing={10}>
+						<Grid
+							container
+							spacing={8}
+							className="product-how-it-works"
+						>
 							<Grid item xs={12} md={4}>
 								<div className="product-how-it-works__single-container--grey">
 									<img

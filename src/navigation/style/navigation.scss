@@ -1,34 +1,75 @@
+@import "../../theme/variables.scss";
+
 .nav-bar__header--white {
 	background-color: rgba(245, 246, 253, 1);
-	width: 100%;
+	width: 100vw;
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
 	justify-content: space-around;
 	z-index: 100;
 	position: fixed;
 	font-family: Nunito;
 	margin: 0;
 	box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.25);
+	@media (max-width: $mediaXsWidth) {
+		justify-content: space-evenly;
+	}
+
 	div {
 		align-items: center;
 	}
 	.nav-bar__logo--pic {
 		width: 48px;
 		height: 48px;
-		margin: 10px 10px 5px;
+		margin: 8px 10px 5px;
+
+		@media (max-width: $mediaSmWidth) {
+			width: 45px;
+			height: 45px;
+			margin: 15px 0px 8px 15px;
+		}
 	}
 	.nav-bar__logo--font {
 		width: 177px;
 		height: 37px;
 		margin: 10px;
-	}
 
-	.nav-bar__items--container {
-		// @media screen and (max-width: 786px) {
-		// 	display: none;
+		@media (max-width: $mediaSmWidth) {
+			display: none;
+		}
+		// @media (max-width: $mediaSmWidth) {
+		// 	width: 150px;
+		// 	height: 30px;
+		// 	margin: 16px;
 		// }
+	}
+	.nav-bar__icons--container {
+		display: none;
+		@media (max-width: $mediaXsWidth) {
+			display: flex;
+
+			.nav-bar__icons {
+				display: flex;
+				list-style: none;
+				padding-left: 3rem;
+				& > li {
+					margin: 0 10px;
+					padding-top: 10px;
+					text-align: left;
+
+					svg {
+						color: #0004;
+						&:hover {
+							color: $primary-color-blue;
+						}
+					}
+				}
+			}
+		}
+	}
+	.nav-bar__items--container {
 		display: flex;
+
 		.nav-bar__ul--black {
 			display: flex;
 			list-style: none;
@@ -38,6 +79,13 @@
 			line-height: 27px;
 			justify-content: space-around;
 			padding: 0;
+			@media (max-width: $mediaSmWidth) {
+				font-size: 16px;
+			}
+			@media (max-width: $mediaXsWidth) {
+				display: none;
+			}
+
 			li {
 				.nav-bar__link--black {
 					text-decoration: none;
@@ -46,24 +94,34 @@
 				}
 
 				.nav-bar__link--black:hover {
-					color: #3f88de;
+					color: $primary-color-blue;
 				}
 			}
 		}
 		.nav-bar__avatar--container {
 			margin: 0 20px;
+			@media (max-width: $mediaSmWidth) {
+				margin: 0 10px;
+				& img {
+					width: 30px;
+					height: 30px;
+				}
+			}
 		}
 		.nav-bar__button--blue {
 			margin: 0 0 0 30px;
+			@media (max-width: $mediaSmWidth) {
+				margin: 0 10px;
+				& button {
+					font-size: 10px;
+				}
+			}
 		}
 	}
-
-	.nav-bar__menu-icon {
-		@media screen and (min-width: 786px) {
-			display: none;
+	.nav-bar__menu--container {
+		display: none;
+		@media (max-width: $mediaXsWidth) {
+			display: flex;
 		}
-		margin: 20px;
-		cursor: pointer;
-		right: 0;
 	}
 }

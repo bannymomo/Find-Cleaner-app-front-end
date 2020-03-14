@@ -12,7 +12,13 @@ const useStyles = makeStyles(theme => ({
 		top: "3rem",
 		right: "4rem",
 		width: "15rem",
-		textAlign: "center"
+		textAlign: "center",
+		[theme.breakpoints.down("xs")]: {
+			position: "relative",
+			marginLeft: 75,
+			marginBottom: 50,
+			width: "17rem"
+		}
 	},
 	bullet: {
 		display: "inline-block",
@@ -32,7 +38,11 @@ const useStyles = makeStyles(theme => ({
 		fontSize: "0.8rem",
 		textAlign: "left",
 		lineHeight: "1.5rem",
-		marginLeft: "5px"
+		marginLeft: "5px",
+		[theme.breakpoints.down("xs")]: {
+			fontSize: "1rem",
+			textAlign: "center"
+		}
 	},
 	button: {
 		margin: "0 auto",
@@ -76,7 +86,7 @@ export default function SimpleCard(props) {
 					</Typography>
 				</CardContent>
 				{props.isCreating ? (
-						<CircularProgress size={50} color="secondary" />
+					<CircularProgress size={50} color="secondary" />
 				) : (
 					<Button
 						className={classes.button}

@@ -51,31 +51,58 @@
 		text-align: center;
 		display: inline-block;
 		margin: 0.8rem 2rem;
+		@media (max-width: $mediaSmWidth) {
+			margin: 0;
+		}
+		@media (max-width: $mediaXsWidth) {
+			margin-bottom: 20px;
+		}
 
 		& .MuiFab-root {
 			border-radius: 5px;
 			width: 12rem;
 			height: 12rem;
 			margin-bottom: 15px;
+			@media (max-width: $mediaXsWidth) {
+				margin-bottom: 20px;
+			}
+			@media (max-width: $mediaXsWidth) {
+				height: 13rem;
+				width: 13rem;
+			}
+			@media (max-width: 320px) {
+				height: 10rem;
+				width: 10rem;
+			}
 		}
 
 		& span {
 			font-size: 1.2rem;
 		}
 	}
-	// .service__button--homepage {
-	// 	margin-left: 50rem;
-	// 	margin-top: 10px;
-	// 	font-size: 14px;
-	// 	color: #0008;
-	// 	border-radius: 0;
-	// 	border-bottom: 1px solid #0008;
-	// 	padding: 0;
-	// 	text-transform: none;
-	// 	&:hover {
-	// 		color: $primary-color-blue;
-	// 		border-bottom: 1px solid $primary-color-blue;
-	// 		background-color: transparent;
-	// 	}
-	// }
+	.service__button--homepage {
+		margin-left: 50rem;
+		margin-top: 10px;
+		font-size: 14px;
+		color: #0008;
+		border-radius: 0;
+		border-bottom: 1px solid #0008;
+		padding: 0;
+		text-transform: none;
+		@media (max-width: $mediaMdWidth) {
+			margin-left: 40rem;
+		}
+		@media (max-width: $mediaSmWidth) {
+			margin-left: 30rem;
+		}
+		@media (max-width: $mediaXsWidth) {
+			margin-left: 10rem;
+		}
+
+		&:hover {
+			color: $primary-color-blue;
+			border-bottom: 1px solid $primary-color-blue;
+			background-color: transparent;
+		}
+	}
 }
