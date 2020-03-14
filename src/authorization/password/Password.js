@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { TextField, Button, LinearProgress } from "@material-ui/core";
-import { changePasswordById, getUserId } from '../../../api/auth';
+import { changePasswordById, getUserId } from '../../api/auth';
 import Alert from "@material-ui/lab/Alert";
 import "./style/password.scss";
 

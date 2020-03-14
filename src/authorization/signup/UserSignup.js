@@ -66,14 +66,13 @@ class User extends Component {
 		username: "",
 		password: "",
 		history: "",
-		// role: this.props.location.role,
 		role: "",
 		basicInfo: false,
 		error: null,
 		isLoading: false,
-		isUsernameValid: false,
-		isEmailValid: false,
-		isPasswordValid: false,
+		// isUsernameValid: false,
+		// isEmailValid: false,
+		// isPasswordValid: false,
 	};
 
 	componentDidMount() {
@@ -88,7 +87,7 @@ class User extends Component {
 	handleContinue = () => {
 		this.setState({ isLoading: true, error: null }, () => {
 			checkUsername(this.state.username)
-				.then(data => 
+				.then(() => 
 					this.setState({ isLoading: false, basicInfo: true, history: this.props.history })
 				)
 				.catch(error => this.setState({ error,  isLoading: false }))
@@ -101,11 +100,11 @@ class User extends Component {
 		} else {
 			return (
 				<Button
-					disabled={
-						!this.state.isUsernameValid ||
-						!this.state.isEmailValid ||
-						!this.state.isPasswordValid
-					}
+					// disabled={
+					// 	!this.state.isUsernameValid ||
+					// 	!this.state.isEmailValid ||
+					// 	!this.state.isPasswordValid
+					// }
 					type="submit"
 					variant="contained"
 					fullWidth
@@ -118,22 +117,22 @@ class User extends Component {
 		}
 	};
 
-	validateUsername = (result) => {
-		this.setState({ isUsernameValid: result})
-	}
-	validateEmail = (result) => {
-		this.setState({ isEmailValid: result})
-	}
-	validatePassword = (result) => {
-		this.setState({ isPasswordValid: result})
-	}
+	// validateUsername = (result) => {
+	// 	this.setState({ isUsernameValid: result})
+	// }
+	// validateEmail = (result) => {
+	// 	this.setState({ isEmailValid: result})
+	// }
+	// validatePassword = (result) => {
+	// 	this.setState({ isPasswordValid: result})
+	// }
 
 	renderForm = classes => {
 
 		return (
 			<ValidatorForm
 				className={classes.form}
-				instantValidate
+				instantValidate={false}
 				onSubmit={this.handleContinue}
             >
 				<label className="sign-up__header">
@@ -154,7 +153,7 @@ class User extends Component {
 							}
 							validators={['required', 'minStringLength: 2']}
 							errorMessages={['this field is required', 'username must be at least two characters']}
-							validatorListener={this.validateUsername}
+							// validatorListener={this.validateUsername}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -173,7 +172,7 @@ class User extends Component {
 							value={this.state.email}
 							validators={['required', 'isEmail']}
 							errorMessages={['this field is required', 'email is not valid']}
-							validatorListener={this.validateEmail}
+							// validatorListener={this.validateEmail}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -192,7 +191,7 @@ class User extends Component {
 							}
 							validators={['required', 'minStringLength: 2']}
 							errorMessages={['this field is required', 'password must be at least two characters']}
-							validatorListener={this.validatePassword}
+							// validatorListener={this.validatePassword}
 						/>
 					</Grid>
 				</Grid>
