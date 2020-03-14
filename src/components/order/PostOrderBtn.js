@@ -79,7 +79,6 @@ const PostOrderBtn = props => {
 				className={modalClasses.modal}
 				open={modalOpen}
 				closeAfterTransition
-				disableScrollLock
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 1000,

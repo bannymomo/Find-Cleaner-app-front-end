@@ -35,79 +35,113 @@
 		& .MuiSvgIcon-root {
 			padding-right: 5px;
 			padding-left: 7px;
+			@media (max-width: $mediaXsWidth) {
+				margin-top: 3px;
+			}
 		}
 	}
-	& .take-order--toggle-button-group {
-		& div.MuiToggleButtonGroup-root {
-			margin-bottom: 1rem;
-			& .MuiTouchRipple-root {
-				top: auto;
-				bottom: auto;
+	& .client__take-order-container {
+		max-width: 450px;
+		@media (max-width: $mediaXsWidth) {
+			width: 95vw;
+			& * {
+				font-size: 14px;
 			}
-			& button:hover {
-				background-color: #3489cf;
-			}
-			.Mui-selected {
-				background-color: $primary-color-blue;
-				&:hover {
+		}
+		& .take-order--toggle-button-group {
+			& div.MuiToggleButtonGroup-root {
+				margin-bottom: 1rem;
+				& .MuiButtonBase-root {
+					@media (max-width: $mediaXsWidth) {
+						padding: 10px 20px;
+					}
+
+					& .MuiTouchRipple-root {
+						top: auto;
+						bottom: auto;
+					}
+				}
+				& button:hover {
 					background-color: #3489cf;
+				}
+				.Mui-selected {
+					background-color: $primary-color-blue;
+					&:hover {
+						background-color: #3489cf;
+					}
+				}
+			}
+		}
+
+		& .take-order--checkbox div.MuiPaper-root {
+			background-color: #2195f31a;
+			margin-bottom: 1.2rem;
+			@media (max-width: $mediaXsWidth) {
+				width: 300px;
+			}
+
+			& .MuiFormControlLabel-root {
+				margin-left: 0;
+				& .MuiTypography-body1 {
+					font-size: 0.8rem;
+					color: #0008;
+					@media (max-width: $mediaXsWidth) {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+
+		& .take-order--checkboxes div.MuiPaper-root {
+			background-color: #eeee;
+			margin-bottom: 1.5rem;
+			margin-top: 0.5rem;
+			@media (max-width: $mediaXsWidth) {
+				height: 60px;
+				width: 70px;
+			}
+
+			& .MuiIconButton-root {
+				margin: -20px 0 0 -15px;
+				@media (max-width: $mediaXsWidth) {
+					margin: -10px 0 0 -70px;
+				}
+			}
+
+			& span.MuiTypography-body1 {
+				margin: 12px 0 0 19px;
+			}
+
+			& p.MuiTypography-body1 {
+				// margin: -6px 0;
+				line-height: 0.8rem;
+				text-align: center;
+				font-size: 0.8rem;
+				@media (max-width: $mediaXsWidth) {
+					text-align: right;
+					padding-right: 12px;
+				}
+			}
+		}
+
+		& .take-order--radio {
+			margin-bottom: 0.6rem;
+
+			& .MuiFormGroup-root .MuiTypography-body1 {
+				color: #0009;
+				font-size: 0.9rem;
+			}
+		}
+
+		& .take-order--date-time-picker {
+			& .MuiInputBase-root {
+				display: block;
+				& .MuiOutlinedInput-input {
+					padding: 1rem 1.5rem 1rem 1rem;
 				}
 			}
 		}
 	}
-
-	& .take-order--checkbox div.MuiPaper-root {
-		background-color: #2195f31a;
-		margin-bottom: 1.2rem;
-
-		& .MuiFormControlLabel-root {
-			margin-left: 0;
-			& .MuiTypography-body1 {
-				font-size: 0.8rem;
-				color: #0008;
-			}
-		}
-	}
-
-	& .take-order--checkboxes div.MuiPaper-root {
-		background-color: #eeee;
-		margin-bottom: 1.5rem;
-		margin-top: 0.5rem;
-
-		& .MuiIconButton-root {
-			margin: -20px 0 0 3px;
-		}
-
-		& span.MuiTypography-body1 {
-			margin: 12px 0 0 19px;
-		}
-
-		& p.MuiTypography-body1 {
-			// margin: -6px 0;
-			line-height: 0.8rem;
-			text-align: center;
-			font-size: 0.8rem;
-		}
-	}
-
-	& .take-order--radio {
-		margin-bottom: 0.6rem;
-
-		& .MuiFormGroup-root .MuiTypography-body1 {
-			color: #0009;
-			font-size: 0.9rem;
-		}
-	}
-
-	& .take-order--date-time-picker {
-		& .MuiInputBase-root {
-			display: block;
-			& .MuiOutlinedInput-input {
-				padding: 1rem 1.5rem 1rem 1rem;
-			}
-		}
-	}
-
 	& .take-order--card {
 		& .MuiCardContent-root {
 			padding: 0.8rem;
