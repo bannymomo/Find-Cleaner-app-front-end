@@ -133,7 +133,7 @@ class BusinessSignup extends Component {
 		return (
 			<ValidatorForm
 				className={classes.form}
-				instantValidate
+				instantValidate={false}
 				onSubmit={this.postBusiness}
 			>
 				<label>More about you~</label>

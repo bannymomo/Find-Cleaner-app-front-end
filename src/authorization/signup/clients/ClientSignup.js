@@ -131,7 +131,7 @@ class ClientSignup extends Component {
 		return (
 			<ValidatorForm
 				className={classes.form}
-				instantValidate
+				instantValidate={false}
 				onSubmit={this.postClient}
 			>
 				<label>More about you~</label>
