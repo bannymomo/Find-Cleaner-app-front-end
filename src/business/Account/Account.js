@@ -1,24 +1,20 @@
 import React, { Fragment, Component } from "react";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
-import { updateClientById, fetchClientById } from "../../../api/client";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import { updateBusinessById, fetchBusinessById } from "../../api/business";
 import Alert from "@material-ui/lab/Alert";
-import "./style/account.scss";
+import "../../client/ClientSetting/Account/style/account.scss";
 
 class Account extends Component {
 	constructor(props) {
 		super(props);
-		const minDate = new Date();
-		minDate.setFullYear(minDate.getFullYear() - 1);
-		minDate.setHours(0, 0, 0, 0);
 		this.state = {
-			firstName: "",
-			lastName: "",
-			birthday: minDate,
-			postcode: "",
-			// location: "",
+			businessName: "",
+			address: "",
 			email: "",
+			postcode: "",
 			contactNumber: "",
+			ABNNumber: "",
+			description: "",
 
 			isLoading: false,
 			isUpdating: false,
@@ -34,28 +30,23 @@ class Account extends Component {
 	}
 
 	updateDefaultValue = () => {
-		const clientID = this.props.match.params.clientId;
+		const businessID = this.props.match.params.businessId;
 		this.setState({ isLoading: true });
-		fetchClientById(clientID)
+		fetchBusinessById(businessID)
 			.then(data => {
+				console.log(data)
 				this.setState({
-					firstName: data.firstName,
-					lastName: data.lastName,
-					contactNumber: data.description,
+					businessName: data.businessName,
+					address: data.address,
 					email: data.email,
 					postcode: data.postcode,
-					// location: data.postcode,
+					contactNumber: data.telephoneNumber,
+					ABNNumber: data.ABNNumber,
+					description: data.description,
 					isLoading: false
 				});
 			})
 			.catch(error => this.setState({ error, isLoading: false }));
-	};
-
-	handleDateChange = (event, date) => {
-		this.setState({
-			birthday: date
-		});
-		console.log(this.state.birthday);
 	};
 
 	changeHandler = event => {
@@ -73,17 +64,18 @@ class Account extends Component {
 	};
 
 	updateInfo = () => {
-		const clientInfo = {
-			firstName: this.state.firstName,
-			lastName: this.state.lastName,
-			gender: "male",
+		const businessInfo = {
+			businessName: this.state.businessName,
+			address: this.state.address,
 			email: this.state.email,
 			postcode: this.state.postcode,
-			description: this.state.contactNumber
+			contactNumber: this.state.telephoneNumber,
+			ABNNumber: this.state.ABNNumber,
+			description: this.state.description,
 		};
-		const clientID = this.props.match.params.clientId;
+		const businessID = this.props.match.params.businessId;
 		this.setState({ isUpdating: true }, () => {
-			updateClientById(clientID, clientInfo)
+			updateBusinessById(businessID, businessInfo)
 				.then(() => {
 					this.setState(
 						{
@@ -112,7 +104,7 @@ class Account extends Component {
 		} else {
 			return (
 				<Fragment>
-					<h5>Personal Details</h5>
+					<h5>Business Details</h5>
 					<div className="account__form--container">
 						<div className="account__form--edit">
 							{!this.state.editButtonHidden ? (
@@ -128,36 +120,32 @@ class Account extends Component {
 							<TextField
 								variant="outlined"
 								className="account__form--input"
-								label="First Name"
-								name="firstName"
+								label="Business Name"
+								name="businessName"
 								disabled={this.state.canNotEdit}
-								value={this.state.firstName}
+								value={this.state.businessName}
 								onChange={this.changeHandler}
 							/>
 							<TextField
 								variant="outlined"
 								className="account__form--input"
-								label="Last Name"
-								name="lastName"
+								label="ABNNumber"
+								name="ABNNumber"
 								margin="normal"
 								disabled={this.state.canNotEdit}
-								value={this.state.lastName}
+								value={this.state.ABNNumber}
 								onChange={this.changeHandler}
 							/>
-							<KeyboardDatePicker
+							<TextField
+								variant="outlined"
 								className="account__form--input"
-								disableToolbar
-								variant="inline"
-								format="MM/dd/yyyy"
+								label="Description"
+								name="description"
 								margin="normal"
-								id="date-picker-inline"
-								label="Birthday"
+								multiline
 								disabled={this.state.canNotEdit}
-								value={this.state.birthday}
-								onChange={this.handleDateChange}
-								KeyboardButtonProps={{
-									"aria-label": "change date"
-								}}
+								value={this.state.description}
+								onChange={this.changeHandler}
 							/>
 						</div>
 					</div>
@@ -186,7 +174,17 @@ class Account extends Component {
 						<TextField
 							variant="outlined"
 							className="account__form--input"
-							label="Current Residential Postcode"
+							label="Address"
+							name="address"
+							margin="normal"
+							disabled={this.state.canNotEdit}
+							value={this.state.address}
+							onChange={this.changeHandler}
+						/>
+						<TextField
+							variant="outlined"
+							className="account__form--input"
+							label="Postcode"
 							name="postcode"
 							margin="normal"
 							disabled={this.state.canNotEdit}
@@ -215,14 +213,14 @@ class Account extends Component {
 						)}
 					</div>
 				</Fragment>
-			);
+			)
 		}
-	};
+	}
 
 	render() {
 		return (
 			<Fragment>
-				<h3 className="account__form--header">Account</h3>
+				<h1 className="account__form--header">Account</h1>
 				{this.renderContent()}
 			</Fragment>
 		);

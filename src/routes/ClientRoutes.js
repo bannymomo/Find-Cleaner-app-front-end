@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { CLIENT_BASE_URL } from "./URLMap";
 import ClientDashboard from "../client/DashBoard/ClientDashBoard";
 import Account from "../client/ClientSetting/Account/Account";
-import Password from "../client/ClientSetting/Password/Password";
+import Password from "../authorization/password/Password";
 import TakeOrder from "../client/Take-Order/TakeOrder";
 import OrderHistory from "../client/Order-History/OrderHistory";
 import OrderInformation from "../client/Order-History/OrderInformation";
