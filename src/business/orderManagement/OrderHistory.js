@@ -1,22 +1,19 @@
 import React from "react";
 import OrderCard from "../../components/order/OrderCard";
 import OrderNavBar from "../../components/order/OrderNavBar";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import { Container, Grid, CircularProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchHisOrders } from "../../api/business";
-
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
-
 import {
 	BUSINESS_ROLE,
 	ACCEPTED,
 	CANCELLED_BY_BUSINESS,
 	DONE
 } from "../../utils/variables";
+
 class OrderHistory extends React.Component {
 	state = {
 		orders: [],

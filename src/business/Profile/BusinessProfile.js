@@ -1,16 +1,19 @@
 import React from "react";
 import Moment from "react-moment";
 import Reviews from "../../UI/Reviews";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import Link from "@material-ui/core/Link";
+import {
+	List,
+	ListItem,
+	ListItemText,
+	Typography,
+	Divider,
+	Link,
+	ButtonBase,
+	Grid,
+	makeStyles
+} from "@material-ui/core";
+
 import Rating from "@material-ui/lab/Rating";
-import { makeStyles } from "@material-ui/core/styles";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Grid from "@material-ui/core/Grid";
 
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";

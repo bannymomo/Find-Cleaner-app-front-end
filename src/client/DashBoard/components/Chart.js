@@ -32,7 +32,7 @@ import {
 	dailySalesChart,
 	emailsSubscriptionChart,
 	completedTasksChart
-} from "./card/variable-charts";
+} from "./card/variableCharts";
 
 import styles from "../style/card/tempelate-dashboardStyle";
 

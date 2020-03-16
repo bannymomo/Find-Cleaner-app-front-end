@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MainNavigation from "../../navigation/MainNavigation";
-import ListArray from "../../client/DashBoard/components/ListArray";
+import ListArray from "../../client/dashBoard/components/ListArray";
 import "./style/service.scss";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";

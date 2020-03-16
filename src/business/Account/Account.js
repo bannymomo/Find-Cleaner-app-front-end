@@ -2,7 +2,7 @@ import React, { Fragment, Component } from "react";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
 import { updateBusinessById, fetchBusinessById } from "../../api/business";
 import Alert from "@material-ui/lab/Alert";
-import "../../client/ClientSetting/Account/style/account.scss";
+import "../../client/account/style/account.scss";
 
 class Account extends Component {
 	constructor(props) {

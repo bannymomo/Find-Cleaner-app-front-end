@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-import TakeOrder from "../../client/Take-Order/TakeOrder";
+import TakeOrder from "../../client/takeOrder/TakeOrder";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
 import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
