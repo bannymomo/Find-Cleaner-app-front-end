@@ -9,7 +9,7 @@
 	justify-content: space-between;
 	box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
 	min-height: calc(100vh - 75px);
-	@media (max-width: $mediaMdWidth) {
+	@media (max-width: $mediaTabletWidth) {
 		width: 100vw;
 	}
 }

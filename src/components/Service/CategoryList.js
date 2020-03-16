@@ -1,17 +1,17 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-import house from "../../../assets/images/house.png";
-import kitchen from "../../../assets/images/kitchen.png";
-import carpet from "../../../assets/images/carpet.png";
-import rent from "../../../assets/images/rent.png";
-import bathroom from "../../../assets/images/bathroom.png";
-import window from "../../../assets/images/window.png";
+import house from "../../assets/images/house.png";
+import kitchen from "../../assets/images/kitchen.png";
+import carpet from "../../assets/images/carpet.png";
+import rent from "../../assets/images/rent.png";
+import bathroom from "../../assets/images/bathroom.png";
+import window from "../../assets/images/window.png";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../../routes/URLMap";
-import { getBusinessId, getClientId } from "../../../utils/auth";
-import { isLoggedIn } from "../../../utils/auth";
-import { POST_ORDER_AT_HOMEPAGE } from "../../../utils/variables";
+import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../routes/URLMap";
+import { getBusinessId, getClientId, isLoggedIn } from "../../utils/auth";
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
+import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme =>
@@ -52,10 +52,15 @@ export default function FloatingActionButtonSize() {
 	const loginClient = getClientId();
 	const loginBussiness = getBusinessId();
 	return (
-		<animated.div style={props} className="list-array__container--whole">
+		<animated.div style={props} className="category-list__container--whole">
+			{/* <Grid container spacing={0} className={classes.margin}> */}
 			{listArray.map((list, index) => {
 				return (
-					<div className="list-array__container--single" key={index}>
+					// <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
+					<div
+						className="category-list__container--single"
+						key={index}
+					>
 						<div>
 							{loginBussiness && isLoggedIn() ? (
 								<Fab
@@ -67,7 +72,7 @@ export default function FloatingActionButtonSize() {
 									<img
 										src={list.img}
 										alt={list.alt}
-										className="list-array__icon--single"
+										className="category-list__icon--single"
 									/>
 								</Fab>
 							) : loginClient && isLoggedIn() ? (
@@ -86,7 +91,7 @@ export default function FloatingActionButtonSize() {
 									<img
 										src={list.img}
 										alt={list.alt}
-										className="list-array__icon--single"
+										className="category-list__icon--single"
 									/>
 								</Fab>
 							) : (
@@ -105,16 +110,17 @@ export default function FloatingActionButtonSize() {
 									<img
 										src={list.img}
 										alt={list.alt}
-										className="list-array__icon--single"
+										className="category-list__icon--single"
 									/>
 								</Fab>
 							)}
 						</div>
-
 						<span>{list.description}</span>
 					</div>
+					// </Grid>
 				);
 			})}
+			{/* </Grid> */}
 		</animated.div>
 	);
 }

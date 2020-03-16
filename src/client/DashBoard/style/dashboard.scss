@@ -47,6 +47,15 @@
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
+		@media (max-width: $mediaSmWidth) {
+			justify-content: flex-start;
+		}
+		@media (max-width: $mediaXsWidth) {
+			margin: 0 25px;
+		}
+		@media (max-width: $mediaXxsWidth) {
+			margin: 0 7px;
+		}
 	}
 
 	.list-array__icon--single {
