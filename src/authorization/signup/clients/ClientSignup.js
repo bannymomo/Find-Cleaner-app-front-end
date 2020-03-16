@@ -93,23 +93,16 @@ class ClientSignup extends Component {
 			signupFn(userInfo)
 				.then(data => setToken(data.token))
 				.then(() => {
-					createClient(clientInfo)
-						.then(data => {
-							this.setState({ isLoading: false }, () => {
-								removeClientId();
-								removeBusinessId();
-								const clientId = data._id;
-								setClientId(clientId);
-								const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
-								this.props.history.replace(redirectTo);
-							});
-						})
-<<<<<<< HEAD
-						.catch(error =>
-							this.setState({ error, isLoading: false })
-						);
-=======
->>>>>>> 1a5a5ea6e3d45a903e106ede636bbb99f08d8002
+					createClient(clientInfo).then(data => {
+						this.setState({ isLoading: false }, () => {
+							removeClientId();
+							removeBusinessId();
+							const clientId = data._id;
+							setClientId(clientId);
+							const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
+							this.props.history.replace(redirectTo);
+						});
+					});
 				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
