@@ -8,7 +8,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "../style/homepage.scss";
 import styled from "styled-components";
-import TakeOrder from "../../client/Take-Order/TakeOrder";
+import TakeOrder from "../../client/takeOrder/TakeOrder";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { isLoggedIn, getClientId, getBusinessId } from "../../utils/auth";

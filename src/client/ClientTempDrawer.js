@@ -1,7 +1,7 @@
 import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-import SideBar from "./Sidebar/SideBar";
+import SideBar from "./sidebar/SideBar";
 
 export default function TemporaryDrawer() {
 	const [state, setState] = React.useState({

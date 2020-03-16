@@ -7,8 +7,8 @@ import UserSignup from "../authorization/signup/UserSignup";
 import HomePage from "../homepage/HomePage";
 import Business from "../business/Business";
 import Client from "../client/Client";
-import Service from "../components/Service/Service";
-import Support from "../components/Support/Support";
+import Service from "../components/service/Service";
+import Support from "../components/support/Support";
 import ProtectedClientRoute from "./components/ProtectedClientRoute";
 import ProtectedBusinessRoute from "./components/ProtectedBusinessRoute";
 import {

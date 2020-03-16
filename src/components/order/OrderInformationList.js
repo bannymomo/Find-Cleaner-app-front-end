@@ -21,7 +21,7 @@ import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 
 import Maps from "./Maps";
-import BusinessProfile from "../Business-Profile/BusinessProfile";
+import BusinessProfile from "../businessProfile/BusinessProfile";
 import "./style/orderHistory.scss";
 
 

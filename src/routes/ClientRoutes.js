@@ -2,15 +2,15 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { CLIENT_BASE_URL } from "./URLMap";
-import ClientDashboard from "../client/DashBoard/ClientDashBoard";
-import Account from "../client/ClientSetting/Account/Account";
+import ClientDashboard from "../client/dashBoard/ClientDashBoard";
+import Account from "../client/account/Account";
 import Password from "../authorization/password/Password";
-import TakeOrder from "../client/Take-Order/TakeOrder";
-import OrderHistory from "../client/Order-History/OrderHistory";
-import OrderInformation from "../client/Order-History/OrderInformation";
-import OrderEdit from "../client/Order-History/OrderEdit";
-import Notification from "../client/Notification/Notification";
-import Message from "../client/Message/Message";
+import TakeOrder from "../client/takeOrder/TakeOrder";
+import OrderHistory from "../client/orderManagement/OrderHistory";
+import OrderInformation from "../client/orderManagement/OrderInformation";
+import OrderEdit from "../client/orderManagement/OrderEdit";
+import Notification from "../client/notification/Notification";
+import Message from "../client/message/Message";
 const ClientRoutes = () => (
 	<Switch>
 		<Redirect
