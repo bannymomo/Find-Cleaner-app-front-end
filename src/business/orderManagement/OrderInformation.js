@@ -25,7 +25,6 @@ import {
 	DONE
 } from "../../utils/variables";
 import getStatusText from "../../utils/getStatusText";
-import ButtonGoBack from "../../UI/ButtonGoBack";
 
 const listArray = [
 	{
@@ -188,7 +187,6 @@ class OrderInformaiton extends React.Component {
 							/>
 						</Grid>
 						<Grid item xs={4}>
-							<ButtonGoBack handleGoBack={this.handleGoBack} />
 							<Card>
 								<CardContent className="order-information__budget">
 									<Typography gutterBottom>Price</Typography>
