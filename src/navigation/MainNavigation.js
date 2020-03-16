@@ -32,7 +32,7 @@ class MainNavigation extends Component {
 					variant="contained"
 					color="primary"
 				>
-					Browse all tasks
+					All tasks
 				</Button>
 			);
 		} else if (loginClient && isLoggedIn()) {

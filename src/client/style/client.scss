@@ -1,4 +1,5 @@
 @import "../../theme/variables.scss";
+
 .client__container--whole-page {
 	padding-top: 70px;
 	width: 1024px;
@@ -9,7 +10,7 @@
 	justify-content: space-between;
 	box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
 	min-height: calc(100vh - 75px);
-	@media (max-width: $mediaMdWidth) {
+	@media (max-width: $mediaTabletWidth) {
 		width: 100vw;
 	}
 }
@@ -36,6 +37,15 @@
 }
 
 .client__temporaryDrawer {
+	position: fixed;
+	z-index: 999;
+	right: 0;
+	top: 8px;
+	color: #0005;
+	&:hover {
+		color: $primary-color-blue;
+	}
+
 	@media screen and (min-width: 786px) {
 		display: none;
 	}

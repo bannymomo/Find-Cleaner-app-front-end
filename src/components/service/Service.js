@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MainNavigation from "../../navigation/MainNavigation";
-import ListArray from "../../client/dashBoard/components/ListArray";
+import CategoryList from "./CategoryList";
 import "./style/service.scss";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
@@ -21,7 +21,7 @@ class Service extends Component {
 						and find the help you need on Broomer.
 					</p>
 
-					<ListArray />
+					<CategoryList />
 					<Button
 						component={Link}
 						to={`${HOMEPAGE_URL}`}
