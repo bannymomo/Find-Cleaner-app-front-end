@@ -23,15 +23,17 @@ class OrderHistory extends React.Component {
 			pageSize: 5
 		},
 		searchStatus: "",
-		role: BUSINESS_ROLE
 	};
 
 	componentDidMount() {
-		if (this.props.location.state) {
+		const { location: { state } } = this.props;
+		const { pagination: { page, pageSize } } =this.state;
+
+		if (state) {
 			this.loadOrders(
-				this.state.pagination.page,
-				this.state.pagination.pageSize,
-				this.props.location.state.searchStatus
+				page,
+				pageSize,
+				state.searchStatus
 			);
 		} else {
 			this.loadOrders();
@@ -56,37 +58,46 @@ class OrderHistory extends React.Component {
 	};
 
 	handlePageChange = (event, data) => {
-		const pageSize = this.state.pagination.pageSize;
-		const status = this.state.searchStatus;
-		this.loadOrders(data, pageSize, status);
+		const { pagination: { pageSize }, searchStatus } =this.state;
+		this.loadOrders(data, pageSize, searchStatus);
 	};
 
-	handlesearchAccepted = () => {
+	handleSearch = status => {
+		const { pagination: { page, pageSize } } =this.state;
 		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			ACCEPTED
+			page,
+			pageSize,
+			status
 		);
-		this.setState({ searchStatus: ACCEPTED });
-	};
+		this.setState({ searchStatus: status });
+	}
 
-	handlesearchDone = () => {
-		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			DONE
-		);
-		this.setState({ searchStatus: DONE });
-	};
-
-	handlesearchCancelled = () => {
-		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			CANCELLED_BY_BUSINESS
-		);
-		this.setState({ CANCELLED_BY_BUSINESS });
-	};
+	renderConetent = BASE_URL => {
+		if (this.state.isLoading) {
+			return (
+				<div className="order-history-progress__container">
+					<CircularProgress size={200} color="secondary" />
+				</div>
+			);
+		} 
+		if (!!this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} 
+		if (!this.state.isLoading && !this.state.orders.length) {
+			return <p> There isn't any order. </p>;
+		} 
+		return this.state.orders.map(order => (
+			<OrderCard
+				key={order._id}
+				role={BUSINESS_ROLE}
+				location={order.location}
+				dueDate={order.dueDate}
+				price={order.price}
+				status={order.status}
+				to={`${BASE_URL}/orders/${order._id}`}
+			/>
+		))
+	}
 
 	render() {
 		const businessId = this.props.match.params.businessId;
@@ -96,10 +107,10 @@ class OrderHistory extends React.Component {
 				<Grid container spacing={2}>
 					<Grid item sm={4} className="order-history__nav-sidebar">
 						<OrderNavBar
-							searchAll={this.loadOrders}
-							searchAccepted={this.handlesearchAccepted}
-							searchDone={this.handlesearchDone}
-							searchCancelled={this.handlesearchCancelled}
+							searchAll={() => this.handleSearch()}
+							searchAccepted={() => this.handleSearch(ACCEPTED)}
+							searchDone={() => this.handleSearch(DONE)}
+							searchCancelled={() => this.handleSearch(CANCELLED_BY_BUSINESS)}
 						/>
 					</Grid>
 					<Grid item xs={11} className="order-history__nav-selector">
@@ -122,31 +133,7 @@ class OrderHistory extends React.Component {
 							onChange={this.handlePageChange}
 							shape="rounded"
 						/>
-						{!!this.state.error && (
-							<ErrorMessage error={this.state.error} />
-						)}
-						{this.state.isLoading && (
-							<div className="order-history-progress__container">
-								<CircularProgress
-									size={200}
-									color="secondary"
-								/>
-							</div>
-						)}
-						{!this.state.isLoading && !this.state.orders.length && (
-							<p> There isn't any order. </p>
-						)}
-						{this.state.orders.map(order => (
-							<OrderCard
-								key={order._id}
-								role={this.state.role}
-								location={order.location}
-								dueDate={order.dueDate}
-								price={order.price}
-								status={order.status}
-								to={`${BASE_URL}/orders/${order._id}`}
-							/>
-						))}
+						{this.renderConetent(BASE_URL)}
 					</Grid>
 				</Grid>
 			</Container>

@@ -23,9 +23,10 @@ class Password extends Component {
 		}
 		this.setState({ isFinished: false, isLoading: true, error: null }, () => {
 			getUserId().then(userID => {
-				changePasswordById(userID, passwordInfo).then(res => {
-					this.setState({ isLoading: false, isFinished: true })
-				})
+				changePasswordById(userID, passwordInfo)
+					.then(() => {
+						this.setState({ isLoading: false, isFinished: true })
+					})
 					.catch(error => {
 						this.setState({
 							error, isLoading: false,
