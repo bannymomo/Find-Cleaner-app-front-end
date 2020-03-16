@@ -35,6 +35,7 @@ const useStylesModal = makeStyles(theme => ({
 		border: "none",
 		borderRadius: "100px",
 		fontSize: "1.2rem",
+
 		"&:hover": {
 			color: "#2196f3",
 			backgroundColor: "transparent"
@@ -78,7 +79,6 @@ const PostOrderBtn = props => {
 				className={modalClasses.modal}
 				open={modalOpen}
 				closeAfterTransition
-				disableScrollLock
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 1000,

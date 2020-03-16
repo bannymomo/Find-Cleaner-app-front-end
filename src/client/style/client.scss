@@ -1,3 +1,4 @@
+@import "../../theme/variables.scss";
 .client__container--whole-page {
 	padding-top: 70px;
 	width: 1024px;
@@ -8,6 +9,9 @@
 	justify-content: space-between;
 	box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
 	min-height: calc(100vh - 75px);
+	@media (max-width: $mediaMdWidth) {
+		width: 100vw;
+	}
 }
 
 .client__avatar-container--left-top {
