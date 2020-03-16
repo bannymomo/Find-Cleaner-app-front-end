@@ -5,10 +5,7 @@ import SideBar from "./sideBar/SideBar";
 
 export default function TemporaryDrawer() {
 	const [state, setState] = React.useState({
-		top: false,
-		left: false,
-		bottom: false,
-		right: false
+		left: false
 	});
 
 	const toggleDrawer = (side, open) => event => {
@@ -29,7 +26,7 @@ export default function TemporaryDrawer() {
 				fontSize="large"
 			/>
 			<Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-				<SideBar />
+				<SideBar onClose={setState} />
 			</Drawer>
 		</div>
 	);

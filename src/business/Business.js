@@ -4,6 +4,7 @@ import SideBar from "./sideBar/SideBar";
 import BusinessRoutes from "../routes/BusinessRoutes";
 import "./style/business.scss";
 import DashboardNavigation from "../navigation/DashboardNavigation";
+import BusinessTempDrawer from "./BusinessTempDrawer";
 
 class Business extends Component {
 	render() {
@@ -15,6 +16,9 @@ class Business extends Component {
 						<SideBar />
 					</div>
 					<div className="business__content-container--page-right">
+						<div className="business__temporaryDrawer">
+							<BusinessTempDrawer />
+						</div>
 						<BusinessRoutes />
 					</div>
 				</div>

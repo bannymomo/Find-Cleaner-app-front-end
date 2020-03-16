@@ -13,7 +13,6 @@ import {
 	CANCELLED_BY_BUSINESS,
 	DONE
 } from "../../utils/variables";
-
 class OrderHistory extends React.Component {
 	state = {
 		orders: [],

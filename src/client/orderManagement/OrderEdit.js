@@ -100,7 +100,6 @@ class OrderEdit extends React.Component {
 		this.setState({ dueDate: value });
 	};
 
-
 	handleUpdateOrder = (orderId, order, clientId) => {
 		this.setState({ isUpdating: true }, () => {
 			updateOrderById(orderId, order)
@@ -111,7 +110,7 @@ class OrderEdit extends React.Component {
 				})
 				.catch(error => this.setState({ error, isUpdating: false }));
 		});
-	}
+	};
 
 	handleSubmit = () => {
 		const order = { ...this.state };

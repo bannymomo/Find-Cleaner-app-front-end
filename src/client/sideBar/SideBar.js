@@ -59,11 +59,12 @@ function SimpleList(props) {
 			<div className={classes.root}>
 				<Divider className={classes.divider} />
 				<div className="clinet__button--container">
-					<PostOrderBtn buttonInNav={false} />
+					<PostOrderBtn buttonInNav={false} onClick={props.onClose} />
 				</div>
 				<List component="nav" aria-label="secondary mailbox folders">
 					<ListItemLink
 						to={`${CLIENT_BASE_URL}/${clientId}/dashboard`}
+						onClick={props.onClose}
 					>
 						<ListItemIcon>
 							<DashboardRoundedIcon />
@@ -72,6 +73,7 @@ function SimpleList(props) {
 					</ListItemLink>
 					<ListItemLink
 						to={`${CLIENT_BASE_URL}/${clientId}/order-history`}
+						onClick={props.onClose}
 					>
 						<ListItemIcon>
 							<HistoryRoundedIcon />
@@ -90,6 +92,7 @@ function SimpleList(props) {
 							<ListItem className={classes.nested}>
 								<ListItemLink
 									to={`${CLIENT_BASE_URL}/${clientId}/account`}
+									onClick={props.onClose}
 								>
 									Account
 								</ListItemLink>
@@ -97,6 +100,7 @@ function SimpleList(props) {
 							<ListItem className={classes.nested}>
 								<ListItemLink
 									to={`${CLIENT_BASE_URL}/${clientId}/password`}
+									onClick={props.onClose}
 								>
 									Password
 								</ListItemLink>
