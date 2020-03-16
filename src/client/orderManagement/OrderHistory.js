@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Pagination from "@material-ui/lab/Pagination";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import OrderStatus from "../../components/order/OrderStatus";
 import { fetchHisOrders } from "../../api/client";
 
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
@@ -116,7 +116,11 @@ class OrderHistory extends React.Component {
 		if (this.state.isLoading) {
 			return (
 				<div className="order-history-progress__container">
-					<CircularProgress size={200} color="secondary" />
+					<CircularProgress
+						size="60%"
+						color="secondary"
+						className="circular-progress"
+					/>
 				</div>
 			);
 		} else if (!!this.state.error) {
@@ -144,7 +148,7 @@ class OrderHistory extends React.Component {
 		return (
 			<Container className="order-history__container">
 				<Grid container spacing={2}>
-					<Grid item xs={4}>
+					<Grid item sm={4} className="order-history__nav-sidebar">
 						<OrderNavBar
 							role={this.state.role}
 							searchAll={this.loadOrders}
@@ -155,7 +159,23 @@ class OrderHistory extends React.Component {
 							searchCancelled={this.handlesearchCancelled}
 						/>
 					</Grid>
-					<Grid item xs={6} className="order-history__cardlist">
+					<Grid item xs={11} className="order-history__nav-selector">
+						<OrderStatus
+							role={this.state.role}
+							searchAll={this.loadOrders}
+							searchNew={this.handleSearchNew}
+							searchAccepted={this.handlesearchAccepted}
+							searchDone={this.handlesearchDone}
+							searchWithdraw={this.handleSearchWithdraw}
+							searchCancelled={this.handlesearchCancelled}
+						/>
+					</Grid>
+					<Grid
+						item
+						sm={6}
+						xs={11}
+						className="order-history__cardlist"
+					>
 						<Pagination
 							page={this.state.pagination.page}
 							count={this.state.pagination.pages}

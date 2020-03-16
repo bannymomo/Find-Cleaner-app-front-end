@@ -3,7 +3,7 @@ import OrderCard from "../../components/order/OrderCard";
 import OrderNavBar from "../../components/order/OrderNavBar";
 import { Container, Grid, CircularProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-
+import OrderStatus from "../../components/order/OrderStatus";
 import { fetchHisOrders } from "../../api/business";
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
@@ -94,7 +94,7 @@ class OrderHistory extends React.Component {
 		return (
 			<Container className="order-history__container">
 				<Grid container spacing={2}>
-					<Grid item xs={4}>
+					<Grid item sm={4} className="order-history__nav-sidebar">
 						<OrderNavBar
 							searchAll={this.loadOrders}
 							searchAccepted={this.handlesearchAccepted}
@@ -102,7 +102,20 @@ class OrderHistory extends React.Component {
 							searchCancelled={this.handlesearchCancelled}
 						/>
 					</Grid>
-					<Grid item xs={6} className="order-history__cardlist">
+					<Grid item xs={11} className="order-history__nav-selector">
+						<OrderStatus
+							searchAll={this.loadOrders}
+							searchAccepted={this.handlesearchAccepted}
+							searchDone={this.handlesearchDone}
+							searchCancelled={this.handlesearchCancelled}
+						/>
+					</Grid>
+					<Grid
+						item
+						sm={6}
+						xs={11}
+						className="order-history__cardlist"
+					>
 						<Pagination
 							page={this.state.pagination.page}
 							count={this.state.pagination.pages}
