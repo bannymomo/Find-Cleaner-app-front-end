@@ -104,7 +104,6 @@ class ClientSignup extends Component {
 								this.props.history.replace(redirectTo);
 							});
 						})
-						.catch(error => this.setState({ error, isLoading: false }))
 				})
 				.catch(error => this.setState({ error, isLoading: false }))
 		});

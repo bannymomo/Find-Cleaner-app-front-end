@@ -17,12 +17,10 @@ import Grid from "@material-ui/core/Grid";
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
 
+import { convertValue } from "../../utils/helper";
+
 import Geocode from "react-geocode";
 
-const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
-Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
-Geocode.setLanguage("en");
-Geocode.setRegion("au");
 class TakeOrder extends React.Component {
 	constructor(props) {
 		super(props);
@@ -44,32 +42,27 @@ class TakeOrder extends React.Component {
 		};
 	}
 
+	calculateTotalPrice = () => {
+		let totalPrice =
+			this.state.bedrooms * 22 +
+			this.state.bathrooms * 28 +
+			this.state.endOfLease * 135 +
+			this.state.oven * 5 +
+			this.state.windows * 68 +
+			this.state.cabinets * 36 +
+			this.state.carpet * 58 +
+			20;
+		this.setState({ price: totalPrice });
+	}
+
 	handleChange = event => {
 		const key = event.target.name;
-		let value = event.target.value;
-		if (key === "bedrooms" || key === "bathrooms") {
-			value = parseInt(value);
-		} else if (
-			key === "location" ||
-			key === "dueDate" ||
-			key === "description"
-		) {
-		} else {
-			value = value === "false";
-		}
+		const value = event.target.value;
+		const convertedValue = convertValue(value, key);
 
-		this.setState({ [key]: value }, () => {
-			let totalPrice =
-				this.state.bedrooms * 22 +
-				this.state.bathrooms * 28 +
-				this.state.endOfLease * 135 +
-				this.state.oven * 5 +
-				this.state.windows * 68 +
-				this.state.cabinets * 36 +
-				this.state.carpet * 58 +
-				20;
-			this.setState({ price: totalPrice });
-		});
+		this.setState({ [key]: convertedValue }, () =>
+			this.calculateTotalPrice()
+		);
 	};
 
 	handleChangeDate = value => {
@@ -105,16 +98,12 @@ class TakeOrder extends React.Component {
 		}
 		clientId = localStorage.getItem("clientId");
 
-		Geocode.fromAddress(`${order.location}`).then(
-			() => {
-				!order.dueDate
-					? alert("Please choose a due date")
-					: this.handleCreateOrder(clientId, order);
-			},
-			() => {
-				alert("Location is invalid");
-			}
-		);
+		Geocode.fromAddress(`${order.location}`)
+			.then(() => {
+				!order.dueDate ? alert("Please choose a due date") :
+				this.handleCreateOrder(clientId, order)
+			})
+			.catch(() => alert("Location is invalid"))
 	};
 
 	render() {
@@ -139,7 +128,6 @@ class TakeOrder extends React.Component {
 								/>
 							</Grid>
 							<Grid item xs={12}>
-								{" "}
 								<Bathrooms
 									bathrooms={this.state.bathrooms}
 									handleChange={this.handleChange}
@@ -185,7 +173,6 @@ class TakeOrder extends React.Component {
 								/>
 							</Grid>
 						</Grid>
-
 						<Price
 							price={this.state.price}
 							handleSubmit={this.handleSubmit}

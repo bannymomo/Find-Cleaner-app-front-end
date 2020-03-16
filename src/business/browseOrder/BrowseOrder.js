@@ -24,7 +24,6 @@ class BrowseOrder extends Component {
 			page: 1,
 			pageSize: 5
 		},
-		role: BUSINESS_ROLE
 	};
 
 	componentDidMount() {
@@ -74,6 +73,47 @@ class BrowseOrder extends Component {
 		});
 		this.setState({ orders });
 	};
+
+	renderConetent = BASE_URL => {
+		if (this.state.isLoading) {
+			return (
+				<div className="browse-orders-progress__container">
+					<CircularProgress size={200} color="secondary" />
+				</div>
+			);
+		} 
+		if (!!this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} 
+		if (!this.state.isLoading && !this.state.orders.length) {
+			return <p> There is no opened orders at the moment. </p>;
+		} 
+		return (
+			<Grid
+				container
+				spacing={3}
+				className="browse-orders--container"
+			>
+				<Grid item xs={6}>
+					{this.state.orders.map(order => (
+						<OrderCard
+							key={order._id}
+							role={BUSINESS_ROLE}
+							location={order.location}
+							dueDate={order.dueDate}
+							price={order.price}
+							status={order.status}
+							to={`${BASE_URL}/orders/${order._id}`}
+						/>
+					))}
+				</Grid>
+				<Grid item xs={6}>
+					<Maps orders={this.state.orders} />
+				</Grid>
+			</Grid>			
+		)
+	}
+
 	render() {
 		const businessId = this.props.match.params.businessId;
 		const BASE_URL = `${BUSINESS_BASE_URL}/${businessId}`;
@@ -96,49 +136,7 @@ class BrowseOrder extends Component {
 							onChange={this.handlePageChange}
 							shape="rounded"
 						/>
-						{this.state.isLoading && (
-							<div className="browse-orders-progress__container">
-								<CircularProgress
-									size={200}
-									color="secondary"
-								/>
-							</div>
-						)}
-						<Grid
-							container
-							spacing={3}
-							className="browse-orders--container"
-						>
-							{!!this.state.error && (
-								<ErrorMessage error={this.state.error} />
-							)}
-							<Grid item xs={6}>
-								{!this.state.isLoading &&
-									!this.state.orders.length && (
-										<p>
-											{" "}
-											There is no opened orders at the
-											moment.{" "}
-										</p>
-									)}
-								{this.state.orders.map(order => (
-									<OrderCard
-										key={order._id}
-										role={this.state.role}
-										location={order.location}
-										dueDate={order.dueDate}
-										price={order.price}
-										status={order.status}
-										to={`${BASE_URL}/orders/${order._id}`}
-									/>
-								))}
-							</Grid>
-							<Grid item xs={6}>
-								{!this.state.isLoading && (
-									<Maps orders={this.state.orders} />
-								)}
-							</Grid>
-						</Grid>
+						{this.renderConetent(BASE_URL)}
 					</Container>
 				</div>
 			</React.Fragment>
