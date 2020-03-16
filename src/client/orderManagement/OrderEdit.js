@@ -17,6 +17,8 @@ import { withRouter } from "react-router";
 import DateTime from "../takeOrder/components/DateTime";
 import "./order.scss";
 
+import { convertValue } from "../../utils/helper";
+
 import Geocode from "react-geocode";
 
 class OrderEdit extends React.Component {
@@ -66,44 +68,37 @@ class OrderEdit extends React.Component {
 						isUpdating: false
 					})
 				)
-
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
+	calculateTotalPrice = () => {
+		let totalPrice =
+			this.state.bedrooms * 22 +
+			this.state.bathrooms * 28 +
+			this.state.endOfLease * 135 +
+			this.state.oven * 5 +
+			this.state.windows * 68 +
+			this.state.cabinets * 36 +
+			this.state.carpet * 58 +
+			20;
+		this.setState({ price: totalPrice });
+	}
+
 	handleChange = event => {
 		const key = event.target.name;
-		let value = event.target.value;
+		const value = event.target.value;
+		const convertedValue = convertValue(value, key);
 
-		if (key === "bedrooms" || key === "bathrooms") {
-			value = parseInt(value);
-		} else if (
-			key === "location" ||
-			key === "dueDate" ||
-			key === "description"
-		) {
-		} else {
-			value = value === "false";
-		}
-
-		this.setState({ [key]: value }, () => {
-			let totalPrice =
-				this.state.bedrooms * 22 +
-				this.state.bathrooms * 28 +
-				this.state.endOfLease * 135 +
-				this.state.oven * 5 +
-				this.state.windows * 68 +
-				this.state.cabinets * 36 +
-				this.state.carpet * 18 + 20;
-			this.setState({ price: totalPrice });
-		});
+		this.setState({ [key]: convertedValue }, () =>
+			this.calculateTotalPrice()
+		);
 	};
 
 	handleChangeDate = value => {
 		// value = value.toString();
 		this.setState({ dueDate: value });
 	};
-
 
 	handleUpdateOrder = (orderId, order, clientId) => {
 		this.setState({ isUpdating: true }, () => {
@@ -115,93 +110,99 @@ class OrderEdit extends React.Component {
 				})
 				.catch(error => this.setState({ error, isUpdating: false }));
 		});
-	}
+	};
 
 	handleSubmit = () => {
 		const order = { ...this.state };
 		const orderId = this.props.match.params.orderId;
 		const clientId = this.props.match.params.clientId;
 
-		Geocode.fromAddress(`${order.location}`).then(
-			() => {
+		Geocode.fromAddress(`${order.location}`)
+			.then(() => {
 				!order.dueDate ? alert("Please choose a due date") :
 				this.handleUpdateOrder(orderId, order, clientId)
-			},
-			() => {
-				alert("Location is invalid");
-			}
-		);
+			})
+			.catch(() => alert("Location is invalid"))
 	};
+
+	renderButton = () => {		
+		if (this.state.isUpdating) {
+			return <CircularProgress className="submitButtonCircularProgress" size={50} color="secondary" />
+		}
+		return (
+			<Button
+				className="submitButton"
+				size="large"
+				variant="contained"
+				color="secondary"
+				onClick={this.handleSubmit}
+			>
+				Update my order
+			</Button>
+		)
+	}
 
 	renderContent = () => {
+		if (this.state.isLoading) {
+			return (
+				<div className="edit-orders-progress__container">
+					<CircularProgress size={200} color="secondary" />
+				</div>
+			);
+		} 
+		if (!!this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		} 
 		return (
-			<div className="client__take-order-page">
-				{this.state.error ? (
-					<ErrorMessage error={this.state.error} />
-				) : (
-				<React.Fragment>
-					<p id="take-order">Update your order here...</p>
-					<Bedrooms
-						bedrooms={this.state.bedrooms}
-						handleChange={this.handleChange}
-					/>
-					<Bathrooms
-						bathrooms={this.state.bathrooms}
-						handleChange={this.handleChange}
-					/>
-					<LeaseEnd
-						endOfLease={this.state.endOfLease}
-						handleChange={this.handleChange}
-					/>
-					<OtherClean
-						oven={this.state.oven}
-						windows={this.state.windows}
-						cabinets={this.state.cabinets}
-						carpet={this.state.carpet}
-						handleChange={this.handleChange}
-					/>
-					<Location
-						location={this.state.location}
-						handleChange={this.handleChange}
-					/>
-					<DateTime
-						dueDate={this.state.dueDate}
-						handleChange={this.handleChange}
-					/>
-					<Time
-						dueDate={this.state.dueDate}
-						handleChangeDate={this.handleChangeDate}
-					/>
-					<Description
-						description={this.state.description}
-						handleChange={this.handleChange}
-					/>
-					<TotalPrice price={this.state.price} />
-
-					{this.state.isUpdating ? (
-						<CircularProgress className="submitButtonCircularProgress" size={50} color="secondary" />
-					) : (
-						<Button
-							className="submitButton"
-							size="large"
-							variant="contained"
-							color="secondary"
-							onClick={this.handleSubmit}
-						>
-							Update my order
-						</Button>
-					)}
-				</React.Fragment>
-				)}
+			<div className="client__take-order-container">
+				<p id="take-order">Update your order here...</p>
+				<Bedrooms
+					bedrooms={this.state.bedrooms}
+					handleChange={this.handleChange}
+				/>
+				<Bathrooms
+					bathrooms={this.state.bathrooms}
+					handleChange={this.handleChange}
+				/>
+				<LeaseEnd
+					endOfLease={this.state.endOfLease}
+					handleChange={this.handleChange}
+				/>
+				<OtherClean
+					oven={this.state.oven}
+					windows={this.state.windows}
+					cabinets={this.state.cabinets}
+					carpet={this.state.carpet}
+					handleChange={this.handleChange}
+				/>
+				<Location
+					location={this.state.location}
+					handleChange={this.handleChange}
+				/>
+				<DateTime
+					dueDate={this.state.dueDate}
+					handleChange={this.handleChange}
+				/>
+				<Time
+					dueDate={this.state.dueDate}
+					handleChangeDate={this.handleChangeDate}
+				/>
+				<Description
+					description={this.state.description}
+					handleChange={this.handleChange}
+				/>
+				<TotalPrice price={this.state.price} />
+				{this.renderButton()}
 			</div>
-		);
-
-	};
+		)
+	}
 
 	render() {
 		return (
 			<div className="client__order-edit-page">
-				{this.renderContent()}
+				<div className="client__take-order-page">
+					{this.renderContent()}
+				</div>
 			</div>
 		);
 	}

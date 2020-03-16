@@ -111,15 +111,12 @@ export default function Maps(props) {
 		if (!address) {
 			address = "116 adelaide st, brisbane";
 		}
-		Geocode.fromAddress(`${address}`).then(
-			response => {
+		Geocode.fromAddress(`${address}`)
+			.then(response => {
 				const { lat, lng } = response.results[0].geometry.location;
 				setLocations(locations => [...locations, { lat, lng }]);
-			},
-			error => {
-				console.error(error);
-			}
-		);
+			})
+			.catch(error => console.error(error))
 	};
 
 	useEffect(() => {

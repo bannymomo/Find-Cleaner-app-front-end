@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import "./style/client.scss";
 import SideBar from "./sideBar/SideBar";
 import ClientRoutes from "../routes/ClientRoutes";
-import TemporaryDrawer from "./TemporaryDrawer";
+import ClientTempDrawer from "./ClientTempDrawer";
 import DashboardNavigation from "../navigation/DashboardNavigation";
 
 class Client extends Component {
@@ -19,7 +19,7 @@ class Client extends Component {
 
 					<div className="client__content-container--page-right">
 						<div className="client__temporaryDrawer">
-							<TemporaryDrawer />
+							<ClientTempDrawer />
 						</div>
 						<ClientRoutes />
 					</div>

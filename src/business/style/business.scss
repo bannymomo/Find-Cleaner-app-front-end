@@ -1,3 +1,5 @@
+@import "../../theme/variables.scss";
+
 .business__container--whole-page {
 	padding-top: 70px;
 	width: 1024px;
@@ -8,6 +10,9 @@
 	justify-content: space-between;
 	box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
 	min-height: 100vh;
+	@media (max-width: $mediaTabletWidth) {
+		width: 100vw;
+	}
 }
 
 .business__avatar-container--left-top {
@@ -16,10 +21,36 @@
 .business__sidebar--page-left {
 	width: 230px;
 	box-shadow: 15px 0px 53px -4px rgba(0, 0, 0, 0.1);
+	@media screen and (max-width: 786px) {
+		display: none;
+	}
 }
 
 .business__content-container--page-right {
 	width: 794px;
+	position: relative;
+}
+
+.business__temporaryDrawer {
+	position: fixed;
+	z-index: 999;
+	right: 0;
+	top: 8px;
+	color: #0005;
+	&:hover {
+		color: $primary-color-blue;
+	}
+
+	@media screen and (min-width: 786px) {
+		display: none;
+	}
+	margin: 20px;
+	@media screen and (max-width: 775px) {
+		margin-top: 4.5rem;
+	}
+
+	right: 0;
+	cursor: pointer;
 }
 
 .business__button-container {

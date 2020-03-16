@@ -67,6 +67,7 @@ function SimpleList(props) {
 						color="primary"
 						component={Link}
 						to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
+						onClick={props.onClose}
 					>
 						Browse all Tasks
 					</Button>
@@ -74,6 +75,7 @@ function SimpleList(props) {
 				<List component="nav" aria-label="secondary mailbox folders">
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/dashboard`}
+						onClick={props.onClose}
 					>
 						<ListItemIcon>
 							<DashboardRoundedIcon />
@@ -82,6 +84,7 @@ function SimpleList(props) {
 					</ListItemLink>
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/profile`}
+						onClick={props.onClose}
 					>
 						<ListItemIcon>
 							<AccountBoxRoundedIcon />
@@ -90,6 +93,7 @@ function SimpleList(props) {
 					</ListItemLink>
 					<ListItemLink
 						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
+						onClick={props.onClose}
 					>
 						<ListItemIcon>
 							<HistoryRoundedIcon />
@@ -108,6 +112,7 @@ function SimpleList(props) {
 							<ListItem className={classes.nested}>
 								<ListItemLink
 									to={`${BUSINESS_BASE_URL}/${businessId}/account`}
+									onClick={props.onClose}
 								>
 									Account
 								</ListItemLink>
@@ -115,6 +120,7 @@ function SimpleList(props) {
 							<ListItem className={classes.nested}>
 								<ListItemLink
 									to={`${BUSINESS_BASE_URL}/${businessId}/password`}
+									onClick={props.onClose}
 								>
 									Password
 								</ListItemLink>

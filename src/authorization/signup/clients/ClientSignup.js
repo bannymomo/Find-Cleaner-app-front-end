@@ -104,9 +104,12 @@ class ClientSignup extends Component {
 								this.props.history.replace(redirectTo);
 							});
 						})
+<<<<<<< HEAD
 						.catch(error =>
 							this.setState({ error, isLoading: false })
 						);
+=======
+>>>>>>> 1a5a5ea6e3d45a903e106ede636bbb99f08d8002
 				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});

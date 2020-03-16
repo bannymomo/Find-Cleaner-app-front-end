@@ -18,7 +18,7 @@ class ClientDashboard extends Component {
 					</p>
 				</div>
 				<Chart />
-				{/* <ListArray /> */}
+				<ListArray />
 			</div>
 		);
 	}

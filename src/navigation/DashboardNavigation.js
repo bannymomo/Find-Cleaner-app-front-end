@@ -53,7 +53,7 @@ class DashboardNavigation extends Component {
 							variant="contained"
 							color="primary"
 						>
-							Browse all tasks
+							All tasks
 						</Button>
 					) : (
 						<PostOrderBtn buttonInNav={true} />

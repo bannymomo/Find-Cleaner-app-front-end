@@ -1,16 +1,12 @@
 import React from "react";
 import OrderCard from "../../components/order/OrderCard";
 import OrderNavBar from "../../components/order/OrderNavBar";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import { Container, Grid, CircularProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchHisOrders } from "../../api/client";
-
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
-
 import {
 	CLIENT_ROLE,
 	NEW_ORDER,
@@ -29,15 +25,17 @@ class OrderHistory extends React.Component {
 			pageSize: 5
 		},
 		searchStatus: "",
-		role: CLIENT_ROLE
 	};
 
 	componentDidMount() {
-		if (this.props.location.state) {
+		const { location: { state } } = this.props;
+		const { pagination: { page, pageSize } } =this.state;
+
+		if (state) {
 			this.loadOrders(
-				this.state.pagination.page,
-				this.state.pagination.pageSize,
-				this.props.location.state.searchStatus
+				page,
+				pageSize,
+				state.searchStatus
 			);
 		} else {
 			this.loadOrders();
@@ -62,55 +60,19 @@ class OrderHistory extends React.Component {
 	};
 
 	handlePageChange = (event, data) => {
-		const pageSize = this.state.pagination.pageSize;
-		const status = this.state.searchStatus;
-		this.loadOrders(data, pageSize, status);
+		const { pagination: { pageSize }, searchStatus } =this.state;
+		this.loadOrders(data, pageSize, searchStatus);
 	};
-
-	handleSearchNew = () => {
+	
+	handleSearch = status => {
+		const { pagination: { page, pageSize } } =this.state;
 		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			NEW_ORDER
+			page,
+			pageSize,
+			status
 		);
-		this.setState({ searchStatus: NEW_ORDER });
-	};
-
-	handlesearchAccepted = () => {
-		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			ACCEPTED
-		);
-		this.setState({ searchStatus: ACCEPTED });
-	};
-
-	handlesearchDone = () => {
-		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			DONE
-		);
-		this.setState({ searchStatus: DONE });
-	};
-
-	handleSearchWithdraw = () => {
-		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			CANCELLED_BY_CLIENT
-		);
-		this.setState({ searchStatus: CANCELLED_BY_CLIENT });
-	};
-
-	handlesearchCancelled = () => {
-		this.loadOrders(
-			this.state.pagination.page,
-			this.state.pagination.pageSize,
-			CANCELLED_BY_BUSINESS
-		);
-		this.setState({ CANCELLED_BY_BUSINESS });
-	};
+		this.setState({ searchStatus: status });
+	}
 
 	renderContent = BASE_URL => {
 		if (this.state.isLoading) {
@@ -119,23 +81,24 @@ class OrderHistory extends React.Component {
 					<CircularProgress size={200} color="secondary" />
 				</div>
 			);
-		} else if (!!this.state.error) {
+		} 
+		if (!!this.state.error) {
 			return <ErrorMessage error={this.state.error} />;
-		} else if (!this.state.isLoading && !this.state.orders.length) {
+		} 
+		if (!this.state.isLoading && !this.state.orders.length) {
 			return <p> There isn't any order. </p>;
-		} else {
-			return this.state.orders.map(order => (
-				<OrderCard
-					key={order._id}
-					role={this.state.role}
-					location={order.location}
-					dueDate={order.dueDate}
-					price={order.price}
-					status={order.status}
-					to={`${BASE_URL}/orders/${order._id}`}
-				/>
-			));
-		}
+		} 
+		return this.state.orders.map(order => (
+			<OrderCard
+				key={order._id}
+				role={CLIENT_ROLE}
+				location={order.location}
+				dueDate={order.dueDate}
+				price={order.price}
+				status={order.status}
+				to={`${BASE_URL}/orders/${order._id}`}
+			/>
+		));
 	};
 	render() {
 		const clientId = this.props.match.params.clientId;
@@ -146,13 +109,13 @@ class OrderHistory extends React.Component {
 				<Grid container spacing={2}>
 					<Grid item xs={4}>
 						<OrderNavBar
-							role={this.state.role}
-							searchAll={this.loadOrders}
-							searchNew={this.handleSearchNew}
-							searchAccepted={this.handlesearchAccepted}
-							searchDone={this.handlesearchDone}
-							searchWithdraw={this.handleSearchWithdraw}
-							searchCancelled={this.handlesearchCancelled}
+							role={CLIENT_ROLE}
+							searchAll={() => this.handleSearch()}
+							searchNew={() => this.handleSearch(NEW_ORDER)}
+							searchAccepted={() => this.handleSearch(ACCEPTED)}
+							searchDone={() => this.handleSearch(DONE)}
+							searchWithdraw={() => this.handleSearch(CANCELLED_BY_CLIENT)}
+							searchCancelled={() => this.handleSearch(CANCELLED_BY_BUSINESS)}
 						/>
 					</Grid>
 					<Grid item xs={6} className="order-history__cardlist">
