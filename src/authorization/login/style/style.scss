@@ -1,3 +1,5 @@
+@import "../../../theme/variables.scss";
+
 .login__logo {
 	margin-top: 20px;
 	margin-bottom: 0px;
@@ -34,4 +36,32 @@ label {
 	font-weight: bold;
 	font-size: 20px;
 	line-height: 24px;
+}
+
+.login__button-container {
+	margin: 15px 0;
+}
+
+.login__my-facebook-button-class {
+	background-color: #4267b2;
+	text-align: center;
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	margin-top: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	transition: all 0.3s ease;
+	&:hover {
+		background-color: rgb(30, 89, 156);
+	}
+}
+
+.login__google-button-class {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 10px 0;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	height: 42px;
 }
