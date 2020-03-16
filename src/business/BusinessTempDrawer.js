@@ -1,14 +1,14 @@
 import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-import SideBar from "./Sidebar/SideBar";
+import SideBar from "./SideBar/SideBar";
 
 export default function TemporaryDrawer() {
 	const [state, setState] = React.useState({
-		top: false,
-		left: false,
-		bottom: false,
-		right: false
+		// top: false,
+		left: false
+		// bottom: false,
+		// right: false
 	});
 
 	const toggleDrawer = (side, open) => event => {
@@ -29,7 +29,7 @@ export default function TemporaryDrawer() {
 				fontSize="large"
 			/>
 			<Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-				<SideBar />
+				<SideBar onClose={setState} />
 			</Drawer>
 		</div>
 	);

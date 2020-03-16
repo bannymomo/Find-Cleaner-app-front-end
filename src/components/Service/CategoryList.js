@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../routes/URLMap";
 import { getBusinessId, getClientId, isLoggedIn } from "../../utils/auth";
 import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
-import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme =>

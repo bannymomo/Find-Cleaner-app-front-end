@@ -116,6 +116,13 @@
 					font-size: 10px;
 				}
 			}
+			@media (max-width: $mediaSmWidth) {
+				margin: 0 5px;
+
+				& button {
+					font-size: 7px;
+				}
+			}
 		}
 	}
 	.nav-bar__menu--container {
