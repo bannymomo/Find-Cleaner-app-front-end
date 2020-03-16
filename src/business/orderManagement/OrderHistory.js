@@ -22,19 +22,19 @@ class OrderHistory extends React.Component {
 			page: 1,
 			pageSize: 5
 		},
-		searchStatus: "",
+		searchStatus: ""
 	};
 
 	componentDidMount() {
-		const { location: { state } } = this.props;
-		const { pagination: { page, pageSize } } =this.state;
+		const {
+			location: { state }
+		} = this.props;
+		const {
+			pagination: { page, pageSize }
+		} = this.state;
 
 		if (state) {
-			this.loadOrders(
-				page,
-				pageSize,
-				state.searchStatus
-			);
+			this.loadOrders(page, pageSize, state.searchStatus);
 		} else {
 			this.loadOrders();
 		}
@@ -58,19 +58,20 @@ class OrderHistory extends React.Component {
 	};
 
 	handlePageChange = (event, data) => {
-		const { pagination: { pageSize }, searchStatus } =this.state;
+		const {
+			pagination: { pageSize },
+			searchStatus
+		} = this.state;
 		this.loadOrders(data, pageSize, searchStatus);
 	};
 
 	handleSearch = status => {
-		const { pagination: { page, pageSize } } =this.state;
-		this.loadOrders(
-			page,
-			pageSize,
-			status
-		);
+		const {
+			pagination: { page, pageSize }
+		} = this.state;
+		this.loadOrders(page, pageSize, status);
 		this.setState({ searchStatus: status });
-	}
+	};
 
 	renderConetent = BASE_URL => {
 		if (this.state.isLoading) {
@@ -79,13 +80,13 @@ class OrderHistory extends React.Component {
 					<CircularProgress size={200} color="secondary" />
 				</div>
 			);
-		} 
+		}
 		if (!!this.state.error) {
 			return <ErrorMessage error={this.state.error} />;
-		} 
+		}
 		if (!this.state.isLoading && !this.state.orders.length) {
 			return <p> There isn't any order. </p>;
-		} 
+		}
 		return this.state.orders.map(order => (
 			<OrderCard
 				key={order._id}
@@ -96,8 +97,8 @@ class OrderHistory extends React.Component {
 				status={order.status}
 				to={`${BASE_URL}/orders/${order._id}`}
 			/>
-		))
-	}
+		));
+	};
 
 	render() {
 		const businessId = this.props.match.params.businessId;
@@ -110,15 +111,19 @@ class OrderHistory extends React.Component {
 							searchAll={() => this.handleSearch()}
 							searchAccepted={() => this.handleSearch(ACCEPTED)}
 							searchDone={() => this.handleSearch(DONE)}
-							searchCancelled={() => this.handleSearch(CANCELLED_BY_BUSINESS)}
+							searchCancelled={() =>
+								this.handleSearch(CANCELLED_BY_BUSINESS)
+							}
 						/>
 					</Grid>
 					<Grid item xs={11} className="order-history__nav-selector">
 						<OrderStatus
-							searchAll={this.loadOrders}
-							searchAccepted={this.handlesearchAccepted}
-							searchDone={this.handlesearchDone}
-							searchCancelled={this.handlesearchCancelled}
+							searchAll={() => this.handleSearch()}
+							searchAccepted={() => this.handleSearch(ACCEPTED)}
+							searchDone={() => this.handleSearch(DONE)}
+							searchCancelled={() =>
+								this.handleSearch(CANCELLED_BY_BUSINESS)
+							}
 						/>
 					</Grid>
 					<Grid

@@ -129,13 +129,17 @@ class OrderHistory extends React.Component {
 					</Grid>
 					<Grid item xs={11} className="order-history__nav-selector">
 						<OrderStatus
-							role={this.state.role}
-							searchAll={this.loadOrders}
-							searchNew={this.handleSearchNew}
-							searchAccepted={this.handlesearchAccepted}
-							searchDone={this.handlesearchDone}
-							searchWithdraw={this.handleSearchWithdraw}
-							searchCancelled={this.handlesearchCancelled}
+							role={CLIENT_ROLE}
+							searchAll={() => this.handleSearch()}
+							searchNew={() => this.handleSearch(NEW_ORDER)}
+							searchAccepted={() => this.handleSearch(ACCEPTED)}
+							searchDone={() => this.handleSearch(DONE)}
+							searchWithdraw={() =>
+								this.handleSearch(CANCELLED_BY_CLIENT)
+							}
+							searchCancelled={() =>
+								this.handleSearch(CANCELLED_BY_BUSINESS)
+							}
 						/>
 					</Grid>
 					<Grid
