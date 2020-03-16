@@ -1,8 +1,12 @@
-import React, { Fragment, Component } from "react";
-import { TextField, Button, CircularProgress } from "@material-ui/core";
-import { updateClientById, fetchClientById } from "../../../api/client";
-import { KeyboardDatePicker } from "@material-ui/pickers";
-import Alert from "@material-ui/lab/Alert";
+import React, { Fragment, Component } from "./node_modules/react";
+import {
+	TextField,
+	Button,
+	CircularProgress
+} from "./node_modules/@material-ui/core";
+import { updateClientById, fetchClientById } from "../../api/client";
+import { KeyboardDatePicker } from "./node_modules/@material-ui/pickers";
+import Alert from "./node_modules/@material-ui/lab/Alert";
 import "./style/account.scss";
 
 class Account extends Component {

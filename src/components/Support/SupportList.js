@@ -1,10 +1,10 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import React from "./node_modules/react";
+import Button from "./node_modules/@material-ui/core/Button";
+import Grid from "./node_modules/@material-ui/core/Grid";
+import List from "./node_modules/@material-ui/core/List";
+import ListItem from "./node_modules/@material-ui/core/ListItem";
+import { makeStyles } from "./node_modules/@material-ui/core/styles";
+import { Link } from "./node_modules/react-router-dom";
 
 import {
 	CLIENT_BASE_URL,

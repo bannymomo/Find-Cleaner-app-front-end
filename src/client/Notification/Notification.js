@@ -1,8 +1,8 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
+import React from "./node_modules/react";
+import Button from "./node_modules/@material-ui/core/Button";
 import "./style/notification.scss";
 import PostOrderBtn from "../../components/order/PostOrderBtn";
-import { Link } from "react-router-dom";
+import { Link } from "./node_modules/react-router-dom";
 import { CLIENT_BASE_URL } from "../../routes/URLMap";
 
 function Notification(props) {

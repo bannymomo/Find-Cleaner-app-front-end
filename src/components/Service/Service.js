@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from "./node_modules/react";
 import MainNavigation from "../../navigation/MainNavigation";
 import CategoryList from "./CategoryList";
 import "./style/service.scss";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import Button from "./node_modules/@material-ui/core/Button";
+import { Link } from "./node_modules/react-router-dom";
 import { HOMEPAGE_URL } from "../../routes/URLMap";
 
 class Service extends Component {

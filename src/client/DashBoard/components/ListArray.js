@@ -1,18 +1,21 @@
-import React from "react";
-import { useSpring, animated } from "react-spring";
+import React from "./node_modules/react";
+import { useSpring, animated } from "./node_modules/react-spring";
 import house from "../../../assets/images/house.png";
 import kitchen from "../../../assets/images/kitchen.png";
 import carpet from "../../../assets/images/carpet.png";
 import rent from "../../../assets/images/rent.png";
 import bathroom from "../../../assets/images/bathroom.png";
 import window from "../../../assets/images/window.png";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import {
+	makeStyles,
+	createStyles
+} from "./node_modules/@material-ui/core/styles";
+import { Link } from "./node_modules/react-router-dom";
 import { BUSINESS_BASE_URL, CLIENT_BASE_URL } from "../../../routes/URLMap";
 import { getBusinessId, getClientId } from "../../../utils/auth";
 import { isLoggedIn } from "../../../utils/auth";
 import { POST_ORDER_AT_HOMEPAGE } from "../../../utils/variables";
-import Fab from "@material-ui/core/Fab";
+import Fab from "./node_modules/@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme =>
 	createStyles({

@@ -1,9 +1,9 @@
-import React from "react";
-import { withRouter } from "react-router";
+import React from "./node_modules/react";
+import { withRouter } from "./node_modules/react-router";
 import { fetchClientById } from "../../api/client";
-import { Avatar } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Avatar } from "./node_modules/@material-ui/core";
+import { withStyles } from "./node_modules/@material-ui/core/styles";
+import CircularProgress from "./node_modules/@material-ui/core/CircularProgress";
 import ErrorMessage from "../../UI/ErrorMessage";
 const useStyles = theme => ({
 	root: {

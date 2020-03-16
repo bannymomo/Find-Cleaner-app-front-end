@@ -2,7 +2,7 @@
 // // // javascript library for creating charts
 // #############################
 var primaryBlue = "#2196f3";
-var Chartist = require("chartist");
+var Chartist = require("./node_modules/chartist");
 // ##############################
 // // // variables used to create animation on charts
 // #############################

@@ -2,17 +2,17 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { BUSINESS_BASE_URL } from "./URLMap";
-import BusinessDashboard from "../business/DashBoard/BusinessDashboard";
+import BusinessDashboard from "../business/dashBoard/BusinessDashboard";
 
-import Account from "../business/Account/Account";
+import Account from "../business/account/Account";
 import Password from "../authorization/password/Password";
 
-import BrowseOrder from "../business/BrowseOrder/BrowseOrder";
-import Profile from "../business/Profile/Profile";
-import OrderHistory from "../business/OrderHistory/OrderHistory";
-import OrderInformation from "../business/OrderHistory/OrderInformation";
-import Notification from "../business/Notification/Notification";
-import Message from "../business/Message/Message";
+import BrowseOrder from "../business/browseOrder/BrowseOrder";
+import Profile from "../business/profile/Profile";
+import OrderHistory from "../business/orderManagement/OrderHistory";
+import OrderInformation from "../business/orderManagement/OrderInformation";
+import Notification from "../business/notification/Notification";
+import Message from "../business/message/Message";
 
 const orderId = "orderId";
 

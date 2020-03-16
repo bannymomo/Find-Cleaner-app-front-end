@@ -1,7 +1,7 @@
-import React from "react";
-import { withRouter } from "react-router";
+import React from "./node_modules/react";
+import { withRouter } from "./node_modules/react-router";
 import { fetchHisOrders } from "../../../api/client";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "./node_modules/@material-ui/core/CircularProgress";
 
 class TotalNewOrdersNumber extends React.Component {
 	state = {

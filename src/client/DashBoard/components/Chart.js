@@ -1,19 +1,19 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import React from "./node_modules/react";
+import { Link, withRouter } from "./node_modules/react-router-dom";
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+import ChartistGraph from "./node_modules/react-chartist";
 // @material-ui/core
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "./node_modules/@material-ui/core/styles";
 // @material-ui/icons
 
-import Store from "@material-ui/icons/Store";
-import DateRange from "@material-ui/icons/DateRange";
-import Update from "@material-ui/icons/Update";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
-import Accessibility from "@material-ui/icons/Accessibility";
-import Icon from "@material-ui/core/Icon";
-import { useSpring, animated } from "react-spring";
+import Store from "./node_modules/@material-ui/icons/Store";
+import DateRange from "./node_modules/@material-ui/icons/DateRange";
+import Update from "./node_modules/@material-ui/icons/Update";
+import ArrowUpward from "./node_modules/@material-ui/icons/ArrowUpward";
+import AccessTime from "./node_modules/@material-ui/icons/AccessTime";
+import Accessibility from "./node_modules/@material-ui/icons/Accessibility";
+import Icon from "./node_modules/@material-ui/core/Icon";
+import { useSpring, animated } from "./node_modules/react-spring";
 
 // core components
 import GridItem from "./card/GridItem";
@@ -37,7 +37,7 @@ import {
 import styles from "../style/card/tempelate-dashboardStyle";
 
 import { CLIENT_BASE_URL } from "../../../routes/URLMap";
-import { CardActionArea } from "@material-ui/core";
+import { CardActionArea } from "./node_modules/@material-ui/core";
 import { NEW_ORDER, ACCEPTED } from "../../../utils/variables";
 
 const useStyles = makeStyles(styles);

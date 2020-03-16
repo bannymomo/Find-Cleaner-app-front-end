@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "./node_modules/react";
 import ListArray from "./components/ListArray";
 import "./style/dashboard.scss";
 import Chart from "./components/Chart";
