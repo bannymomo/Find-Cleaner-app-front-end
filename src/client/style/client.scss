@@ -37,6 +37,15 @@
 }
 
 .client__temporaryDrawer {
+	position: fixed;
+	z-index: 999;
+	right: 0;
+	top: 8px;
+	color: #0005;
+	&:hover {
+		color: $primary-color-blue;
+	}
+
 	@media screen and (min-width: 786px) {
 		display: none;
 	}
