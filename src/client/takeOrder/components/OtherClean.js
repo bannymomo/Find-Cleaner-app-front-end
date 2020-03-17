@@ -55,7 +55,7 @@ export default function FormControlLabelPosition(props) {
 								}
 								label={<CallToActionOutlinedIcon />}
 								labelPlacement="start"
-							/>{" "}
+							/>
 							<Typography>Oven</Typography>
 						</Paper>
 					</div>
@@ -74,7 +74,7 @@ export default function FormControlLabelPosition(props) {
 								}
 								label={<SettingsSystemDaydreamIcon />}
 								labelPlacement="start"
-							/>{" "}
+							/>
 							<Typography>Windows</Typography>
 						</Paper>
 					</div>
@@ -93,7 +93,7 @@ export default function FormControlLabelPosition(props) {
 								}
 								label={<StorageIcon />}
 								labelPlacement="start"
-							/>{" "}
+							/>
 							<Typography>Cabinets</Typography>
 						</Paper>
 					</div>
@@ -112,7 +112,7 @@ export default function FormControlLabelPosition(props) {
 								}
 								label={<GridOnIcon />}
 								labelPlacement="start"
-							/>{" "}
+							/>
 							<Typography>Carpet</Typography>
 						</Paper>
 					</div>

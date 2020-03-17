@@ -84,7 +84,7 @@ const stylesArray = [
 const CustomSkinMap = withScriptjs(
 	withGoogleMap(props => (
 		<GoogleMap
-			defaultZoom={13}
+			defaultZoom={10}
 			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
 			defaultOptions={{
 				scrollwheel: false,

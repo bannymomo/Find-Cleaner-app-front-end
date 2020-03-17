@@ -8,7 +8,7 @@ export const convertValue = (value, key) => {
         case "windows":
         case "cabinets":
         case "carpet":
-            return Boolean(value);
+            return value = value === "false";
         default:
             return value;
     }
