@@ -178,7 +178,7 @@ class OrderInformaiton extends React.Component {
 						className="order-information__top"
 						spacing={2}
 					>
-						<Grid item xs={8}>
+						<Grid item sm={8} xs={12}>
 							<div className="order-information__head">
 								<ul className="order-information__status">
 									<li className="order-information__status-active">
@@ -196,7 +196,7 @@ class OrderInformaiton extends React.Component {
 								business={this.state.business}
 							/>
 						</Grid>
-						<Grid item xs={4}>
+						<Grid item sm={4} xs={12}>
 							<Card>
 								<CardContent className="order-information__budget">
 									<Typography gutterBottom>Price</Typography>
@@ -262,22 +262,22 @@ class OrderInformaiton extends React.Component {
 								Number of bedrooms: {this.state.order.bedrooms}
 							</li>
 							<li>
-								Number of bathrooms:{" "}
+								Number of bathrooms:
 								{this.state.order.bathrooms}
 							</li>
 							<li>
-								End-of-lease clean:{" "}
+								End-of-lease clean:
 								{this.state.order.endOfLease ? "Yes" : "No"}
 							</li>
 							<li>
 								Oven: {this.state.order.oven ? "Yes" : "No"}
 							</li>
 							<li>
-								Windows:{" "}
+								Windows:
 								{this.state.order.windows ? "Yes" : "No"}
 							</li>
 							<li>
-								Cabinets:{" "}
+								Cabinets:
 								{this.state.order.cabinets ? "Yes" : "No"}
 							</li>
 							<li>

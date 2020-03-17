@@ -44,9 +44,16 @@ const useStylesModal = makeStyles(theme => ({
 		border: "none",
 		borderRadius: 0,
 		fontSize: "1rem",
+		[theme.breakpoints.down("xs")]: {
+			right: 0,
+			backgroundColor: "rgba(255, 255, 255, 0)"
+		},
 		"&:hover": {
 			color: "#2196f3",
-			backgroundColor: "white"
+			backgroundColor: "white",
+			[theme.breakpoints.down("xs")]: {
+				backgroundColor: "rgba(255, 255, 255, 0)"
+			}
 		}
 	},
 	paper: {
@@ -54,11 +61,17 @@ const useStylesModal = makeStyles(theme => ({
 		boxSizing: "border-box",
 		position: "relative",
 		width: "960px",
+		height: "98%",
+		overflow: "scroll",
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(1, 1, 1, 0),
-		outline: 0
+		outline: 0,
+		[theme.breakpoints.down("xs")]: {
+			height: "100%",
+			padding: theme.spacing(2)
+		}
 	},
 	button: {
 		position: "absolute",
@@ -67,6 +80,10 @@ const useStylesModal = makeStyles(theme => ({
 		border: "none",
 		borderRadius: "100px",
 		fontSize: "1rem",
+		[theme.breakpoints.down("xs")]: {
+			right: -5,
+			top: 5
+		},
 		"&:hover": {
 			color: "#2196f3",
 			backgroundColor: "transparent"

@@ -53,7 +53,7 @@ class TakeOrder extends React.Component {
 			this.state.carpet * 58 +
 			20;
 		this.setState({ price: totalPrice });
-	}
+	};
 
 	handleChange = event => {
 		const key = event.target.name;
@@ -66,7 +66,6 @@ class TakeOrder extends React.Component {
 	};
 
 	handleChangeDate = value => {
-		// value = value.toString();
 		this.setState({ dueDate: value });
 	};
 
@@ -100,10 +99,11 @@ class TakeOrder extends React.Component {
 
 		Geocode.fromAddress(`${order.location}`)
 			.then(() => {
-				!order.dueDate ? alert("Please choose a due date") :
-				this.handleCreateOrder(clientId, order)
+				!order.dueDate
+					? alert("Please choose a due date")
+					: this.handleCreateOrder(clientId, order);
 			})
-			.catch(() => alert("Location is invalid"))
+			.catch(() => alert("Location is invalid"));
 	};
 
 	render() {
@@ -172,12 +172,14 @@ class TakeOrder extends React.Component {
 									handleChange={this.handleChange}
 								/>
 							</Grid>
+							<Grid item xs={12}>
+								<Price
+									price={this.state.price}
+									handleSubmit={this.handleSubmit}
+									isCreating={this.state.isCreating}
+								/>
+							</Grid>
 						</Grid>
-						<Price
-							price={this.state.price}
-							handleSubmit={this.handleSubmit}
-							isCreating={this.state.isCreating}
-						/>
 					</Fragment>
 				)}
 			</div>

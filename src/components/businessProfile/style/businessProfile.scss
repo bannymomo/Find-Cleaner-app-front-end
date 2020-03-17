@@ -6,6 +6,9 @@
 	flex-wrap: wrap;
 	box-shadow: 5px 0px 53px -4px rgba(0, 0, 0, 0.05);
 	& .business-profile__sidebar {
+		@media (max-width: $mediaXsWidth) {
+			width: 90vw;
+		}
 		& li {
 			padding: 0 3rem;
 			margin: 10px auto;
@@ -71,6 +74,9 @@
 	padding: 1.2rem 2rem;
 
 	& .business-profile__container {
+		@media (max-width: $mediaXsWidth) {
+			width: 90vw;
+		}
 		& h6.MuiTypography-subtitle1 {
 			text-transform: capitalize;
 			font-size: 1.2rem;
