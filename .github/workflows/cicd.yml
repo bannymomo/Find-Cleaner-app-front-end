@@ -30,6 +30,8 @@ jobs:
         cmd: build
       env:
         REACT_APP_GOOGLE_MAP_API_KEY: ${{secrets.REACT_APP_GOOGLE_MAP_API_KEY}}
+        REACT_APP_GOOGLE_ID: ${{secrets.REACT_APP_GOOGLE_ID}}
+        REACT_APP_FACEBOOK_ID: ${{secrets.REACT_APP_FACEBOOK_ID}}  
         
     - name: upload artifact
       uses: actions/upload-artifact@master
