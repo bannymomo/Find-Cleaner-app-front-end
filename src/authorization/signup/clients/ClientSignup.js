@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import {
 	Button,
 	Grid,
@@ -76,7 +76,7 @@ class ClientSignup extends Component {
 		gender: "female",
 		invalidName: false,
 		error: null,
-		isLoading: false,
+		isLoading: false
 	};
 
 	postClient = () => {
@@ -98,19 +98,18 @@ class ClientSignup extends Component {
 			signupFn(userInfo)
 				.then(data => setToken(data.token))
 				.then(() => {
-					createClient(clientInfo)
-						.then(data => {
-							this.setState({ isLoading: false }, () => {
-								removeClientId();
-								removeBusinessId();
-								const clientId = data._id;
-								setClientId(clientId);
-								const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
-								this.props.history.replace(redirectTo);
-							});
-						})
+					createClient(clientInfo).then(data => {
+						this.setState({ isLoading: false }, () => {
+							removeClientId();
+							removeBusinessId();
+							const clientId = data._id;
+							setClientId(clientId);
+							const redirectTo = `${CLIENT_BASE_URL}/${clientId}`;
+							this.props.history.replace(redirectTo);
+						});
+					});
 				})
-				.catch(error => this.setState({ error, isLoading: false }))
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
@@ -157,8 +156,11 @@ class ClientSignup extends Component {
 									firstName: event.target.value
 								})
 							}
-							validators={['required', 'minStringLength:2']}
-                    		errorMessages={['this field is required', 'The length must longer than 2']}
+							validators={["required", "minStringLength:2"]}
+							errorMessages={[
+								"this field is required",
+								"The length must longer than 2"
+							]}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -173,8 +175,11 @@ class ClientSignup extends Component {
 									lastName: event.target.value
 								})
 							}
-							validators={['required', 'minStringLength:2']}
-                    		errorMessages={['this field is required', 'The length must longer than 2']}
+							validators={["required", "minStringLength:2"]}
+							errorMessages={[
+								"this field is required",
+								"The length must longer than 2"
+							]}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -218,13 +223,10 @@ class ClientSignup extends Component {
 									postcode: event.target.value
 								})
 							}
-							validators={[
-								'required', 
-								'matchRegexp:^[0-9]{4}$'
-							]}
+							validators={["required", "matchRegexp:^[0-9]{4}$"]}
 							errorMessages={[
-								'this field is required', 
-								'postcode is not valid'
+								"this field is required",
+								"postcode is not valid"
 							]}
 						/>
 					</Grid>

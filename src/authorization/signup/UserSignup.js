@@ -11,7 +11,7 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
 
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { checkUsername } from "../../api/auth";
 import ClientSignup from "./clients/ClientSignup";
@@ -21,7 +21,15 @@ import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
 import { LOGIN_URL } from "../../routes/URLMap";
-import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
+import {
+	CLIENT_ROLE,
+	BUSINESS_ROLE,
+	FACEBOOK_ID,
+	GOOGLE_ID
+} from "../../utils/variables";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+import { FaFacebookF } from "react-icons/fa";
 
 import "./style/signup.scss";
 
@@ -69,7 +77,7 @@ class User extends Component {
 		role: "",
 		basicInfo: false,
 		error: null,
-		isLoading: false,
+		isLoading: false
 		// isUsernameValid: false,
 		// isEmailValid: false,
 		// isPasswordValid: false,
@@ -78,21 +86,25 @@ class User extends Component {
 	componentDidMount() {
 		const pathname = this.props.location.pathname;
 		if (pathname.includes(CLIENT_ROLE)) {
-			this.setState({ role: CLIENT_ROLE })
+			this.setState({ role: CLIENT_ROLE });
 		} else {
-			this.setState({ role: BUSINESS_ROLE })
+			this.setState({ role: BUSINESS_ROLE });
 		}
 	}
 
 	handleContinue = () => {
 		this.setState({ isLoading: true, error: null }, () => {
 			checkUsername(this.state.username)
-				.then(() => 
-					this.setState({ isLoading: false, basicInfo: true, history: this.props.history })
+				.then(() =>
+					this.setState({
+						isLoading: false,
+						basicInfo: true,
+						history: this.props.history
+					})
 				)
-				.catch(error => this.setState({ error,  isLoading: false }))
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
-	}
+	};
 
 	renderButton = classes => {
 		if (this.state.isLoading) {
@@ -128,13 +140,12 @@ class User extends Component {
 	// }
 
 	renderForm = classes => {
-
 		return (
 			<ValidatorForm
 				className={classes.form}
 				instantValidate={false}
 				onSubmit={this.handleContinue}
-            >
+			>
 				<label className="sign-up__header">
 					{this.state.role} Sign up
 				</label>
@@ -151,8 +162,11 @@ class User extends Component {
 									username: event.target.value
 								})
 							}
-							validators={['required', 'minStringLength: 2']}
-							errorMessages={['this field is required', 'username must be at least two characters']}
+							validators={["required", "minStringLength: 2"]}
+							errorMessages={[
+								"this field is required",
+								"username must be at least two characters"
+							]}
 							// validatorListener={this.validateUsername}
 						/>
 					</Grid>
@@ -170,8 +184,11 @@ class User extends Component {
 							}
 							name="email"
 							value={this.state.email}
-							validators={['required', 'isEmail']}
-							errorMessages={['this field is required', 'email is not valid']}
+							validators={["required", "isEmail"]}
+							errorMessages={[
+								"this field is required",
+								"email is not valid"
+							]}
 							// validatorListener={this.validateEmail}
 						/>
 					</Grid>
@@ -189,15 +206,35 @@ class User extends Component {
 									password: event.target.value
 								})
 							}
-							validators={['required', 'minStringLength: 2']}
-							errorMessages={['this field is required', 'password must be at least two characters']}
+							validators={["required", "minStringLength: 2"]}
+							errorMessages={[
+								"this field is required",
+								"password must be at least two characters"
+							]}
 							// validatorListener={this.validatePassword}
 						/>
 					</Grid>
 				</Grid>
 				{this.renderButton(classes)}
+				<FacebookLogin
+					appId={FACEBOOK_ID}
+					fields="name,email,picture"
+					callback={this.responseFacebook}
+					cssClass="signup__my-facebook-button-class"
+					textButton="SIGN UP WITH FACEBOOK"
+					icon={<FaFacebookF />}
+				/>
+				<GoogleLogin
+					clientId={GOOGLE_ID}
+					buttonText="SIGN UP WITH GOOGLE"
+					onSuccess={this.responseGoogle}
+					onFailure={this.responseGoogle}
+					cookiePolicy={"single_host_origin"}
+					className="signup__google-button-class"
+				/>
+
 				<div className="signin__text--bottom">
-					Already have an account?{" "}
+					Already have an account?
 					<Link className="signin__link--bottom" to={LOGIN_URL}>
 						Log in.
 					</Link>
@@ -205,10 +242,29 @@ class User extends Component {
 				{!this.state.isLoading && !!this.state.error && (
 					<Alert severity="error">User already exits~</Alert>
 				)}
-            </ValidatorForm>
+			</ValidatorForm>
 		);
 	};
 
+	responseFacebook = response => {
+		const username = response.name;
+		const email = response.email;
+		const password = response.id;
+		this.setState({ username, email, password });
+		if (username && password) {
+			this.handleContinue();
+		}
+	};
+
+	responseGoogle = response => {
+		const username = response.Rt.Ad;
+		const email = response.Rt.Au;
+		const password = response.Rt.eV;
+		this.setState({ username, email, password });
+		if (username && password) {
+			this.handleContinue();
+		}
+	};
 	render() {
 		const { classes } = this.props;
 		if (!this.state.basicInfo) {

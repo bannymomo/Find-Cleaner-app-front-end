@@ -1,3 +1,5 @@
+@import "../../../theme/variables.scss";
+
 .signUp__logo {
 	margin-top: 20px;
 	margin-bottom: 0px;
@@ -38,4 +40,37 @@ label {
 	font-size: 20px;
 	line-height: 24px;
 	margin-left: 2px;
+}
+
+.signup__my-facebook-button-class {
+	background-color: #4267b2;
+	text-align: center;
+	height: 45px;
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	transition: all 0.3s ease;
+	&:hover {
+		background-color: rgb(30, 89, 156);
+	}
+	svg {
+		display: inline-block;
+		margin-right: 20px;
+	}
+	display: flex;
+	justify-content: center;
+	color: white;
+	outline: none;
+}
+
+.signup__google-button-class {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 10px 0;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	height: 42px;
+	outline: none;
 }

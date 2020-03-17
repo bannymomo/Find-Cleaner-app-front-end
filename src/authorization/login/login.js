@@ -32,7 +32,13 @@ import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
 import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
-import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
+import {
+	POST_ORDER_AT_HOMEPAGE,
+	FACEBOOK_ID,
+	GOOGLE_ID
+} from "../../utils/variables";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 class Login extends React.Component {
 	state = {
 		username: "",
@@ -134,6 +140,24 @@ class Login extends React.Component {
 		}
 	};
 
+	responseFacebook = response => {
+		const username = response.name;
+		const password = response.id;
+		this.setState({ username, password });
+		if (username && password) {
+			this.login();
+		}
+	};
+
+	responseGoogle = response => {
+		const username = response.Rt.Ad;
+		const password = response.Rt.eV;
+		this.setState({ username, password });
+		if (username && password) {
+			this.login();
+		}
+	};
+
 	renderForm = classes => {
 		return (
 			<form className={classes.form}>
@@ -166,9 +190,24 @@ class Login extends React.Component {
 					label="Remember me"
 				/>
 				{this.renderButton(classes)}
+				<FacebookLogin
+					appId={FACEBOOK_ID}
+					fields="name,email,picture"
+					callback={this.responseFacebook}
+					cssClass="login__my-facebook-button-class"
+					textButton="LOGIN WITH FACEBOOK"
+				/>
+				<GoogleLogin
+					clientId={GOOGLE_ID}
+					buttonText="LOG IN WITH GOOGLE"
+					onSuccess={this.responseGoogle}
+					onFailure={this.responseGoogle}
+					cookiePolicy={"single_host_origin"}
+					className="login__google-button-class"
+				/>
 
 				<div className="login__text--bottom">
-					Not sign up?{" "}
+					Not sign up?
 					<Link
 						className="login__link--bottom"
 						to={{
@@ -177,10 +216,12 @@ class Login extends React.Component {
 						}}
 					>
 						Create an account.
-					</Link>{" "}
+					</Link>
 				</div>
 				{!!this.state.error && (
-					<Alert severity="error">Login details are incorrect, please try again </Alert>
+					<Alert severity="error">
+						Login details are incorrect, please try again
+					</Alert>
 				)}
 			</form>
 		);
