@@ -3,11 +3,13 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {
 	Button,
 	Grid,
-	TextField,
 	Container,
 	CssBaseline,
 	withStyles,
 	Box,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
 	LinearProgress
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
@@ -60,6 +62,9 @@ const styles = theme => ({
 	},
 	loading: {
 		margin: theme.spacing(2, 0)
+	},
+	radioGroup: {
+		flexDirection: "row"
 	}
 });
 
@@ -68,7 +73,7 @@ class ClientSignup extends Component {
 		firstName: "",
 		lastName: "",
 		postcode: "",
-		gender: "",
+		gender: "female",
 		invalidName: false,
 		error: null,
 		isLoading: false,
@@ -109,6 +114,10 @@ class ClientSignup extends Component {
 		});
 	};
 
+	handleChange = event => {
+		this.setState({ gender: event.target.value })
+	}
+
 	renderButton = classes => {
 		if (this.state.isLoading) {
 			return <LinearProgress className={classes.loading} />;
@@ -126,6 +135,7 @@ class ClientSignup extends Component {
 			);
 		}
 	};
+
 	renderForm = classes => {
 		return (
 			<ValidatorForm
@@ -168,18 +178,32 @@ class ClientSignup extends Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
-							variant="outlined"
-							required
-							fullWidth
-							label="Gender"
-							value={this.state.gender}
-							onChange={event =>
-								this.setState({
-									gender: event.target.value
-								})
-							}
-						/>
+						<RadioGroup 
+							className={classes.radioGroup} 
+							aria-label="gender" 
+							name="gender"
+							value={this.state.gender} 
+							onChange={this.handleChange}
+						>
+							<FormControlLabel
+								value="female"
+								control={<Radio color="primary" />}
+								label="Female"
+								labelPlacement="end"
+							/>
+							<FormControlLabel
+								value="male"
+								control={<Radio color="primary" />}
+								label="Male"
+								labelPlacement="end"
+							/>
+							<FormControlLabel
+								value="other"
+								control={<Radio color="primary" />}
+								label="Other"
+								labelPlacement="end"
+							/>
+						</RadioGroup>
 					</Grid>
 					<Grid item xs={12}>
 						<TextValidator
