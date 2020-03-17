@@ -194,7 +194,7 @@ class Account extends Component {
 							onChange={this.changeHandler}
 						/>
 					</div>
-					<div className="account__from--button">
+					<div className="account__form--button">
 						{!this.state.updateButtonHidden ? (
 							<Button
 								variant="contained"
