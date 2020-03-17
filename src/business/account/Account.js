@@ -219,7 +219,7 @@ class Account extends Component {
 
 	render() {
 		return (
-			<div className="account__form">
+			<div className="business-account__form">
 				<Fragment>
 					<h1 className="account__form--header">Account</h1>
 					{this.renderContent()}
