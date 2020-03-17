@@ -32,13 +32,13 @@ import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
 import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
-import {
-	POST_ORDER_AT_HOMEPAGE,
-	FACEBOOK_ID,
-	GOOGLE_ID
-} from "../../utils/variables";
+import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
+
+const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
+const GOOGLE_ID = process.env.REACT_APP_GOOGLE_ID;
+
 class Login extends React.Component {
 	state = {
 		username: "",
