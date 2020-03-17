@@ -2,7 +2,7 @@ import React, { Fragment, Component } from "react";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
 import { updateBusinessById, fetchBusinessById } from "../../api/business";
 import Alert from "@material-ui/lab/Alert";
-import "../../client/account/style/account.scss";
+import "./style/account.scss";
 
 class Account extends Component {
 	constructor(props) {
@@ -192,7 +192,7 @@ class Account extends Component {
 							onChange={this.changeHandler}
 						/>
 					</div>
-					<div className="account__from--button">
+					<div className="account__form--button">
 						{!this.state.updateButtonHidden ? (
 							<Button
 								variant="contained"
