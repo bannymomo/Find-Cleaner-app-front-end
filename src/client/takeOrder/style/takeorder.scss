@@ -165,6 +165,9 @@
 	position: relative;
 	padding-left: 50px;
 	margin-bottom: 40px;
+	@media (max-width: $mediaXsWidth) {
+		padding-left: 20px;
+	}
 	& .submitButtonCircularProgress {
 		position: absolute;
 		right: 50px;
@@ -175,6 +178,11 @@
 		right: 50px;
 		bottom: 0;
 		background-color: $primary-color-blue;
+		@media (max-width: $mediaXsWidth) {
+			position: relative;
+			margin: 20px auto auto 32vw;
+		}
+
 		&:hover {
 			background-color: $primary-color-blue;
 		}

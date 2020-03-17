@@ -15,6 +15,7 @@ import ErrorMessage from "../../UI/ErrorMessage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
 import DateTime from "../takeOrder/components/DateTime";
+import Grid from "@material-ui/core/Grid";
 import "./order.scss";
 
 import { convertValue } from "../../utils/helper";
@@ -83,7 +84,7 @@ class OrderEdit extends React.Component {
 			this.state.carpet * 58 +
 			20;
 		this.setState({ price: totalPrice });
-	}
+	};
 
 	handleChange = event => {
 		const key = event.target.name;
@@ -119,15 +120,22 @@ class OrderEdit extends React.Component {
 
 		Geocode.fromAddress(`${order.location}`)
 			.then(() => {
-				!order.dueDate ? alert("Please choose a due date") :
-				this.handleUpdateOrder(orderId, order, clientId)
+				!order.dueDate
+					? alert("Please choose a due date")
+					: this.handleUpdateOrder(orderId, order, clientId);
 			})
-			.catch(() => alert("Location is invalid"))
+			.catch(() => alert("Location is invalid"));
 	};
 
-	renderButton = () => {		
+	renderButton = () => {
 		if (this.state.isUpdating) {
-			return <CircularProgress className="submitButtonCircularProgress" size={50} color="secondary" />
+			return (
+				<CircularProgress
+					className="submitButtonCircularProgress"
+					size={50}
+					color="secondary"
+				/>
+			);
 		}
 		return (
 			<Button
@@ -139,8 +147,8 @@ class OrderEdit extends React.Component {
 			>
 				Update my order
 			</Button>
-		)
-	}
+		);
+	};
 
 	renderContent = () => {
 		if (this.state.isLoading) {
@@ -149,53 +157,80 @@ class OrderEdit extends React.Component {
 					<CircularProgress size={200} color="secondary" />
 				</div>
 			);
-		} 
+		}
 		if (!!this.state.error) {
 			return <ErrorMessage error={this.state.error} />;
-		} 
+		}
 		return (
 			<div className="client__take-order-container">
-				<p id="take-order">Update your order here...</p>
-				<Bedrooms
-					bedrooms={this.state.bedrooms}
-					handleChange={this.handleChange}
-				/>
-				<Bathrooms
-					bathrooms={this.state.bathrooms}
-					handleChange={this.handleChange}
-				/>
-				<LeaseEnd
-					endOfLease={this.state.endOfLease}
-					handleChange={this.handleChange}
-				/>
-				<OtherClean
-					oven={this.state.oven}
-					windows={this.state.windows}
-					cabinets={this.state.cabinets}
-					carpet={this.state.carpet}
-					handleChange={this.handleChange}
-				/>
-				<Location
-					location={this.state.location}
-					handleChange={this.handleChange}
-				/>
-				<DateTime
-					dueDate={this.state.dueDate}
-					handleChange={this.handleChange}
-				/>
-				<Time
-					dueDate={this.state.dueDate}
-					handleChangeDate={this.handleChangeDate}
-				/>
-				<Description
-					description={this.state.description}
-					handleChange={this.handleChange}
-				/>
-				<TotalPrice price={this.state.price} />
-				{this.renderButton()}
+				<Grid
+					container
+					spacing={1}
+					className="client__take-order-container"
+				>
+					<p id="take-order">Update your order here...</p>
+					<Grid item xs={12}>
+						<Bedrooms
+							bedrooms={this.state.bedrooms}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<Bathrooms
+							bathrooms={this.state.bathrooms}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<LeaseEnd
+							endOfLease={this.state.endOfLease}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<OtherClean
+							oven={this.state.oven}
+							windows={this.state.windows}
+							cabinets={this.state.cabinets}
+							carpet={this.state.carpet}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<Location
+							location={this.state.location}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+
+					<Grid item xs={12}>
+						<DateTime
+							dueDate={this.state.dueDate}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<Time
+							dueDate={this.state.dueDate}
+							handleChangeDate={this.handleChangeDate}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<Description
+							description={this.state.description}
+							handleChange={this.handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TotalPrice price={this.state.price} />
+					</Grid>
+					<Grid item xs={12}>
+						{this.renderButton()}
+					</Grid>
+				</Grid>
 			</div>
-		)
-	}
+		);
+	};
 
 	render() {
 		return (
