@@ -24,7 +24,6 @@ import Maps from "./Maps";
 import BusinessProfile from "../businessProfile/BusinessProfile";
 import "./style/orderHistory.scss";
 
-
 const useStylesModal = makeStyles(theme => ({
 	modal: {
 		display: "flex",
@@ -49,7 +48,6 @@ const useStylesModal = makeStyles(theme => ({
 			color: "#2196f3",
 			backgroundColor: "white"
 		}
-
 	},
 	paper: {
 		display: "flex",
@@ -134,9 +132,7 @@ export default function OrderInformationList(props) {
 					>
 						<Fade in={openMap}>
 							<div className={modalClasses.map}>
-								<Maps 
-									address={props.location} 
-								/>
+								<Maps address={props.location} />
 								<Button
 									onClick={handleClose}
 									className={modalClasses.mapButton}

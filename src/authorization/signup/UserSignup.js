@@ -21,17 +21,14 @@ import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import MainNavigation from "../../navigation/MainNavigation";
 import { LOGIN_URL } from "../../routes/URLMap";
-import {
-	CLIENT_ROLE,
-	BUSINESS_ROLE,
-	FACEBOOK_ID,
-	GOOGLE_ID
-} from "../../utils/variables";
+import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import { FaFacebookF } from "react-icons/fa";
 
 import "./style/signup.scss";
+const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
+const GOOGLE_ID = process.env.REACT_APP_GOOGLE_ID;
 
 const styles = theme => ({
 	container: {
@@ -39,7 +36,7 @@ const styles = theme => ({
 		height: "100vh"
 	},
 	backGround: {
-		backgroundImage: `linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(${Background})`,
+		backgroundImage: `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(${Background})`,
 		backgroundPosition: "center",
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",

@@ -27,6 +27,8 @@
 	line-height: 22px;
 	text-align: right;
 	color: #646464;
+	z-index: 10;
+	position: relative;
 }
 
 .signin__link--bottom {
@@ -51,6 +53,8 @@ label {
 	border-radius: 5px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 	transition: all 0.3s ease;
+	z-index: 10;
+	position: relative;
 	&:hover {
 		background-color: rgb(30, 89, 156);
 	}
@@ -73,4 +77,6 @@ label {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 	height: 42px;
 	outline: none;
+	z-index: 10;
+	position: relative;
 }

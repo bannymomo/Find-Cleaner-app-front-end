@@ -38,13 +38,12 @@ function ProductHowItWorks(props) {
 	const { classes } = props;
 
 	return (
-		<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
-			<section className={classes.root}>
-				<Container className={classes.container}>
-					<div className="homepage-child-components__title--black">
-						How it works
-					</div>
-
+		<section className={classes.root}>
+			<Container className={classes.container}>
+				<div className="homepage-child-components__title--black">
+					How it works
+				</div>
+				<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
 					<div>
 						<Grid
 							container
@@ -93,22 +92,22 @@ function ProductHowItWorks(props) {
 							</Grid>
 						</Grid>
 					</div>
-					<Button
-						color="primary"
-						size="large"
-						variant="contained"
-						className={classes.button}
-						component={Link}
-						to={{
-							pathname: `${SIGNUP_URL}/user/business`,
-							role: BUSINESS_ROLE
-						}}
-					>
-						Register your business
-					</Button>
-				</Container>
-			</section>
-		</ScrollAnimation>
+				</ScrollAnimation>
+				<Button
+					color="primary"
+					size="large"
+					variant="contained"
+					className={classes.button}
+					component={Link}
+					to={{
+						pathname: `${SIGNUP_URL}/user/business`,
+						role: BUSINESS_ROLE
+					}}
+				>
+					Register your business
+				</Button>
+			</Container>
+		</section>
 	);
 }
 

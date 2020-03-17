@@ -6,3 +6,9 @@ body {
 .app__container--whole-page {
 	background-color: #f5f6fd;
 }
+
+.app__canvas-wrapper {
+	position: fixed;
+	z-index: 0;
+	width: 100%;
+}

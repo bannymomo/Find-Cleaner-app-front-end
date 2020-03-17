@@ -9,19 +9,21 @@ class Client extends Component {
 	render() {
 		return (
 			<Fragment>
-				<DashboardNavigation />
-				<div className="client__container--whole-page">
-					<div className="client__sidebar--page-left">
-						<div>
-							<SideBar />
+				<div className="client__whole-page">
+					<DashboardNavigation />
+					<div className="client__container--whole-page">
+						<div className="client__sidebar--page-left">
+							<div>
+								<SideBar />
+							</div>
 						</div>
-					</div>
 
-					<div className="client__content-container--page-right">
-						<div className="client__temporaryDrawer">
-							<ClientTempDrawer />
+						<div className="client__content-container--page-right">
+							<div className="client__temporaryDrawer">
+								<ClientTempDrawer />
+							</div>
+							<ClientRoutes />
 						</div>
-						<ClientRoutes />
 					</div>
 				</div>
 			</Fragment>

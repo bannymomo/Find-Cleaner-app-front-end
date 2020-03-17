@@ -42,7 +42,6 @@ export default function AppFooter() {
 								className="footer__links--white"
 								to={{
 									pathname: `${SIGNUP_URL}/user/business`
-									// role: BUSINESS_ROLE
 								}}
 							>
 								Register your business
