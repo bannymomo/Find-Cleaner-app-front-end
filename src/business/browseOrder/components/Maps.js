@@ -17,20 +17,12 @@ Geocode.setRegion("au");
 const stylesArray = [
 	{
 		featureType: "water",
-		stylers: [
-			{ saturation: 43 },
-			{ lightness: -11 },
-			{ hue: "#0088ff" }
-		]
+		stylers: [{ saturation: 43 }, { lightness: -11 }, { hue: "#0088ff" }]
 	},
 	{
 		featureType: "road",
 		elementType: "geometry.fill",
-		stylers: [
-			{ hue: "#ff0000" },
-			{ saturation: -100 },
-			{ lightness: 99 }
-		]
+		stylers: [{ hue: "#ff0000" }, { saturation: -100 }, { lightness: 99 }]
 	},
 	{
 		featureType: "road",
@@ -79,7 +71,7 @@ const stylesArray = [
 		featureType: "poi.business",
 		stylers: [{ visibility: "simplified" }]
 	}
-]
+];
 
 const CustomSkinMap = withScriptjs(
 	withGoogleMap(props => (
@@ -93,17 +85,15 @@ const CustomSkinMap = withScriptjs(
 			}}
 		>
 			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
-			{
-				props.locations.map( location => (
-					<Marker position={ location }  />
-				))
-			}
+			{props.locations.map(location => (
+				<Marker position={location} />
+			))}
 		</GoogleMap>
 	))
 );
 
 export default function Maps(props) {
-	const addresses = props.orders.map( order => order.location );
+	const addresses = props.orders.map(order => order.location);
 
 	const [locations, setLocations] = React.useState([]);
 
@@ -116,11 +106,11 @@ export default function Maps(props) {
 				const { lat, lng } = response.results[0].geometry.location;
 				setLocations(locations => [...locations, { lat, lng }]);
 			})
-			.catch(error => console.error(error))
+			.catch(error => console.error(error));
 	};
 
 	useEffect(() => {
-		addresses.forEach( address => {
+		addresses.forEach(address => {
 			getLocation(address);
 		});
 	}, [props.orders]);
@@ -131,7 +121,7 @@ export default function Maps(props) {
 			googleMapURL={googleMapURL}
 			loadingElement={<div style={{ height: `100%` }} />}
 			containerElement={<div style={{ height: `100%`, width: `100%` }} />}
-			mapElement={<div style={{ height: `100%` }} />}
+			mapElement={<div style={{ height: `98%` }} />}
 		/>
 	);
 }
