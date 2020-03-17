@@ -220,7 +220,9 @@ class Login extends React.Component {
 				</div>
 				{!!this.state.error && (
 					<Alert severity="error">
-						Login details are incorrect, please try again
+						Login details are incorrect, please try again. <br />
+						If you wanna login with Facebook or Google, please sign
+						up with them first.
 					</Alert>
 				)}
 			</form>
