@@ -56,7 +56,7 @@ function SimpleList(props) {
 		<div>
 			<div className="client__avatar-container--left-top">
 				<BusinessAvatar />
-				<p>business name</p>
+				{/* <p>business name</p> */}
 			</div>
 			<div className={classes.root}>
 				<Divider />
