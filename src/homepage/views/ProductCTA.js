@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "../../UI/Button";
-import ScrollAnimation from "react-animate-on-scroll";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -30,54 +29,52 @@ function ProductCTA() {
 	`;
 
 	return (
-		<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
-			<div className="productcta__container--whole">
-				<div className="productcta__title--black">
-					We are always here to help. Get in touch！
-				</div>
-
-				<Button
-					color="primary"
-					variant="contained"
-					className="product-container__button--blue-thin"
-				>
-					Ask me questions
-				</Button>
-
-				<div className="productcta__title--black">
-					Subscribe our newsletter
-				</div>
-				<form noValidate autoComplete="off">
-					<div className="product-container__input-container--whole">
-						<StyledTextField
-							id="outlined-basic"
-							label="Email-address"
-							variant="outlined"
-							fullWidth={true}
-						/>
-						<div className="product-container__button--blue">
-							<Button
-								onClick={handleClick}
-								color="primary"
-								variant="contained"
-							>
-								Subscribe
-							</Button>
-						</div>
-
-						<Snackbar
-							open={open}
-							autoHideDuration={6000}
-							onClose={handleClose}
-						>
-							<Alert onClose={handleClose} severity="info">
-								Thanks for subscribing our website
-							</Alert>
-						</Snackbar>
-					</div>
-				</form>
+		<div className="productcta__container--whole">
+			<div className="productcta__title--black">
+				We are always here to help. Get in touch！
 			</div>
-		</ScrollAnimation>
+
+			<Button
+				color="primary"
+				variant="contained"
+				className="product-container__button--blue-thin"
+			>
+				Ask me questions
+			</Button>
+
+			<div className="productcta__title--black">
+				Subscribe our newsletter
+			</div>
+			<form noValidate autoComplete="off">
+				<div className="product-container__input-container--whole">
+					<StyledTextField
+						id="outlined-basic"
+						label="Email-address"
+						variant="outlined"
+						fullWidth={true}
+					/>
+					<div className="product-container__button--blue">
+						<Button
+							onClick={handleClick}
+							color="primary"
+							variant="contained"
+						>
+							Subscribe
+						</Button>
+					</div>
+
+					<Snackbar
+						open={open}
+						autoHideDuration={6000}
+						onClose={handleClose}
+					>
+						<Alert onClose={handleClose} severity="info">
+							Thanks for subscribing our website
+						</Alert>
+					</Snackbar>
+				</div>
+			</form>
+		</div>
 	);
 }
 

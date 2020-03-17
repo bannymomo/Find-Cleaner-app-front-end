@@ -17,6 +17,8 @@
 			margin-bottom: 0;
 		}
 	}
+	z-index: 10;
+	position: relative;
 }
 
 .product-hero__title--black {
@@ -98,6 +100,7 @@
 .product-value__container--whole {
 	margin: 200px auto 150px;
 }
+
 .product-how-it-works__title--black {
 	font-size: 25px;
 	font-family: Nunito;
@@ -202,7 +205,7 @@
 }
 
 .footer__container--main {
-	background-color: #646464;
+	background-color: #858282;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -258,6 +261,9 @@
 	.footer__links--white {
 		text-decoration: none;
 		color: white;
+		z-index: 5;
+		display: inline-block;
+		position: relative;
 	}
 	button {
 		border-radius: 10px;
