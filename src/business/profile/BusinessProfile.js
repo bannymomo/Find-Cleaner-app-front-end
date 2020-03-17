@@ -74,7 +74,12 @@ const useStyles = makeStyles(theme => ({
 		color: "#3f89decc",
 		borderBottom: "1px solid",
 		marginTop: theme.spacing(-3),
-		marginLeft: theme.spacing(58),
+		marginLeft: theme.spacing(70),
+		[theme.breakpoints.down("sm")]: {
+			marginTop: theme.spacing(-3),
+			marginLeft: theme.spacing(67),
+			fontSize: "10px"
+		},
 		[theme.breakpoints.down("xs")]: {
 			marginTop: theme.spacing(-3),
 			marginLeft: theme.spacing(28),
