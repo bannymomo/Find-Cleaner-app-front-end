@@ -3,6 +3,9 @@
 .login__logo {
 	margin-top: 20px;
 	margin-bottom: 0px;
+	@media (max-width: "320px") {
+		display: none;
+	}
 }
 
 .login__logo--pic {
