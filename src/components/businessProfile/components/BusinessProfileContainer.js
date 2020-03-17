@@ -137,7 +137,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="body2"
 								color="textSecondary"
 								row="5"
-								multiline
+								multiline="true"
 							>
 								{description}
 							</Typography>

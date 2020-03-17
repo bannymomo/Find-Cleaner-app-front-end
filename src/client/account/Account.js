@@ -221,10 +221,12 @@ class Account extends Component {
 
 	render() {
 		return (
-			<Fragment>
-				<h3 className="account__form--header">Account</h3>
-				{this.renderContent()}
-			</Fragment>
+			<div className="client-account">
+				<Fragment>
+					<h3 className="account__form--header">Account</h3>
+					{this.renderContent()}
+				</Fragment>
+			</div>
 		);
 	}
 }
