@@ -1,6 +1,6 @@
 @import "../../../theme/variables.scss";
 
-.client-account {
+.account__form {
 	.account__progress--container {
 		text-align: center;
 		padding-top: 30%;
@@ -31,12 +31,12 @@
 
 	.account__form--edit {
 		position: absolute;
-		top: 15%;
+		top: 10%;
 		left: 70%;
-		// @media (max-width: $mediaXsWidth) {
-		// 	top: 0;
-		// 	left: 60%;
-		// }
+		@media (max-width: $mediaXsWidth) {
+			top: 25px;
+			left: 60%;
+		}
 	}
 	.account__form--personal {
 		display: flex;
@@ -46,6 +46,9 @@
 		font: $primary-font-family;
 		padding-bottom: 2vh;
 		margin-right: 10vh;
+		@media (max-width: $mediaXsWidth) {
+			margin: 10px 0 0 0px;
+		}
 	}
 
 	.account__form--contact {
@@ -55,15 +58,36 @@
 		margin-bottom: 0;
 		font: $primary-font-family;
 		margin-right: 10vh;
+		@media (max-width: $mediaXsWidth) {
+			margin: 10px 0 0 30px;
+		}
 	}
 
 	.account__form--input {
 		width: 50%;
+		@media (max-width: $mediaXsWidth) {
+			width: 80vw;
+		}
+	}
+	.account__form--input-description {
+		width: 40vw;
+		@media (max-width: $mediaMdWidth) {
+			width: 50vw;
+		}
+		@media (max-width: $mediaSmWidth) {
+			width: 65vw;
+		}
+		@media (max-width: $mediaXsWidth) {
+			width: 80vw;
+		}
 	}
 
 	.account__from--button {
 		margin-top: 3vh;
 		margin-left: 12vh;
+		@media (max-width: $mediaXsWidth) {
+			margin: 15px 30px;
+		}
 	}
 	.account__form--error {
 		width: 30vh;

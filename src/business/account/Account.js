@@ -34,7 +34,7 @@ class Account extends Component {
 		this.setState({ isLoading: true });
 		fetchBusinessById(businessID)
 			.then(data => {
-				console.log(data)
+				console.log(data);
 				this.setState({
 					businessName: data.businessName,
 					address: data.address,
@@ -71,7 +71,7 @@ class Account extends Component {
 			postcode: this.state.postcode,
 			contactNumber: this.state.telephoneNumber,
 			ABNNumber: this.state.ABNNumber,
-			description: this.state.description,
+			description: this.state.description
 		};
 		const businessID = this.props.match.params.businessId;
 		this.setState({ isUpdating: true }, () => {
@@ -138,7 +138,7 @@ class Account extends Component {
 							/>
 							<TextField
 								variant="outlined"
-								className="account__form--input"
+								className="account__form--input-description"
 								label="Description"
 								name="description"
 								margin="normal"
@@ -213,16 +213,18 @@ class Account extends Component {
 						)}
 					</div>
 				</Fragment>
-			)
+			);
 		}
-	}
+	};
 
 	render() {
 		return (
-			<Fragment>
-				<h1 className="account__form--header">Account</h1>
-				{this.renderContent()}
-			</Fragment>
+			<div className="account__form">
+				<Fragment>
+					<h1 className="account__form--header">Account</h1>
+					{this.renderContent()}
+				</Fragment>
+			</div>
 		);
 	}
 }
