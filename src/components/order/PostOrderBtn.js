@@ -26,6 +26,9 @@ const useStylesModal = makeStyles(theme => ({
 		border: "2px solid #fff",
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(1, 4, 2),
+		[theme.breakpoints.down("xs")]: {
+			padding: theme.spacing(2.5)
+		},
 		outline: 0
 	},
 	button: {
