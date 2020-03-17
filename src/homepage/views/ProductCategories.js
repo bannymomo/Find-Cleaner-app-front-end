@@ -18,11 +18,11 @@ import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
 const styles = theme => ({
 	root: {
-		marginTop: theme.spacing(8),
-		marginBottom: theme.spacing(4)
+		marginTop: theme.spacing(8)
 	},
 	images: {
 		marginTop: theme.spacing(8),
+		marginBottom: theme.spacing(4),
 		display: "flex",
 		flexWrap: "wrap"
 	},

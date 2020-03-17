@@ -30,6 +30,8 @@ jobs:
         cmd: build
       env:
         REACT_APP_GOOGLE_MAP_API_KEY: ${{secrets.REACT_APP_GOOGLE_MAP_API_KEY}}
+        REACT_APP_GOOGLE_ID: ${{secrets.REACT_APP_GOOGLE_ID}}
+        REACT_APP_FACEBOOK_ID: ${{secrets.REACT_APP_FACEBOOK_ID}}  
         
     - name: upload artifact
       uses: actions/upload-artifact@master
@@ -74,3 +76,5 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         REACT_APP_GOOGLE_MAP_API_KEY: ${{secrets.REACT_APP_GOOGLE_MAP_API_KEY}}
+        REACT_APP_GOOGLE_ID: ${{secrets.REACT_APP_GOOGLE_ID}}
+        REACT_APP_FACEBOOK_ID: ${{secrets.REACT_APP_FACEBOOK_ID}}

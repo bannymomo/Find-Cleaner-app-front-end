@@ -10,16 +10,18 @@ class Business extends Component {
 	render() {
 		return (
 			<Fragment>
-				<DashboardNavigation />
-				<div className="business__container--whole-page">
-					<div className="business__sidebar--page-left">
-						<SideBar />
-					</div>
-					<div className="business__content-container--page-right">
-						<div className="business__temporaryDrawer">
-							<BusinessTempDrawer />
+				<div className="business__whole-page">
+					<DashboardNavigation />
+					<div className="business__container--whole-page">
+						<div className="business__sidebar--page-left">
+							<SideBar />
 						</div>
-						<BusinessRoutes />
+						<div className="business__content-container--page-right">
+							<div className="business__temporaryDrawer">
+								<BusinessTempDrawer />
+							</div>
+							<BusinessRoutes />
+						</div>
 					</div>
 				</div>
 			</Fragment>

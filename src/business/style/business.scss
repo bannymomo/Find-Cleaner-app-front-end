@@ -1,6 +1,12 @@
 @import "../../theme/variables.scss";
 
+.business__whole-page {
+	background-color: #e8eaf6;
+}
+
 .business__container--whole-page {
+	position: relative;
+	z-index: 50;
 	padding-top: 70px;
 	width: 1024px;
 	border: solid 1px rgba(0, 0, 0, 0.1);

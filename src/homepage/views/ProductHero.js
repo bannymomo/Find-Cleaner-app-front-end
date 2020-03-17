@@ -47,7 +47,6 @@ function ProductHero(props) {
 					component={Link}
 					to={{
 						pathname: `${SIGNUP_URL}/user/client`
-						// role: CLIENT_ROLE
 					}}
 				>
 					Get started now
