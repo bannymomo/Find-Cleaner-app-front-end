@@ -17,20 +17,12 @@ Geocode.setRegion("au");
 const stylesArray = [
 	{
 		featureType: "water",
-		stylers: [
-			{ saturation: 43 },
-			{ lightness: -11 },
-			{ hue: "#0088ff" }
-		]
+		stylers: [{ saturation: 43 }, { lightness: -11 }, { hue: "#0088ff" }]
 	},
 	{
 		featureType: "road",
 		elementType: "geometry.fill",
-		stylers: [
-			{ hue: "#ff0000" },
-			{ saturation: -100 },
-			{ lightness: 99 }
-		]
+		stylers: [{ hue: "#ff0000" }, { saturation: -100 }, { lightness: 99 }]
 	},
 	{
 		featureType: "road",
@@ -79,7 +71,7 @@ const stylesArray = [
 		featureType: "poi.business",
 		stylers: [{ visibility: "simplified" }]
 	}
-]
+];
 
 const CustomSkinMap = withScriptjs(
 	withGoogleMap(props => (
@@ -108,11 +100,11 @@ export default function Maps(props) {
 			address = "116 adelaide st, brisbane";
 		}
 		Geocode.fromAddress(`${address}`)
-			.then( response => {
+			.then(response => {
 				const { lat, lng } = response.results[0].geometry.location;
 				setLocation({ lat, lng });
 			})
-			.catch(error => console.error(error))
+			.catch(error => console.error(error));
 	};
 
 	useEffect(() => {

@@ -155,7 +155,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Member since: 
+								Member since :
 								<Moment format="DD-MM-YY HH:mm">
 									{memberSince}
 								</Moment>
@@ -171,10 +171,10 @@ export default function BusinessProfileSidebar(props) {
 								variant="subtitle2"
 								color="textSecondary"
 							>
-								Last online: 
+								Last online :
 								<Moment format="DD-MM-YY HH:mm">
 									{lastOnline}
-								</Moment>								
+								</Moment>
 							</Typography>
 						}
 					/>

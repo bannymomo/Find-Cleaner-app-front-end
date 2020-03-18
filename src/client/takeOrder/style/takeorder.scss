@@ -31,27 +31,20 @@
 		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 		font-weight: 500;
 	}
+
 	& .MuiGrid-container {
 		& .MuiSvgIcon-root {
 			padding-right: 5px;
 			padding-left: 7px;
-			@media (max-width: $mediaXsWidth) {
-				margin-top: 3px;
-			}
 		}
 	}
+
 	& .client__take-order-container {
-		max-width: 450px;
-		@media (max-width: $mediaXsWidth) {
-			& * {
-				font-size: 14px;
-			}
-		}
 		& .take-order--toggle-button-group {
 			& div.MuiToggleButtonGroup-root {
 				margin-bottom: 1rem;
 				& .MuiButtonBase-root {
-					@media (max-width: $mediaXsWidth) {
+					@media (max-width: "320px") {
 						padding: 10px 20px;
 					}
 
@@ -75,18 +68,12 @@
 		& .take-order--checkbox div.MuiPaper-root {
 			background-color: #2195f31a;
 			margin-bottom: 1.2rem;
-			@media (max-width: $mediaXsWidth) {
-				width: 250px;
-			}
 
 			& .MuiFormControlLabel-root {
 				margin-left: 0;
 				& .MuiTypography-body1 {
 					font-size: 0.8rem;
 					color: #0008;
-					@media (max-width: $mediaXsWidth) {
-						font-size: 14px;
-					}
 				}
 			}
 		}
@@ -95,24 +82,15 @@
 			background-color: #eeee;
 			margin-bottom: 1.5rem;
 			margin-top: 0.5rem;
+
 			@media (max-width: $mediaXsWidth) {
-				height: 60px;
-				width: 100px;
 				margin-right: 20px;
-				margin-bottom: 20px;
-			}
-			@media (max-width: $mediaXxsWidth) {
-				height: 60px;
-				width: 80px;
-				margin-right: 20px;
-				margin-bottom: 20px;
+				margin-left: 10px;
 			}
 
 			& .MuiIconButton-root {
-				margin: -20px 0 0 -15px;
-				@media (max-width: $mediaXsWidth) {
-					margin: -10px 0 0 -70px;
-				}
+				margin-left: -85px;
+				margin-top: -15px;
 			}
 
 			& span.MuiTypography-body1 {
@@ -120,14 +98,10 @@
 			}
 
 			& p.MuiTypography-body1 {
-				// margin: -6px 0;
 				line-height: 0.8rem;
 				text-align: center;
 				font-size: 0.8rem;
-				@media (max-width: $mediaXsWidth) {
-					// text-align: right;
-					padding-right: 5px;
-				}
+				padding-left: 10px;
 			}
 		}
 
@@ -194,6 +168,9 @@
 	position: relative;
 	padding-left: 50px;
 	margin-bottom: 40px;
+	@media (max-width: $mediaXsWidth) {
+		padding-left: 20px;
+	}
 	& .submitButtonCircularProgress {
 		position: absolute;
 		right: 50px;
@@ -204,6 +181,11 @@
 		right: 50px;
 		bottom: 0;
 		background-color: $primary-color-blue;
+		@media (max-width: $mediaXsWidth) {
+			position: relative;
+			margin: 20px auto auto 32vw;
+		}
+
 		&:hover {
 			background-color: $primary-color-blue;
 		}

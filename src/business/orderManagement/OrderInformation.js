@@ -167,7 +167,7 @@ class OrderInformaiton extends React.Component {
 						className="order-information__top"
 						spacing={2}
 					>
-						<Grid item xs={8}>
+						<Grid item sm={8} xs={12}>
 							<div className="order-information__head">
 								<ul className="order-information__status">
 									<li className="order-information__status-active">
@@ -186,7 +186,7 @@ class OrderInformaiton extends React.Component {
 								role={this.state.role}
 							/>
 						</Grid>
-						<Grid item xs={4}>
+						<Grid item sm={4} xs={12}>
 							<Card>
 								<CardContent className="order-information__budget">
 									<Typography gutterBottom>Price</Typography>

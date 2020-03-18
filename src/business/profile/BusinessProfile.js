@@ -15,6 +15,7 @@ import {
 
 import Rating from "@material-ui/lab/Rating";
 
+import BusinessOutlinedIcon from "@material-ui/icons/BusinessOutlined";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
@@ -73,7 +74,17 @@ const useStyles = makeStyles(theme => ({
 		color: "#3f89decc",
 		borderBottom: "1px solid",
 		marginTop: theme.spacing(-3),
-		marginLeft: theme.spacing(58),
+		marginLeft: theme.spacing(70),
+		[theme.breakpoints.down("sm")]: {
+			marginTop: theme.spacing(-3),
+			marginLeft: theme.spacing(67),
+			fontSize: "10px"
+		},
+		[theme.breakpoints.down("xs")]: {
+			marginTop: theme.spacing(-3),
+			marginLeft: theme.spacing(28),
+			fontSize: "10px"
+		},
 		"&:hover": {
 			textDecoration: "none",
 			color: "#3f89de"
@@ -85,8 +96,6 @@ export default function BusinessProfileSidebar(props) {
 	const classes = useStyles();
 	const {
 		ABNNumber,
-		// photo,
-		// businessName,
 		email,
 		address,
 		telephoneNumber,
@@ -142,192 +151,184 @@ export default function BusinessProfileSidebar(props) {
 	];
 
 	return (
-		<div className="business-profile__container">
-			<List>
-				<ListItem alignItems="flex-start">
-					<ListItemText
-						secondary={
-							<Typography
-								variant="body2"
-								color="textSecondary"
-								row="5"
-							>
-								{description}
-							</Typography>
-						}
-					/>
-					<ListItemText
-						secondary={
-							<Typography variant="body2" color="textSecondary">
-								ABN <span>{ABNNumber}</span>
-							</Typography>
-						}
-					/>
-				</ListItem>
-				<Divider variant="middle" component="li" />
+		<List>
+			<ListItem
+				alignItems="flex-start"
+				className="business-profile__description"
+			>
+				<ListItemText
+					secondary={
+						<Typography
+							variant="body2"
+							color="textSecondary"
+							row="5"
+						>
+							{description}
+						</Typography>
+					}
+				/>
+			</ListItem>
+			<Divider
+				variant="middle"
+				component="li"
+				className="business-profile__divider"
+			/>
 
-				<ListItem alignItems="flex-start">
-					<PhoneAndroidOutlinedIcon />
-					<ListItemText
-						secondary={
-							<Typography
-								variant="subtitle2"
-								color="textSecondary"
-							>
-								{telephoneNumber}
-							</Typography>
-						}
-					/>
-				</ListItem>
+			<ListItem alignItems="flex-start">
+				<BusinessOutlinedIcon />
+				<ListItemText
+					secondary={
+						<Typography variant="subtitle2" color="textSecondary">
+							ABN: <span>{ABNNumber}</span>
+						</Typography>
+					}
+				/>
+			</ListItem>
+			<ListItem alignItems="flex-start">
+				<PhoneAndroidOutlinedIcon />
+				<ListItemText
+					secondary={
+						<Typography variant="subtitle2" color="textSecondary">
+							{telephoneNumber}
+						</Typography>
+					}
+				/>
+			</ListItem>
 
-				<ListItem alignItems="flex-start">
-					<AlternateEmailOutlinedIcon />
-					<ListItemText
-						secondary={
-							<Typography
-								variant="subtitle2"
-								color="textSecondary"
-							>
-								{email}
-							</Typography>
-						}
-					/>
-				</ListItem>
-				<ListItem alignItems="flex-start">
-					<AddLocationOutlinedIcon />
-					<ListItemText
-						secondary={
-							<Typography
-								variant="subtitle2"
-								color="textSecondary"
-							>
-								{address}, {postcode}
-							</Typography>
-						}
-					/>
-				</ListItem>
+			<ListItem alignItems="flex-start">
+				<AlternateEmailOutlinedIcon />
+				<ListItemText
+					secondary={
+						<Typography variant="subtitle2" color="textSecondary">
+							{email}
+						</Typography>
+					}
+				/>
+			</ListItem>
+			<ListItem alignItems="flex-start">
+				<AddLocationOutlinedIcon />
+				<ListItemText
+					secondary={
+						<Typography variant="subtitle2" color="textSecondary">
+							{address}, {postcode}
+						</Typography>
+					}
+				/>
+			</ListItem>
 
-				<ListItem alignItems="flex-start">
-					<UpdateOutlinedIcon />
-					<ListItemText
-						secondary={
-							<Typography
-								variant="subtitle2"
-								color="textSecondary"
-							>
-								Member since: 
-								<Moment format="DD-MM-YY HH:mm">
-									{memberSince}
-								</Moment>
-							</Typography>
-						}
-					/>
-				</ListItem>
-				<ListItem alignItems="flex-start">
-					<HistoryOutlinedIcon />
-					<ListItemText
-						secondary={
-							<Typography
-								variant="subtitle2"
-								color="textSecondary"
-							>
-								Last online: 
-								<Moment format="DD-MM-YY HH:mm">
-									{lastOnline}
-								</Moment>
-							</Typography>
-						}
-					/>
-				</ListItem>
+			<ListItem alignItems="flex-start">
+				<UpdateOutlinedIcon />
+				<ListItemText
+					secondary={
+						<Typography variant="subtitle2" color="textSecondary">
+							Member since:
+							<Moment format="DD-MM-YY HH:mm">
+								{memberSince}
+							</Moment>
+						</Typography>
+					}
+				/>
+			</ListItem>
+			<ListItem alignItems="flex-start">
+				<HistoryOutlinedIcon />
+				<ListItemText
+					secondary={
+						<Typography variant="subtitle2" color="textSecondary">
+							Last online:
+							<Moment format="DD-MM-YY HH:mm">
+								{lastOnline}
+							</Moment>
+						</Typography>
+					}
+				/>
+			</ListItem>
 
-				<ListItem alignItems="flex-start">
-					<ListItemText
-						primary={
-							<Typography variant="subtitle1" color="textPrimary">
-								Portfilio
-							</Typography>
-						}
-					></ListItemText>
-				</ListItem>
-				<ListItem alignItems="flex-start">
-					<Grid container spacing={2}>
-						{images.map(image => {
-							const StyledButtonBase = styled(ButtonBase)`
-								width: ${image.width};
-							`;
-							const StyledDiv = styled.div`
-								background-image: url(${image.url});
-							`;
-							return (
-								<Grid
-									item
-									xs
-									className={classes.images}
-									key={image.title}
+			<ListItem alignItems="flex-start">
+				<ListItemText
+					primary={
+						<Typography variant="subtitle1" color="textPrimary">
+							Portfilio
+						</Typography>
+					}
+				></ListItemText>
+			</ListItem>
+			<ListItem alignItems="flex-start">
+				<Grid container spacing={2}>
+					{images.map(image => {
+						const StyledButtonBase = styled(ButtonBase)`
+							width: ${image.width};
+						`;
+						const StyledDiv = styled.div`
+							background-image: url(${image.url});
+						`;
+						return (
+							<Grid
+								item
+								sm={3}
+								xs={6}
+								className={classes.images}
+								key={image.title}
+							>
+								<StyledButtonBase
+									className={classes.imageWrapper}
 								>
-									<StyledButtonBase
-										className={classes.imageWrapper}
-									>
-										<StyledDiv
-											className={classes.imageSrc}
-										/>
-									</StyledButtonBase>
-								</Grid>
-							);
-						})}
-					</Grid>
-				</ListItem>
-
-				<ListItem alignItems="flex-start">
-					<ListItemText
-						primary={
-							<Typography variant="subtitle1" color="textPrimary">
-								Reviews
-							</Typography>
-						}
-					></ListItemText>
-				</ListItem>
-
-				<div className={classes.rating}>
-					<Rating
-						name="half-rating-read"
-						defaultValue={value}
-						precision={0.5}
-						readOnly
-					/>
-					<span>{value}</span>
-					<span>|</span>
-					<span>219 Reviews</span>
-				</div>
-				<ListItem alignItems="flex-start" className={classes.reviews}>
-					<ListItemText
-						primary={
-							<Typography variant="caption" color="textSecondary">
-								208 out of 219 (95%) reviewers recommend this
-								business
-							</Typography>
-						}
-					></ListItemText>
-				</ListItem>
-				<ListItem alignItems="flex-start">
-					<Grid container spacing={0}>
-						{reviews.map(review => (
-							<Grid item xs key={review.name + review.date}>
-								<Reviews
-									name={review.name}
-									rating={review.rating}
-									date={review.date}
-									service={review.service}
-									comment={review.comment}
-								/>
+									<StyledDiv className={classes.imageSrc} />
+								</StyledButtonBase>
 							</Grid>
-						))}
-					</Grid>
-				</ListItem>
-				<Link className={classes.buttonLink} component="button">
-					View more
-				</Link>
-			</List>
-		</div>
+						);
+					})}
+				</Grid>
+			</ListItem>
+
+			<ListItem alignItems="flex-start">
+				<ListItemText
+					primary={
+						<Typography variant="subtitle1" color="textPrimary">
+							Reviews
+						</Typography>
+					}
+				></ListItemText>
+			</ListItem>
+
+			<div className={classes.rating}>
+				<Rating
+					name="half-rating-read"
+					defaultValue={value}
+					precision={0.5}
+					readOnly
+				/>
+				<span>{value}</span>
+				<span>|</span>
+				<span>219 Reviews</span>
+			</div>
+			<ListItem alignItems="flex-start" className={classes.reviews}>
+				<ListItemText
+					primary={
+						<Typography variant="caption" color="textSecondary">
+							208 out of 219 (95%) reviewers recommend this
+							business
+						</Typography>
+					}
+				></ListItemText>
+			</ListItem>
+			<ListItem alignItems="flex-start">
+				<Grid container spacing={0}>
+					{reviews.map(review => (
+						<Grid item xs key={review.name + review.date}>
+							<Reviews
+								name={review.name}
+								rating={review.rating}
+								date={review.date}
+								service={review.service}
+								comment={review.comment}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			</ListItem>
+			<Link className={classes.buttonLink} component="button">
+				View more
+			</Link>
+		</List>
 	);
 }

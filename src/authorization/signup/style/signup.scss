@@ -3,10 +3,17 @@
 .signUp__logo {
 	margin-top: 20px;
 	margin-bottom: 0px;
+	@media (max-width: "320px") {
+		display: none;
+	}
 }
 
 .sign-up__header {
 	text-transform: uppercase;
+	@media (max-width: "320px") {
+		font-size: 16px;
+		line-height: 16px;
+	}
 }
 .signUp__logo--pic {
 	height: 34px;

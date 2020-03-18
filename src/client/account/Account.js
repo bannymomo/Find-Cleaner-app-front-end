@@ -194,7 +194,7 @@ class Account extends Component {
 							onChange={this.changeHandler}
 						/>
 					</div>
-					<div className="account__from--button">
+					<div className="account__form--button">
 						{!this.state.updateButtonHidden ? (
 							<Button
 								variant="contained"
@@ -221,10 +221,12 @@ class Account extends Component {
 
 	render() {
 		return (
-			<Fragment>
-				<h3 className="account__form--header">Account</h3>
-				{this.renderContent()}
-			</Fragment>
+			<div className="client-account__form">
+				<Fragment>
+					<h3 className="account__form--header">Account</h3>
+					{this.renderContent()}
+				</Fragment>
+			</div>
 		);
 	}
 }

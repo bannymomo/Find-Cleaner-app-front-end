@@ -61,6 +61,11 @@ const useStyles = makeStyles(theme => ({
 		borderBottom: "1px solid",
 		marginTop: theme.spacing(-3),
 		marginLeft: theme.spacing(58),
+		[theme.breakpoints.down("xs")]: {
+			marginTop: theme.spacing(-3),
+			marginLeft: theme.spacing(33)
+		},
+
 		"&:hover": {
 			textDecoration: "none",
 			color: "#3f89de"
@@ -132,7 +137,7 @@ export default function BusinessProfileSidebar(props) {
 								variant="body2"
 								color="textSecondary"
 								row="5"
-								multiline
+								multiline="true"
 							>
 								{description}
 							</Typography>
@@ -161,7 +166,8 @@ export default function BusinessProfileSidebar(props) {
 							return (
 								<Grid
 									item
-									xs
+									sm={3}
+									xs={6}
 									className={classes.images}
 									key={image.title}
 								>

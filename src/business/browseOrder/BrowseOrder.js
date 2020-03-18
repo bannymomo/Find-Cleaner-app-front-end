@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import OrderCard from "../../components/order/OrderCard";
-import { Container, Grid, CircularProgress  } from "@material-ui/core";
+import { Container, Grid, CircularProgress } from "@material-ui/core";
 
 import Maps from "./components/Maps";
 import SearchBar from "./components/Search";
@@ -14,6 +14,7 @@ import { fetchAllNewOrders } from "../../api/order";
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 import { BUSINESS_ROLE } from "../../utils/variables";
+import MapButton from "./components/MapButton";
 
 class BrowseOrder extends Component {
 	state = {
@@ -23,7 +24,7 @@ class BrowseOrder extends Component {
 		pagination: {
 			page: 1,
 			pageSize: 5
-		},
+		}
 	};
 
 	componentDidMount() {
@@ -55,9 +56,6 @@ class BrowseOrder extends Component {
 		orders.sort((a, b) => {
 			let keyA = new Date(a.dueDate),
 				keyB = new Date(b.dueDate);
-			// if (keyA < keyB) return -1;
-			// if (keyA > keyB) return 1;
-			// return 0;
 			return keyA - keyB;
 		});
 		this.setState({ orders });
@@ -81,20 +79,16 @@ class BrowseOrder extends Component {
 					<CircularProgress size={200} color="secondary" />
 				</div>
 			);
-		} 
+		}
 		if (!!this.state.error) {
 			return <ErrorMessage error={this.state.error} />;
-		} 
+		}
 		if (!this.state.isLoading && !this.state.orders.length) {
 			return <p> There is no opened orders at the moment. </p>;
-		} 
+		}
 		return (
-			<Grid
-				container
-				spacing={3}
-				className="browse-orders--container"
-			>
-				<Grid item xs={6}>
+			<Grid container spacing={1} className="browse-orders--container">
+				<Grid item sm={6} xs={11}>
 					{this.state.orders.map(order => (
 						<OrderCard
 							key={order._id}
@@ -107,12 +101,15 @@ class BrowseOrder extends Component {
 						/>
 					))}
 				</Grid>
-				<Grid item xs={6}>
-					<Maps orders={this.state.orders} />
+				<Grid item sm={6}>
+					<Maps
+						orders={this.state.orders}
+						className="browse-orders--map"
+					/>
 				</Grid>
-			</Grid>			
-		)
-	}
+			</Grid>
+		);
+	};
 
 	render() {
 		const businessId = this.props.match.params.businessId;
@@ -127,6 +124,7 @@ class BrowseOrder extends Component {
 						/>
 						<NewTasks />
 						<SearchBar />
+						<MapButton orders={this.state.orders} />
 					</div>
 
 					<Container className="order-history__container">

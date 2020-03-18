@@ -6,7 +6,10 @@ import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles(theme => ({
 	formControl: {
-		minWidth: 120,
+		minWidth: 150,
+		[theme.breakpoints.down("xs")]: {
+			width: 170
+		},
 		"& > span": {
 			fontSize: "10px",
 			color: "#0006"

@@ -2,6 +2,12 @@
 
 .profile__container {
 	padding-left: 40px;
+	@media (max-width: $mediaXsWidth) {
+		padding-left: 30px;
+	}
+	@media (max-width: "320px") {
+		padding-left: 10px;
+	}
 }
 .business-profile__header {
 	font-family: Nunito;
@@ -21,18 +27,36 @@
 
 .business-profile__container {
 	width: 90%;
+	& .business-profile__description {
+		@media (max-width: $mediaXsWidth) {
+			width: 80vw;
+			height: 25vh;
+			overflow: scroll;
+			margin-bottom: 20px;
+			margin-top: -15px;
 
-	& .business-profile__container {
-		& h6.MuiTypography-subtitle1 {
-			text-transform: capitalize;
-			font-size: 1.2rem;
-			font-weight: 500;
+			& p {
+				text-align: justify;
+			}
 		}
+	}
+	& .business-profile__divider {
+		@media (max-width: $mediaXsWidth) {
+			margin-bottom: 12px;
+		}
+	}
+	& .MuiTypography-subtitle2 {
+		padding-left: 10px;
+	}
+	& h6.MuiTypography-subtitle1 {
+		text-transform: capitalize;
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
 
-		& .MuiTypography-body2 {
-			text-align: left;
-			font-size: 0.9rem;
-			line-height: 1.7;
-		}
+	& .MuiTypography-body2 {
+		text-align: left;
+		font-size: 0.9rem;
+		line-height: 1.7;
 	}
 }
