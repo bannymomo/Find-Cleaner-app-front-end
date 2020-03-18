@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Grid from "@material-ui/core/Grid";
-
+import WriteOrderComment from "./WriteOrderComment";
+import ShowOrderComment from "./ShowOrderComment";
 import {
 	CircularProgress,
 	Card,
@@ -55,7 +56,6 @@ const listArray = [
 class OrderInformaiton extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			order: {},
 			clientName: "",
@@ -63,8 +63,12 @@ class OrderInformaiton extends React.Component {
 			error: null,
 			isLoading: false,
 			isUpdating: false,
-
-			expanded: false
+			expanded: false,
+			writeCommentModal: false,
+			showCommentModal: false,
+			commentSubmit: false,
+			rate: 0,
+			comment: ""
 		};
 	}
 
@@ -76,17 +80,19 @@ class OrderInformaiton extends React.Component {
 	loadOrder = orderId => {
 		this.setState({ isLoading: true }, () => {
 			fetchOrderById(orderId)
-				.then(order =>
+				.then(order => {
 					this.setState({
 						order,
 						isLoading: false,
 						isUpdating: false
-					})
-				)
+					});
+				})
 				.then(() =>
 					this.setState({
 						business: this.state.order.business,
-						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`
+						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
+						rate: this.state.order.rate,
+						comment: this.state.order.comment
 					})
 				)
 				.catch(error => this.setState({ error, isLoading: false }));
@@ -151,6 +157,26 @@ class OrderInformaiton extends React.Component {
 					.catch(error => this.setState({ error }));
 			});
 		}
+	};
+
+	showWriteCommentModal = () => {
+		this.setState({ writeCommentModal: true });
+	};
+
+	closeWriteCommentModal = () => {
+		this.setState({ writeCommentModal: false });
+	};
+
+	showCommentModal = () => {
+		this.setState({ showCommentModal: true });
+	};
+
+	changeSubmitStatus = (comment, rate) => {
+		this.setState({ commentSubmit: true, comment, rate });
+	};
+
+	closeCommentModal = () => {
+		this.setState({ showCommentModal: false });
 	};
 
 	handleExpand = () => {
@@ -226,6 +252,30 @@ class OrderInformaiton extends React.Component {
 									>
 										{this.getEditButtonText()}
 									</Button>
+									{this.state.order.status === DONE &&
+										!this.state.order.comment &&
+										!this.state.commentSubmit && (
+											<Button
+												color={"primary"}
+												variant="contained"
+												onClick={
+													this.showWriteCommentModal
+												}
+											>
+												LEAVE A COMMNET
+											</Button>
+										)}
+									{this.state.order.status === DONE &&
+										(this.state.order.comment ||
+											this.state.commentSubmit) && (
+											<Button
+												color={"primary"}
+												variant="contained"
+												onClick={this.showCommentModal}
+											>
+												VIEW YOUR COMMENT
+											</Button>
+										)}
 								</div>
 							</Card>
 							<Box
@@ -253,6 +303,18 @@ class OrderInformaiton extends React.Component {
 							</Box>
 						</Grid>
 					</Grid>
+					<WriteOrderComment
+						writeCommentModal={this.state.writeCommentModal}
+						closeCommentModal={this.closeWriteCommentModal}
+						changeSubmitStatus={this.changeSubmitStatus}
+					/>
+					<ShowOrderComment
+						clientName={this.state.clientName}
+						rate={this.state.rate}
+						comment={this.state.comment}
+						showCommentModal={this.state.showCommentModal}
+						closeCommentModal={this.closeCommentModal}
+					/>
 					<div className="order-information__details">
 						<Typography variant="h6" component="p">
 							DETAILS

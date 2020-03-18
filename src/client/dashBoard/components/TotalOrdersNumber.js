@@ -19,6 +19,7 @@ class TotalOrdersNumber extends React.Component {
 		this.setState({ isLoading: true }, () => {
 			fetchClientById(clientId)
 				.then(client => {
+					console.log(client);
 					const totalOrdersNumber = client.orders.length;
 					this.setState({ totalOrdersNumber, isLoading: false });
 				})

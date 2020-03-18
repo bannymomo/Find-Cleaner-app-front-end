@@ -26,6 +26,7 @@
 		"query-string": "^6.11.0",
 		"react": "^16.12.0",
 		"react-animate-on-scroll": "^2.1.5",
+		"react-animated-modal": "^1.1.1",
 		"react-chartist": "^0.14.2",
 		"react-dom": "^16.12.0",
 		"react-facebook-login": "^3.7.2",
