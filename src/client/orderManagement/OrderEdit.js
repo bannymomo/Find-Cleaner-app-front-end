@@ -22,6 +22,10 @@ import { convertValue } from "../../utils/helper";
 
 import Geocode from "react-geocode";
 
+const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+Geocode.setApiKey(`${GOOGLE_MAP_API_KEY}`);
+Geocode.setLanguage("en");
+Geocode.setRegion("au");
 class OrderEdit extends React.Component {
 	constructor(props) {
 		super(props);

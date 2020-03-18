@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
 import { updateBusinessById, fetchBusinessById } from "../../api/business";
 import Alert from "@material-ui/lab/Alert";
@@ -103,7 +104,10 @@ class Account extends Component {
 			);
 		} else {
 			return (
-				<Fragment>
+				<ValidatorForm
+					instantValidate={false}
+					onSubmit={this.updateInfo}
+				>
 					<h5>Business Details</h5>
 					<div className="account__form--container">
 						<div className="account__form--edit">
@@ -117,7 +121,7 @@ class Account extends Component {
 							) : null}
 						</div>
 						<div className="account__form--personal">
-							<TextField
+							<TextValidator
 								variant="outlined"
 								className="account__form--input"
 								label="Business Name"
@@ -125,8 +129,10 @@ class Account extends Component {
 								disabled={this.state.canNotEdit}
 								value={this.state.businessName}
 								onChange={this.changeHandler}
+								validators={['required', 'minStringLength:2']}
+								errorMessages={['this field is required', 'The length must longer than 2']}
 							/>
-							<TextField
+							<TextValidator
 								variant="outlined"
 								className="account__form--input"
 								label="ABNNumber"
@@ -135,6 +141,14 @@ class Account extends Component {
 								disabled={this.state.canNotEdit}
 								value={this.state.ABNNumber}
 								onChange={this.changeHandler}
+								validators={[
+									'required', 
+									'matchRegexp:^[0-9]{11}$'
+								]}
+								errorMessages={[
+									'this field is required', 
+									'ABN is not valid'
+								]}
 							/>
 							<TextField
 								variant="outlined"
@@ -152,7 +166,7 @@ class Account extends Component {
 
 					<h5>Contact Details</h5>
 					<div className="account__form--contact">
-						<TextField
+						<TextValidator
 							variant="outlined"
 							className="account__form--input"
 							label="Contact Number"
@@ -160,8 +174,16 @@ class Account extends Component {
 							disabled={this.state.canNotEdit}
 							value={this.state.contactNumber}
 							onChange={this.changeHandler}
+							validators={[
+								'required', 
+								'matchRegexp:^[0-9]{10}$'
+							]}
+							errorMessages={[
+								'this field is required', 
+								'phone number is not valid'
+							]}
 						/>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							className="account__form--input"
 							label="Email Address"
@@ -170,6 +192,11 @@ class Account extends Component {
 							disabled={this.state.canNotEdit}
 							value={this.state.email}
 							onChange={this.changeHandler}
+							validators={["required", "isEmail"]}
+							errorMessages={[
+								"this field is required",
+								"email is not valid"
+							]}
 						/>
 						<TextField
 							variant="outlined"
@@ -181,7 +208,7 @@ class Account extends Component {
 							value={this.state.address}
 							onChange={this.changeHandler}
 						/>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							className="account__form--input"
 							label="Postcode"
@@ -190,6 +217,11 @@ class Account extends Component {
 							disabled={this.state.canNotEdit}
 							value={this.state.postcode}
 							onChange={this.changeHandler}
+							validators={["required", "matchRegexp:^[0-9]{4}$"]}
+							errorMessages={[
+								"this field is required",
+								"postcode is not valid"
+							]}
 						/>
 					</div>
 					<div className="account__form--button">
@@ -197,7 +229,7 @@ class Account extends Component {
 							<Button
 								variant="contained"
 								color="primary"
-								onClick={this.updateInfo}
+								type="submit"
 							>
 								UPDATE
 							</Button>
@@ -212,7 +244,7 @@ class Account extends Component {
 							</Alert>
 						)}
 					</div>
-				</Fragment>
+				</ValidatorForm>
 			);
 		}
 	};

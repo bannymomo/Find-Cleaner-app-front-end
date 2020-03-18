@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
 import { updateClientById, fetchClientById } from "../../api/client";
 import { KeyboardDatePicker } from "@material-ui/pickers";
@@ -111,7 +112,10 @@ class Account extends Component {
 			);
 		} else {
 			return (
-				<Fragment>
+				<ValidatorForm
+					instantValidate={false}
+					onSubmit={this.updateInfo}
+				>
 					<h5>Personal Details</h5>
 					<div className="account__form--container">
 						<div className="account__form--edit">
@@ -125,7 +129,7 @@ class Account extends Component {
 							) : null}
 						</div>
 						<div className="account__form--personal">
-							<TextField
+							<TextValidator
 								variant="outlined"
 								className="account__form--input"
 								label="First Name"
@@ -133,8 +137,13 @@ class Account extends Component {
 								disabled={this.state.canNotEdit}
 								value={this.state.firstName}
 								onChange={this.changeHandler}
+								validators={["required", "minStringLength:2"]}
+								errorMessages={[
+									"this field is required",
+									"The length must longer than 2"
+								]}
 							/>
-							<TextField
+							<TextValidator
 								variant="outlined"
 								className="account__form--input"
 								label="Last Name"
@@ -143,6 +152,11 @@ class Account extends Component {
 								disabled={this.state.canNotEdit}
 								value={this.state.lastName}
 								onChange={this.changeHandler}
+								validators={["required", "minStringLength:2"]}
+								errorMessages={[
+									"this field is required",
+									"The length must longer than 2"
+								]}
 							/>
 							<KeyboardDatePicker
 								className="account__form--input"
@@ -173,7 +187,7 @@ class Account extends Component {
 							value={this.state.contactNumber}
 							onChange={this.changeHandler}
 						/>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							className="account__form--input"
 							label="Email Address"
@@ -182,8 +196,13 @@ class Account extends Component {
 							disabled={this.state.canNotEdit}
 							value={this.state.email}
 							onChange={this.changeHandler}
+							validators={["required", "isEmail"]}
+							errorMessages={[
+								"this field is required",
+								"email is not valid"
+							]}
 						/>
-						<TextField
+						<TextValidator
 							variant="outlined"
 							className="account__form--input"
 							label="Current Residential Postcode"
@@ -192,6 +211,11 @@ class Account extends Component {
 							disabled={this.state.canNotEdit}
 							value={this.state.postcode}
 							onChange={this.changeHandler}
+							validators={["required", "matchRegexp:^[0-9]{4}$"]}
+							errorMessages={[
+								"this field is required",
+								"postcode is not valid"
+							]}
 						/>
 					</div>
 					<div className="account__form--button">
@@ -199,7 +223,7 @@ class Account extends Component {
 							<Button
 								variant="contained"
 								color="primary"
-								onClick={this.updateInfo}
+								type="submit"
 							>
 								UPDATE
 							</Button>
@@ -214,7 +238,7 @@ class Account extends Component {
 							</Alert>
 						)}
 					</div>
-				</Fragment>
+				</ValidatorForm>
 			);
 		}
 	};
