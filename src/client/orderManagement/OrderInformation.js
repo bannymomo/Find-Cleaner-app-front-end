@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Grid from "@material-ui/core/Grid";
-import WriteOrderComment from "./WriteOrderComment";
-import ShowOrderComment from "./ShowOrderComment";
+import WriteOrderComment from "../../components/order/WriteOrderComment";
+import ShowOrderComment from "../../components/order/ShowOrderComment";
 import {
 	CircularProgress,
 	Card,
@@ -59,6 +59,7 @@ class OrderInformaiton extends React.Component {
 		this.state = {
 			order: {},
 			clientName: "",
+			businessName: "",
 			business: "",
 			error: null,
 			isLoading: false,
@@ -91,6 +92,7 @@ class OrderInformaiton extends React.Component {
 					this.setState({
 						business: this.state.order.business,
 						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
+						businessName: `${this.state.order.business.businessName}`,
 						rate: this.state.order.rate,
 						comment: this.state.order.comment
 					})
@@ -310,10 +312,12 @@ class OrderInformaiton extends React.Component {
 					/>
 					<ShowOrderComment
 						clientName={this.state.clientName}
+						businessName={this.state.businessName}
 						rate={this.state.rate}
 						comment={this.state.comment}
 						showCommentModal={this.state.showCommentModal}
 						closeCommentModal={this.closeCommentModal}
+						orderId={this.state.order._id}
 					/>
 					<div className="order-information__details">
 						<Typography variant="h6" component="p">

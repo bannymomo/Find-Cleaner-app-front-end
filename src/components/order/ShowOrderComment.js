@@ -11,9 +11,19 @@ function ShowOrderComment(props) {
 				type="flipInY"
 			>
 				<h3 className="order-comment__modal--title">
-					{props.clientName} 's comment
+					From {props.clientName}
 				</h3>
+				<p className="order-comment__modal--information">
+					Client:{props.clientName}
+				</p>
+				<p className="order-comment__modal--information">
+					Business:{props.businessName}
+				</p>
+				<p className="order-comment__modal--information">
+					OrderId:{props.orderId}
+				</p>
 				<div className="order-comment__rating--container">
+					RATING:
 					<Rating name="hover-feedback" value={props.rate} readOnly />
 				</div>
 				<div className="order-comment__modal--input">

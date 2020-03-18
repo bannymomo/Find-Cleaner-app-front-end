@@ -14,7 +14,7 @@ import {
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByBusiness } from "../../api/order";
-
+import ShowOrderComment from "../../components/order/ShowOrderComment";
 import ErrorMessage from "../../UI/ErrorMessage";
 
 import {
@@ -57,12 +57,15 @@ class OrderInformaiton extends React.Component {
 			role: BUSINESS_ROLE,
 			order: {},
 			clientName: "",
+			businessName: "",
 			business: "",
 			error: null,
 			isLoading: false,
 			isUpdating: false,
-
-			expanded: false
+			expanded: false,
+			rate: 0,
+			comment: "",
+			showCommentModal: false
 		};
 	}
 
@@ -84,7 +87,10 @@ class OrderInformaiton extends React.Component {
 				.then(() =>
 					this.setState({
 						business: this.state.order.business,
-						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`
+						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
+						rate: this.state.order.rate,
+						comment: this.state.order.comment,
+						businessName: `${this.state.order.business.businessName}`
 					})
 				)
 				.catch(error => this.setState({ error, isLoading: false }));
@@ -150,6 +156,14 @@ class OrderInformaiton extends React.Component {
 		this.props.history.go(-1);
 	};
 
+	showCommentModal = () => {
+		this.setState({ showCommentModal: true });
+	};
+
+	closeCommentModal = () => {
+		this.setState({ showCommentModal: false });
+	};
+
 	renderContent = () => {
 		if (this.state.isLoading || this.state.isUpdating) {
 			return (
@@ -213,6 +227,16 @@ class OrderInformaiton extends React.Component {
 											{this.getStatusText()}
 										</Button>
 									)}
+									{this.state.order.comment &&
+										this.state.order.status === DONE && (
+											<Button
+												color={"primary"}
+												variant="contained"
+												onClick={this.showCommentModal}
+											>
+												VIEW YOUR COMMENT
+											</Button>
+										)}
 								</div>
 							</Card>
 							<Box
@@ -240,6 +264,15 @@ class OrderInformaiton extends React.Component {
 							</Box>
 						</Grid>
 					</Grid>
+					<ShowOrderComment
+						clientName={this.state.clientName}
+						rate={this.state.rate}
+						comment={this.state.comment}
+						showCommentModal={this.state.showCommentModal}
+						closeCommentModal={this.closeCommentModal}
+						orderId={this.state.order._id}
+						businessName={this.state.businessName}
+					/>
 					<div className="order-information__details">
 						<Typography variant="h6" component="p">
 							DETAILS
