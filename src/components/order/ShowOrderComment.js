@@ -23,7 +23,7 @@ function ShowOrderComment(props) {
 						size="small"
 					/>
 					<p className="order-comment__modal--information">
-						Client:{props.clientName}
+						Client: {props.clientName}
 					</p>
 				</div>
 				<div class="order-comment__avatar-title--container">
@@ -38,7 +38,7 @@ function ShowOrderComment(props) {
 						size="small"
 					/>
 					<p className="order-comment__modal--information">
-						Business:
+						Business:{" "}
 						{props.business ? props.business.businessName : ""}
 					</p>
 				</div>
@@ -56,7 +56,7 @@ function ShowOrderComment(props) {
 					</p>
 				</div>
 				<div className="order-comment__rating--container">
-					RATING:
+					RATING: &nbsp;&nbsp;
 					<Rating name="hover-feedback" value={props.rate} readOnly />
 				</div>
 				<div className="order-comment__modal--input">
