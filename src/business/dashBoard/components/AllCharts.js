@@ -57,7 +57,7 @@ function AllCharts(props) {
 				<GridItem xs={12} sm={6} md={3}>
 					<CardActionArea
 						component={Link}
-						to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
+						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
 					>
 						<Card>
 							<CardHeader color="warning" stats icon>
