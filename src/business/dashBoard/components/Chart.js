@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core

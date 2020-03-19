@@ -17,7 +17,8 @@ function ShowOrderComment(props) {
 					Client:{props.clientName}
 				</p>
 				<p className="order-comment__modal--information">
-					Business:{props.businessName}
+					Business:
+					{props.business ? props.business.businessName : ""}
 				</p>
 				<p className="order-comment__modal--information">
 					OrderId:{props.orderId}

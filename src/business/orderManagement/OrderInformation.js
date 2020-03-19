@@ -57,7 +57,6 @@ class OrderInformaiton extends React.Component {
 			role: BUSINESS_ROLE,
 			order: {},
 			clientName: "",
-			businessName: "",
 			business: "",
 			error: null,
 			isLoading: false,
@@ -84,15 +83,14 @@ class OrderInformaiton extends React.Component {
 						isUpdating: false
 					})
 				)
-				.then(() =>
+				.then(() => {
 					this.setState({
 						business: this.state.order.business,
 						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
 						rate: this.state.order.rate,
-						comment: this.state.order.comment,
-						businessName: `${this.state.order.business.businessName}`
-					})
-				)
+						comment: this.state.order.comment
+					});
+				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
@@ -271,7 +269,7 @@ class OrderInformaiton extends React.Component {
 						showCommentModal={this.state.showCommentModal}
 						closeCommentModal={this.closeCommentModal}
 						orderId={this.state.order._id}
-						businessName={this.state.businessName}
+						business={this.state.business}
 					/>
 					<div className="order-information__details">
 						<Typography variant="h6" component="p">
