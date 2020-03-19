@@ -26,7 +26,9 @@
 	.account__form--container {
 		margin-left: 4vh;
 		margin-right: 4vh;
-		border-bottom: solid #c4c4c4;
+		&:nth-of-type(2) {
+			border-bottom: solid #c4c4c4;
+		}
 
 		.account__form--edit {
 			position: absolute;
@@ -69,6 +71,33 @@
 		}
 	}
 
+	.account__form--avatar {
+		display: flex;
+		flex-direction: column;
+		margin-left: 8vh;
+		margin-bottom: 0;
+		font: $primary-font-family;
+		padding-bottom: 2vh;
+		margin-right: 10vh;
+		@media (max-width: $mediaXsWidth) {
+			margin: 10px 0 0 0px;
+		}
+		&-file {
+			width: 50%;
+			margin-bottom: 16px;
+			@media (max-width: $mediaXsWidth) {
+				width: 70vw;
+			}
+		}
+		&-upload {
+			width: 50%;
+			margin-bottom: 16px;
+			@media (max-width: $mediaXsWidth) {
+				width: 70vw;
+			}
+		}
+	}
+	
 	.account__form--contact {
 		display: flex;
 		flex-direction: column;

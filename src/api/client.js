@@ -38,3 +38,9 @@ export const fetchHisOrders = (id, page = 1, pageSize = 5, status) => {
 		status: res.data.data.search
 	}));
 };
+
+export const updateAvatar = (id, file) => {
+	const url = `${getApiClientUrlWithId(id)}/avatar`;
+	console.log(1,file)
+	return put(url, file)
+}

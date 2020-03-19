@@ -1,8 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
-import { updateClientById, fetchClientById } from "../../api/client";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import { updateClientById, fetchClientById, updateAvatar } from "../../api/client";
 import Alert from "@material-ui/lab/Alert";
 import "./style/account.scss";
 
@@ -20,10 +19,13 @@ class Account extends Component {
 			// location: "",
 			email: "",
 			contactNumber: "",
+			avatar: null,
 
 			isLoading: false,
 			isUpdating: false,
+			isUploading: false,
 			error: null,
+			uploadError: null,
 			canNotEdit: true,
 			updateButtonHidden: true,
 			editButtonHidden: false
@@ -52,17 +54,37 @@ class Account extends Component {
 			.catch(error => this.setState({ error, isLoading: false }));
 	};
 
-	handleDateChange = (event, date) => {
-		this.setState({
-			birthday: date
-		});
-		console.log(this.state.birthday);
+	handleUpload = () => {
+		const clientId = this.props.match.params.clientId;
+		const avatar = this.state.avatar;
+		const data = new FormData();
+		data.append('avatar', avatar);
+		console.log(avatar);
+		console.log(data);
+		this.setState({ isUploading: true }, () => {
+
+			updateAvatar(clientId, data)
+				.then(() => {
+					this.setState(
+						{
+							isUploading: false,
+						},
+						() => window.location.reload()
+					)
+				})
+				.catch(error => this.setState({ uploadError: error, isUploading: false }))
+		})
 	};
 
 	changeHandler = event => {
 		const key = event.target.name;
 		const value = event.target.value;
 		this.setState({ [key]: value });
+	};
+
+	changeFile = event => {
+		const file = event.target.files[0];
+		this.setState({ avatar: file })
 	};
 
 	disableEdit = () => {
@@ -158,21 +180,39 @@ class Account extends Component {
 									"The length must longer than 2"
 								]}
 							/>
-							<KeyboardDatePicker
-								className="account__form--input"
-								disableToolbar
-								variant="inline"
-								format="MM/dd/yyyy"
-								margin="normal"
-								id="date-picker-inline"
-								label="Birthday"
+						</div>
+					</div>
+
+					<h5>Upload Your Avatar</h5>
+					<div className="account__form--container">
+						<div className="account__form--avatar">
+							<input
+								className="account__form--avatar-file"
+								type="file"
+								name="avatar"
+								onChange={this.changeFile}
 								disabled={this.state.canNotEdit}
-								value={this.state.birthday}
-								onChange={this.handleDateChange}
-								KeyboardButtonProps={{
-									"aria-label": "change date"
-								}}
 							/>
+							{this.state.isUploading ? 
+								<CircularProgress size={50} color="secondary" /> :
+								(<Button
+									className="account__form--avatar-upload"
+									variant="contained"
+									onClick={this.handleUpload}
+									disabled={this.state.canNotEdit}
+								>
+									Upload
+								</Button>)
+							}
+
+							{!!this.state.uploadError && (
+								<Alert
+									severity="error"
+									className="account__form--error"
+								>
+									Upload fail, please try again.
+								</Alert>
+							)}
 						</div>
 					</div>
 
