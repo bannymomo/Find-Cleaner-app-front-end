@@ -111,7 +111,7 @@ export default function OrderInformationList(props) {
 		<List>
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
-					<Avatar alt="user1" src="/1.jpg" />
+					<Avatar alt={props.clientName} src={props.clientPhoto} />
 				</ListItemAvatar>
 				<ListItemText
 					primary="POSTED BY"
@@ -180,7 +180,12 @@ export default function OrderInformationList(props) {
 			<Divider variant="inset" component="li" />
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
-					<Avatar alt="business1" src="/1.jpg" />
+					{
+						props.businessPhoto ? 
+						<Avatar alt="business1" src={props.businessPhoto} /> :
+						<Avatar alt="business1" src="" />
+					}
+					
 				</ListItemAvatar>
 				<ListItemText
 					primary="TAKEN BY"

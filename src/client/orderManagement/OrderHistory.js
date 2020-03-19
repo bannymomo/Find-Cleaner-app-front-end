@@ -101,6 +101,7 @@ class OrderHistory extends React.Component {
 				dueDate={order.dueDate}
 				price={order.price}
 				status={order.status}
+				clientId={order.client}
 				to={`${BASE_URL}/orders/${order._id}`}
 			/>
 		));

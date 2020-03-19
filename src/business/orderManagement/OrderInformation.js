@@ -84,7 +84,9 @@ class OrderInformaiton extends React.Component {
 				.then(() =>
 					this.setState({
 						business: this.state.order.business,
-						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`
+						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
+						clientPhoto: this.state.order.client.photo,
+						businessPhoto: this.state.order.business.photo
 					})
 				)
 				.catch(error => this.setState({ error, isLoading: false }));
@@ -182,6 +184,8 @@ class OrderInformaiton extends React.Component {
 								clientName={this.state.clientName}
 								location={this.state.order.location}
 								dueDate={this.state.order.dueDate}
+								clientPhoto={this.state.clientPhoto}
+								businessPhoto={this.state.businessPhoto}
 								business={this.state.business}
 								role={this.state.role}
 							/>
