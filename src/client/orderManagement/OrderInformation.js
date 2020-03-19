@@ -66,6 +66,7 @@ class OrderInformaiton extends React.Component {
 		this.state = {
 			order: {},
 			clientName: "",
+			client: "",
 			business: "",
 			error: null,
 			isLoading: false,
@@ -97,6 +98,7 @@ class OrderInformaiton extends React.Component {
 				.then(() =>
 					this.setState({
 						business: this.state.order.business,
+						client: this.state.order.client,
 						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
 						rate: this.state.order.rate,
 						comment: this.state.order.comment
@@ -320,6 +322,7 @@ class OrderInformaiton extends React.Component {
 						business={
 							this.state.business ? this.state.business : ""
 						}
+						clientPhoto={this.state.client.photo}
 						rate={this.state.rate}
 						comment={this.state.comment}
 						showCommentModal={this.state.showCommentModal}

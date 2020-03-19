@@ -64,6 +64,7 @@ class OrderInformaiton extends React.Component {
 			role: BUSINESS_ROLE,
 			order: {},
 			clientName: "",
+			client: "",
 			business: "",
 			error: null,
 			isLoading: false,
@@ -93,6 +94,7 @@ class OrderInformaiton extends React.Component {
 				.then(() => {
 					this.setState({
 						business: this.state.order.business,
+						client: this.state.order.client,
 						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
 						rate: this.state.order.rate,
 						comment: this.state.order.comment
@@ -270,6 +272,7 @@ class OrderInformaiton extends React.Component {
 						</Grid>
 					</Grid>
 					<ShowOrderComment
+						clientPhoto={this.state.client.photo}
 						clientName={this.state.clientName}
 						rate={this.state.rate}
 						comment={this.state.comment}

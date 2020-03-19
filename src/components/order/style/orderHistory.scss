@@ -237,14 +237,23 @@ $secondary-text-color: #c2c2c2;
 	z-index: 100;
 
 	.order-comment__modal--title {
-		margin-left: 20px;
+		margin-left: 30px;
 		text-transform: uppercase;
 	}
 
-	.order-comment__modal--information {
-		margin: 20px;
-		opacity: 0.7;
-		text-transform: uppercase;
+	.order-comment__avatar-title--container {
+		display: inline-flex;
+		align-items: center;
+
+		.order-comment__avatar--pic {
+			margin: 0 20px;
+		}
+
+		.order-comment__modal--information {
+			margin: 20px;
+			opacity: 0.7;
+			text-transform: uppercase;
+		}
 	}
 
 	.order-comment__rating--container {
