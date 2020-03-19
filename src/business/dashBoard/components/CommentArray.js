@@ -1,11 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Rating from "@material-ui/lab/Rating";
 import Avatar from "@material-ui/core/Avatar";
-import bigajiu from "../../../assets/images/bigajiu.jpg";
-import George from "../../../assets/images/George.JPG";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import { fetchHisOrders } from "../../../api/business";
+import { withRouter } from "react-router";
+import { DONE } from "../../../utils/variables";
+import { Link } from "react-router-dom";
+import { BUSINESS_BASE_URL, ORDER_BASE_URL } from "../../../routes/URLMap";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import ErrorMessage from "../../../UI/ErrorMessage";
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
 	root: {
 		display: "flex",
 		"& > *": {
@@ -20,84 +25,109 @@ const useStyles = makeStyles(theme => ({
 		width: theme.spacing(7),
 		height: theme.spacing(7)
 	}
-}));
+});
 
-const commentArray = [
-	{
-		name: "Jason",
-		alt: "Jason",
-		Avatar: George,
-		value: 5,
-		comment: "Love it!!!"
-	},
-	{
-		name: "Joey",
-		alt: "Joey",
-		value: 5,
-		Avatar: bigajiu,
-		comment: "Good job!!!"
-	},
-	{
-		name: "Mike",
-		alt: "Mike",
-		Avatar:
-			"https://pngimage.net/wp-content/uploads/2018/05/avatar-png-5.png",
-		value: 4,
-		comment: "More than expected~~~"
-	},
+class CommentArray extends React.Component {
+	state = {
+		isLoading: false,
+		commentArray: []
+	};
 
-	{
-		name: "John",
-		alt: "John",
-		value: 3,
-		Avatar:
-			"https://www.vippng.com/png/full/136-1363819_red-avatar-ace-craige-supremo-anime.png",
-		comment: "......still wait you accept my order"
-	},
-	{
-		name: "Ann",
-		alt: "Ann",
-		value: 5,
-		Avatar:
-			"https://apkplz.net/storage/images/jp/co/avatar/avatar2016factory/jp.co.avatar.avatar2016factory_1.png",
-		comment: "Well done"
+	componentDidMount() {
+		const businessId = this.props.match.params.businessId;
+		const commentArray = [...this.state.commentArray];
+		this.setState(
+			{
+				isLoading: true
+			},
+			() => {
+				fetchHisOrders(businessId, 1, 10, DONE)
+					.then(res => {
+						res.orders.map(order => {
+							const comment = {
+								clientName: order.client.fullname,
+								avatar: order.client.photo,
+								rate: order.rate,
+								comment: order.comment,
+								alt: order.client.fullname,
+								orderId: order._id
+							};
+							commentArray.push(comment);
+							return commentArray;
+						});
+						this.setState({ isLoading: false, commentArray });
+					})
+					.catch(error => {
+						this.setState({ error, isLoading: false });
+					});
+			}
+		);
 	}
-];
-export default function CommnetArray() {
-	const classes = useStyles();
-	return (
-		<Fragment>
-			<div className="dashboard__paragraph--title">
-				Latest user comments
-			</div>
-			{commentArray.map((comment, index) => {
-				return (
-					<div key={index}>
-						<span className="comment__avarta--container">
-							<Avatar
-								alt={comment.alt}
-								src={comment.Avatar}
-								className={classes.large}
-							/>
-						</span>
-						<div className="comment__rating--container">
-							<strong>{comment.name} </strong>
-							<br />
-							<Rating
-								name="disabled"
-								value={comment.value}
-								readOnly
-								size="small"
-							/>
-							<br />
-							{comment.value * 20}% Completion Rate
-						</div>
-						<div className="comment__content--container">
-							{comment.comment}
-						</div>
+
+	renderComment = () => {
+		const { classes } = this.props;
+		const businessId = this.props.match.params.businessId;
+		if (this.state.isLoading) {
+			return (
+				<div className="comment__progress--container">
+					<CircularProgress size={200} color="secondary" />
+				</div>
+			);
+		}
+		if (this.state.error) {
+			return <ErrorMessage error={this.state.error} />;
+		}
+		if (this.state.commentArray.length === 0) {
+			return <p>You have no comment yet</p>;
+		}
+		return this.state.commentArray.map((comment, index) => {
+			return (
+				<div className="single-comment__whole--container" key={index}>
+					<span className="comment__avarta--container">
+						<Avatar
+							alt={comment.alt}
+							src={comment.avatar}
+							className={classes.large}
+						/>
+					</span>
+					<div className="comment__rating--container">
+						<strong>{comment.clientName} </strong>
+						<br />
+						<Rating
+							name="disabled"
+							value={comment.rate}
+							readOnly
+							size="small"
+						/>
+						<br />
+						{comment.rate * 20}% Completion Rate
 					</div>
-				);
-			})}
-		</Fragment>
-	);
+					<span className="comment__orderId--container">
+						<Link
+							className="comment__orderId--link"
+							to={`${BUSINESS_BASE_URL}/${businessId}${ORDER_BASE_URL}/${comment.orderId}`}
+						>
+							OrderID: {comment.orderId}
+						</Link>
+					</span>
+					<div className="comment__content--container">
+						{comment.comment}
+					</div>
+				</div>
+			);
+		});
+	};
+
+	render() {
+		return (
+			<div className="comment__whole--container">
+				<div className="dashboard__paragraph--title">
+					Latest user comments
+				</div>
+				{this.renderComment()}
+			</div>
+		);
+	}
 }
+
+export default withRouter(withStyles(styles)(CommentArray));

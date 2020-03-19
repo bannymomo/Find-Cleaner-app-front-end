@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ListArray from "./components/ListArray";
+import ServerListArray from "./components/ServerListArray";
 import "./style/dashboard.scss";
-import Chart from "./components/Chart";
+import AllCharts from "./components/AllCharts";
 
 class ClientDashboard extends Component {
 	render() {
@@ -17,8 +17,8 @@ class ClientDashboard extends Component {
 						and find the help you need on Broomer.
 					</p>
 				</div>
-				<Chart />
-				<ListArray />
+				<AllCharts />
+				<ServerListArray />
 			</div>
 		);
 	}

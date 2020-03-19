@@ -23,10 +23,10 @@ import CardHeader from "./card/CardHeader";
 import CardBody from "./card/CardBody";
 import CardFooter from "./card/CardFooter";
 import CardIcon from "./card/CardIcon.js";
-import TotalTasksNumber from "./TotalTasksNumber";
-import TotalUnfinishedTasksNumber from "./TotalUnfinishedTasksNumber";
-import TotalFinishTasksNumber from "./TotalFinishTasksNumber";
-import FollowersNumber from "./FollowersNumber";
+import TotalOrdersNumber from "./TotalOrdersNumber";
+import TotalNewOrdersNumber from "./TotalNewOrdersNumber";
+import TotalAssignedOrdersNumber from "./TotalAssignedOrdersNumber";
+import FavoriteCleanersNumber from "./FavoriteCleanersNumber";
 
 import {
 	dailySalesChart,
@@ -35,28 +35,28 @@ import {
 } from "./card/variableCharts";
 
 import styles from "../style/card/tempelate-dashboardStyle";
-import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
+
+import { CLIENT_BASE_URL } from "../../../routes/URLMap";
 import { CardActionArea } from "@material-ui/core";
-import { ACCEPTED, DONE } from "../../../utils/variables";
+import { NEW_ORDER, ACCEPTED } from "../../../utils/variables";
 
 const useStyles = makeStyles(styles);
 
-function Chart(props) {
+function AllCharts(props) {
 	const classes = useStyles();
 	const animatedProps = useSpring({
 		opacity: 1,
 		from: { opacity: 0 }
 	});
 
-	const businessId = props.match.params.businessId;
-
+	const clientId = props.match.params.clientId;
 	return (
-		<div className="Chart__container--whole">
+		<div className="dashboard__chart--container">
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={3}>
 					<CardActionArea
 						component={Link}
-						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
+						to={`${CLIENT_BASE_URL}/${clientId}/order-history`}
 					>
 						<Card>
 							<CardHeader color="warning" stats icon>
@@ -72,9 +72,9 @@ function Chart(props) {
 									(classes.cardTitle, "card__title--black")
 								}
 							>
-								Total tasks
+								Total orders
 							</animated.h3>
-							<TotalTasksNumber />
+							<TotalOrdersNumber />
 							<CardFooter stats>
 								<animated.div
 									style={animatedProps}
@@ -91,8 +91,8 @@ function Chart(props) {
 					<CardActionArea
 						component={Link}
 						to={{
-							pathname: `${BUSINESS_BASE_URL}/${businessId}/order-history`,
-							state: { searchStatus: ACCEPTED }
+							pathname: `${CLIENT_BASE_URL}/${clientId}/order-history`,
+							state: { searchStatus: NEW_ORDER }
 						}}
 					>
 						<Card>
@@ -109,9 +109,9 @@ function Chart(props) {
 									(classes.cardTitle, "card__title--black")
 								}
 							>
-								Unfinished Tasks
+								Awaiting offers
 							</animated.h3>
-							<TotalUnfinishedTasksNumber />
+							<TotalNewOrdersNumber />
 							<CardFooter stats>
 								<animated.div
 									style={animatedProps}
@@ -128,8 +128,8 @@ function Chart(props) {
 					<CardActionArea
 						component={Link}
 						to={{
-							pathname: `${BUSINESS_BASE_URL}/${businessId}/order-history`,
-							state: { searchStatus: DONE }
+							pathname: `${CLIENT_BASE_URL}/${clientId}/order-history`,
+							state: { searchStatus: ACCEPTED }
 						}}
 					>
 						<Card>
@@ -146,9 +146,9 @@ function Chart(props) {
 									(classes.cardTitle, "card__title--black")
 								}
 							>
-								Completed Tasks
+								Assigned orders
 							</animated.h3>
-							<TotalFinishTasksNumber />
+							<TotalAssignedOrdersNumber />
 							<CardFooter stats>
 								<animated.div
 									style={animatedProps}
@@ -176,9 +176,9 @@ function Chart(props) {
 								(classes.cardTitle, "card__title--black")
 							}
 						>
-							Followers
+							Favorite cleaners
 						</animated.h3>
-						<FollowersNumber />
+						<FavoriteCleanersNumber />
 						<CardFooter stats>
 							<animated.div
 								style={animatedProps}
@@ -210,7 +210,7 @@ function Chart(props) {
 									<ArrowUpward
 										className={classes.upArrowCardCategory}
 									/>{" "}
-									70%
+									55%
 								</span>
 								increase this week.
 							</p>
@@ -237,7 +237,7 @@ function Chart(props) {
 							/>
 						</CardHeader>
 						<CardBody>
-							<h4 className={classes.cardTitle}>Income</h4>
+							<h4 className={classes.cardTitle}>Bill</h4>
 							<p className={classes.cardCategory}>
 								Last 6 months Performance
 							</p>
@@ -261,7 +261,9 @@ function Chart(props) {
 							/>
 						</CardHeader>
 						<CardBody>
-							<h4 className={classes.cardTitle}>Rating Stars</h4>
+							<h4 className={classes.cardTitle}>
+								Completed Tasks
+							</h4>
 							<p className={classes.cardCategory}>
 								Last Campaign Performance
 							</p>
@@ -278,4 +280,4 @@ function Chart(props) {
 	);
 }
 
-export default withRouter(Chart);
+export default withRouter(AllCharts);

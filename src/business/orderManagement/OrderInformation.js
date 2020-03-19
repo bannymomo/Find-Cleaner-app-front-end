@@ -10,12 +10,19 @@ import {
 	Button,
 	Collapse
 } from "@material-ui/core";
-
+import "./style/orderInformation.scss";
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByBusiness } from "../../api/order";
-
+import ShowOrderComment from "../../components/order/ShowOrderComment";
 import ErrorMessage from "../../UI/ErrorMessage";
+import bedroomPic from "../../assets/images/bedroom.png";
+import bathroomPic from "../../assets/images/bathroom.png";
+import ovenPic from "../../assets/images/oven.png";
+import windowPic from "../../assets/images/window.png";
+import carpetPic from "../../assets/images/carpet.png";
+import cabinetPic from "../../assets/images/cabinet.png";
+import rentalPic from "../../assets/images/rental.png";
 
 import {
 	BUSINESS_ROLE,
@@ -57,12 +64,15 @@ class OrderInformaiton extends React.Component {
 			role: BUSINESS_ROLE,
 			order: {},
 			clientName: "",
+			client: "",
 			business: "",
 			error: null,
 			isLoading: false,
 			isUpdating: false,
-
-			expanded: false
+			expanded: false,
+			rate: 0,
+			comment: "",
+			showCommentModal: false
 		};
 	}
 
@@ -81,14 +91,17 @@ class OrderInformaiton extends React.Component {
 						isUpdating: false
 					})
 				)
-				.then(() =>
+				.then(() => {
 					this.setState({
 						business: this.state.order.business,
+						client: this.state.order.client,
 						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
 						clientPhoto: this.state.order.client.photo,
-						businessPhoto: this.state.order.business.photo
-					})
-				)
+						businessPhoto: this.state.order.business.photo,
+						rate: this.state.order.rate,
+						comment: this.state.order.comment
+					});
+				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
@@ -150,6 +163,14 @@ class OrderInformaiton extends React.Component {
 
 	handleGoBack = () => {
 		this.props.history.go(-1);
+	};
+
+	showCommentModal = () => {
+		this.setState({ showCommentModal: true });
+	};
+
+	closeCommentModal = () => {
+		this.setState({ showCommentModal: false });
 	};
 
 	renderContent = () => {
@@ -217,6 +238,16 @@ class OrderInformaiton extends React.Component {
 											{this.getStatusText()}
 										</Button>
 									)}
+									{this.state.order.comment &&
+										this.state.order.status === DONE && (
+											<Button
+												color={"primary"}
+												variant="contained"
+												onClick={this.showCommentModal}
+											>
+												VIEW YOUR COMMENT
+											</Button>
+										)}
 								</div>
 							</Card>
 							<Box
@@ -244,44 +275,108 @@ class OrderInformaiton extends React.Component {
 							</Box>
 						</Grid>
 					</Grid>
+					<ShowOrderComment
+						clientPhoto={this.state.client.photo}
+						clientName={this.state.clientName}
+						rate={this.state.rate}
+						comment={this.state.comment}
+						showCommentModal={this.state.showCommentModal}
+						closeCommentModal={this.closeCommentModal}
+						orderId={this.state.order._id}
+						business={this.state.business}
+					/>
 					<div className="order-information__details">
 						<Typography variant="h6" component="p">
 							DETAILS
 						</Typography>
 						<ul className="order-information__details--list">
-							<li>
-								Number of bedrooms: {this.state.order.bedrooms}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={bedroomPic}
+									alt={bedroomPic}
+								/>
+								<span className="order-information__icon--title">
+									Number of bedrooms:{" "}
+									{this.state.order.bedrooms}
+								</span>
 							</li>
-							<li>
-								Number of bathrooms:{" "}
-								{this.state.order.bathrooms}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={bathroomPic}
+									alt={bathroomPic}
+								/>
+								<span className="order-information__icon--title">
+									Number of bathrooms:{" "}
+									{this.state.order.bathrooms}
+								</span>
 							</li>
-							<li>
-								End-of-lease clean:{" "}
-								{this.state.order.endOfLease ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={rentalPic}
+									alt={rentalPic}
+								/>
+								<span className="order-information__icon--title">
+									End-of-lease clean:{" "}
+									{this.state.order.endOfLease ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Oven: {this.state.order.oven ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={ovenPic}
+									alt={ovenPic}
+								/>
+								<span className="order-information__icon--title">
+									Oven: {this.state.order.oven ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Windows:{" "}
-								{this.state.order.windows ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={windowPic}
+									alt={windowPic}
+								/>
+								<span className="order-information__icon--title">
+									Windows:{" "}
+									{this.state.order.windows ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Cabinets:{" "}
-								{this.state.order.cabinets ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={cabinetPic}
+									alt={cabinetPic}
+								/>
+								<span className="order-information__icon--title">
+									Cabinets:{" "}
+									{this.state.order.cabinets ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Carpet: {this.state.order.carpet ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={carpetPic}
+									alt={carpetPic}
+								/>
+								<span className="order-information__icon--title">
+									Carpet:{" "}
+									{this.state.order.carpet ? "Yes" : "No"}
+								</span>
 							</li>
 						</ul>
 						<Typography variant="body1" component="p">
-							I need dlkalgj aepwgk'ape [apeg[ap aEOihgao ]]
-							jeofiahgiuh ioweja owea a aeg aweoig. dlkalgj
-							aepwgk'ape [apeg[ap aEOihgao ]] jeofiahgiuh ioweja
-							owea a aeg aweoig. dlkalgj aepwgk'ape [apeg[ap
-							aEOihgao ]] jeofiahgiuh ioweja owea a aeg aweoig.rtt
-							er, erware ea eaqoh [wp] euigh aerhaer
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat. Duis aute irure dolor in
+							reprehenderit in voluptate velit esse cillum dolore
+							eu fugiat nulla pariatur. Excepteur sint occaecat
+							cupidatat non proident, sunt in culpa qui officia
+							deserunt mollit anim id est laborum.
 						</Typography>
 						<p
 							className="order-information__details--collapse"
@@ -295,11 +390,23 @@ class OrderInformaiton extends React.Component {
 							unmountOnExit
 						>
 							<p>
-								ioweja owea a aeg aweoig. dlkalgj aepwgk'ape
-								[apeg[ap aEOihgao ]] jeofiahgiuh ioweja owea a
-								aeg aweoig. dlkalgj aepwgk'ape [apeg[ap aEOihgao
-								]] jeofiahgiuh ioweja owea a aeg aweoig.
-								awegaeaer wejfawg we aewoi wo woigjoa.
+								Ut tristique et egestas quis ipsum suspendisse
+								ultrices gravida. Ultricies lacus sed turpis
+								tincidunt id aliquet risus feugiat in. Nunc
+								faucibus a pellentesque sit amet porttitor. Et
+								ligula ullamcorper malesuada proin libero nunc
+								consequat interdum. Sed nisi lacus sed viverra
+								tellus in hac habitasse platea. Augue lacus
+								viverra vitae congue eu consequat ac felis
+								donec. Neque vitae tempus quam pellentesque nec
+								nam aliquam sem et. Dapibus ultrices in iaculis
+								nunc sed augue lacus viverra. Malesuada bibendum
+								arcu vitae elementum. Fringilla ut morbi
+								tincidunt augue. Ut pharetra sit amet aliquam id
+								diam maecenas ultricies. Elit ullamcorper
+								dignissim cras tincidunt lobortis feugiat
+								vivamus. Tempor orci dapibus ultrices in
+								iaculis.
 							</p>
 						</Collapse>
 					</div>

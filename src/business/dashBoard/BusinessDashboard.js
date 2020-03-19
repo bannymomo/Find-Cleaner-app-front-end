@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./style/dashboard.scss";
-import Chart from "./components/Chart";
+import AllCharts from "./components/AllCharts";
 import CommentArry from "./components/CommentArray";
 
 class Dashboard extends Component {
@@ -17,7 +17,7 @@ class Dashboard extends Component {
 						list
 					</p>
 				</div>
-				<Chart />
+				<AllCharts />
 				<CommentArry />
 			</div>
 		);

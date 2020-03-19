@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme =>
 	})
 );
 
-export default function FloatingActionButtonSize() {
+export default function ServerListArray() {
 	const props = useSpring({
 		opacity: 1,
 		from: { opacity: 0 }

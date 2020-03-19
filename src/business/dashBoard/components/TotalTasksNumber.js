@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { fetchAllNewOrders } from "../../../api/order";
+import { fetchHisOrders } from "../../../api/business";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class TotalTasksNumber extends React.Component {
@@ -16,8 +16,10 @@ class TotalTasksNumber extends React.Component {
 
 	getTotalTasksNumber = () => {
 		this.setState({ isLoading: true }, () => {
-			fetchAllNewOrders(null, null)
+			const businessId = this.props.match.params.businessId;
+			fetchHisOrders(businessId, 1, 1000, null)
 				.then(orders => {
+					console.log(orders);
 					const totalTasksNumber = orders.orders.length;
 					this.setState({ totalTasksNumber, isLoading: false });
 				})
