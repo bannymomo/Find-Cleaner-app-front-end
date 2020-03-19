@@ -42,7 +42,7 @@ import { ACCEPTED, DONE } from "../../../utils/variables";
 
 const useStyles = makeStyles(styles);
 
-function Chart(props) {
+function AllCharts(props) {
 	const classes = useStyles();
 	const animatedProps = useSpring({
 		opacity: 1,
@@ -57,7 +57,7 @@ function Chart(props) {
 				<GridItem xs={12} sm={6} md={3}>
 					<CardActionArea
 						component={Link}
-						to={`${BUSINESS_BASE_URL}/${businessId}/order-history`}
+						to={`${BUSINESS_BASE_URL}/${businessId}/browse-order`}
 					>
 						<Card>
 							<CardHeader color="warning" stats icon>
@@ -279,4 +279,4 @@ function Chart(props) {
 	);
 }
 
-export default withRouter(Chart);
+export default withRouter(AllCharts);

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Rating from "@material-ui/lab/Rating";
 import Avatar from "@material-ui/core/Avatar";
 import { withStyles } from "@material-ui/core/styles";

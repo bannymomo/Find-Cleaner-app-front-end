@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import { fetchAllNewOrders } from "../../../api/order";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ControlledOpenSelect from "../../browseOrder/components/DatePosted";
 
 class TotalTasksNumber extends React.Component {
 	state = {
@@ -16,8 +17,9 @@ class TotalTasksNumber extends React.Component {
 
 	getTotalTasksNumber = () => {
 		this.setState({ isLoading: true }, () => {
-			fetchAllNewOrders(null, null)
+			fetchAllNewOrders(1, 1000)
 				.then(orders => {
+					console.log(orders);
 					const totalTasksNumber = orders.orders.length;
 					this.setState({ totalTasksNumber, isLoading: false });
 				})

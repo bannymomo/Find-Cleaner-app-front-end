@@ -42,7 +42,7 @@ import { NEW_ORDER, ACCEPTED } from "../../../utils/variables";
 
 const useStyles = makeStyles(styles);
 
-function Chart(props) {
+function AllCharts(props) {
 	const classes = useStyles();
 	const animatedProps = useSpring({
 		opacity: 1,
@@ -280,4 +280,4 @@ function Chart(props) {
 	);
 }
 
-export default withRouter(Chart);
+export default withRouter(AllCharts);
