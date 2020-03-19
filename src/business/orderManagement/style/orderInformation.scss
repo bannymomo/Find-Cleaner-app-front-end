@@ -1,25 +1,3 @@
-@import "../../theme/variables.scss";
-
-.edit-orders-progress__container {
-	text-align: center;
-	padding-top: 40%;
-	@media (max-width: $mediaSmWidth) {
-		padding-left: 10px;
-	}
-}
-
-.order-history__nav-sidebar {
-	@media (max-width: $mediaXsWidth) {
-		display: none;
-	}
-}
-.order-history__nav-selector {
-	display: none;
-	@media (max-width: $mediaXsWidth) {
-		display: inline-block;
-	}
-}
-
 .order-information__details--list {
 	display: flex;
 	flex-wrap: wrap;

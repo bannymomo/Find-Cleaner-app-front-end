@@ -234,6 +234,7 @@ $secondary-text-color: #c2c2c2;
 	position: fixed;
 	left: 0;
 	top: 0;
+	z-index: 100;
 
 	.order-comment__modal--title {
 		margin-left: 20px;

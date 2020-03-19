@@ -20,6 +20,13 @@ import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
 import ErrorMessage from "../../UI/ErrorMessage";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+import bedroomPic from "../../assets/images/bedroom.png";
+import bathroomPic from "../../assets/images/bathroom.png";
+import ovenPic from "../../assets/images/oven.png";
+import windowPic from "../../assets/images/window.png";
+import carpetPic from "../../assets/images/carpet.png";
+import cabinetPic from "../../assets/images/cabinet.png";
+import rentalPic from "../../assets/images/rental.png";
 
 import {
 	NEW_ORDER,
@@ -324,30 +331,79 @@ class OrderInformaiton extends React.Component {
 							DETAILS
 						</Typography>
 						<ul className="order-information__details--list">
-							<li>
-								Number of bedrooms: {this.state.order.bedrooms}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={bedroomPic}
+									alt={bedroomPic}
+								/>
+								<span className="order-information__icon--title">
+									Bedrooms: {this.state.order.bedrooms}
+								</span>
 							</li>
-							<li>
-								Number of bathrooms:
-								{this.state.order.bathrooms}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={bathroomPic}
+									alt={bathroomPic}
+								/>
+								<span className="order-information__icon--title">
+									Bathrooms: {this.state.order.bathrooms}
+								</span>
 							</li>
-							<li>
-								End-of-lease clean:
-								{this.state.order.endOfLease ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={rentalPic}
+									alt={rentalPic}
+								/>
+								<span className="order-information__icon--title">
+									End-of-lease clean:{" "}
+									{this.state.order.endOfLease ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Oven: {this.state.order.oven ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={ovenPic}
+									alt={ovenPic}
+								/>
+								<span className="order-information__icon--title">
+									Oven: {this.state.order.oven ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Windows:
-								{this.state.order.windows ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={windowPic}
+									alt={windowPic}
+								/>
+								<span className="order-information__icon--title">
+									Windows:{" "}
+									{this.state.order.windows ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Cabinets:
-								{this.state.order.cabinets ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={cabinetPic}
+									alt={cabinetPic}
+								/>
+								<span className="order-information__icon--title">
+									Cabinets:{" "}
+									{this.state.order.cabinets ? "Yes" : "No"}
+								</span>
 							</li>
-							<li>
-								Carpet: {this.state.order.carpet ? "Yes" : "No"}
+							<li className="order-information__details--singlelist">
+								<img
+									className="order-information__icon--pic"
+									src={carpetPic}
+									alt={carpetPic}
+								/>
+								<span className="order-information__icon--title">
+									Carpet:{" "}
+									{this.state.order.carpet ? "Yes" : "No"}
+								</span>
 							</li>
 						</ul>
 						<Typography variant="body1" component="p">
@@ -365,11 +421,23 @@ class OrderInformaiton extends React.Component {
 							unmountOnExit
 						>
 							<p>
-								ioweja owea a aeg aweoig. dlkalgj aepwgk'ape
-								[apeg[ap aEOihgao ]] jeofiahgiuh ioweja owea a
-								aeg aweoig. dlkalgj aepwgk'ape [apeg[ap aEOihgao
-								]] jeofiahgiuh ioweja owea a aeg aweoig.
-								awegaeaer wejfawg we aewoi wo woigjoa.
+								Ut tristique et egestas quis ipsum suspendisse
+								ultrices gravida. Ultricies lacus sed turpis
+								tincidunt id aliquet risus feugiat in. Nunc
+								faucibus a pellentesque sit amet porttitor. Et
+								ligula ullamcorper malesuada proin libero nunc
+								consequat interdum. Sed nisi lacus sed viverra
+								tellus in hac habitasse platea. Augue lacus
+								viverra vitae congue eu consequat ac felis
+								donec. Neque vitae tempus quam pellentesque nec
+								nam aliquam sem et. Dapibus ultrices in iaculis
+								nunc sed augue lacus viverra. Malesuada bibendum
+								arcu vitae elementum. Fringilla ut morbi
+								tincidunt augue. Ut pharetra sit amet aliquam id
+								diam maecenas ultricies. Elit ullamcorper
+								dignissim cras tincidunt lobortis feugiat
+								vivamus. Tempor orci dapibus ultrices in
+								iaculis.
 							</p>
 						</Collapse>
 					</div>
