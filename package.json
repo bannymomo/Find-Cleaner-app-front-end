@@ -66,6 +66,7 @@
 		]
 	},
 	"devDependencies": {
+		"canvas": "^2.6.1",
 		"gh-pages": "^2.2.0"
 	}
 }
