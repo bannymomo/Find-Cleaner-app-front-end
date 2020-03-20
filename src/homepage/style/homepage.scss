@@ -1,11 +1,6 @@
 @import "../../theme/variables.scss";
 
 .product-hero__background--gradient {
-	background: linear-gradient(
-			rgba(254, 254, 254, 0.2),
-			rgba(254, 254, 254, 0.2)
-		),
-		url("../../assets/images/homepage.png");
 	background-size: cover;
 	height: 100vh;
 	animation-name: getClear;
