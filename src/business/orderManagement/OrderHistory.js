@@ -26,12 +26,8 @@ class OrderHistory extends React.Component {
 	};
 
 	componentDidMount() {
-		const {
-			location: { state }
-		} = this.props;
-		const {
-			pagination: { page, pageSize }
-		} = this.state;
+		const { location: { state } } = this.props;
+		const { pagination: { page, pageSize } } = this.state;
 
 		if (state) {
 			this.loadOrders(page, pageSize, state.searchStatus);
@@ -95,6 +91,7 @@ class OrderHistory extends React.Component {
 				dueDate={order.dueDate}
 				price={order.price}
 				status={order.status}
+				clientPhoto={order.client.photo}
 				to={`${BASE_URL}/orders/${order._id}`}
 			/>
 		));

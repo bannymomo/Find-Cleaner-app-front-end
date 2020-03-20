@@ -19,7 +19,6 @@ class TotalTasksNumber extends React.Component {
 			const businessId = this.props.match.params.businessId;
 			fetchHisOrders(businessId, 1, 1000, null)
 				.then(orders => {
-					console.log(orders);
 					const totalTasksNumber = orders.orders.length;
 					this.setState({ totalTasksNumber, isLoading: false });
 				})
