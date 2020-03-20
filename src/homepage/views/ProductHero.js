@@ -10,7 +10,17 @@ import { Link } from "react-router-dom";
 
 const styles = theme => ({
 	button: {
-		minWidth: 200
+		minWidth: 200,
+		transition: "all 0.5s",
+		position: "relative",
+		"&:hover": {
+			transform: "translateY(-3px)",
+			boxShadow: "0 10px 20px rgba(0,0,0,.4)"
+		},
+		"&:active": {
+			transform: "translateY(-1px)",
+			boxShadow: "0 5px 10px rgba(0,0,0,.4)"
+		}
 	},
 	h5: {
 		marginBottom: theme.spacing(4),

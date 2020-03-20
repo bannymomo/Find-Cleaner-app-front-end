@@ -8,6 +8,10 @@
 		url("../../assets/images/homepage.png");
 	background-size: cover;
 	height: 100vh;
+	animation-name: getClear;
+	animation-duration: 2s;
+	animation-timing-function: ease-out;
+
 	@media (max-width: $mediaSmWidth) {
 		height: 650px;
 	}
@@ -32,6 +36,10 @@
 	text-align: center;
 	color: #000000;
 
+	animation-name: moveInleft;
+	animation-duration: 2s;
+	animation-timing-function: ease-out;
+
 	@media (max-width: $mediaSmWidth) {
 		font-size: 36px;
 	}
@@ -52,6 +60,11 @@
 	line-height: 55px;
 	text-align: center;
 	color: #000000;
+
+	animation-name: moveInRight;
+	animation-duration: 2s;
+	animation-timing-function: ease-out;
+
 	@media (max-width: $mediaSmWidth) {
 		font-size: 24px;
 	}
@@ -62,6 +75,53 @@
 		font-size: 14px;
 	}
 }
+
+@keyframes getClear {
+	0% {
+		opacity: 0.1;
+	}
+	80% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes moveInleft {
+	0% {
+		opacity: 0;
+		transform: translateX(-100px);
+		color: #0005;
+	}
+	80% {
+		transform: translate(10px);
+		color: #000;
+	}
+	100% {
+		opacity: 1;
+		transform: translate(0);
+		color: #000;
+	}
+}
+
+@keyframes moveInRight {
+	0% {
+		opacity: 0;
+		transform: translateX(100px);
+		color: #0005;
+	}
+	80% {
+		transform: translate(-10px);
+		color: #000;
+	}
+	100% {
+		opacity: 1;
+		transform: translate(0);
+		color: #000;
+	}
+}
+
 .product-values__img--blue {
 	height: 60px;
 	margin: 30px 0;
