@@ -1,5 +1,5 @@
 import React from "react";
-// import ProductCategories from "./views/ProductCategories";
+import ProductCategories from "./views/ProductCategories";
 import AppFooter from "./views/AppFooter";
 import ProductHero from "./views/ProductHero";
 import ProductValues from "./views/ProductValues";
@@ -15,7 +15,7 @@ function HomePage() {
 			<MainNavigation />
 			<ProductHero />
 			<ProductValues />
-			{/* <ProductCategories /> */}
+			<ProductCategories />
 			<BusinessGallery />
 			<ProductAchievments />
 			<ProductHowItWorks />
