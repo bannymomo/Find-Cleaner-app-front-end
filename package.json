@@ -22,6 +22,7 @@
 		"date-fns": "^2.10.0",
 		"dotenv": "^8.2.0",
 		"eslint": "^6.8.0",
+		"jest-canvas-mock": "^2.2.0",
 		"jsonwebtoken": "^8.5.1",
 		"moment": "^2.24.0",
 		"node-sass": "^4.13.1",
@@ -31,6 +32,7 @@
 		"react-animate-on-scroll": "^2.1.5",
 		"react-animated-modal": "^1.1.1",
 		"react-chartist": "^0.14.2",
+		"react-countup": "^4.3.3",
 		"react-dom": "^16.12.0",
 		"react-facebook-login": "^3.7.2",
 		"react-geocode": "^0.2.1",
@@ -44,6 +46,7 @@
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.3.1",
 		"react-spring": "^8.0.27",
+		"react-visibility-sensor": "^5.1.1",
 		"react-water-wave": "^1.0.5",
 		"styled-components": "^5.0.1"
 	},
