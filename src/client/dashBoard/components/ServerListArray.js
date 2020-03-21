@@ -3,7 +3,7 @@ import { useSpring, animated } from "react-spring";
 import house from "../../../assets/images/house.png";
 import oven from "../../../assets/images/oven.png";
 import carpet from "../../../assets/images/carpet.png";
-import rental from "../../../assets/images/rental.png";
+import rent from "../../../assets/images/rent.png";
 import bathroom from "../../../assets/images/bathroom.png";
 import window from "../../../assets/images/window.png";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -30,7 +30,7 @@ export default function ServerListArray() {
 	const listArray = [
 		{ img: house, alt: "Home Cleaning", description: "Home Cleaning" },
 		{
-			img: rental,
+			img: rent,
 			alt: "End of Lease Cleaning",
 			description: "End of Lease Cleaning"
 		},
