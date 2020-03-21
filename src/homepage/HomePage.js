@@ -5,6 +5,7 @@ import ProductHero from "./views/ProductHero";
 import ProductValues from "./views/ProductValues";
 import ProductHowItWorks from "./views/ProductHowItWorks";
 import ProductCTA from "./views/ProductCTA";
+import ProductAchievments from "./views/ProductAchievments";
 import MainNavigation from "../navigation/MainNavigation";
 
 function HomePage() {
@@ -14,6 +15,7 @@ function HomePage() {
 			<ProductHero />
 			<ProductValues />
 			<ProductCategories />
+			<ProductAchievments />
 			<ProductHowItWorks />
 			<ProductCTA />
 			<AppFooter />
