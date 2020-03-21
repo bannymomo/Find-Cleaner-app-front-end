@@ -1,9 +1,9 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
 import house from "../../../assets/images/house.png";
-import kitchen from "../../../assets/images/kitchen.png";
+import oven from "../../../assets/images/oven.png";
 import carpet from "../../../assets/images/carpet.png";
-import rent from "../../../assets/images/rent.png";
+import rental from "../../../assets/images/rental.png";
 import bathroom from "../../../assets/images/bathroom.png";
 import window from "../../../assets/images/window.png";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -30,14 +30,14 @@ export default function ServerListArray() {
 	const listArray = [
 		{ img: house, alt: "Home Cleaning", description: "Home Cleaning" },
 		{
-			img: rent,
+			img: rental,
 			alt: "End of Lease Cleaning",
 			description: "End of Lease Cleaning"
 		},
 		{ img: carpet, alt: "Carpet Cleaning", description: "Carpet Cleaning" },
 
 		{
-			img: kitchen,
+			img: oven,
 			alt: "Oven Cleaning",
 			description: "Oven Cleaning"
 		},
