@@ -15,7 +15,10 @@ export default function BusinessProfile(props) {
 					className="business-profile__sidebar--page-left"
 				>
 					<div>
-						<BusinessProfileSideBar business={props.business} />
+						<BusinessProfileSideBar
+							business={props.business}
+							expanded={props.expanded}
+						/>
 					</div>
 				</Grid>
 				<Grid
@@ -25,7 +28,10 @@ export default function BusinessProfile(props) {
 					className="business-profile__container--page-right"
 				>
 					<div>
-						<BusinessProfileContainer business={props.business} />
+						<BusinessProfileContainer
+							business={props.business}
+							expanded={props.expanded}
+						/>
 					</div>
 				</Grid>
 			</Grid>

@@ -138,7 +138,6 @@ function App() {
 							canvasClassName="app__canvas-wrapper"
 							params={particleOpt}
 						/>
-
 						<Routes />
 					</main>
 				</div>

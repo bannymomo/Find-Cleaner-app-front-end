@@ -115,6 +115,19 @@ const useStylesModal = makeStyles(theme => ({
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(1, 4, 2),
 		outline: 0
+	},
+	button: {
+		position: "absolute",
+		right: 5,
+		top: 5,
+		border: "none",
+		borderRadius: "100px",
+		fontSize: "1.2rem",
+
+		"&:hover": {
+			color: "#2196f3",
+			backgroundColor: "transparent"
+		}
 	}
 }));
 

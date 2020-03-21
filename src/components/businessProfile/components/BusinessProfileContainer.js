@@ -13,6 +13,9 @@ import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
 
 const useStyles = makeStyles(theme => ({
+	root: {
+		position: "relative"
+	},
 	rating: {
 		display: "flex",
 		alignItems: "center",
@@ -70,6 +73,18 @@ const useStyles = makeStyles(theme => ({
 			textDecoration: "none",
 			color: "#3f89de"
 		}
+	},
+	buttonClose: {
+		position: "absolute",
+		right: -20,
+		top: 10,
+		fontSize: "1.5rem",
+		color: "#0008",
+		border: "none",
+		"&:hover": {
+			textDecoration: "none",
+			color: "#3f89de"
+		}
 	}
 }));
 
@@ -110,7 +125,7 @@ export default function BusinessProfileSidebar(props) {
 			date: "3 days ago",
 			rating: "5",
 			service: "End-of-lease cleaning",
-			comment: "Prestige Home Cleaning service is great. Thanks a lot."
+			comment: "Home cleaning service is great. Thanks a lot."
 		},
 		{
 			name: "Smith L",
@@ -123,8 +138,13 @@ export default function BusinessProfileSidebar(props) {
 	];
 
 	return (
-		<div className="business-profile__container">
-			<List>
+		<div
+			className="business-profile__container"
+			style={{
+				display: props.expanded ? "flex" : "none"
+			}}
+		>
+			<List className={classes.root}>
 				<ListItem alignItems="flex-start">
 					<ListItemText
 						primary={
@@ -230,8 +250,16 @@ export default function BusinessProfileSidebar(props) {
 						))}
 					</Grid>
 				</ListItem>
-				<Link className={classes.buttonLink} component="button">
-					View more
+				<Link
+					// className={classes.buttonLink}
+					className={`${
+						props.expanded
+							? classes.buttonClose
+							: classes.buttonLink
+					}`}
+					component="button"
+				>
+					{props.expanded ? "✖" : "view more"}
 				</Link>
 			</List>
 		</div>
