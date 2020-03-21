@@ -2,14 +2,35 @@
 @import "../../../style/homepage.scss";
 
 .circular-progress {
-	margin: 5rem 35rem;
+	margin: 5rem 0 5rem 35rem;
 	border-color: $primary-color-blue;
+	@media (max-width: $mediaMdWidth) {
+		margin: 5rem 0 5rem 25rem;
+	}
+	@media (max-width: $mediaSmWidth) {
+		margin: 5rem 0 5rem 18rem;
+	}
 }
 
 .business-gallery__load-more-btn.MuiButton-root {
 	padding: 0 auto;
 	width: 15rem;
-	margin: -50px 42vw 0 42vw;
+	margin: -50px auto 0 42vw;
+	@media (max-width: $mediaMdWidth) {
+		margin: -50px auto 0 39vw;
+	}
+	@media (max-width: $mediaSmWidth) {
+		margin: -50px auto 0 35vw;
+	}
+	@media (max-width: $mediaXsWidth) {
+		margin: -50px auto 0 21vw;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		margin: -50px auto 0 18vw;
+	}
+	@media (max-width: "320px") {
+		margin: -50px auto 0 13vw;
+	}
 	span.MuiButton-label {
 		color: $primary-color-blue;
 	}
@@ -26,6 +47,10 @@
 	margin: 1rem 5rem;
 	background-color: #0001;
 	border-radius: 10px;
+	@media (max-width: $mediaXsWidth) {
+		margin: 0;
+		padding: 0;
+	}
 
 	.grid {
 		display: grid;
@@ -34,6 +59,11 @@
 		grid-auto-rows: 1fr;
 		grid-gap: 20px;
 		grid-auto-flow: dense;
+		@media (max-width: $mediaSmWidth) {
+			grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+			grid-template-rows: minmax(12rem, 1fr);
+			grid-gap: 10px;
+		}
 	}
 
 	.grid-template-columns {
@@ -49,6 +79,14 @@
 	.card--expanded {
 		grid-column: span 3;
 		grid-row: span 2;
+		@media (max-width: $mediaSmWidth) {
+			grid-column: span 2;
+			grid-row: span 4;
+		}
+		@media (max-width: $mediaXsWidth) {
+			grid-column: span 1;
+			grid-row: span 4;
+		}
 	}
 
 	.card {
@@ -58,6 +96,9 @@
 		align-items: center;
 		padding: 1rem;
 		z-index: 1;
+		@media (max-width: $mediaXsWidth) {
+			padding: 0;
+		}
 	}
 
 	.card > div {

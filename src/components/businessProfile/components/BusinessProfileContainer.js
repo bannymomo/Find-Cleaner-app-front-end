@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	buttonClose: {
 		position: "absolute",
-		right: -20,
+		right: 0,
 		top: 10,
 		fontSize: "1.5rem",
 		color: "#0008",
@@ -141,7 +141,10 @@ export default function BusinessProfileSidebar(props) {
 		<div
 			className="business-profile__container"
 			style={{
-				display: props.expanded ? "flex" : "none"
+				display:
+					props.expanded || props.expanded === undefined
+						? "flex"
+						: "none"
 			}}
 		>
 			<List className={classes.root}>

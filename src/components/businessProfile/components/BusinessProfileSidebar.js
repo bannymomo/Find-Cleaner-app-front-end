@@ -15,9 +15,12 @@ import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined";
 import HistoryOutlinedIcon from "@material-ui/icons/HistoryOutlined";
+import { HOMEPAGE_URL } from "../../../routes/URLMap";
 
 import "../../../theme/theme";
 import "../../../theme/variables.scss";
+
+const onHomePage = HOMEPAGE_URL;
 
 const useStyles = makeStyles(theme => ({
 	avatar: {
@@ -55,7 +58,10 @@ export default function BusinessProfileSidebar(props) {
 		<div
 			className="business-profile__sidebar"
 			style={{
-				display: props.expanded ? "flex" : "none"
+				display:
+					props.expanded || props.expanded === undefined
+						? "flex"
+						: "none"
 			}}
 		>
 			<List>

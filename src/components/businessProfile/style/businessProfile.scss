@@ -5,10 +5,33 @@
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	box-shadow: 5px 0px 53px -4px rgba(0, 0, 0, 0.05);
+	@media (max-width: $mediaSmWidth) {
+		width: 300px;
+	}
+	@media (max-width: $mediaXsWidth) {
+		width: 100vw;
+	}
 	& .business-profile__sidebar {
+		@media (max-width: $mediaSmWidth) {
+			& ul.MuiList-root {
+				margin-left: 15vw;
+			}
+		}
+		@media (max-width: $mediaXsWidth) {
+			& ul.MuiList-root {
+				margin-left: 7vw;
+			}
+		}
+		@media (max-width: "320px") {
+			& ul.MuiList-root {
+				margin-left: 2vw;
+			}
+		}
+
 		@media (max-width: $mediaXsWidth) {
 			width: 90vw;
 		}
+
 		& li {
 			padding: 0 1.5rem;
 			margin: 10px auto;
@@ -72,6 +95,15 @@
 	width: 600px;
 	display: flex;
 	padding: 1.2rem 2rem;
+	@media (max-width: $mediaSmWidth) {
+		width: 260px;
+	}
+	@media (max-width: $mediaXsWidth) {
+		padding: 10px;
+		& ul.MuiList-root {
+			padding-left: 10px;
+		}
+	}
 
 	& .business-profile__container {
 		@media (max-width: $mediaXsWidth) {

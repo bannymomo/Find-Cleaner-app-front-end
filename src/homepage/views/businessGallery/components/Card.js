@@ -65,9 +65,6 @@ class Card extends React.Component {
 						<BusinessProfile
 							business={this.props.business}
 							expanded={this.state.expanded}
-							style={{
-								display: this.state.expanded ? "flex" : "none"
-							}}
 						/>
 					</div>
 				</div>
