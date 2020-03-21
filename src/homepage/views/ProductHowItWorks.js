@@ -40,10 +40,10 @@ function ProductHowItWorks(props) {
 	return (
 		<section className={classes.root}>
 			<Container className={classes.container}>
-				<div className="homepage-child-components__title--black">
-					How it works
-				</div>
 				<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
+					<div className="homepage-child-components__title--black">
+						How it works
+					</div>
 					<div>
 						<Grid
 							container

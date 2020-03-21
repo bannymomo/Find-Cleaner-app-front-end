@@ -18,7 +18,12 @@ import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
 const styles = theme => ({
 	root: {
-		marginTop: theme.spacing(8)
+		marginTop: theme.spacing(8),
+		marginBottom: theme.spacing(8),
+		[theme.breakpoints.down("sm")]: {
+			marginTop: theme.spacing(3),
+			marginBottom: theme.spacing(15)
+		}
 	},
 	images: {
 		marginTop: theme.spacing(8),
@@ -115,6 +120,19 @@ const useStylesModal = makeStyles(theme => ({
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(1, 4, 2),
 		outline: 0
+	},
+	button: {
+		position: "absolute",
+		right: 5,
+		top: 5,
+		border: "none",
+		borderRadius: "100px",
+		fontSize: "1.2rem",
+
+		"&:hover": {
+			color: "#2196f3",
+			backgroundColor: "transparent"
+		}
 	}
 }));
 

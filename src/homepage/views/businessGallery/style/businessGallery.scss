@@ -1,0 +1,219 @@
+@import "../../../../theme/variables.scss";
+@import "../../../style/homepage.scss";
+
+.circular-progress {
+	margin: 5rem 0 5rem 35rem;
+	border-color: $primary-color-blue;
+	@media (max-width: $mediaMdWidth) {
+		margin: 5rem 0 5rem 25rem;
+	}
+	@media (max-width: $mediaSmWidth) {
+		margin: 5rem 0 5rem 18rem;
+	}
+}
+
+.business-gallery__load-more-btn.MuiButton-root {
+	padding: 0 auto;
+	width: 15rem;
+	margin: -50px auto 0 42vw;
+	@media (max-width: $mediaMdWidth) {
+		margin: -50px auto 0 39vw;
+	}
+	@media (max-width: $mediaSmWidth) {
+		margin: -50px auto 0 35vw;
+	}
+	@media (max-width: $mediaXsWidth) {
+		margin: -50px auto 0 21vw;
+	}
+	@media (max-width: $mediaXxsWidth) {
+		margin: -50px auto 0 18vw;
+	}
+	@media (max-width: "320px") {
+		margin: -50px auto 0 13vw;
+	}
+	span.MuiButton-label {
+		color: $primary-color-blue;
+	}
+	span.MuiTouchRipple-root {
+		border: 1px solid $primary-color-blue;
+	}
+
+	&:hover {
+		background-color: transparent;
+	}
+}
+.business-gallery__container {
+	padding: 0.5rem 0.5rem;
+	margin: 1rem 5rem;
+	background-color: #0001;
+	border-radius: 10px;
+	@media (max-width: $mediaXsWidth) {
+		margin: 0;
+		padding: 0;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+		grid-template-rows: minmax(12rem, 1fr);
+		grid-auto-rows: 1fr;
+		grid-gap: 20px;
+		grid-auto-flow: dense;
+		@media (max-width: $mediaSmWidth) {
+			grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+			grid-template-rows: minmax(12rem, 1fr);
+			grid-gap: 10px;
+		}
+	}
+
+	.grid-template-columns {
+		grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	}
+
+	.grid-gap {
+		grid-gap: 2.5rem;
+	}
+
+	/* styling */
+
+	.card--expanded {
+		grid-column: span 3;
+		grid-row: span 2;
+		@media (max-width: $mediaSmWidth) {
+			grid-column: span 2;
+			grid-row: span 4;
+		}
+		@media (max-width: $mediaXsWidth) {
+			grid-column: span 1;
+			grid-row: span 4;
+		}
+	}
+
+	.card {
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		z-index: 1;
+		@media (max-width: $mediaXsWidth) {
+			padding: 0;
+		}
+	}
+
+	.card > div {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.card__content {
+		width: 13rem;
+	}
+	.card__content--expanded {
+		width: auto;
+		background-color: rgba(255, 255, 255, 0.801);
+	}
+
+	.card__avatar {
+		min-height: 5rem;
+		width: 5rem;
+		border-radius: 100%;
+		margin-bottom: 1.2rem;
+	}
+	.card__avatar--expanded {
+		display: none;
+	}
+
+	.card__name {
+		height: 2.5rem;
+		width: 9rem;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.801);
+		font-weight: 600;
+		font-size: 14px;
+		margin-bottom: 0.5rem;
+	}
+	.card__name--expanded {
+		display: none;
+	}
+
+	.card__learn-more {
+		margin: 0 auto;
+		background-color: transparent;
+		color: rgba(255, 255, 255, 0.801);
+		font-size: 12px;
+		text-transform: none;
+		border: none;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.801);
+		padding: 0;
+		border-radius: 0;
+	}
+	.card__learn-more--expanded {
+		display: none;
+	}
+
+	.card__abn {
+		height: 1rem;
+		width: 9rem;
+		color: rgba(255, 255, 255, 0.664);
+		text-align: center;
+		font-size: 12px;
+		margin-bottom: 0.4rem;
+		letter-spacing: 0.5px;
+		display: none;
+	}
+	.card__abn--expanded {
+		display: none;
+	}
+	.card__content--expanded {
+		display: flex;
+	}
+	.card__content {
+		display: none;
+	}
+	.card--1 {
+		border-radius: 5px;
+		background-color: rgba(53, 110, 109, 1);
+	}
+
+	.card--2 {
+		border-radius: 5px;
+		background-color: rgba(119, 172, 144, 1);
+	}
+
+	.card--3 {
+		border-radius: 5px;
+		background-color: rgba(226, 176, 96, 1);
+	}
+
+	.card--4 {
+		border-radius: 5px;
+		background-color: rgba(233, 103, 73, 1);
+	}
+
+	.card--5 {
+		border-radius: 5px;
+		background-color: rgba(219, 81, 98, 1);
+	}
+
+	body {
+		background-color: #191919;
+		color: lightgray;
+		font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+			"Roboto", "Helvetica Neue", Arial, sans-serif;
+		font-size: 1.1rem;
+	}
+
+	.mb-4 {
+		margin-bottom: 1rem;
+	}
+
+	.pt-4 {
+		margin-top: 1rem;
+	}
+
+	.p-4 {
+		padding: 1rem;
+	}
+}

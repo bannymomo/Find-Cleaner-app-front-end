@@ -7,6 +7,7 @@ import ProductHowItWorks from "./views/ProductHowItWorks";
 import ProductCTA from "./views/ProductCTA";
 import ProductAchievments from "./views/ProductAchievments";
 import MainNavigation from "../navigation/MainNavigation";
+import BusinessGallery from "./views/businessGallery/BusinessGallery";
 
 function HomePage() {
 	return (
@@ -15,6 +16,7 @@ function HomePage() {
 			<ProductHero />
 			<ProductValues />
 			<ProductCategories />
+			<BusinessGallery />
 			<ProductAchievments />
 			<ProductHowItWorks />
 			<ProductCTA />

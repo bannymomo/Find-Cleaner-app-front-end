@@ -96,6 +96,7 @@ export default function OrderInformationList(props) {
 
 	const [openMap, setOpenMap] = React.useState(false);
 	const [openBusiness, setOpenBusiness] = React.useState(false);
+
 	const handleClose = () => {
 		setOpenMap(false);
 		setOpenBusiness(false);
@@ -180,12 +181,11 @@ export default function OrderInformationList(props) {
 			<Divider variant="inset" component="li" />
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
-					{
-						props.businessPhoto ? 
-						<Avatar alt="business1" src={props.businessPhoto} /> :
+					{props.businessPhoto ? (
+						<Avatar alt="business1" src={props.businessPhoto} />
+					) : (
 						<Avatar alt="business1" src="" />
-					}
-					
+					)}
 				</ListItemAvatar>
 				<ListItemText
 					primary="TAKEN BY"

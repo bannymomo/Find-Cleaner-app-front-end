@@ -10,22 +10,30 @@ export default function BusinessProfile(props) {
 			<Grid container spacing={1}>
 				<Grid
 					item
-					sm={4}
-					xs={12}
+					md={4}
+					sm={12}
+					// xs={12}
 					className="business-profile__sidebar--page-left"
 				>
 					<div>
-						<BusinessProfileSideBar business={props.business} />
+						<BusinessProfileSideBar
+							business={props.business}
+							expanded={props.expanded}
+						/>
 					</div>
 				</Grid>
 				<Grid
 					item
-					sm={8}
-					xs={12}
+					md={8}
+					sm={12}
+					// xs={12}
 					className="business-profile__container--page-right"
 				>
 					<div>
-						<BusinessProfileContainer business={props.business} />
+						<BusinessProfileContainer
+							business={props.business}
+							expanded={props.expanded}
+						/>
 					</div>
 				</Grid>
 			</Grid>
