@@ -8,7 +8,6 @@ import "../style/homepage.scss";
 import { Link } from "react-router-dom";
 import WaterWave from "react-water-wave";
 import homePic from "../../assets/images/homepage.png";
-import zIndex from "@material-ui/core/styles/zIndex";
 
 const styles = theme => ({
 	button: {
