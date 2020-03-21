@@ -97,11 +97,13 @@ class OrderInformaiton extends React.Component {
 						client: this.state.order.client,
 						clientName: `${this.state.order.client.firstName} ${this.state.order.client.lastName}`,
 						clientPhoto: this.state.order.client.photo,
-						businessPhoto: this.state.order.business.photo,
 						rate: this.state.order.rate,
 						comment: this.state.order.comment
-					});
-				})
+					})
+					if (this.state.order.business) 
+					this.setState({	businessPhoto: this.state.order.business.photo })
+					}
+				)
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};

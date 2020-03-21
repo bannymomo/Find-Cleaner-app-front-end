@@ -41,6 +41,5 @@ export const fetchHisOrders = (id, page = 1, pageSize = 5, status) => {
 
 export const updateAvatar = (id, file) => {
 	const url = `${getApiClientUrlWithId(id)}/avatar`;
-	console.log(1,file)
 	return put(url, file)
 }

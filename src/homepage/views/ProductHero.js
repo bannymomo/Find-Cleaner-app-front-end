@@ -6,7 +6,8 @@ import ProductHeroLayout from "./ProductHeroLayout";
 import { SIGNUP_URL } from "../../routes/URLMap";
 import "../style/homepage.scss";
 import { Link } from "react-router-dom";
-// import { CLIENT_ROLE } from "../../utils/variables";
+import WaterWave from "react-water-wave";
+import homePic from "../../assets/images/homepage.png";
 
 const styles = theme => ({
 	button: {
@@ -36,33 +37,36 @@ const styles = theme => ({
 
 function ProductHero(props) {
 	const { classes } = props;
-
 	return (
-		<div className="product-hero__background--gradient">
-			<ProductHeroLayout>
-				<div className="product-hero__title--black">
-					Just one touch then experience
-					<br />
-					the difference
-				</div>
-				<div className="product-hero__text--black">
-					Your one stop for home cleaning needs.
-				</div>
+		<WaterWave imageUrl={homePic} dropRadius={30}>
+			{methods => (
+				<div className="product-hero__background--gradient">
+					<ProductHeroLayout>
+						<div className="product-hero__title--black">
+							Just one touch then experience
+							<br />
+							the difference
+						</div>
+						<div className="product-hero__text--black">
+							Your one stop for home cleaning needs.
+						</div>
 
-				<Button
-					color="primary"
-					variant="contained"
-					size="large"
-					className={classes.button}
-					component={Link}
-					to={{
-						pathname: `${SIGNUP_URL}/user/client`
-					}}
-				>
-					Get started now
-				</Button>
-			</ProductHeroLayout>
-		</div>
+						<Button
+							color="primary"
+							variant="contained"
+							size="large"
+							className={classes.button}
+							component={Link}
+							to={{
+								pathname: `${SIGNUP_URL}/user/client`
+							}}
+						>
+							Get started now
+						</Button>
+					</ProductHeroLayout>
+				</div>
+			)}
+		</WaterWave>
 	);
 }
 

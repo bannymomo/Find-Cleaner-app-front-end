@@ -1,7 +1,7 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
 import house from "../../../assets/images/house.png";
-import kitchen from "../../../assets/images/kitchen.png";
+import oven from "../../../assets/images/oven.png";
 import carpet from "../../../assets/images/carpet.png";
 import rent from "../../../assets/images/rent.png";
 import bathroom from "../../../assets/images/bathroom.png";
@@ -37,7 +37,7 @@ export default function ServerListArray() {
 		{ img: carpet, alt: "Carpet Cleaning", description: "Carpet Cleaning" },
 
 		{
-			img: kitchen,
+			img: oven,
 			alt: "Oven Cleaning",
 			description: "Oven Cleaning"
 		},

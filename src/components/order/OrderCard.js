@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import styled from 'styled-components';
@@ -19,7 +19,6 @@ import {
     DONE
 } from "../../utils/variables";
 import getStatusText from "../../utils/getStatusText";
-import { fetchClientById } from "../../api/client";
 
 import "./style/orderHistory.scss";
 import theme from "../../theme/theme";
@@ -68,17 +67,6 @@ const ColoredCard = styled(Card)`
 export default function OrderCard(props) {
 	const classes = useStyles();
 
-	const [clientPhoto, setClientPhoto] = React.useState("");
-
-	useEffect(() => {
-		!!props.clientId &&
-		fetchClientById(props.clientId)
-			.then(data => {
-				setClientPhoto(data.photo)
-			})
-			.catch(error => console.error(error))
-	}, [props]);
-
 	return (
 		<CardActionArea
 			component={Link}
@@ -121,19 +109,11 @@ export default function OrderCard(props) {
 						>
 							${props.price}
 						</Typography>
-						{
-							props.clientId ?
 							<Avatar
 								className="order-card__avatar"
 								alt="client photo"
-								src={clientPhoto}
-							/> :
-							<Avatar
-								className="order-card__avatar"
-								alt="client photo"
-								src=""
+								src={props.clientPhoto}
 							/> 
-						}
 					</Grid>
 				</Grid>
 				<p className="order-card__status">{getStatusText(props.status)}</p>

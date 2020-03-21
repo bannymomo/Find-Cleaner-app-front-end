@@ -97,6 +97,7 @@ class BrowseOrder extends Component {
 							dueDate={order.dueDate}
 							price={order.price}
 							status={order.status}
+							clientPhoto={order.client.photo}
 							to={`${BASE_URL}/orders/${order._id}`}
 						/>
 					))}
