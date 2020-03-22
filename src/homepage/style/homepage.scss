@@ -118,10 +118,9 @@
 }
 
 .product-values__img--blue {
-	height: 60px;
-	margin: 30px 0;
-	height: 120px;
-	width: 120px;
+	margin: 30px 30px;
+	height: 80px;
+	width: 80px;
 }
 
 .product-values__title--black {
@@ -146,7 +145,7 @@
 	font-style: normal;
 	font-weight: bold;
 	font-size: 36px;
-	line-height: 49px;
+	line-height: 50px;
 	text-align: center;
 	color: #000000;
 	margin-bottom: 50px;
@@ -154,7 +153,7 @@
 }
 
 .product-value__container--whole {
-	margin: 200px auto 150px;
+	margin: 100px auto 100px;
 }
 
 .product-how-it-works__title--black {
@@ -259,7 +258,10 @@
 		width: 225px;
 	}
 }
-
+.footer__container--whole {
+	position: relative;
+	z-index: 5;
+}
 .footer__container--main {
 	background-color: #858282;
 	display: flex;
@@ -317,7 +319,6 @@
 	.footer__links--white {
 		text-decoration: none;
 		color: white;
-		z-index: 5;
 		display: inline-block;
 		position: relative;
 	}

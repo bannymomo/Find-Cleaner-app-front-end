@@ -9,10 +9,7 @@ import Grid from "@material-ui/core/Grid";
 
 export default function AppFooter() {
 	return (
-		<footer>
-			{/* <Grid container spacing={3}>
-				<Grid item sm={3} xs={6}></Grid>
-			</Grid> */}
+		<footer className="footer__container--whole">
 			<Grid container spacing={0} className="footer__container--main">
 				<Grid
 					item
