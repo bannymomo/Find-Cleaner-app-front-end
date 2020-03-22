@@ -36,8 +36,8 @@ class BusinessGallery extends React.Component {
 
 	async loadBusiness() {
 		const response = await fetchAllBusiness();
-		let start = this.state.start < response.length ? this.state.start : 0;
-		let end =
+		const start = this.state.start < response.length ? this.state.start : 0;
+		const end =
 			this.state.start < response.length ? this.state.start + 10 : 10;
 
 		const businesses = response.slice(start, end);
