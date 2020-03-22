@@ -26,9 +26,13 @@
 	span.MuiTouchRipple-root {
 		border: 1px solid $primary-color-blue;
 	}
+	transition: all 0.3s ease-in-out;
 
 	&:hover {
 		background-color: transparent;
+		transform: scale(1.05);
+		transition: all 0.3s ease-in-out;
+		box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
 	}
 }
 .business-gallery__container {
