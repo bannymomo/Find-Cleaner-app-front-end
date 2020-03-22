@@ -119,6 +119,7 @@ export default function BusinessProfileSidebar(props) {
 			width: "100%"
 		}
 	];
+
 	const reviews = [
 		{
 			name: "Joe D",
@@ -136,6 +137,39 @@ export default function BusinessProfileSidebar(props) {
 				"Cleaners are nice and professional. I will come back for sure! "
 		}
 	];
+
+	const getReviews = () => {
+		if (props.business.comments.length === 0) {
+			return (
+				reviews.map(review => (
+					<Grid item xs key={review.name + review.date}>
+						<Reviews
+							name={review.name}
+							rating={review.rating}
+							date={review.date}
+							service={review.service}
+							comment={review.comment}
+						/>
+					</Grid>
+				))
+			)
+		}
+		return (
+			props.business.comments.map(comment => (
+				<Grid item xs key={comment._id}>
+					<Reviews
+						name={comment.clientName}
+						rating={comment.rate}
+						date={reviews[0].date}
+						service={reviews[0].service}
+						comment={comment.comment}
+						clientPhoto={comment.clientPhoto}
+					/>
+				</Grid>
+			))
+		)
+	}
+
 
 	return (
 		<div
@@ -240,21 +274,10 @@ export default function BusinessProfileSidebar(props) {
 				</ListItem>
 				<ListItem alignItems="flex-start">
 					<Grid container spacing={0}>
-						{reviews.map(review => (
-							<Grid item xs key={review.name + review.date}>
-								<Reviews
-									name={review.name}
-									rating={review.rating}
-									date={review.date}
-									service={review.service}
-									comment={review.comment}
-								/>
-							</Grid>
-						))}
+						{getReviews()}
 					</Grid>
 				</ListItem>
 				<Link
-					// className={classes.buttonLink}
 					className={`${
 						props.expanded
 							? classes.buttonClose

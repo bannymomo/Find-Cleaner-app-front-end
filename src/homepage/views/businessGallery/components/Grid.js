@@ -22,7 +22,7 @@ class Grid extends React.Component {
 			<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
 				<div className={classes} ref={el => (this.grid = el)}>
 					{this.props.businesses.map(business => (
-						<Card business={business} key={business.ABNNumber} />
+						<Card business={business} key={business._id} />
 					))}
 				</div>
 			</ScrollAnimation>

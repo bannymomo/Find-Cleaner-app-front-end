@@ -92,7 +92,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function BusinessProfileSidebar(props) {
+export default function BusinessProfile(props) {
 	const classes = useStyles();
 	const {
 		ABNNumber,
@@ -102,7 +102,8 @@ export default function BusinessProfileSidebar(props) {
 		postcode,
 		memberSince,
 		lastOnline,
-		description
+		description,
+		comments
 	} = props.business;
 	const [value] = React.useState(4.5);
 
@@ -149,6 +150,38 @@ export default function BusinessProfileSidebar(props) {
 				"Cleaners are nice and professional. I will come back for sure! "
 		}
 	];
+
+	const getReviews = () => {
+		if (!comments || comments.length === 0) {
+			return (
+				reviews.map(review => (
+					<Grid item xs key={review.name + review.date}>
+						<Reviews
+							name={review.name}
+							rating={review.rating}
+							date={review.date}
+							service={review.service}
+							comment={review.comment}
+						/>
+					</Grid>
+				))
+			)
+		}
+		return (
+			comments.map(comment => (
+				<Grid item xs key={comment._id}>
+					<Reviews
+						name={comment.clientName}
+						rating={comment.rate}
+						date={reviews[0].date}
+						service={reviews[0].service}
+						comment={comment.comment}
+						clientPhoto={comment.clientPhoto}
+					/>
+				</Grid>
+			))
+		)
+	}
 
 	return (
 		<List>
@@ -313,17 +346,7 @@ export default function BusinessProfileSidebar(props) {
 			</ListItem>
 			<ListItem alignItems="flex-start">
 				<Grid container spacing={0}>
-					{reviews.map(review => (
-						<Grid item xs key={review.name + review.date}>
-							<Reviews
-								name={review.name}
-								rating={review.rating}
-								date={review.date}
-								service={review.service}
-								comment={review.comment}
-							/>
-						</Grid>
-					))}
+					{getReviews()}
 				</Grid>
 			</ListItem>
 			<Link className={classes.buttonLink} component="button">

@@ -48,12 +48,13 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function BusinessProfileSidebar(props) {
+// export default function BusinessProfileSidebar(props) {
+export default function Reviews(props) {
 	const classes = useStyles();
 	const defaultRating = parseInt(props.rating);
 	return (
 		<div className={classes.root}>
-			<Avatar className={classes.avatar} alt={props.name} src="/1.jpg" />
+			<Avatar className={classes.avatar} alt={props.name} src={props.clientPhoto} />
 			<List>
 				<ListItem className={classes.card}>
 					<div className={classes.rating}>
