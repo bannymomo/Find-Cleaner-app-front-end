@@ -258,7 +258,10 @@
 		width: 225px;
 	}
 }
-
+.footer__container--whole {
+	position: relative;
+	z-index: 5;
+}
 .footer__container--main {
 	background-color: #858282;
 	display: flex;
@@ -316,7 +319,6 @@
 	.footer__links--white {
 		text-decoration: none;
 		color: white;
-		z-index: 5;
 		display: inline-block;
 		position: relative;
 	}
