@@ -1,17 +1,6 @@
 @import "../../../../theme/variables.scss";
 @import "../../../style/homepage.scss";
 
-.circular-progress {
-	margin: 5rem 0 5rem 35rem;
-	border-color: $primary-color-blue;
-	@media (max-width: $mediaMdWidth) {
-		margin: 5rem 0 5rem 25rem;
-	}
-	@media (max-width: $mediaSmWidth) {
-		margin: 5rem 0 5rem 18rem;
-	}
-}
-
 .business-gallery__load-more-btn.MuiButton-root {
 	padding: 0 auto;
 	width: 15rem;
@@ -43,13 +32,22 @@
 	}
 }
 .business-gallery__container {
+	max-width: 1270px;
 	padding: 0.5rem 0.5rem;
-	margin: 1rem 5rem;
-	background-color: #0001;
+	margin: 1rem auto;
 	border-radius: 10px;
 	@media (max-width: $mediaXsWidth) {
 		margin: 0;
 		padding: 0;
+	}
+
+	.business-gallery__progress--container {
+		text-align: center;
+		margin-top: 30px;
+
+		.business-gallery__progress--circle {
+			opacity: 0.7;
+		}
 	}
 
 	.grid {
@@ -109,6 +107,13 @@
 	}
 	.card__content {
 		width: 13rem;
+		padding-bottom: 10px;
+		border-radius: 5px;
+		transition: all 0.3s ease-in-out;
+		&:hover {
+			transform: scale(1.2);
+			transition: all 0.3s ease-in-out;
+		}
 	}
 	.card__content--expanded {
 		width: auto;
@@ -174,27 +179,27 @@
 	}
 	.card--1 {
 		border-radius: 5px;
-		background-color: rgba(53, 110, 109, 1);
+		background-color: #3f88de;
 	}
 
 	.card--2 {
 		border-radius: 5px;
-		background-color: rgba(119, 172, 144, 1);
+		background-color: #e5e5e5;
 	}
 
 	.card--3 {
 		border-radius: 5px;
-		background-color: rgba(226, 176, 96, 1);
+		background-color: #f6da87e5;
 	}
 
 	.card--4 {
 		border-radius: 5px;
-		background-color: rgba(233, 103, 73, 1);
+		background-color: #90a8e5d5;
 	}
 
 	.card--5 {
 		border-radius: 5px;
-		background-color: rgba(219, 81, 98, 1);
+		background-color: #64b2fc;
 	}
 
 	body {

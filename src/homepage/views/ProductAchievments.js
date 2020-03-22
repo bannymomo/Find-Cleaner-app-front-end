@@ -39,7 +39,7 @@ const styles = theme => ({
 		top: 0,
 		right: 0,
 		bottom: 0,
-		opacity: 0.8,
+		opacity: 0.5,
 		backgroundColor: "#1C1D21"
 	},
 	container: {

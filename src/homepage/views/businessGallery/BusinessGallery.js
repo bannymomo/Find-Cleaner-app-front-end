@@ -13,7 +13,7 @@ class BusinessGallery extends React.Component {
 		isLoading: false,
 		error: null,
 		start: 0,
-		end: 12
+		end: 10
 	};
 
 	async componentDidMount() {
@@ -22,7 +22,7 @@ class BusinessGallery extends React.Component {
 				isLoading: true,
 				businesses: [],
 				start: 0,
-				end: 12
+				end: 10
 			},
 			async () => {
 				try {
@@ -36,15 +36,16 @@ class BusinessGallery extends React.Component {
 
 	async loadBusiness() {
 		const response = await fetchAllBusiness();
-		let start = this.state.start;
-		let end = this.state.end;
+		let start = this.state.start < response.length ? this.state.start : 0;
+		let end =
+			this.state.start < response.length ? this.state.start + 10 : 10;
 
 		const businesses = response.slice(start, end);
 
 		this.setState({
 			businesses: businesses,
-			start: this.state.start + 10,
-			end: this.state.end + 10,
+			start: start + 10,
+			end: end + 10,
 			isLoading: false
 		});
 	}
@@ -73,10 +74,13 @@ class BusinessGallery extends React.Component {
 				</Button>
 				<div className="business-gallery__container">
 					{this.state.isLoading ? (
-						<CircularProgress
-							size="10%"
-							className="circular-progress"
-						/>
+						<div className="business-gallery__progress--container">
+							<CircularProgress
+								size={200}
+								color="primary"
+								className="business-gallery__progress--circle"
+							/>
+						</div>
 					) : !!this.state.error ? (
 						<ErrorMessage error={this.state.error} />
 					) : (

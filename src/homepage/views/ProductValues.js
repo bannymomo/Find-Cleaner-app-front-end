@@ -17,8 +17,8 @@ const styles = theme => ({
 		backgroundColor: theme.palette.secondary.light
 	},
 	container: {
-		marginTop: theme.spacing(15),
-		marginBottom: theme.spacing(30),
+		marginTop: theme.spacing(),
+		marginBottom: theme.spacing(0),
 		display: "flex",
 		position: "relative"
 	},

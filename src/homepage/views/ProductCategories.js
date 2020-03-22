@@ -18,8 +18,8 @@ import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 
 const styles = theme => ({
 	root: {
-		marginTop: theme.spacing(8),
-		marginBottom: theme.spacing(8),
+		marginTop: theme.spacing(0),
+		marginBottom: theme.spacing(12),
 		[theme.breakpoints.down("sm")]: {
 			marginTop: theme.spacing(3),
 			marginBottom: theme.spacing(15)
@@ -36,7 +36,7 @@ const styles = theme => ({
 		display: "block",
 		padding: 0,
 		borderRadius: 0,
-		height: "40vh",
+		height: "20vh",
 		[theme.breakpoints.down("sm")]: {
 			width: "100% !important",
 			height: 100
@@ -221,8 +221,7 @@ function ProductCategories(props) {
 		<Container className={classes.root} component="section">
 			<ScrollAnimation animateIn="fadeIn" duration={2} delay={100}>
 				<div className="homepage-child-components__title--black">
-					For all the needs to make your <br />
-					home or office neat and tidy
+					For all the needs to make your home or office neat and tidy
 				</div>
 				<Modal
 					className={modalClasses.modal}
@@ -248,6 +247,7 @@ function ProductCategories(props) {
 						</div>
 					</Fade>
 				</Modal>
+
 				<div className={classes.images}>
 					{images.map(image => {
 						const StyledButtonBase = styled(ButtonBase)`
