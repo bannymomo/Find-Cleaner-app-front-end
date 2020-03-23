@@ -31,7 +31,10 @@ const styles = theme => ({
 	},
 
 	button: {
-		marginTop: theme.spacing(18)
+		marginTop: theme.spacing(18),
+		[theme.breakpoints.down("sm")]: {
+			marginTop: theme.spacing(8)
+		}
 	},
 
 	pos: {
@@ -40,8 +43,7 @@ const styles = theme => ({
 		lineHeight: "4rem",
 		color: "#0008",
 		[theme.breakpoints.down("xs")]: {
-			fontSize: "1rem",
-			textAlign: "center"
+			fontSize: "0.8rem"
 		}
 	}
 });
@@ -60,10 +62,10 @@ function ProductHowItWorks(props) {
 					<div>
 						<Grid
 							container
-							spacing={8}
+							spacing={1}
 							className="product-how-it-works"
 						>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<div className="product-how-it-works__single-card--grey">
 									<div className="card__side card__side--front">
 										<img
@@ -96,7 +98,7 @@ function ProductHowItWorks(props) {
 									</div>
 								</div>
 							</Grid>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<div className="product-how-it-works__single-card--grey">
 									<div className="card__side card__side--front">
 										<img
@@ -130,7 +132,7 @@ function ProductHowItWorks(props) {
 									</div>
 								</div>
 							</Grid>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<div className="product-how-it-works__single-card--grey">
 									<div className="card__side card__side--front">
 										<img
