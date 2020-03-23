@@ -15,7 +15,7 @@ import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined";
 import HistoryOutlinedIcon from "@material-ui/icons/HistoryOutlined";
-
+import { isLoggedIn, getBusinessId, getClientId } from "../../../utils/auth";
 import "../../../theme/theme";
 import "../../../theme/variables.scss";
 
@@ -51,6 +51,10 @@ export default function BusinessProfileSidebar(props) {
 		memberSince,
 		lastOnline
 	} = props.business;
+
+	const loginClient = getClientId();
+	const loginBussiness = getBusinessId();
+
 	return (
 		<div
 			className="business-profile__sidebar"
@@ -113,7 +117,15 @@ export default function BusinessProfileSidebar(props) {
 
 				<Divider variant="middle" component="li" />
 
-				<ListItem alignItems="flex-start">
+				<ListItem
+					alignItems="flex-start"
+					style={{
+						display:
+							isLoggedIn() && (loginClient || loginBussiness)
+								? "flex"
+								: "none"
+					}}
+				>
 					<PhoneAndroidOutlinedIcon />
 					<ListItemText
 						secondary={
@@ -127,7 +139,15 @@ export default function BusinessProfileSidebar(props) {
 					/>
 				</ListItem>
 
-				<ListItem alignItems="flex-start">
+				<ListItem
+					alignItems="flex-start"
+					style={{
+						display:
+							isLoggedIn() && (loginClient || loginBussiness)
+								? "flex"
+								: "none"
+					}}
+				>
 					<AlternateEmailOutlinedIcon />
 					<ListItemText
 						secondary={
@@ -155,7 +175,15 @@ export default function BusinessProfileSidebar(props) {
 				</ListItem>
 				<Divider variant="middle" component="li" />
 
-				<ListItem alignItems="flex-start">
+				<ListItem
+					alignItems="flex-start"
+					style={{
+						display:
+							isLoggedIn() && (loginClient || loginBussiness)
+								? "flex"
+								: "none"
+					}}
+				>
 					<UpdateOutlinedIcon />
 					<ListItemText
 						secondary={
@@ -171,7 +199,15 @@ export default function BusinessProfileSidebar(props) {
 						}
 					/>
 				</ListItem>
-				<ListItem alignItems="flex-start">
+				<ListItem
+					alignItems="flex-start"
+					style={{
+						display:
+							isLoggedIn() && (loginClient || loginBussiness)
+								? "flex"
+								: "none"
+					}}
+				>
 					<HistoryOutlinedIcon />
 					<ListItemText
 						secondary={
