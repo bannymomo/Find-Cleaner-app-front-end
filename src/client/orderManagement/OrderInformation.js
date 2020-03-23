@@ -69,7 +69,7 @@ class OrderInformaiton extends React.Component {
 			clientPhoto: "",
 			businessPhoto: "",
 			client: "",
-			business: "",
+			business: {},
 			error: null,
 			isLoading: false,
 			isUpdating: false,

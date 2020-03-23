@@ -15,7 +15,7 @@ function ShowOrderComment(props) {
 				<h3 className="order-comment__modal--title">
 					From {props.clientName}
 				</h3>
-				<div class="order-comment__avatar-title--container">
+				<div className="order-comment__avatar-title--container">
 					<Avatar
 						className="order-comment__avatar--pic"
 						alt="client-pic"
@@ -26,7 +26,7 @@ function ShowOrderComment(props) {
 						Client: {props.clientName}
 					</p>
 				</div>
-				<div class="order-comment__avatar-title--container">
+				<div className="order-comment__avatar-title--container">
 					<Avatar
 						className="order-comment__avatar--pic"
 						alt="business-pic"
@@ -42,7 +42,7 @@ function ShowOrderComment(props) {
 						{props.business ? props.business.businessName : ""}
 					</p>
 				</div>
-				<div class="order-comment__avatar-title--container">
+				<div className="order-comment__avatar-title--container">
 					<Avatar
 						className="order-comment__avatar--pic"
 						alt="order-pic"

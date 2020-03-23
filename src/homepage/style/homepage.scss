@@ -238,6 +238,9 @@
 		@media (max-width: $mediaXxsWidth) {
 			width: 260px;
 		}
+		&-textfield {
+			background-color: #e5e5e5;
+		}
 	}
 
 	.product-container__button--blue {

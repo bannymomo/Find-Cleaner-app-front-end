@@ -21,7 +21,6 @@ import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined";
 import HistoryOutlinedIcon from "@material-ui/icons/HistoryOutlined";
-import styled from "styled-components";
 
 import "../../theme/theme";
 import "../../theme/variables.scss";
@@ -92,7 +91,52 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function BusinessProfileSidebar(props) {
+
+const images = [
+	{
+		url:
+			"https://cdn.pixabay.com/photo/2016/08/03/14/24/roses-1566792_1280.jpg",
+		title: "Home & Gardening",
+		width: "100%"
+	},
+	{
+		url:
+			"https://cdn.pixabay.com/photo/2017/05/23/16/23/soap-dispenser-2337697_1280.jpg",
+		title: "Washing",
+		width: "100%"
+	},
+	{
+		url:
+			"https://cdn.pixabay.com/photo/2017/08/24/12/23/coffee-2676642_1280.jpg",
+		title: "Bed making",
+		width: "100%"
+	},
+	{
+		url:
+			"https://cdn.pixabay.com/photo/2015/03/26/10/01/bathroom-690774_1280.jpg",
+		title: "Bathroom cleaning",
+		width: "100%"
+	}
+];
+const reviews = [
+	{
+		name: "Joe D",
+		date: "3 days ago",
+		rating: "5",
+		service: "End-of-lease cleaning",
+		comment: "Prestige Home Cleaning service is great. Thanks a lot."
+	},
+	{
+		name: "Smith L",
+		date: "2 days ago",
+		rating: "5",
+		service: "Carpet Cleaning",
+		comment:
+			"Cleaners are nice and professional. I will come back for sure! "
+	}
+];
+
+export default function BusinessProfile(props) {
 	const classes = useStyles();
 	const {
 		ABNNumber,
@@ -102,53 +146,42 @@ export default function BusinessProfileSidebar(props) {
 		postcode,
 		memberSince,
 		lastOnline,
-		description
+		description,
+		comments
 	} = props.business;
 	const [value] = React.useState(4.5);
 
-	const images = [
-		{
-			url:
-				"https://cdn.pixabay.com/photo/2016/08/03/14/24/roses-1566792_1280.jpg",
-			title: "Home & Gardening",
-			width: "100%"
-		},
-		{
-			url:
-				"https://cdn.pixabay.com/photo/2017/05/23/16/23/soap-dispenser-2337697_1280.jpg",
-			title: "Washing",
-			width: "100%"
-		},
-		{
-			url:
-				"https://cdn.pixabay.com/photo/2017/08/24/12/23/coffee-2676642_1280.jpg",
-			title: "Bed making",
-			width: "100%"
-		},
-		{
-			url:
-				"https://cdn.pixabay.com/photo/2015/03/26/10/01/bathroom-690774_1280.jpg",
-			title: "Bathroom cleaning",
-			width: "100%"
+	const getReviews = () => {
+		if (!comments || comments.length === 0) {
+			return (
+				reviews.map(review => (
+					<Grid item xs key={review.name + review.date}>
+						<Reviews
+							name={review.name}
+							rating={review.rating}
+							date={review.date}
+							service={review.service}
+							comment={review.comment}
+						/>
+					</Grid>
+				))
+			)
 		}
-	];
-	const reviews = [
-		{
-			name: "Joe D",
-			date: "3 days ago",
-			rating: "5",
-			service: "End-of-lease cleaning",
-			comment: "Prestige Home Cleaning service is great. Thanks a lot."
-		},
-		{
-			name: "Smith L",
-			date: "2 days ago",
-			rating: "5",
-			service: "Carpet Cleaning",
-			comment:
-				"Cleaners are nice and professional. I will come back for sure! "
-		}
-	];
+		return (
+			comments.map(comment => (
+				<Grid item xs key={comment._id}>
+					<Reviews
+						name={comment.clientName}
+						rating={comment.rate}
+						date={reviews[0].date}
+						service={reviews[0].service}
+						comment={comment.comment}
+						clientPhoto={comment.clientPhoto}
+					/>
+				</Grid>
+			))
+		)
+	}
 
 	return (
 		<List>
@@ -255,12 +288,6 @@ export default function BusinessProfileSidebar(props) {
 			<ListItem alignItems="flex-start">
 				<Grid container spacing={2}>
 					{images.map(image => {
-						const StyledButtonBase = styled(ButtonBase)`
-							width: ${image.width};
-						`;
-						const StyledDiv = styled.div`
-							background-image: url(${image.url});
-						`;
 						return (
 							<Grid
 								item
@@ -269,11 +296,15 @@ export default function BusinessProfileSidebar(props) {
 								className={classes.images}
 								key={image.title}
 							>
-								<StyledButtonBase
+								<ButtonBase
 									className={classes.imageWrapper}
+									style={{width: image.width}}
 								>
-									<StyledDiv className={classes.imageSrc} />
-								</StyledButtonBase>
+									<div
+										className={classes.imageSrc}
+										style={{backgroundImage: `url(${image.url})`}}
+									/>
+								</ButtonBase>
 							</Grid>
 						);
 					})}
@@ -313,17 +344,7 @@ export default function BusinessProfileSidebar(props) {
 			</ListItem>
 			<ListItem alignItems="flex-start">
 				<Grid container spacing={0}>
-					{reviews.map(review => (
-						<Grid item xs key={review.name + review.date}>
-							<Reviews
-								name={review.name}
-								rating={review.rating}
-								date={review.date}
-								service={review.service}
-								comment={review.comment}
-							/>
-						</Grid>
-					))}
+					{getReviews()}
 				</Grid>
 			</ListItem>
 			<Link className={classes.buttonLink} component="button">

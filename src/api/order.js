@@ -47,6 +47,5 @@ export const changeOrderStatusByBusiness = (orderId, businessId, status) => {
 
 export const addOrderComment = (orderId, data) => {
 	const url = `${getApiOrderUrlWithId(orderId)}/comments`;
-	console.log(data);
 	return post(url, data).then(res => res.data.data);
 };
