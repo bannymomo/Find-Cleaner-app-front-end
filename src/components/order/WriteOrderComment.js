@@ -29,6 +29,9 @@ class WriteOrderComment extends React.Component {
 	};
 
 	handleSubmit = () => {
+		if (!this.state.commentContent) {
+			this.setState({ commentContent: "Good!" });
+		}
 		const orderComment = {
 			comment: {
 				rate: this.state.value,
@@ -53,7 +56,7 @@ class WriteOrderComment extends React.Component {
 		if (this.state.isLoading) {
 			return (
 				<div className="modal-orders__progress--container">
-					<CircularProgress size={150} color="secondary" />;
+					<CircularProgress size={150} color="secondary" />
 				</div>
 			);
 		}
