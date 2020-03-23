@@ -22,7 +22,18 @@ import PostOrderBtn from "../components/order/PostOrderBtn";
 import styled from "styled-components";
 import { POST_ORDER_AT_HOMEPAGE } from "../utils/variables";
 
+
+const StyledLogin = styled(Link)`
+	display: ${props => props.isloggedin ? "none" : ""};
+`;
+const StyleAvartarButton = styled(Link)`
+	display: ${props => props.isloggedin && (props.loginclient || props.loginbussiness)
+		? ""
+		: "none"};
+`;
+
 class MainNavigation extends Component {
+
 	renderButton = (loginClient, loginBussiness) => {
 		if (loginBussiness && isLoggedIn()) {
 			return (
@@ -53,12 +64,9 @@ class MainNavigation extends Component {
 			);
 		}
 	};
-	renderItems = (
-		loginClient,
-		loginBussiness,
-		StyledLogin,
-		StyleAvartarButton
-	) => {
+	renderItems = () => {
+		const loginClient = getClientId();
+		const loginBussiness = getBusinessId();
 		return (
 			<div className="nav-bar__items--container">
 				<ul className="nav-bar__ul--black">
@@ -82,6 +90,7 @@ class MainNavigation extends Component {
 					</li>
 					<li>
 						<StyledLogin
+							isloggedin={isLoggedIn()? 1 : 0}
 							to={LOGIN_URL}
 							className="nav-bar__link--black"
 						>
@@ -91,6 +100,9 @@ class MainNavigation extends Component {
 				</ul>
 				<div className="nav-bar__avatar--container">
 					<StyleAvartarButton
+						isloggedin={isLoggedIn()? 1 : 0}
+						loginclient={loginClient}
+						loginbussiness={loginBussiness}
 						to={
 							loginClient
 								? `${CLIENT_BASE_URL}/${loginClient}`
@@ -107,17 +119,6 @@ class MainNavigation extends Component {
 		);
 	};
 	render() {
-		const loginClient = getClientId();
-		const loginBussiness = getBusinessId();
-		const StyledLogin = styled(Link)`
-			display: ${isLoggedIn() ? "none" : ""};
-		`;
-		const StyleAvartarButton = styled(Link)`
-			display: ${isLoggedIn() && (loginClient || loginBussiness)
-				? ""
-				: "none"};
-		`;
-
 		return (
 			<header className="nav-bar__header--white">
 				<div>
@@ -134,12 +135,7 @@ class MainNavigation extends Component {
 						/>
 					</Link>
 				</div>
-				{this.renderItems(
-					loginClient,
-					loginBussiness,
-					StyledLogin,
-					StyleAvartarButton
-				)}
+				{this.renderItems()}
 				<MainMenu />
 			</header>
 		);

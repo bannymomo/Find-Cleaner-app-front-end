@@ -21,14 +21,15 @@ const menuItems = [
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu() {
+const StyledLogin = styled(Link)`
+	display: ${props => props.isloggedin ? "none" : ""};
+	color: #fff;
+	text-decoration: none;
+`;
+
+export default function MainMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
-	const StyledLogin = styled(Link)`
-		display: ${isLoggedIn() ? "none" : ""};
-		color: #fff;
-		text-decoration: none;
-	`;
 
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget);
@@ -76,7 +77,11 @@ export default function LongMenu() {
 					</MenuItem>
 				))}
 				<MenuItem onClick={handleClose}>
-					<StyledLogin className="styled-login" to={LOGIN_URL}>
+					<StyledLogin
+						isloggedin={isLoggedIn()? 1 : 0} 
+						className="styled-login" 
+						to={LOGIN_URL}
+					>
 						Login
 					</StyledLogin>
 				</MenuItem>
