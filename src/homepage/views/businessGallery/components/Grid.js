@@ -9,7 +9,7 @@ class Grid extends React.Component {
 		wrapGrid(this.grid, {
 			easing: "backOut",
 			stagger: 10,
-			duration: 1000
+			duration: 800
 		});
 	}
 

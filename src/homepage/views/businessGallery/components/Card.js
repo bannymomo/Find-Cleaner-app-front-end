@@ -6,7 +6,7 @@ import BusinessProfile from "../../../../components/businessProfile/BusinessProf
 class Card extends React.Component {
 	state = { expanded: false };
 
-	randomNumber = Math.floor(Math.random() * 5) + 1;
+	randomNumber = Math.floor(Math.random() * 4) + 1;
 
 	render() {
 		return (

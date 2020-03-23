@@ -40,21 +40,21 @@
 			margin: 14px 3rem;
 		}
 		& .MuiTypography-body1 {
-			text-align: justify;
-			font-size: 1.2rem;
+			text-align: center;
+			font-size: 0.9rem;
 			font-weight: 500;
 			line-height: 2;
 			margin: 0;
 			letter-spacing: 1px;
 		}
 		& .MuiTypography-body2 {
-			font-size: 0.9rem;
+			font-size: 0.8rem;
 			& > span {
 				color: $primary-color-blue;
 			}
 		}
 		& .MuiTypography-subtitle1 {
-			font-size: 1rem;
+			font-size: 0.9rem;
 			line-height: 1.5;
 			font-weight: 500;
 			margin-left: -10px;
@@ -62,7 +62,7 @@
 		}
 
 		& .MuiTypography-subtitle2 {
-			font-size: 0.9rem;
+			font-size: 0.7rem;
 			line-height: 1.5;
 		}
 
@@ -70,7 +70,7 @@
 			text-decoration: none;
 			color: $primary-color-blue;
 			text-transform: lowercase;
-			font-size: 0.9rem;
+			font-size: 0.7rem;
 			font-weight: 300;
 			margin: 0;
 		}
