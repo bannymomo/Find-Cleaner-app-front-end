@@ -182,9 +182,9 @@ export default function OrderInformationList(props) {
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
 					{props.businessPhoto ? (
-						<Avatar alt="business1" src={props.businessPhoto} />
+						<Avatar alt="business photo" src={props.businessPhoto} />
 					) : (
-						<Avatar alt="business1" src="" />
+						<Avatar alt="business photo" src="" />
 					)}
 				</ListItemAvatar>
 				<ListItemText
