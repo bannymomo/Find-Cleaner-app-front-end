@@ -20,7 +20,6 @@ export const fetchAllNewOrders = (page = 1, pageSize = 5) => {
 	}));
 };
 
-// need to be double checked
 export const createOrder = (clientId, order) => {
 	const url = `${API_ORDERS_URL}?clientId=${clientId}`;
 	return post(url, order).then(res => res.data.data);

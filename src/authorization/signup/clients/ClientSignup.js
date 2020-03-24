@@ -20,10 +20,8 @@ import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
 import MainNavigation from "../../../navigation/MainNavigation";
 import { createClient } from "../../../api/client";
-
 import { signup as signupFn } from "../../../api/auth";
 import { setToken } from "../../../utils/auth";
-
 import {
 	setClientId,
 	removeBusinessId,
@@ -114,8 +112,8 @@ class ClientSignup extends Component {
 	};
 
 	handleChange = event => {
-		this.setState({ gender: event.target.value })
-	}
+		this.setState({ gender: event.target.value });
+	};
 
 	renderButton = classes => {
 		if (this.state.isLoading) {
@@ -183,11 +181,11 @@ class ClientSignup extends Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<RadioGroup 
-							className={classes.radioGroup} 
-							aria-label="gender" 
+						<RadioGroup
+							className={classes.radioGroup}
+							aria-label="gender"
 							name="gender"
-							value={this.state.gender} 
+							value={this.state.gender}
 							onChange={this.handleChange}
 						>
 							<FormControlLabel

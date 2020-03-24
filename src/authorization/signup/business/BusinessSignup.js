@@ -13,10 +13,8 @@ import Alert from "@material-ui/lab/Alert";
 import Background from "../../../assets/images/auth-background.png";
 import { BUSINESS_BASE_URL } from "../../../routes/URLMap";
 import { createBusiness } from "../../../api/business";
-
 import { signup as signupFn } from "../../../api/auth";
 import { setToken } from "../../../utils/auth";
-
 import logo from "../../../assets/images/logo.png";
 import brandName from "../../../assets/images/brandname.png";
 import "../style/signup.scss";
@@ -94,19 +92,18 @@ class BusinessSignup extends Component {
 			signupFn(userInfo)
 				.then(data => setToken(data.token))
 				.then(() => {
-					createBusiness(businessInfo)
-						.then(data => {
-							this.setState({ isLoading: false }, () => {
-								removeClientId();
-								removeBusinessId();
-								const businessId = data._id;
-								setBusinessId(businessId);
-								const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
-								this.props.history.replace(redirectTo);
-							});
-						})
+					createBusiness(businessInfo).then(data => {
+						this.setState({ isLoading: false }, () => {
+							removeClientId();
+							removeBusinessId();
+							const businessId = data._id;
+							setBusinessId(businessId);
+							const redirectTo = `${BUSINESS_BASE_URL}/${businessId}`;
+							this.props.history.replace(redirectTo);
+						});
+					});
 				})
-				.catch(error => this.setState({ error, isLoading: false }))
+				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};
 
@@ -149,8 +146,11 @@ class BusinessSignup extends Component {
 									businessName: event.target.value
 								})
 							}
-							validators={['required', 'minStringLength:2']}
-                    		errorMessages={['this field is required', 'The length must longer than 2']}
+							validators={["required", "minStringLength:2"]}
+							errorMessages={[
+								"this field is required",
+								"The length must longer than 2"
+							]}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -180,13 +180,10 @@ class BusinessSignup extends Component {
 									postcode: event.target.value
 								})
 							}
-							validators={[
-								'required', 
-								'matchRegexp:^[0-9]{4}$'
-							]}
+							validators={["required", "matchRegexp:^[0-9]{4}$"]}
 							errorMessages={[
-								'this field is required', 
-								'postcode is not valid'
+								"this field is required",
+								"postcode is not valid"
 							]}
 						/>
 					</Grid>
@@ -202,13 +199,10 @@ class BusinessSignup extends Component {
 									telephoneNumber: event.target.value
 								})
 							}
-							validators={[
-								'required', 
-								'matchRegexp:^[0-9]{10}$'
-							]}
+							validators={["required", "matchRegexp:^[0-9]{10}$"]}
 							errorMessages={[
-								'this field is required', 
-								'phone number is not valid'
+								"this field is required",
+								"phone number is not valid"
 							]}
 						/>
 					</Grid>
@@ -224,13 +218,10 @@ class BusinessSignup extends Component {
 									ABNNumber: event.target.value
 								})
 							}
-							validators={[
-								'required', 
-								'matchRegexp:^[0-9]{11}$'
-							]}
+							validators={["required", "matchRegexp:^[0-9]{11}$"]}
 							errorMessages={[
-								'this field is required', 
-								'ABN is not valid'
+								"this field is required",
+								"ABN is not valid"
 							]}
 						/>
 					</Grid>

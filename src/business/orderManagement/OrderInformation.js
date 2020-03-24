@@ -99,11 +99,12 @@ class OrderInformaiton extends React.Component {
 						clientPhoto: this.state.order.client.photo,
 						rate: this.state.order.rate,
 						comment: this.state.order.comment
-					})
-					if (this.state.order.business) 
-					this.setState({	businessPhoto: this.state.order.business.photo })
-					}
-				)
+					});
+					if (this.state.order.business)
+						this.setState({
+							businessPhoto: this.state.order.business.photo
+						});
+				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};

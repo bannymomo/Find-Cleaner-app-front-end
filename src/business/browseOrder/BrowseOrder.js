@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import OrderCard from "../../components/order/OrderCard";
 import { Container, Grid, CircularProgress } from "@material-ui/core";
-
 import Maps from "./components/Maps";
 import SearchBar from "./components/Search";
 import DatePosted from "./components/DatePosted";
 import NewTasks from "./components/NewTasks";
 import "./style/browseorders.scss";
 import Pagination from "@material-ui/lab/Pagination";
-
 import { fetchAllNewOrders } from "../../api/order";
-
 import { BUSINESS_BASE_URL } from "../../routes/URLMap";
 import ErrorMessage from "../../UI/ErrorMessage";
 import { BUSINESS_ROLE } from "../../utils/variables";

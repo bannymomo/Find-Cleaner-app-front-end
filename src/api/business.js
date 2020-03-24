@@ -13,7 +13,6 @@ export const fetchAllBusiness = () => {
 	return get(API_BUSINESSES_URL).then(res => res.data.data);
 };
 
-// need to be double checked
 export const fetchBusinessOrderById = id => {
 	const url = `${getApiBusinessUrlWithId()}/orders`;
 	return get(url).then(res => res.data.data);

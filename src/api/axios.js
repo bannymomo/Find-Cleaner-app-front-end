@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getToken } from "../utils/auth";
 
-// need to change
 axios.defaults.baseURL = "https://find-cleaner.herokuapp.com/api";
 
 const appendAuthToken = config => {

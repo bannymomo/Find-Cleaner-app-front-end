@@ -9,11 +9,9 @@ import {
 } from "@material-ui/core";
 import { Container, Box, CssBaseline, withStyles } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-
 import logo from "../../assets/images/logo.png";
 import brandName from "../../assets/images/brandname.png";
 import "./style/style.scss";
-
 import {
 	CLIENT_BASE_URL,
 	BUSINESS_BASE_URL,
@@ -29,7 +27,6 @@ import {
 } from "../../utils/auth";
 import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
-
 import styles from "./style/Style";
 import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
 import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";

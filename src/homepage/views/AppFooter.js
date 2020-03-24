@@ -4,7 +4,6 @@ import googleplay from "../../assets/images/google-play.png";
 import appstore from "../../assets/images/app-store.png";
 import { Link } from "react-router-dom";
 import { SIGNUP_URL } from "../../routes/URLMap";
-// import { BUSINESS_ROLE } from "../../utils/variables";
 import Grid from "@material-ui/core/Grid";
 
 export default function AppFooter() {

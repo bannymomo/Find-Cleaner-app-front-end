@@ -29,27 +29,37 @@ class WriteOrderComment extends React.Component {
 	};
 
 	handleSubmit = () => {
-		if (!this.state.commentContent) {
-			this.setState({ commentContent: "Good!" });
-		}
 		const orderComment = {
 			comment: {
 				rate: this.state.value,
 				comment: this.state.commentContent
+					? this.state.commentContent
+					: "Good!"
 			}
 		};
 		const orderId = this.props.match.params.orderId;
-		this.setState({ isLoading: true }, () => {
-			addOrderComment(orderId, orderComment)
-				.then(() => {
-					this.setState({ submitSuccess: true, isLoading: false });
-					this.props.changeSubmitStatus(
-						this.state.commentContent,
-						this.state.value
-					);
-				})
-				.catch(error => this.setState({ error, isLoading: false }));
-		});
+		this.setState(
+			{
+				isLoading: true,
+				commentContent: this.state.commentContent
+					? this.state.commentContent
+					: "Good!"
+			},
+			() => {
+				addOrderComment(orderId, orderComment)
+					.then(() => {
+						this.setState({
+							submitSuccess: true,
+							isLoading: false
+						});
+						this.props.changeSubmitStatus(
+							this.state.commentContent,
+							this.state.value
+						);
+					})
+					.catch(error => this.setState({ error, isLoading: false }));
+			}
+		);
 	};
 
 	renderModal = () => {
@@ -98,6 +108,7 @@ class WriteOrderComment extends React.Component {
 					)}
 				</div>
 				<textarea
+					placeholder="Good!"
 					className="order-comment__modal--input"
 					onChange={this.changeContent}
 					value={this.state.commentContent}

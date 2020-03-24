@@ -9,7 +9,6 @@ export const fetchClientById = id => {
 	return get(url).then(res => res.data.data);
 };
 
-// need to be double checked
 export const fetchClientOrderById = id => {
 	const url = `${getApiClientUrlWithId}/orders`;
 	return get(url).then(res => res.data.data);
@@ -41,5 +40,5 @@ export const fetchHisOrders = (id, page = 1, pageSize = 5, status) => {
 
 export const updateAvatar = (id, file) => {
 	const url = `${getApiClientUrlWithId(id)}/avatar`;
-	return put(url, file)
-}
+	return put(url, file);
+};
