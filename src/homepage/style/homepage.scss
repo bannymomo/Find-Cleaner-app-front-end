@@ -238,10 +238,9 @@
 				transform: rotateY(180deg);
 				background-image: linear-gradient(
 					to right bottom,
-					#f6da87e5,
-					#f6da8773,
-					#90a8e577,
-					#64b3fc88
+					#999999a6,
+					#eeeeee,
+					#ffffff
 				);
 				&--title {
 					text-align: left;
@@ -281,7 +280,7 @@
 			transform: rotateY(0);
 		}
 		&:hover .card__side--back .bullet {
-			color: red;
+			color: $primary-color-blue;
 		}
 	}
 }
