@@ -87,7 +87,6 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-
 const images = [
 	{
 		url:
@@ -140,36 +139,31 @@ export default function BusinessProfileContainer(props) {
 
 	const getReviews = () => {
 		if (!comments || comments.length === 0 || comments._id) {
-			return (
-				reviews.map(review => (
-					<Grid item xs key={review.name + review.date}>
-						<Reviews
-							name={review.name}
-							rating={review.rating}
-							date={review.date}
-							service={review.service}
-							comment={review.comment}
-						/>
-					</Grid>
-				))
-			)
-		}
-		return (
-			comments.map(comment => (
-				<Grid item xs key={comment._id}>
+			return reviews.map(review => (
+				<Grid item xs key={review.name + review.date}>
 					<Reviews
-						name={comment.clientName}
-						rating={comment.rate}
-						date={reviews[0].date}
-						service={reviews[0].service}
-						comment={comment.comment}
-						clientPhoto={comment.clientPhoto}
+						name={review.name}
+						rating={review.rating}
+						date={review.date}
+						service={review.service}
+						comment={review.comment}
 					/>
 				</Grid>
-			))
-		)
-	}
-
+			));
+		}
+		return comments.slice(0, 4).map(comment => (
+			<Grid item xs key={comment._id}>
+				<Reviews
+					name={comment.clientName}
+					rating={comment.rate}
+					date={reviews[0].date}
+					service={reviews[0].service}
+					comment={comment.comment}
+					clientPhoto={comment.clientPhoto}
+				/>
+			</Grid>
+		));
+	};
 
 	return (
 		<div
@@ -224,11 +218,13 @@ export default function BusinessProfileContainer(props) {
 								>
 									<ButtonBase
 										className={classes.imageWrapper}
-										style={{width: image.width}}
+										style={{ width: image.width }}
 									>
 										<div
 											className={classes.imageSrc}
-											style={{backgroundImage: `url(${image.url})`}}
+											style={{
+												backgroundImage: `url(${image.url})`
+											}}
 										/>
 									</ButtonBase>
 								</Grid>
