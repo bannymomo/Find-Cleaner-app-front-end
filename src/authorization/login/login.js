@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import {
 	Button,
-	TextField,
 	FormControlLabel,
 	Checkbox,
 	LinearProgress
@@ -31,8 +31,7 @@ import { login as loginFn } from "../../api/auth";
 import MainNavigation from "../../navigation/MainNavigation";
 
 import styles from "./style/Style";
-import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
-import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
+import { CLIENT_ROLE, BUSINESS_ROLE, POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 
@@ -80,14 +79,6 @@ class Login extends React.Component {
 	};
 
 	login = () => {
-		if (!this.state.username) {
-			alert("Username is empty, please fill your name");
-			return;
-		}
-		if (!this.state.password) {
-			alert("Password is empty, please fill your password");
-			return;
-		}
 		const loginInfo = {
 			username: this.state.username,
 			password: this.state.password
@@ -117,19 +108,13 @@ class Login extends React.Component {
 		this.setState({ [key]: value });
 	};
 
-	handleKeyPress = event => {
-		if (event.key === "Enter") {
-			this.login();
-		}
-	};
-
 	renderButton = classes => {
 		if (this.state.isLoading) {
 			return <LinearProgress className={classes.loading} />;
 		} else {
 			return (
 				<Button
-					onClick={this.login}
+					type="submit"
 					variant="contained"
 					fullWidth
 					color={"primary"}
@@ -160,23 +145,26 @@ class Login extends React.Component {
 
 	renderForm = classes => {
 		return (
-			<form className={classes.form}>
+			<ValidatorForm
+				className={classes.form}
+				onSubmit={this.login}
+			>
 				<label>Log in</label>
-				<TextField
-					onKeyDown={this.handleKeyPress}
+				<TextValidator
 					variant="outlined"
-					required
 					margin="normal"
 					fullWidth
 					label="User Name"
 					value={this.state.username}
 					name="username"
 					onChange={this.handleChange}
+					validators={["required"]}
+					errorMessages={
+						["this field is required"]
+					}
 				/>
-				<TextField
-					onKeyDown={this.handleKeyPress}
+				<TextValidator
 					variant="outlined"
-					required
 					margin="normal"
 					type="password"
 					fullWidth
@@ -184,6 +172,10 @@ class Login extends React.Component {
 					name="password"
 					value={this.state.password}
 					onChange={this.handleChange}
+					validators={["required"]}
+					errorMessages={
+						["this field is required"]
+					}
 				/>
 				<FormControlLabel
 					control={<Checkbox value="remember" color="primary" />}
@@ -225,7 +217,7 @@ class Login extends React.Component {
 						up with them first.
 					</Alert>
 				)}
-			</form>
+			</ValidatorForm>
 		);
 	};
 

@@ -75,9 +75,6 @@ class User extends Component {
 		basicInfo: false,
 		error: null,
 		isLoading: false
-		// isUsernameValid: false,
-		// isEmailValid: false,
-		// isPasswordValid: false,
 	};
 
 	componentDidMount() {
@@ -109,11 +106,6 @@ class User extends Component {
 		} else {
 			return (
 				<Button
-					// disabled={
-					// 	!this.state.isUsernameValid ||
-					// 	!this.state.isEmailValid ||
-					// 	!this.state.isPasswordValid
-					// }
 					type="submit"
 					variant="contained"
 					fullWidth
@@ -125,16 +117,6 @@ class User extends Component {
 			);
 		}
 	};
-
-	// validateUsername = (result) => {
-	// 	this.setState({ isUsernameValid: result})
-	// }
-	// validateEmail = (result) => {
-	// 	this.setState({ isEmailValid: result})
-	// }
-	// validatePassword = (result) => {
-	// 	this.setState({ isPasswordValid: result})
-	// }
 
 	renderForm = classes => {
 		return (
@@ -151,7 +133,6 @@ class User extends Component {
 						<TextValidator
 							variant="outlined"
 							fullWidth
-							required
 							label="User Name"
 							value={this.state.username}
 							onChange={event =>
@@ -164,14 +145,12 @@ class User extends Component {
 								"this field is required",
 								"username must be at least two characters"
 							]}
-							// validatorListener={this.validateUsername}
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<TextValidator
 							color="primary"
 							variant="outlined"
-							required
 							fullWidth
 							label="Email"
 							onChange={event =>
@@ -186,7 +165,6 @@ class User extends Component {
 								"this field is required",
 								"email is not valid"
 							]}
-							// validatorListener={this.validateEmail}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -194,7 +172,6 @@ class User extends Component {
 							color="primary"
 							variant="outlined"
 							fullWidth
-							required
 							label="Password"
 							type="password"
 							value={this.state.password}
@@ -208,7 +185,6 @@ class User extends Component {
 								"this field is required",
 								"password must be at least two characters"
 							]}
-							// validatorListener={this.validatePassword}
 						/>
 					</Grid>
 				</Grid>

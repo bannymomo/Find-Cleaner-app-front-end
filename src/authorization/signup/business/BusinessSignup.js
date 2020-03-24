@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import {
 	Button,
 	Grid,
-	TextField,
 	Container,
 	CssBaseline,
 	withStyles,
@@ -140,7 +139,6 @@ class BusinessSignup extends Component {
 					<Grid item xs={12}>
 						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
 							label="Business Name"
 							value={this.state.businessName}
@@ -149,14 +147,19 @@ class BusinessSignup extends Component {
 									businessName: event.target.value
 								})
 							}
-							validators={['required', 'minStringLength:2']}
-                    		errorMessages={['this field is required', 'The length must longer than 2']}
+							validators={[
+								'required', 
+								'minStringLength:2'
+							]}
+                    		errorMessages={[
+								'this field is required', 
+								'The length must longer than 2'
+							]}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
+						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
 							label="Address"
 							value={this.state.address}
@@ -165,15 +168,16 @@ class BusinessSignup extends Component {
 									address: event.target.value
 								})
 							}
+							validators={['required']}
+							errorMessages={['this field is required']}
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<TextValidator
 							color="primary"
 							variant="outlined"
-							required
 							fullWidth
-							label="postcode"
+							label="Postcode"
 							value={this.state.postcode}
 							onChange={event =>
 								this.setState({
@@ -193,7 +197,6 @@ class BusinessSignup extends Component {
 					<Grid item xs={12}>
 						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
 							label="Telephone Number"
 							value={this.state.telephoneNumber}
@@ -215,7 +218,6 @@ class BusinessSignup extends Component {
 					<Grid item xs={12}>
 						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
 							label="ABN Number"
 							value={this.state.ABNNumber}
