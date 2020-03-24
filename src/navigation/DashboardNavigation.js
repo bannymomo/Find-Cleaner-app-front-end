@@ -11,7 +11,6 @@ import {
 	CLIENT_BASE_URL,
 	BUSINESS_BASE_URL
 } from "../routes/URLMap";
-
 import { withRouter } from "react-router";
 import PostOrderBtn from "../components/order/PostOrderBtn";
 

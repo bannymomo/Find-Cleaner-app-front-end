@@ -12,7 +12,6 @@ export default function BusinessProfile(props) {
 					item
 					md={4}
 					sm={12}
-					// xs={12}
 					className="business-profile__sidebar--page-left"
 				>
 					<div>
@@ -26,7 +25,6 @@ export default function BusinessProfile(props) {
 					item
 					md={8}
 					sm={12}
-					// xs={12}
 					className="business-profile__container--page-right"
 				>
 					<div>

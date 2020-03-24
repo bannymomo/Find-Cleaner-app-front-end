@@ -22,18 +22,17 @@ import PostOrderBtn from "../components/order/PostOrderBtn";
 import styled from "styled-components";
 import { POST_ORDER_AT_HOMEPAGE } from "../utils/variables";
 
-
 const StyledLogin = styled(Link)`
-	display: ${props => props.isloggedin ? "none" : ""};
+	display: ${props => (props.isloggedin ? "none" : "")};
 `;
 const StyleAvartarButton = styled(Link)`
-	display: ${props => props.isloggedin && (props.loginclient || props.loginbussiness)
-		? ""
-		: "none"};
+	display: ${props =>
+		props.isloggedin && (props.loginclient || props.loginbussiness)
+			? ""
+			: "none"};
 `;
 
 class MainNavigation extends Component {
-
 	renderButton = (loginClient, loginBussiness) => {
 		if (loginBussiness && isLoggedIn()) {
 			return (
@@ -90,7 +89,7 @@ class MainNavigation extends Component {
 					</li>
 					<li>
 						<StyledLogin
-							isloggedin={isLoggedIn()? 1 : 0}
+							isloggedin={isLoggedIn() ? 1 : 0}
 							to={LOGIN_URL}
 							className="nav-bar__link--black"
 						>
@@ -100,7 +99,7 @@ class MainNavigation extends Component {
 				</ul>
 				<div className="nav-bar__avatar--container">
 					<StyleAvartarButton
-						isloggedin={isLoggedIn()? 1 : 0}
+						isloggedin={isLoggedIn() ? 1 : 0}
 						loginclient={loginClient}
 						loginbussiness={loginBussiness}
 						to={

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
-import { 
+import {
 	Grid,
 	Card,
 	CardActionArea,
@@ -12,14 +12,8 @@ import {
 } from "@material-ui/core";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
-
-import { 
-    NEW_ORDER,
-    ACCEPTED,
-    DONE
-} from "../../utils/variables";
+import { NEW_ORDER, ACCEPTED, DONE } from "../../utils/variables";
 import getStatusText from "../../utils/getStatusText";
-
 import "./style/orderHistory.scss";
 import theme from "../../theme/theme";
 
@@ -27,7 +21,7 @@ const useStyles = makeStyles({
 	root: {
 		padding: "0 20px",
 		marginBottom: "20px",
-		borderLeft: "solid 5px #3f88de",
+		borderLeft: "solid 5px #3f88de"
 	},
 	card_container: {
 		borderBottom: "solid 2px lightgrey",
@@ -45,33 +39,30 @@ const useStyles = makeStyles({
 });
 
 const getCardColor = cardStatus => {
-	switch(cardStatus) {
+	switch (cardStatus) {
 		case NEW_ORDER:
-			return "orange"
-        case ACCEPTED:
-			return theme.palette.primary.main
-        case DONE:
-			return theme.palette.secondary.dark
-        default:
-            return theme.palette.secondary.light
+			return "orange";
+		case ACCEPTED:
+			return theme.palette.primary.main;
+		case DONE:
+			return theme.palette.secondary.dark;
+		default:
+			return theme.palette.secondary.light;
 	}
-}
+};
 
-const ColoredCard = styled(Card)`	
-		padding: 0 20px;
-		margin-bottom: 20px;
-		border-left: solid 5px;
-		border-left-color: ${props => getCardColor(props.cardstatus)};	
+const ColoredCard = styled(Card)`
+	padding: 0 20px;
+	margin-bottom: 20px;
+	border-left: solid 5px;
+	border-left-color: ${props => getCardColor(props.cardstatus)};
 `;
 
 export default function OrderCard(props) {
 	const classes = useStyles();
 
 	return (
-		<CardActionArea
-			component={Link}
-			to={props.to}
-		>
+		<CardActionArea component={Link} to={props.to}>
 			<ColoredCard cardstatus={props.status}>
 				<Grid container className={classes.card_container} spacing={1}>
 					<Grid item xs={9}>
@@ -91,7 +82,7 @@ export default function OrderCard(props) {
 								</li>
 								<li>
 									<DateRangeOutlinedIcon fontSize="small" />
-									<span>							
+									<span>
 										<Moment format="DD-MM-YY HH:mm">
 											{props.dueDate}
 										</Moment>
@@ -109,14 +100,16 @@ export default function OrderCard(props) {
 						>
 							${props.price}
 						</Typography>
-							<Avatar
-								className="order-card__avatar"
-								alt="client photo"
-								src={props.clientPhoto}
-							/> 
+						<Avatar
+							className="order-card__avatar"
+							alt="client photo"
+							src={props.clientPhoto}
+						/>
 					</Grid>
 				</Grid>
-				<p className="order-card__status">{getStatusText(props.status)}</p>
+				<p className="order-card__status">
+					{getStatusText(props.status)}
+				</p>
 			</ColoredCard>
 		</CardActionArea>
 	);

@@ -1,11 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-// react plugin for creating charts
 import ChartistGraph from "react-chartist";
-// @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-
 import Store from "@material-ui/icons/Store";
 import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
@@ -14,8 +10,6 @@ import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
 import Icon from "@material-ui/core/Icon";
 import { useSpring, animated } from "react-spring";
-
-// core components
 import GridItem from "./card/GridItem";
 import GridContainer from "./card/GridContainer";
 import Card from "./card/Card";
@@ -27,15 +21,12 @@ import TotalOrdersNumber from "./TotalOrdersNumber";
 import TotalNewOrdersNumber from "./TotalNewOrdersNumber";
 import TotalAssignedOrdersNumber from "./TotalAssignedOrdersNumber";
 import FavoriteCleanersNumber from "./FavoriteCleanersNumber";
-
 import {
 	dailySalesChart,
 	emailsSubscriptionChart,
 	completedTasksChart
 } from "./card/variableCharts";
-
 import styles from "../style/card/tempelate-dashboardStyle";
-
 import { CLIENT_BASE_URL } from "../../../routes/URLMap";
 import { CardActionArea } from "@material-ui/core";
 import { NEW_ORDER, ACCEPTED } from "../../../utils/variables";

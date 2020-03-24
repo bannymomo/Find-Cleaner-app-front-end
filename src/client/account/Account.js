@@ -1,7 +1,11 @@
 import React, { Fragment, Component } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField, Button, CircularProgress } from "@material-ui/core";
-import { updateClientById, fetchClientById, updateAvatar } from "../../api/client";
+import {
+	updateClientById,
+	fetchClientById,
+	updateAvatar
+} from "../../api/client";
 import Alert from "@material-ui/lab/Alert";
 import "./style/account.scss";
 
@@ -16,11 +20,9 @@ class Account extends Component {
 			lastName: "",
 			birthday: minDate,
 			postcode: "",
-			// location: "",
 			email: "",
 			contactNumber: "",
 			avatar: null,
-
 			isLoading: false,
 			isUpdating: false,
 			isUploading: false,
@@ -47,7 +49,6 @@ class Account extends Component {
 					contactNumber: data.description,
 					email: data.email,
 					postcode: data.postcode,
-					// location: data.postcode,
 					isLoading: false
 				});
 			})
@@ -58,22 +59,21 @@ class Account extends Component {
 		const clientId = this.props.match.params.clientId;
 		const avatar = this.state.avatar;
 		const data = new FormData();
-		data.append('avatar', avatar);
-		console.log(avatar);
-		console.log(data);
+		data.append("avatar", avatar);
 		this.setState({ isUploading: true }, () => {
-
 			updateAvatar(clientId, data)
 				.then(() => {
 					this.setState(
 						{
-							isUploading: false,
+							isUploading: false
 						},
 						() => window.location.reload()
-					)
+					);
 				})
-				.catch(error => this.setState({ uploadError: error, isUploading: false }))
-		})
+				.catch(error =>
+					this.setState({ uploadError: error, isUploading: false })
+				);
+		});
 	};
 
 	changeHandler = event => {
@@ -84,7 +84,7 @@ class Account extends Component {
 
 	changeFile = event => {
 		const file = event.target.files[0];
-		this.setState({ avatar: file })
+		this.setState({ avatar: file });
 	};
 
 	disableEdit = () => {
@@ -193,17 +193,18 @@ class Account extends Component {
 								onChange={this.changeFile}
 								disabled={this.state.canNotEdit}
 							/>
-							{this.state.isUploading ? 
-								<CircularProgress size={50} color="secondary" /> :
-								(<Button
+							{this.state.isUploading ? (
+								<CircularProgress size={50} color="secondary" />
+							) : (
+								<Button
 									className="account__form--avatar-upload"
 									variant="contained"
 									onClick={this.handleUpload}
 									disabled={this.state.canNotEdit}
 								>
 									Upload
-								</Button>)
-							}
+								</Button>
+							)}
 
 							{!!this.state.uploadError && (
 								<Alert

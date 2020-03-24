@@ -14,12 +14,9 @@ import { POST_ORDER_AT_HOMEPAGE } from "../../utils/variables";
 import ErrorMessage from "../../UI/ErrorMessage";
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
-
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
-
 import { convertValue } from "../../utils/helper";
-
 import Geocode from "react-geocode";
 
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
@@ -94,7 +91,7 @@ class TakeOrder extends React.Component {
 		this.setState({
 			locationInvalid: false,
 			dueDateInvalid: false
-		})
+		});
 		const order = { ...this.state };
 
 		const match = matchPath(this.props.history.location.pathname, {
@@ -115,7 +112,7 @@ class TakeOrder extends React.Component {
 					? this.setState({ dueDateInvalid: true })
 					: this.handleCreateOrder(clientId, order);
 			})
-			.catch(() => this.setState({ locationInvalid: true }))
+			.catch(() => this.setState({ locationInvalid: true }));
 	};
 
 	render() {
@@ -165,9 +162,11 @@ class TakeOrder extends React.Component {
 									location={this.state.location}
 									handleChange={this.handleChange}
 								/>
-								{this.state.locationInvalid && 
-									<Alert severity="error">Location is invalid</Alert> 
-								}
+								{this.state.locationInvalid && (
+									<Alert severity="error">
+										Location is invalid
+									</Alert>
+								)}
 							</Grid>
 							<Grid item xs={12}>
 								<Date
@@ -180,9 +179,11 @@ class TakeOrder extends React.Component {
 									dueDate={this.state.dueDate}
 									handleChangeDate={this.handleChangeDate}
 								/>
-								{this.state.dueDateInvalid && 
-									<Alert severity="error">Please choose a due date</Alert>
-								}
+								{this.state.dueDateInvalid && (
+									<Alert severity="error">
+										Please choose a due date
+									</Alert>
+								)}
 							</Grid>
 							<Grid item xs={12}>
 								<Description

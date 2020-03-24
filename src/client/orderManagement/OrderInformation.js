@@ -16,7 +16,6 @@ import {
 import "../../components/order/style/orderHistory.scss";
 import OrderInformationList from "../../components/order/OrderInformationList";
 import { fetchOrderById, changeOrderStatusByClient } from "../../api/order";
-
 import ErrorMessage from "../../UI/ErrorMessage";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
@@ -27,7 +26,6 @@ import windowPic from "../../assets/images/window.png";
 import carpetPic from "../../assets/images/carpet.png";
 import cabinetPic from "../../assets/images/cabinet.png";
 import rentalPic from "../../assets/images/rental.png";
-
 import {
 	NEW_ORDER,
 	CANCELLED_BY_CLIENT,
@@ -105,11 +103,12 @@ class OrderInformaiton extends React.Component {
 						clientPhoto: this.state.order.client.photo,
 						rate: this.state.order.rate,
 						comment: this.state.order.comment
-					})
-					if (this.state.order.business) 
-					this.setState({	businessPhoto: this.state.order.business.photo })
-					}
-				)
+					});
+					if (this.state.order.business)
+						this.setState({
+							businessPhoto: this.state.order.business.photo
+						});
+				})
 				.catch(error => this.setState({ error, isLoading: false }));
 		});
 	};

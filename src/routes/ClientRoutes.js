@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-
 import { CLIENT_BASE_URL } from "./URLMap";
 import ClientDashboard from "../client/dashBoard/ClientDashBoard";
 import Account from "../client/account/Account";
@@ -54,7 +53,6 @@ const ClientRoutes = () => (
 			exact
 			path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId/edit`}
 			component={OrderEdit}
-			// render={props => <OrderEdit {...props} isAuthed={true} />}
 		/>
 		<Route
 			exact

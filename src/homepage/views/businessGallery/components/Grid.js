@@ -5,7 +5,6 @@ import Card from "./Card";
 
 class Grid extends React.Component {
 	componentDidMount() {
-		// will automatically clean itself up when dom node is removed
 		wrapGrid(this.grid, {
 			easing: "backOut",
 			stagger: 10,

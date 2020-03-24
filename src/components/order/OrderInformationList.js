@@ -1,6 +1,5 @@
 import React from "react";
 import Moment from "react-moment";
-
 import {
 	List,
 	ListItem,
@@ -16,10 +15,8 @@ import {
 	Fade
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
-
 import Maps from "./Maps";
 import BusinessProfile from "../businessProfile/BusinessProfile";
 import "./style/orderHistory.scss";
@@ -182,7 +179,10 @@ export default function OrderInformationList(props) {
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
 					{props.businessPhoto ? (
-						<Avatar alt="business photo" src={props.businessPhoto} />
+						<Avatar
+							alt="business photo"
+							src={props.businessPhoto}
+						/>
 					) : (
 						<Avatar alt="business photo" src="" />
 					)}

@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchBar() {
 	const classes = useStyles();
-
 	return (
 		<div className="browse-orders--top-bar--search">
 			<div className={classes.searchWrapper}>

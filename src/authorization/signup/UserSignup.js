@@ -23,7 +23,6 @@ import { CLIENT_ROLE, BUSINESS_ROLE } from "../../utils/variables";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import { FaFacebookF } from "react-icons/fa";
-
 import "./style/signup.scss";
 const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_ID = process.env.REACT_APP_GOOGLE_ID;

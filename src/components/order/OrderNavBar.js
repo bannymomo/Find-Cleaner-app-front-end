@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import "./style/orderHistory.scss";
-
 import {
 	NEW_ORDER,
 	CANCELLED_BY_CLIENT,

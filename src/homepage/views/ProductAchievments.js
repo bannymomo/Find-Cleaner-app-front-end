@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import CountUp from "react-countup";
-
 import ScrollAnimation from "react-animate-on-scroll";
 import VisibilitySensor from "react-visibility-sensor";
 import "animate.css/animate.min.css";

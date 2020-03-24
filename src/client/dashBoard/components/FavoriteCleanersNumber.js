@@ -27,7 +27,6 @@ class FavoriteCleanersNumber extends React.Component {
 						return order.business;
 					});
 					const removeDuplicateItems = arr => [...new Set(arr)];
-
 					const FavoriteCleanersNumber = removeDuplicateItems(
 						businessArray
 					).length;

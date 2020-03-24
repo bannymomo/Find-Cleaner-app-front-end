@@ -86,13 +86,6 @@ export default function BusinessProfileSidebar(props) {
 						<span>(219)</span>
 					</div>
 
-					{/* <ListItemText
-						secondary={
-							<Typography variant="body2" color="textSecondary">
-								<span>Completed 12 jobs</span> on Broomer
-							</Typography>
-						}
-					/> */}
 					<ListItemText
 						secondary={
 							<Typography variant="body2" color="textSecondary">

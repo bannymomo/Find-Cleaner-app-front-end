@@ -1,10 +1,7 @@
 import React from "react";
-
 import { Backdrop, Button, Modal, Fade } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Maps from "../../../components/order/Maps";
-
 import "../../../components/order/style/orderHistory.scss";
 
 const useStylesModal = makeStyles(theme => ({
