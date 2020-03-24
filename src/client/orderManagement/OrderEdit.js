@@ -16,8 +16,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
 import DateTime from "../takeOrder/components/DateTime";
 import Grid from "@material-ui/core/Grid";
-import "./order.scss";
+import Alert from "@material-ui/lab/Alert";
 
+import "./order.scss";
 import { convertValue } from "../../utils/helper";
 
 import Geocode from "react-geocode";
@@ -45,7 +46,10 @@ class OrderEdit extends React.Component {
 
 			error: null,
 			isLoading: false,
-			isUpdating: false
+			isUpdating: false,
+
+			dueDateInvalid: false,
+			locationInvalid: false
 		};
 	}
 	componentDidMount() {
@@ -118,6 +122,11 @@ class OrderEdit extends React.Component {
 	};
 
 	handleSubmit = () => {
+		this.setState({
+			locationInvalid: false,
+			dueDateInvalid: false
+		})
+
 		const order = { ...this.state };
 		const orderId = this.props.match.params.orderId;
 		const clientId = this.props.match.params.clientId;
@@ -125,10 +134,10 @@ class OrderEdit extends React.Component {
 		Geocode.fromAddress(`${order.location}`)
 			.then(() => {
 				!order.dueDate
-					? alert("Please choose a due date")
+					? this.setState({ dueDateInvalid: true })
 					: this.handleUpdateOrder(orderId, order, clientId);
 			})
-			.catch(() => alert("Location is invalid"));
+			.catch(() => this.setState({ locationInvalid: true }))
 	};
 
 	renderButton = () => {
@@ -205,6 +214,9 @@ class OrderEdit extends React.Component {
 							location={this.state.location}
 							handleChange={this.handleChange}
 						/>
+						{this.state.locationInvalid && 
+							<Alert severity="error">Location is invalid</Alert> 
+						}
 					</Grid>
 
 					<Grid item xs={12}>
@@ -218,6 +230,9 @@ class OrderEdit extends React.Component {
 							dueDate={this.state.dueDate}
 							handleChangeDate={this.handleChangeDate}
 						/>
+						{this.state.dueDateInvalid && 
+							<Alert severity="error">Please choose a due date</Alert>
+						}
 					</Grid>
 					<Grid item xs={12}>
 						<Description

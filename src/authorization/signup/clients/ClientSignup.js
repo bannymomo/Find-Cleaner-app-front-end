@@ -145,7 +145,6 @@ class ClientSignup extends Component {
 					<Grid item xs={12} sm={6}>
 						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
 							label="First Name"
 							value={this.state.firstName}
@@ -154,7 +153,10 @@ class ClientSignup extends Component {
 									firstName: event.target.value
 								})
 							}
-							validators={["required", "minStringLength:2"]}
+							validators={[
+								"required", 
+								"minStringLength:2"
+							]}
 							errorMessages={[
 								"this field is required",
 								"The length must longer than 2"
@@ -164,7 +166,6 @@ class ClientSignup extends Component {
 					<Grid item xs={12} sm={6}>
 						<TextValidator
 							variant="outlined"
-							required
 							fullWidth
 							label="Last Name"
 							value={this.state.lastName}
@@ -173,7 +174,10 @@ class ClientSignup extends Component {
 									lastName: event.target.value
 								})
 							}
-							validators={["required", "minStringLength:2"]}
+							validators={[
+								"required", 
+								"minStringLength:2"
+							]}
 							errorMessages={[
 								"this field is required",
 								"The length must longer than 2"
@@ -212,7 +216,6 @@ class ClientSignup extends Component {
 						<TextValidator
 							color="primary"
 							variant="outlined"
-							required
 							fullWidth
 							label="postcode"
 							value={this.state.postcode}
@@ -221,7 +224,10 @@ class ClientSignup extends Component {
 									postcode: event.target.value
 								})
 							}
-							validators={["required", "matchRegexp:^[0-9]{4}$"]}
+							validators={[
+								"required", 
+								"matchRegexp:^[0-9]{4}$"
+							]}
 							errorMessages={[
 								"this field is required",
 								"postcode is not valid"
