@@ -79,14 +79,14 @@ const CustomSkinMap = withScriptjs(
 			defaultZoom={10}
 			defaultCenter={{ lat: -27.468055, lng: 153.025035 }}
 			defaultOptions={{
-				scrollwheel: false,
+				scrollwheel: true,
 				zoomControl: true,
 				styles: stylesArray
 			}}
 		>
 			<Marker position={{ lat: -27.468055, lng: 153.025035 }} />
 			{props.locations.map(location => (
-				<Marker position={location} />
+				<Marker key={`${location.lat}${new Date()}`} position={location} />
 			))}
 		</GoogleMap>
 	))

@@ -79,7 +79,7 @@ const CustomSkinMap = withScriptjs(
 			defaultZoom={13}
 			defaultCenter={props.location}
 			defaultOptions={{
-				scrollwheel: false,
+				scrollwheel: true,
 				zoomControl: true,
 				styles: stylesArray
 			}}

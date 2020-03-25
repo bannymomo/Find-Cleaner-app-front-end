@@ -138,7 +138,7 @@ export default function BusinessProfileContainer(props) {
 	const [value] = React.useState(4.5);
 
 	const getReviews = () => {
-		if (!comments || comments.length === 0 || comments._id) {
+		if (!comments || comments.length === 0 || !comments._id) {
 			return reviews.map(review => (
 				<Grid item xs key={review.name + review.date}>
 					<Reviews
