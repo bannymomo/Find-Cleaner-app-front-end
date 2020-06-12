@@ -132,11 +132,13 @@ class Login extends React.Component {
 	};
 
 	responseGoogle = response => {
-		const username = response.Rt.Ad;
-		const password = response.Rt.eV;
-		this.setState({ username, password });
-		if (username && password) {
-			this.login();
+		if (response.Ut) {
+			const username = response.Ut.Bd;
+			const password = response.Ut.bV;
+			this.setState({ username, password });
+			if (username && password) {
+				this.login();
+			}
 		}
 	};
 
@@ -187,11 +189,11 @@ class Login extends React.Component {
 					textButton="LOGIN WITH FACEBOOK"
 				/>
 				<GoogleLogin
-					clientId={GOOGLE_ID}
+					clientId="264068190270-5nvf99t28hp0iorpulur0jos28v1l1mm.apps.googleusercontent.com"
 					buttonText="LOG IN WITH GOOGLE"
 					onSuccess={this.responseGoogle}
 					onFailure={this.responseGoogle}
-					cookiePolicy={"single_host_origin"}
+					// cookiePolicy={"single_host_origin"}
 					className="login__google-button-class"
 				/>
 
