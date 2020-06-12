@@ -93,8 +93,6 @@ const CustomSkinMap = withScriptjs(
 );
 
 export default function Maps(props) {
-	const addresses = props.orders.map(order => order.location);
-
 	const [locations, setLocations] = React.useState([]);
 
 	const getLocation = address => {
@@ -110,6 +108,7 @@ export default function Maps(props) {
 	};
 
 	useEffect(() => {
+		const addresses = props.orders.map(order => order.location);
 		addresses.forEach(address => {
 			getLocation(address);
 		});
