@@ -189,11 +189,11 @@ class Login extends React.Component {
 					textButton="LOGIN WITH FACEBOOK"
 				/>
 				<GoogleLogin
-					clientId="264068190270-5nvf99t28hp0iorpulur0jos28v1l1mm.apps.googleusercontent.com"
+					clientId={GOOGLE_ID}
 					buttonText="LOG IN WITH GOOGLE"
 					onSuccess={this.responseGoogle}
 					onFailure={this.responseGoogle}
-					// cookiePolicy={"single_host_origin"}
+					cookiePolicy={"single_host_origin"}
 					className="login__google-button-class"
 				/>
 
