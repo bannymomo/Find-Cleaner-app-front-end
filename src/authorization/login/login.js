@@ -132,11 +132,13 @@ class Login extends React.Component {
 	};
 
 	responseGoogle = response => {
-		const username = response.Rt.Ad;
-		const password = response.Rt.eV;
-		this.setState({ username, password });
-		if (username && password) {
-			this.login();
+		if (response.Ut) {
+			const username = response.Ut.Bd;
+			const password = response.Ut.bV;
+			this.setState({ username, password });
+			if (username && password) {
+				this.login();
+			}
 		}
 	};
 
